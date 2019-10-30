@@ -1,0 +1,8 @@
+STATUS: PSpice Schematics to Capture translator (17.2.0.d001)
+STATUS:  
+STATUS: Translator started at Friday, November 03, 2017 10:21:08
+STATUS: c:\cadence\spb_17.2\tools\bin\sch2cap -f "\\my.files.iastate.edu\Users\lhb\Documents\sboma53\OPA4830.lib" -o "\\my.files.iastate.edu\Users\lhb\Documents\sboma53\OPA4830.olb" -i U:\/cdssetup/OrCAD_PSpice/17.2.0/PSpice.ini
+INFO(ORSCH-1029): Using existing library 'c:\cadence\spb_17.2\tools\Capture\Library\PSpice\modeled.etc'.
+INFO(ORSCH-1031): Created new library '\\my.files.iastate.edu\Users\lhb\Documents\sboma53\OPA4830.olb'.
+STATUS: Translator stopped at Friday, November 03, 2017 10:21:09
+STATUS: 0 Error messages, 0 Warning messages

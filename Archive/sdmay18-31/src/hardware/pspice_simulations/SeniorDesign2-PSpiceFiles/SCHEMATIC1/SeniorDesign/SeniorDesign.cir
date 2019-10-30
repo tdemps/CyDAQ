@@ -1,0 +1,19 @@
+** Profile: "SCHEMATIC1-SeniorDesign"  [ U:\SENIORDESIGN\Orcad\SeniorDesign2-PSpiceFiles\SCHEMATIC1\SeniorDesign.sim ] 
+
+** Creating circuit file "SeniorDesign.cir" 
+** WARNING: THIS AUTOMATICALLY GENERATED FILE MAY BE OVERWRITTEN BY SUBSEQUENT SIMULATIONS
+
+*Libraries: 
+* Profile Libraries :
+* Local Libraries :
+* From [PSPICE NETLIST] section of C:\cdssetup\OrCAD_PSpice\17.2.0\PSpice.ini file:
+.lib "nom.lib" 
+
+*Analysis directives: 
+.AC DEC 1000 100 1000k
+.OPTIONS ADVCONV
+.PROBE64 V(alias(*)) I(alias(*)) W(alias(*)) D(alias(*)) NOISE(alias(*)) 
+.INC "..\SCHEMATIC1.net" 
+
+
+.END

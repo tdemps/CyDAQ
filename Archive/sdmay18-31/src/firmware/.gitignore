@@ -1,0 +1,18 @@
+# IDE Directories
+.jxbrowser-data/
+.metadata/
+.vscode/
+RemoteSystemsTempFiles/
+
+# Toolchain Files
+build/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Packaged Binaries
+lm4flash
+lmicdi
+firmware.bin
+firmware

@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Webtalk v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# 
+# Start of session at: Tue Oct 22 13:59:11 2019
+# Process ID: 19024
+# Current directory: C:/ETG-Git-Repos/cydaq_2.0_firmware/src/zybo_z7_firmware/XADC_Standalone/XADC_Standalone.sdk/webtalk
+# Command line: wbtcv.exe -mode batch -source sdk_webtalk.tcl
+# Log file: C:/ETG-Git-Repos/cydaq_2.0_firmware/src/zybo_z7_firmware/XADC_Standalone/XADC_Standalone.sdk/webtalk/webtalk.log
+# Journal file: C:/ETG-Git-Repos/cydaq_2.0_firmware/src/zybo_z7_firmware/XADC_Standalone/XADC_Standalone.sdk/webtalk\webtalk.jou
+#-----------------------------------------------------------
+source sdk_webtalk.tcl

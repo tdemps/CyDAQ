@@ -1,0 +1,17 @@
+vhdl xil_defaultlib  \
+"../../../bd/block_design/ip/block_design_xadc_wiz_0_1/proc_common_v3_30_a/hdl/src/vhdl/block_design_xadc_wiz_0_1_conv_funs_pkg.vhd" \
+"../../../bd/block_design/ip/block_design_xadc_wiz_0_1/proc_common_v3_30_a/hdl/src/vhdl/block_design_xadc_wiz_0_1_proc_common_pkg.vhd" \
+"../../../bd/block_design/ip/block_design_xadc_wiz_0_1/proc_common_v3_30_a/hdl/src/vhdl/block_design_xadc_wiz_0_1_ipif_pkg.vhd" \
+"../../../bd/block_design/ip/block_design_xadc_wiz_0_1/proc_common_v3_30_a/hdl/src/vhdl/block_design_xadc_wiz_0_1_family_support.vhd" \
+"../../../bd/block_design/ip/block_design_xadc_wiz_0_1/proc_common_v3_30_a/hdl/src/vhdl/block_design_xadc_wiz_0_1_family.vhd" \
+"../../../bd/block_design/ip/block_design_xadc_wiz_0_1/proc_common_v3_30_a/hdl/src/vhdl/block_design_xadc_wiz_0_1_soft_reset.vhd" \
+"../../../bd/block_design/ip/block_design_xadc_wiz_0_1/proc_common_v3_30_a/hdl/src/vhdl/block_design_xadc_wiz_0_1_pselect_f.vhd" \
+"../../../bd/block_design/ip/block_design_xadc_wiz_0_1/axi_lite_ipif_v1_01_a/hdl/src/vhdl/block_design_xadc_wiz_0_1_address_decoder.vhd" \
+"../../../bd/block_design/ip/block_design_xadc_wiz_0_1/axi_lite_ipif_v1_01_a/hdl/src/vhdl/block_design_xadc_wiz_0_1_slave_attachment.vhd" \
+"../../../bd/block_design/ip/block_design_xadc_wiz_0_1/interrupt_control_v2_01_a/hdl/src/vhdl/block_design_xadc_wiz_0_1_interrupt_control.vhd" \
+"../../../bd/block_design/ip/block_design_xadc_wiz_0_1/axi_lite_ipif_v1_01_a/hdl/src/vhdl/block_design_xadc_wiz_0_1_axi_lite_ipif.vhd" \
+"../../../bd/block_design/ip/block_design_xadc_wiz_0_1/block_design_xadc_wiz_0_1_xadc_core_drp.vhd" \
+"../../../bd/block_design/ip/block_design_xadc_wiz_0_1/block_design_xadc_wiz_0_1_axi_xadc.vhd" \
+"../../../bd/block_design/ip/block_design_rst_ps7_0_50M_0/sim/block_design_rst_ps7_0_50M_0.vhd" \
+
+nosort

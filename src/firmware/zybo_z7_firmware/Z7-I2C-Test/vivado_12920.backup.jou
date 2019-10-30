@@ -1,0 +1,22 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Thu Oct  3 13:51:07 2019
+# Process ID: 12920
+# Current directory: C:/Zybo-Projects/Z7-I2C-Test
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent8052 C:\Zybo-Projects\Z7-I2C-Test\Z7-I2C-Test.xpr
+# Log file: C:/Zybo-Projects/Z7-I2C-Test/vivado.log
+# Journal file: C:/Zybo-Projects/Z7-I2C-Test\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Zybo-Projects/Z7-I2C-Test/Z7-I2C-Test.xpr
+update_compile_order -fileset sources_1
+open_bd_design {C:/Zybo-Projects/Z7-I2C-Test/Z7-I2C-Test.srcs/sources_1/bd/design_1/design_1.bd}
+startgroup
+set_property -dict [list CONFIG.PCW_QSPI_GRP_SINGLE_SS_ENABLE {1}] [get_bd_cells processing_system7_0]
+endgroup
+startgroup
+set_property -dict [list CONFIG.PCW_QSPI_GRP_SINGLE_SS_ENABLE {1}] [get_bd_cells processing_system7_0]
+endgroup
+save_bd_design

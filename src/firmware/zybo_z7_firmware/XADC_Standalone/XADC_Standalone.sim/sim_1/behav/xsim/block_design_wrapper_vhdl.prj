@@ -1,0 +1,19 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../XADC_Standalone.ip_user_files/bd/block_design/ip/block_design_xadc_wiz_0_1/proc_common_v3_30_a/hdl/src/vhdl/block_design_xadc_wiz_0_1_conv_funs_pkg.vhd" \
+"../../../../XADC_Standalone.ip_user_files/bd/block_design/ip/block_design_xadc_wiz_0_1/proc_common_v3_30_a/hdl/src/vhdl/block_design_xadc_wiz_0_1_proc_common_pkg.vhd" \
+"../../../../XADC_Standalone.ip_user_files/bd/block_design/ip/block_design_xadc_wiz_0_1/proc_common_v3_30_a/hdl/src/vhdl/block_design_xadc_wiz_0_1_ipif_pkg.vhd" \
+"../../../../XADC_Standalone.ip_user_files/bd/block_design/ip/block_design_xadc_wiz_0_1/proc_common_v3_30_a/hdl/src/vhdl/block_design_xadc_wiz_0_1_family_support.vhd" \
+"../../../../XADC_Standalone.ip_user_files/bd/block_design/ip/block_design_xadc_wiz_0_1/proc_common_v3_30_a/hdl/src/vhdl/block_design_xadc_wiz_0_1_family.vhd" \
+"../../../../XADC_Standalone.ip_user_files/bd/block_design/ip/block_design_xadc_wiz_0_1/proc_common_v3_30_a/hdl/src/vhdl/block_design_xadc_wiz_0_1_soft_reset.vhd" \
+"../../../../XADC_Standalone.ip_user_files/bd/block_design/ip/block_design_xadc_wiz_0_1/proc_common_v3_30_a/hdl/src/vhdl/block_design_xadc_wiz_0_1_pselect_f.vhd" \
+"../../../../XADC_Standalone.ip_user_files/bd/block_design/ip/block_design_xadc_wiz_0_1/axi_lite_ipif_v1_01_a/hdl/src/vhdl/block_design_xadc_wiz_0_1_address_decoder.vhd" \
+"../../../../XADC_Standalone.ip_user_files/bd/block_design/ip/block_design_xadc_wiz_0_1/axi_lite_ipif_v1_01_a/hdl/src/vhdl/block_design_xadc_wiz_0_1_slave_attachment.vhd" \
+"../../../../XADC_Standalone.ip_user_files/bd/block_design/ip/block_design_xadc_wiz_0_1/interrupt_control_v2_01_a/hdl/src/vhdl/block_design_xadc_wiz_0_1_interrupt_control.vhd" \
+"../../../../XADC_Standalone.ip_user_files/bd/block_design/ip/block_design_xadc_wiz_0_1/axi_lite_ipif_v1_01_a/hdl/src/vhdl/block_design_xadc_wiz_0_1_axi_lite_ipif.vhd" \
+"../../../../XADC_Standalone.ip_user_files/bd/block_design/ip/block_design_xadc_wiz_0_1/block_design_xadc_wiz_0_1_xadc_core_drp.vhd" \
+"../../../../XADC_Standalone.ip_user_files/bd/block_design/ip/block_design_xadc_wiz_0_1/block_design_xadc_wiz_0_1_axi_xadc.vhd" \
+"../../../../XADC_Standalone.ip_user_files/bd/block_design/ip/block_design_rst_ps7_0_50M_0/sim/block_design_rst_ps7_0_50M_0.vhd" \
+
+# Do not sort compile order
+nosort

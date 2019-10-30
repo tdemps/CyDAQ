@@ -1,0 +1,45 @@
+
+**** 11/03/17 10:28:55 ****** PSpice 17.2.0 (March 2016) ****** ID# 0 ********
+
+ ** Profile: "SCHEMATIC1-SeniorDesign"  [ U:\SENIORDESIGN\Orcad\SeniorDesign2-PSpiceFiles\SCHEMATIC1\SeniorDesign.sim ] 
+
+
+ ****     CIRCUIT DESCRIPTION
+
+
+******************************************************************************
+
+
+
+
+** Creating circuit file "SeniorDesign.cir" 
+** WARNING: THIS AUTOMATICALLY GENERATED FILE MAY BE OVERWRITTEN BY SUBSEQUENT SIMULATIONS
+
+*Libraries: 
+* Profile Libraries :
+* Local Libraries :
+* From [PSPICE NETLIST] section of C:\cdssetup\OrCAD_PSpice\17.2.0\PSpice.ini file:
+.lib "nom.lib" 
+
+*Analysis directives: 
+.AC DEC 1000 100 1000k
+.OPTIONS ADVCONV
+.PROBE64 V(alias(*)) I(alias(*)) W(alias(*)) D(alias(*)) NOISE(alias(*)) 
+.INC "..\SCHEMATIC1.net" 
+
+
+
+**** INCLUDING SCHEMATIC1.net ****
+* source SENIORDESIGN2
+V_V1         N00285 0 DC 0Vdc AC 1Vac 
+C_C1         N00285 N00269  6.8n  TC=0,0 
+R_R1         0 N00269  1.2k TC=0,0 
+V_V2         N00242 0 3.3
+R_R2         0 N00251  1k TC=0,0 
+X_U1         N00269 N00251 N00242 0 N00251 OPA4830 
+
+**** RESUMING SeniorDesign.cir ****
+.END
+
+ERROR(ORPSIM-15108): Subcircuit OPA4830 used by X_U1 is undefined
+

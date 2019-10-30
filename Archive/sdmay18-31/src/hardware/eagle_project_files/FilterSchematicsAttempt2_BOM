@@ -1,0 +1,57 @@
+Partlist exported from C:/Users/nstar/Desktop/EE491/sdmay18-31/src/hardware/eagle_project_files/FilterSchematicsAttempt2.sch at 1/12/2018 1:45 PM
+
+Part Value               Device              Package        Description                MANUFACTURER_PART_NUMBER MF MPN OC_FARNELL OC_NEWARK VENDOR            
+C1   6.8n                C-USC0805           C0805          CAPACITOR, American symbol                                                                        
+C2   18n                 C-USC0805           C0805          CAPACITOR, American symbol                                                                        
+C3   6.8n                C-USC0805           C0805          CAPACITOR, American symbol                                                                        
+C4   27n                 C-USC0805           C0805          CAPACITOR, American symbol                                                                        
+C5   27n                 C-USC0805           C0805          CAPACITOR, American symbol                                                                        
+C6   27n                 C-USC0805           C0805          CAPACITOR, American symbol                                                                        
+C7   27n                 C-USC0805           C0805          CAPACITOR, American symbol                                                                        
+C9   18n\                C-USC0805           C0805          CAPACITOR, American symbol                                                                        
+C10  18n                 C-USC0805           C0805          CAPACITOR, American symbol                                                                        
+C11  18n                 C-USC0805           C0805          CAPACITOR, American symbol                                                                        
+C12  18n                 C-USC0805           C0805          CAPACITOR, American symbol                                                                        
+C13  150u                C-USC0805           C0805          CAPACITOR, American symbol                                                                        
+C14  6.8n                C-USC0805           C0805          CAPACITOR, American symbol                                                                        
+C15  27n                 C-USC0805           C0805          CAPACITOR, American symbol                                                                        
+C16  18n                 C-USC0805           C0805          CAPACITOR, American symbol                                                                        
+C17  18n                 C-USC0805           C0805          CAPACITOR, American symbol                                                                        
+C18  6.8n                C-USC0805           C0805          CAPACITOR, American symbol                                                                        
+C19  6.8n                C-USC0805           C0805          CAPACITOR, American symbol                                                                        
+C20  18n                 C-USC0805           C0805          CAPACITOR, American symbol                                                                        
+C21  18n                 C-USC0805           C0805          CAPACITOR, American symbol                                                                        
+C22  27n                 C-USC0805           C0805          CAPACITOR, American symbol                                                                        
+DNC0 1k                  R-US_R0805          R0805          RESISTOR, American symbol                                                                         
+DNC1 1k                  R-US_R0805          R0805          RESISTOR, American symbol                                                                         
+DNC2 1k                  R-US_R0805          R0805          RESISTOR, American symbol                                                                         
+DNC3 1k                  R-US_R0805          R0805          RESISTOR, American symbol                                                                         
+DNC4 1k                  R-US_R0805          R0805          RESISTOR, American symbol                                                                         
+DNC5 1k                  R-US_R0805          R0805          RESISTOR, American symbol                                                                         
+J1   22-27-2031-03       22-27-2031-03       6410-03        CONNECTOR                                                  unknown    unknown                     
+L1   47m                 L-US0204/5          0204/5         INDUCTOR, American symbol                                                                         
+R1   10k                 R-US_R0805          R0805          RESISTOR, American symbol                                                                         
+R2   2.7k                R-US_R0805          R0805          RESISTOR, American symbol                                                                         
+R3   1k                  R-US_R0805          R0805          RESISTOR, American symbol                                                                         
+R4   2.7k                R-US_R0805          R0805          RESISTOR, American symbol                                                                         
+R8   1                   R-US_R0805          R0805          RESISTOR, American symbol                                                                         
+R10  1k                  R-US_R0805          R0805          RESISTOR, American symbol                                                                         
+R11  2.7k                R-US_R0805          R0805          RESISTOR, American symbol                                                                         
+U$1  LAUNCHPAD_FOOTPRINT LAUNCHPAD_FOOTPRINT SSW-110-02-S-D                                                                                                   
+U$2  OPA4830             OPA4830             TSSOP14                                                                                                          
+U$3  CD74HC4051-Q1       CD74HC4051-Q1       TSSOP16                                                                                                          
+U$4  CD74HC4051-Q1       CD74HC4051-Q1       TSSOP16                                                                                                          
+U$5  CD74HC4051-Q1       CD74HC4051-Q1       TSSOP16                                                                                                          
+U$6  CD74HC4051-Q1       CD74HC4051-Q1       TSSOP16                                                                                                          
+U$7  OPA4830             OPA4830             TSSOP14                                                                                                          
+U$21 CD74HC4051-Q1       CD74HC4051-Q1       TSSOP16                                                                                                          
+U$22 CD74HC4051-Q1       CD74HC4051-Q1       TSSOP16                                                                                                          
+U$23 CD74HC4051-Q1       CD74HC4051-Q1       TSSOP16                                                                                                          
+U$25 OPA4830             OPA4830             TSSOP14                                                                                                          
+U1   AD5254BRUZ10-RL7    AD5254BRUZ10-RL7    RU_20                                     AD5254BRUZ10RL7                                      Analog Devices Inc
+U2   AD5254BRUZ10-RL7    AD5254BRUZ10-RL7    RU_20                                     AD5254BRUZ10RL7                                      Analog Devices Inc
+U3   AD5254BRUZ10-RL7    AD5254BRUZ10-RL7    RU_20                                     AD5254BRUZ10RL7                                      Analog Devices Inc
+U4   AD5254BRUZ10-RL7    AD5254BRUZ10-RL7    RU_20                                     AD5254BRUZ10RL7                                      Analog Devices Inc
+U5   AD5254BRUZ10-RL7    AD5254BRUZ10-RL7    RU_20                                     AD5254BRUZ10RL7                                      Analog Devices Inc
+U6   AD5254BRUZ10-RL7    AD5254BRUZ10-RL7    RU_20                                     AD5254BRUZ10RL7                                      Analog Devices Inc
+U7   AD5254BRUZ10-RL7    AD5254BRUZ10-RL7    RU_20                                     AD5254BRUZ10RL7                                      Analog Devices Inc

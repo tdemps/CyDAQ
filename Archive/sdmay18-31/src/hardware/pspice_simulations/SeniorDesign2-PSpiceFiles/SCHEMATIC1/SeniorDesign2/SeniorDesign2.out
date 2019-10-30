@@ -1,0 +1,2620 @@
+
+**** 11/08/17 16:31:06 ****** PSpice 17.2.0 (March 2016) ****** ID# 0 ********
+
+ ** Profile: "SCHEMATIC1-SeniorDesign2"  [ U:\SeniorDesign\Orcad\seniordesign2-pspicefiles\schematic1\seniordesign2.sim ] 
+
+
+ ****     CIRCUIT DESCRIPTION
+
+
+******************************************************************************
+
+
+
+
+** Creating circuit file "SeniorDesign2.cir" 
+** WARNING: THIS AUTOMATICALLY GENERATED FILE MAY BE OVERWRITTEN BY SUBSEQUENT SIMULATIONS
+
+*Libraries: 
+* Profile Libraries :
+* Local Libraries :
+* From [PSPICE NETLIST] section of C:\cdssetup\OrCAD_PSpice\17.2.0\PSpice.ini file:
+.lib "U:\SeniorDesign\Orcad\sboma53\OPA4830.lib" 
+.lib "nom.lib" 
+
+*Analysis directives: 
+.TRAN  0 1ms 0 
+.OPTIONS ADVCONV
+.OPTIONS VNTOL= 100n
+.PROBE64 V(alias(*)) I(alias(*)) W(alias(*)) D(alias(*)) NOISE(alias(*)) 
+.INC "..\SCHEMATIC1.net" 
+
+
+
+**** INCLUDING SCHEMATIC1.net ****
+* source SENIORDESIGN2
+C_C1         N00285 N00278  27n  TC=0,0 
+R_R1         0 N00278  1.2k TC=0,0 
+V_V2         N00244 0 3.3
+X_U1         N00278 N00251 N00244 0 N00251 OPA4830 
+R_R5         0 N00251  1k TC=0,0 
+V_V6         N00285 0  
++SIN 2 0.5 1k 0 0 0
+R_R6         N00278 N051790  360 TC=0,0 
+V_V7         N051790 0 3.3Vdc
+V_V8         N061140 0 3.3Vdc
+R_R7         N06186 N061140  360 TC=0,0 
+V_V10         N06314 0 3.3
+R_R8         0 N06186  1.2k TC=0,0 
+R_R9         0 N06262  1k TC=0,0 
+C_C2         N06626 N06186  27n  TC=0,0 
+X_U2         N06186 N06262 N06314 0 N06262 OPA4830 
+V_V9         N06507 0  
++SIN 2 0.5 1k 0 0 0
+R_R10         0 N06626  1.2k TC=0,0 
+C_C3         N06727 N06626  27n  TC=0,0 
+C_C4         N06828 N06727  27n  TC=0,0 
+R_R11         0 N06727  1.2k TC=0,0 
+R_R12         0 N06828  1.2k TC=0,0 
+C_C5         N07071 N06828  27n  TC=0,0 
+R_R13         0 N07071  1.2k TC=0,0 
+C_C6         N06507 N07071  27n  TC=0,0 
+R_R16         0 N08250  1k TC=0,0 
+X_U3         N08174 N08250 N08302 0 N08250 OPA4830 
+V_V13         N08302 0 3.3
+V_V12         N08164 0  
++SIN 2 0.5 40k 0 0 0
+C_C7         0 N08174  6.8n  TC=0,0 
+R_R15         N08174 N08164  1.2k TC=0,0 
+R_R17         N08963 N09396  1.2k TC=0,0 
+C_C8         0 N08963  6.8n  TC=0,0 
+R_R18         0 N09035  1k TC=0,0 
+X_U4         N08963 N09035 N09089 0 N09035 OPA4830 
+V_V15         N09089 0 3.3
+V_V14         N09846 0  
++SIN 2 0.5 1k 0 0 0
+R_R19         N09396 N09496  1.2k TC=0,0 
+C_C9         0 N09396  6.8n  TC=0,0 
+C_C10         0 N09496  6.8n  TC=0,0 
+R_R20         N09496 N09596  1.2k TC=0,0 
+C_C11         0 N09596  6.8n  TC=0,0 
+R_R21         N09596 N09703  1.2k TC=0,0 
+C_C12         0 N09703  6.8n  TC=0,0 
+R_R22         N09703 N09846  1.2k TC=0,0 
+R_R25         0 N10449  1k TC=0,0 
+V_V16         N10501 0 3.3
+X_U5         N10387 N10449 N10501 0 N10449 OPA4830 
+R_R30         0 N12282  1k TC=0,0 
+V_V21         N12334 0 3.3
+X_U6         N21679 N12282 N12334 0 N12282 OPA4830 
+V_V19         N120820 0 3.3Vdc
+R_R27         N12194 N120820  27k TC=0,0 
+R_R28         N12922 N12773  1.2k TC=0,0 
+R_R29         0 N12773  1.2k TC=0,0 
+C_C16         0 N12922  18n  TC=0,0 
+V_V20         N12763 0  
++SIN 2 0.5 100k 0 0 0
+C_C15         N12763 N12773  18n  TC=0,0 
+R_R31         N13090 N13076  1.2k TC=0,0 
+C_C18         0 N13090  18n  TC=0,0 
+R_R32         0 N13076  1.2k TC=0,0 
+C_C17         N20417 N13076  18n  TC=0,0 
+C_C19         N21161 N13390  18n  TC=0,0 
+R_R34         0 N13390  1.2k TC=0,0 
+C_C20         0 N12194  18n  TC=0,0 
+R_R33         N12194 N13390  1.2k TC=0,0 
+X_U7         N14077 N14149 N14201 0 N14149 OPA4830 
+R_R37         0 N14149  1k TC=0,0 
+V_V24         N14201 0 3.3
+V_V23         N14063 0  
++SIN 2 0.5 1k 0 0 0
+C_C21         0 N14488  150u  TC=0,0 
+R_R36         N14077 N14063  1 TC=0,0 
+L_L1         N14077 N14488  47m  
+X_U8         N15179 N14850 N15586 0 N10387 OPA4830 
+V_V25         N15586 0 3.3
+R_R39         N14850 N10387  2.7k TC=0,0 
+R_R24         0 N15165  1.2k TC=0,0 
+C_C13         N15155 N15165  18n  TC=0,0 
+R_R23         N15179 N15165  1.2k TC=0,0 
+V_V17         N15155 0  
++SIN 2 0.5 40k 0 0 0
+C_C14         0 N15179  18n  TC=0,0 
+R_R38         0 N14850  1k TC=0,0 
+R_R40         N15179 N162640  27k TC=0,0 
+V_V26         N162640 0 3.3Vdc
+V_V27         N20427 0 3.3
+X_U9         N12922 N20407 N20427 0 N20417 OPA4830 
+R_R42         N20407 N20417  3.3k TC=0,0 
+R_R41         0 N20407  1k TC=0,0 
+X_U10         N13090 N21151 N21171 0 N21161 OPA4830 
+R_R43         0 N21151  1k TC=0,0 
+V_V28         N21171 0 3.3
+R_R44         N21151 N21161  2.7k TC=0,0 
+V_V29         N21689 0 3.3
+R_R46         N21669 N21679  2.7k TC=0,0 
+R_R45         0 N21669  1k TC=0,0 
+X_U11         N12194 N21669 N21689 0 N21679 OPA4830 
+V_V30         N222440 0 3.3Vdc
+R_R47         N12922 N222440  12k TC=0,0 
+R_R48         N13090 N223690  27k TC=0,0 
+V_V31         N223690 0 3.3Vdc
+
+**** RESUMING SeniorDesign2.cir ****
+.END
+
+**** 11/08/17 16:31:06 ****** PSpice 17.2.0 (March 2016) ****** ID# 0 ********
+
+ ** Profile: "SCHEMATIC1-SeniorDesign2"  [ U:\SeniorDesign\Orcad\seniordesign2-pspicefiles\schematic1\seniordesign2.sim ] 
+
+
+ ****     Diode MODEL PARAMETERS
+
+
+******************************************************************************
+
+
+
+
+               X_U1.XU9.DNOM   X_U1.XIn11.DVNF X_U1.XVn11.DVN  X_U2.XU9.DNOM   
+          IS    1.000000E-15  100.000000E-18  100.000000E-18    1.000000E-15 
+          RS    1.000000E-03                                    1.000000E-03 
+          TT   10.000000E-12                                   10.000000E-12 
+         CJO    1.000000E-18                                    1.000000E-18 
+          KF                  184.390900E-12   56.568540E-12                 
+
+
+               X_U2.XIn11.DVNF X_U2.XVn11.DVN  X_U3.XU9.DNOM   X_U3.XIn11.DVNF 
+          IS  100.000000E-18  100.000000E-18    1.000000E-15  100.000000E-18 
+          RS                                    1.000000E-03                 
+          TT                                   10.000000E-12                 
+         CJO                                    1.000000E-18                 
+          KF  184.390900E-12   56.568540E-12                  184.390900E-12 
+
+
+               X_U3.XVn11.DVN  X_U4.XU9.DNOM   X_U4.XIn11.DVNF X_U4.XVn11.DVN  
+          IS  100.000000E-18    1.000000E-15  100.000000E-18  100.000000E-18 
+          RS                    1.000000E-03                                 
+          TT                   10.000000E-12                                 
+         CJO                    1.000000E-18                                 
+          KF   56.568540E-12                  184.390900E-12   56.568540E-12 
+
+
+               X_U5.XU9.DNOM   X_U5.XIn11.DVNF X_U5.XVn11.DVN  X_U6.XU9.DNOM   
+          IS    1.000000E-15  100.000000E-18  100.000000E-18    1.000000E-15 
+          RS    1.000000E-03                                    1.000000E-03 
+          TT   10.000000E-12                                   10.000000E-12 
+         CJO    1.000000E-18                                    1.000000E-18 
+          KF                  184.390900E-12   56.568540E-12                 
+
+
+               X_U6.XIn11.DVNF X_U6.XVn11.DVN  X_U7.XU9.DNOM   X_U7.XIn11.DVNF 
+          IS  100.000000E-18  100.000000E-18    1.000000E-15  100.000000E-18 
+          RS                                    1.000000E-03                 
+          TT                                   10.000000E-12                 
+         CJO                                    1.000000E-18                 
+          KF  184.390900E-12   56.568540E-12                  184.390900E-12 
+
+
+               X_U7.XVn11.DVN  X_U8.XU9.DNOM   X_U8.XIn11.DVNF X_U8.XVn11.DVN  
+          IS  100.000000E-18    1.000000E-15  100.000000E-18  100.000000E-18 
+          RS                    1.000000E-03                                 
+          TT                   10.000000E-12                                 
+         CJO                    1.000000E-18                                 
+          KF   56.568540E-12                  184.390900E-12   56.568540E-12 
+
+
+               X_U9.XU9.DNOM   X_U9.XIn11.DVNF X_U9.XVn11.DVN  X_U10.XU9.DNOM  
+          IS    1.000000E-15  100.000000E-18  100.000000E-18    1.000000E-15 
+          RS    1.000000E-03                                    1.000000E-03 
+          TT   10.000000E-12                                   10.000000E-12 
+         CJO    1.000000E-18                                    1.000000E-18 
+          KF                  184.390900E-12   56.568540E-12                 
+
+
+               X_U10.XIn11.DVNF                X_U10.XVn11.DVN X_U11.XU9.DNOM  
+          IS  100.000000E-18                  100.000000E-18    1.000000E-15 
+          RS                    1.000000E-03 
+          TT                   10.000000E-12 
+         CJO                    1.000000E-18 
+          KF  184.390900E-12                   56.568540E-12                 
+
+
+               X_U11.XIn11.DVNF                X_U11.XVn11.DVN 
+          IS  100.000000E-18                  100.000000E-18 
+          KF  184.390900E-12                   56.568540E-12 
+
+
+**** 11/08/17 16:31:06 ****** PSpice 17.2.0 (March 2016) ****** ID# 0 ********
+
+ ** Profile: "SCHEMATIC1-SeniorDesign2"  [ U:\SeniorDesign\Orcad\seniordesign2-pspicefiles\schematic1\seniordesign2.sim ] 
+
+
+ ****     Voltage Controlled Switch MODEL PARAMETERS
+
+
+******************************************************************************
+
+
+
+
+               X_U1.S_VSWITCH_1 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U1.S_VSWITCH_2 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U1.S_VSWITCH_3 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U1.S_VSWITCH_4 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U1.S_VSWITCH_5 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON    -.01         
+        VOFF    0            
+
+
+               X_U1.S_VSWITCH_6 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON     .01         
+        VOFF    0            
+
+
+               X_U1.S_VSWITCH_7 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U1.S_VSWITCH_8 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U1.S_VSWITCH_9 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U1.S_VSWITCH_10 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U1.S_VSWITCH_11 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U1.S_VSWITCH_12 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U2.S_VSWITCH_1 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U2.S_VSWITCH_2 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U2.S_VSWITCH_3 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U2.S_VSWITCH_4 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U2.S_VSWITCH_5 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON    -.01         
+        VOFF    0            
+
+
+               X_U2.S_VSWITCH_6 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON     .01         
+        VOFF    0            
+
+
+               X_U2.S_VSWITCH_7 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U2.S_VSWITCH_8 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U2.S_VSWITCH_9 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U2.S_VSWITCH_10 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U2.S_VSWITCH_11 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U2.S_VSWITCH_12 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U3.S_VSWITCH_1 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U3.S_VSWITCH_2 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U3.S_VSWITCH_3 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U3.S_VSWITCH_4 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U3.S_VSWITCH_5 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON    -.01         
+        VOFF    0            
+
+
+               X_U3.S_VSWITCH_6 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON     .01         
+        VOFF    0            
+
+
+               X_U3.S_VSWITCH_7 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U3.S_VSWITCH_8 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U3.S_VSWITCH_9 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U3.S_VSWITCH_10 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U3.S_VSWITCH_11 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U3.S_VSWITCH_12 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U4.S_VSWITCH_1 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U4.S_VSWITCH_2 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U4.S_VSWITCH_3 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U4.S_VSWITCH_4 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U4.S_VSWITCH_5 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON    -.01         
+        VOFF    0            
+
+
+               X_U4.S_VSWITCH_6 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON     .01         
+        VOFF    0            
+
+
+               X_U4.S_VSWITCH_7 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U4.S_VSWITCH_8 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U4.S_VSWITCH_9 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U4.S_VSWITCH_10 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U4.S_VSWITCH_11 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U4.S_VSWITCH_12 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U5.S_VSWITCH_1 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U5.S_VSWITCH_2 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U5.S_VSWITCH_3 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U5.S_VSWITCH_4 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U5.S_VSWITCH_5 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON    -.01         
+        VOFF    0            
+
+
+               X_U5.S_VSWITCH_6 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON     .01         
+        VOFF    0            
+
+
+               X_U5.S_VSWITCH_7 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U5.S_VSWITCH_8 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U5.S_VSWITCH_9 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U5.S_VSWITCH_10 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U5.S_VSWITCH_11 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U5.S_VSWITCH_12 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U6.S_VSWITCH_1 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U6.S_VSWITCH_2 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U6.S_VSWITCH_3 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U6.S_VSWITCH_4 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U6.S_VSWITCH_5 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON    -.01         
+        VOFF    0            
+
+
+               X_U6.S_VSWITCH_6 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON     .01         
+        VOFF    0            
+
+
+               X_U6.S_VSWITCH_7 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U6.S_VSWITCH_8 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U6.S_VSWITCH_9 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U6.S_VSWITCH_10 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U6.S_VSWITCH_11 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U6.S_VSWITCH_12 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U7.S_VSWITCH_1 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U7.S_VSWITCH_2 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U7.S_VSWITCH_3 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U7.S_VSWITCH_4 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U7.S_VSWITCH_5 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON    -.01         
+        VOFF    0            
+
+
+               X_U7.S_VSWITCH_6 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON     .01         
+        VOFF    0            
+
+
+               X_U7.S_VSWITCH_7 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U7.S_VSWITCH_8 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U7.S_VSWITCH_9 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U7.S_VSWITCH_10 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U7.S_VSWITCH_11 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U7.S_VSWITCH_12 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U8.S_VSWITCH_1 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U8.S_VSWITCH_2 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U8.S_VSWITCH_3 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U8.S_VSWITCH_4 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U8.S_VSWITCH_5 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON    -.01         
+        VOFF    0            
+
+
+               X_U8.S_VSWITCH_6 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON     .01         
+        VOFF    0            
+
+
+               X_U8.S_VSWITCH_7 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U8.S_VSWITCH_8 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U8.S_VSWITCH_9 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U8.S_VSWITCH_10 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U8.S_VSWITCH_11 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U8.S_VSWITCH_12 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U9.S_VSWITCH_1 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U9.S_VSWITCH_2 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U9.S_VSWITCH_3 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U9.S_VSWITCH_4 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U9.S_VSWITCH_5 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON    -.01         
+        VOFF    0            
+
+
+               X_U9.S_VSWITCH_6 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON     .01         
+        VOFF    0            
+
+
+               X_U9.S_VSWITCH_7 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U9.S_VSWITCH_8 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U9.S_VSWITCH_9 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U9.S_VSWITCH_10 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U9.S_VSWITCH_11 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U9.S_VSWITCH_12 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U10.S_VSWITCH_1 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U10.S_VSWITCH_2 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U10.S_VSWITCH_3 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U10.S_VSWITCH_4 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U10.S_VSWITCH_5 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON    -.01         
+        VOFF    0            
+
+
+               X_U10.S_VSWITCH_6 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON     .01         
+        VOFF    0            
+
+
+               X_U10.S_VSWITCH_7 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U10.S_VSWITCH_8 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U10.S_VSWITCH_9 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U10.S_VSWITCH_10 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U10.S_VSWITCH_11 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U10.S_VSWITCH_12 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U11.S_VSWITCH_1 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U11.S_VSWITCH_2 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U11.S_VSWITCH_3 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U11.S_VSWITCH_4 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U11.S_VSWITCH_5 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON    -.01         
+        VOFF    0            
+
+
+               X_U11.S_VSWITCH_6 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON     .01         
+        VOFF    0            
+
+
+               X_U11.S_VSWITCH_7 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U11.S_VSWITCH_8 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U11.S_VSWITCH_9 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U11.S_VSWITCH_10 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U11.S_VSWITCH_11 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U11.S_VSWITCH_12 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+**** 11/08/17 16:31:06 ****** PSpice 17.2.0 (March 2016) ****** ID# 0 ********
+
+ ** Profile: "SCHEMATIC1-SeniorDesign2"  [ U:\SeniorDesign\Orcad\seniordesign2-pspicefiles\schematic1\seniordesign2.sim ] 
+
+
+ ****     INITIAL TRANSIENT SOLUTION       TEMPERATURE =   27.000 DEG C
+
+
+******************************************************************************
+
+
+
+ NODE   VOLTAGE     NODE   VOLTAGE     NODE   VOLTAGE     NODE   VOLTAGE
+
+
+(N00244)    3.3000 (N00251)    1.0575 (N00278)    1.0063 (N00285)    2.0000     
+
+(N06186)    1.0063 (N06262)    1.0575 (N06314)    3.3000 (N06507)    2.0000     
+
+(N06626)    0.0000 (N06727)    0.0000 (N06828)    0.0000 (N07071)    0.0000     
+
+(N08164)    2.0000 (N08174)    1.0016 (N08250)    1.0575 (N08302)    3.3000     
+
+(N08963)    1.0009 (N09035)    1.0575 (N09089)    3.3000 (N09396)    1.2007     
+
+(N09496)    1.4005 (N09596)    1.6004 (N09703)    1.8002 (N09846)    2.0000     
+
+(N10387)    1.0589 (N10449)    1.0575 (N10501)    3.3000 (N12194)    1.0004     
+
+(N12282)    1.0575 (N12334)    3.3000 (N12763)    2.0000 (N12773)     .5002     
+
+(N12922)    1.0005 (N13076)     .5002 (N13090)    1.0004 (N13390)     .5002     
+
+(N14063)    2.0000 (N14077)    1.5007 (N14149)    1.0578 (N14201)    3.3000     
+
+(N14488)    1.5007 (N14850)     .9992 (N15155)    2.0000 (N15165)     .5002     
+
+(N15179)    1.0004 (N15586)    3.3000 (N20407)     .9994 (N20417)    1.5994     
+
+(N20427)    3.3000 (N21151)     .9994 (N21161)    1.5990 (N21171)    3.3000     
+
+(N21669)     .9992 (N21679)    1.0589 (N21689)    3.3000 (X_U1.6)     .9992     
+
+(X_U1.7) 6.600E-09 (X_U1.8) 99.75E+03 (X_U1.9)    6.8839 (X_U2.6)     .9992     
+
+(X_U2.7) 6.600E-09 (X_U2.8) 99.75E+03 (X_U2.9)    6.8839 (X_U3.6)     .9992     
+
+(X_U3.7) 6.600E-09 (X_U3.8) 99.75E+03 (X_U3.9)    6.8840 (X_U4.6)     .9992     
+
+(X_U4.7) 6.600E-09 (X_U4.8) 99.75E+03 (X_U4.9)    6.8840 (X_U5.6)     .9993     
+
+(X_U5.7) 6.600E-09 (X_U5.8) 99.76E+03 (X_U5.9)    6.8836 (X_U6.6)     .9993     
+
+(X_U6.7) 6.600E-09 (X_U6.8) 99.76E+03 (X_U6.9)    6.8836 (X_U7.6)     .9999     
+
+(X_U7.7) 6.600E-09 (X_U7.8) 99.88E+03 (X_U7.9)    6.8808 (X_U8.6)     .9992     
+
+(X_U8.7) 6.600E-09 (X_U8.8) 99.74E+03 (X_U8.9)    6.8691 (X_U9.6)     .9992     
+
+(X_U9.7) 6.600E-09 (X_U9.8) 99.74E+03 (X_U9.9)    1.6176 (N051790)    3.3000    
+
+(N061140)    3.3000                   (N120820)    3.3000                       
+
+(N162640)    3.3000                   (N222440)    3.3000                       
+
+(N223690)    3.3000                   (X_U1.10)     .0137                       
+
+(X_U1.11)    6.8839                   (X_U1.12)    1.0010                       
+
+(X_U1.13)     .0500                   (X_U1.14)    2.6324                       
+
+(X_U1.15)   58.2640                   (X_U1.16)   -1.1950                       
+
+(X_U1.17)     .8009                   (X_U1.18)   -9.9800                       
+
+(X_U1.19)    9.9800                   (X_U1.20)     .0125                       
+
+(X_U1.21)    1.0010                   (X_U1.22)     .9992                       
+
+(X_U1.23)     .9992                   (X_U1.24)    3.3000                       
+
+(X_U1.25)     .9000                   (X_U1.26)    1.0025                       
+
+(X_U1.27) 100.9E+03                   (X_U1.28)    1.0003                       
+
+(X_U1.29)    1.0007                   (X_U1.30) 99.75E+03                       
+
+(X_U1.31) 100.9E+03                   (X_U1.32)    6.8839                       
+
+(X_U1.33)    1.0575                   (X_U1.34)   12.7100                       
+
+(X_U1.35)  -12.7100                   (X_U1.36)   13.7680                       
+
+(X_U1.37)-500.0E+03                   (X_U1.38) -100.7500                       
+
+(X_U1.39)  157.4900                   (X_U1.40) 99.75E+03                       
+
+(X_U1.41)     .0500                   (X_U1.42)    3.2500                       
+
+(X_U1.43)    -.2011                   (X_U1.44)    1.0007                       
+
+(X_U1.45)     .0117                   (X_U1.46)    6.8839                       
+
+(X_U1.47)     .3144                   (X_U1.48)     .1137                       
+
+(X_U1.49)     .0137                   (X_U1.50)     .1137                       
+
+(X_U1.51)     .0137                   (X_U1.52)   -4.9858                       
+
+(X_U1.53)    5.0133                   (X_U1.54)     .0143                       
+
+(X_U1.55)     .0133                   (X_U1.56)  -10.0000                       
+
+(X_U1.57)   10.0000                   (X_U1.58)-5000.0000                       
+
+(X_U1.59) 5000.0000                   (X_U1.60) -598.6700                       
+
+(X_U1.61)  401.2300                   (X_U1.62)    6.8840                       
+
+(X_U1.63)    1.0010                   (X_U1.64)    6.8839                       
+
+(X_U1.65)-12.70E-06                   (X_U1.66)     .0582                       
+
+(X_U1.67)   58.2640                   (X_U1.68)     .9992                       
+
+(X_U1.69) 1.319E+06                   (X_U1.70) 1.319E+06                       
+
+(X_U1.71)     .9803                   (X_U1.72)  140.0000                       
+
+(X_U1.73) -140.0000                   (X_U1.74) 6.600E-09                       
+
+(X_U1.75)    0.0000                   (X_U1.76)    3.3000                       
+
+(X_U1.77)-99.75E+03                   (X_U1.78)-99.75E+03                       
+
+(X_U10.6)     .9992                   (X_U10.7) 6.600E-09                       
+
+(X_U10.8) 99.74E+03                   (X_U10.9)    1.6213                       
+
+(X_U11.6)     .9992                   (X_U11.7) 6.600E-09                       
+
+(X_U11.8) 99.74E+03                   (X_U11.9)    6.8691                       
+
+(X_U2.10)     .0137                   (X_U2.11)    6.8839                       
+
+(X_U2.12)    1.0010                   (X_U2.13)     .0500                       
+
+(X_U2.14)    2.6324                   (X_U2.15)   58.2640                       
+
+(X_U2.16)   -1.1950                   (X_U2.17)     .8009                       
+
+(X_U2.18)   -9.9800                   (X_U2.19)    9.9800                       
+
+(X_U2.20)     .0125                   (X_U2.21)    1.0010                       
+
+(X_U2.22)     .9992                   (X_U2.23)     .9992                       
+
+(X_U2.24)    3.3000                   (X_U2.25)     .9000                       
+
+(X_U2.26)    1.0025                   (X_U2.27) 100.9E+03                       
+
+(X_U2.28)    1.0003                   (X_U2.29)    1.0007                       
+
+(X_U2.30) 99.75E+03                   (X_U2.31) 100.9E+03                       
+
+(X_U2.32)    6.8839                   (X_U2.33)    1.0575                       
+
+(X_U2.34)   12.7100                   (X_U2.35)  -12.7100                       
+
+(X_U2.36)   13.7680                   (X_U2.37)-500.0E+03                       
+
+(X_U2.38) -100.7500                   (X_U2.39)  157.4900                       
+
+(X_U2.40) 99.75E+03                   (X_U2.41)     .0500                       
+
+(X_U2.42)    3.2500                   (X_U2.43)    -.2011                       
+
+(X_U2.44)    1.0007                   (X_U2.45)     .0117                       
+
+(X_U2.46)    6.8839                   (X_U2.47)     .3144                       
+
+(X_U2.48)     .1137                   (X_U2.49)     .0137                       
+
+(X_U2.50)     .1137                   (X_U2.51)     .0137                       
+
+(X_U2.52)   -4.9858                   (X_U2.53)    5.0133                       
+
+(X_U2.54)     .0143                   (X_U2.55)     .0133                       
+
+(X_U2.56)  -10.0000                   (X_U2.57)   10.0000                       
+
+(X_U2.58)-5000.0000                   (X_U2.59) 5000.0000                       
+
+(X_U2.60) -598.6700                   (X_U2.61)  401.2300                       
+
+(X_U2.62)    6.8840                   (X_U2.63)    1.0010                       
+
+(X_U2.64)    6.8839                   (X_U2.65)-12.70E-06                       
+
+(X_U2.66)     .0582                   (X_U2.67)   58.2640                       
+
+(X_U2.68)     .9992                   (X_U2.69) 1.319E+06                       
+
+(X_U2.70) 1.319E+06                   (X_U2.71)     .9803                       
+
+(X_U2.72)  140.0000                   (X_U2.73) -140.0000                       
+
+(X_U2.74) 6.600E-09                   (X_U2.75)    0.0000                       
+
+(X_U2.76)    3.3000                   (X_U2.77)-99.75E+03                       
+
+(X_U2.78)-99.75E+03                   (X_U3.10)     .0137                       
+
+(X_U3.11)    6.8839                   (X_U3.12)    1.0010                       
+
+(X_U3.13)     .0500                   (X_U3.14)    2.6324                       
+
+(X_U3.15)   58.2640                   (X_U3.16)   -1.1950                       
+
+(X_U3.17)     .8009                   (X_U3.18)   -9.9800                       
+
+(X_U3.19)    9.9800                   (X_U3.20)     .0125                       
+
+(X_U3.21)    1.0010                   (X_U3.22)     .9992                       
+
+(X_U3.23)     .9992                   (X_U3.24)    3.3000                       
+
+(X_U3.25)     .9000                   (X_U3.26)    1.0025                       
+
+(X_U3.27) 100.9E+03                   (X_U3.28)    1.0003                       
+
+(X_U3.29)    1.0007                   (X_U3.30) 99.75E+03                       
+
+(X_U3.31) 100.9E+03                   (X_U3.32)    6.8839                       
+
+(X_U3.33)    1.0575                   (X_U3.34)   12.7100                       
+
+(X_U3.35)  -12.7100                   (X_U3.36)   13.7680                       
+
+(X_U3.37)-500.0E+03                   (X_U3.38) -100.7500                       
+
+(X_U3.39)  157.4900                   (X_U3.40) 99.75E+03                       
+
+(X_U3.41)     .0500                   (X_U3.42)    3.2500                       
+
+(X_U3.43)    -.2011                   (X_U3.44)    1.0007                       
+
+(X_U3.45)     .0117                   (X_U3.46)    6.8839                       
+
+(X_U3.47)     .3144                   (X_U3.48)     .1137                       
+
+(X_U3.49)     .0137                   (X_U3.50)     .1137                       
+
+(X_U3.51)     .0137                   (X_U3.52)   -4.9858                       
+
+(X_U3.53)    5.0133                   (X_U3.54)     .0143                       
+
+(X_U3.55)     .0133                   (X_U3.56)  -10.0000                       
+
+(X_U3.57)   10.0000                   (X_U3.58)-5000.0000                       
+
+(X_U3.59) 5000.0000                   (X_U3.60) -598.6700                       
+
+(X_U3.61)  401.2300                   (X_U3.62)    6.8840                       
+
+(X_U3.63)    1.0010                   (X_U3.64)    6.8839                       
+
+(X_U3.65)-12.70E-06                   (X_U3.66)     .0582                       
+
+(X_U3.67)   58.2640                   (X_U3.68)     .9992                       
+
+(X_U3.69) 1.319E+06                   (X_U3.70) 1.319E+06                       
+
+(X_U3.71)     .9803                   (X_U3.72)  140.0000                       
+
+(X_U3.73) -140.0000                   (X_U3.74) 6.600E-09                       
+
+(X_U3.75)    0.0000                   (X_U3.76)    3.3000                       
+
+(X_U3.77)-99.75E+03                   (X_U3.78)-99.75E+03                       
+
+(X_U4.10)     .0137                   (X_U4.11)    6.8840                       
+
+(X_U4.12)    1.0010                   (X_U4.13)     .0500                       
+
+(X_U4.14)    2.6324                   (X_U4.15)   58.2640                       
+
+(X_U4.16)   -1.1950                   (X_U4.17)     .8009                       
+
+(X_U4.18)   -9.9800                   (X_U4.19)    9.9800                       
+
+(X_U4.20)     .0125                   (X_U4.21)    1.0010                       
+
+(X_U4.22)     .9992                   (X_U4.23)     .9992                       
+
+(X_U4.24)    3.3000                   (X_U4.25)     .9000                       
+
+(X_U4.26)    1.0025                   (X_U4.27) 100.9E+03                       
+
+(X_U4.28)    1.0003                   (X_U4.29)    1.0007                       
+
+(X_U4.30) 99.75E+03                   (X_U4.31) 100.9E+03                       
+
+(X_U4.32)    6.8839                   (X_U4.33)    1.0575                       
+
+(X_U4.34)   12.7100                   (X_U4.35)  -12.7100                       
+
+(X_U4.36)   13.7680                   (X_U4.37)-500.0E+03                       
+
+(X_U4.38) -100.7500                   (X_U4.39)  157.4900                       
+
+(X_U4.40) 99.75E+03                   (X_U4.41)     .0500                       
+
+(X_U4.42)    3.2500                   (X_U4.43)    -.2011                       
+
+(X_U4.44)    1.0007                   (X_U4.45)     .0117                       
+
+(X_U4.46)    6.8840                   (X_U4.47)     .3144                       
+
+(X_U4.48)     .1137                   (X_U4.49)     .0137                       
+
+(X_U4.50)     .1137                   (X_U4.51)     .0137                       
+
+(X_U4.52)   -4.9858                   (X_U4.53)    5.0133                       
+
+(X_U4.54)     .0143                   (X_U4.55)     .0133                       
+
+(X_U4.56)  -10.0000                   (X_U4.57)   10.0000                       
+
+(X_U4.58)-5000.0000                   (X_U4.59) 5000.0000                       
+
+(X_U4.60) -598.6700                   (X_U4.61)  401.2300                       
+
+(X_U4.62)    6.8840                   (X_U4.63)    1.0010                       
+
+(X_U4.64)    6.8840                   (X_U4.65)-12.70E-06                       
+
+(X_U4.66)     .0582                   (X_U4.67)   58.2640                       
+
+(X_U4.68)     .9992                   (X_U4.69) 1.319E+06                       
+
+(X_U4.70) 1.319E+06                   (X_U4.71)     .9803                       
+
+(X_U4.72)  140.0000                   (X_U4.73) -140.0000                       
+
+(X_U4.74) 6.600E-09                   (X_U4.75)    0.0000                       
+
+(X_U4.76)    3.3000                   (X_U4.77)-99.75E+03                       
+
+(X_U4.78)-99.75E+03                   (X_U5.10)     .0137                       
+
+(X_U5.11)    6.8836                   (X_U5.12)    1.0010                       
+
+(X_U5.13)     .0500                   (X_U5.14)    2.6324                       
+
+(X_U5.15)   58.2600                   (X_U5.16)   -1.1950                       
+
+(X_U5.17)     .8009                   (X_U5.18)   -9.9800                       
+
+(X_U5.19)    9.9800                   (X_U5.20)     .0125                       
+
+(X_U5.21)    1.0010                   (X_U5.22)     .9993                       
+
+(X_U5.23)     .9993                   (X_U5.24)    3.3000                       
+
+(X_U5.25)     .9000                   (X_U5.26)    1.0025                       
+
+(X_U5.27) 100.9E+03                   (X_U5.28)    1.0003                       
+
+(X_U5.29)    1.0008                   (X_U5.30) 99.76E+03                       
+
+(X_U5.31) 100.9E+03                   (X_U5.32)    6.8836                       
+
+(X_U5.33)    1.0575                   (X_U5.34)   12.7100                       
+
+(X_U5.35)  -12.7100                   (X_U5.36)   13.7670                       
+
+(X_U5.37)-500.0E+03                   (X_U5.38) -100.7500                       
+
+(X_U5.39)  157.4900                   (X_U5.40) 99.76E+03                       
+
+(X_U5.41)     .0500                   (X_U5.42)    3.2500                       
+
+(X_U5.43)    -.2011                   (X_U5.44)    1.0008                       
+
+(X_U5.45)     .0117                   (X_U5.46)    6.8836                       
+
+(X_U5.47)     .3144                   (X_U5.48)     .1137                       
+
+(X_U5.49)     .0137                   (X_U5.50)     .1137                       
+
+(X_U5.51)     .0137                   (X_U5.52)   -4.9858                       
+
+(X_U5.53)    5.0133                   (X_U5.54)     .0143                       
+
+(X_U5.55)     .0133                   (X_U5.56)  -10.0000                       
+
+(X_U5.57)   10.0000                   (X_U5.58)-5000.0000                       
+
+(X_U5.59) 5000.0000                   (X_U5.60) -598.6700                       
+
+(X_U5.61)  401.2300                   (X_U5.62)    6.8837                       
+
+(X_U5.63)    1.0010                   (X_U5.64)    6.8836                       
+
+(X_U5.65)-12.70E-06                   (X_U5.66)     .0582                       
+
+(X_U5.67)   58.2600                   (X_U5.68)     .9993                       
+
+(X_U5.69) 1.319E+06                   (X_U5.70) 1.319E+06                       
+
+(X_U5.71)     .9803                   (X_U5.72)  140.0000                       
+
+(X_U5.73) -140.0000                   (X_U5.74) 6.600E-09                       
+
+(X_U5.75)    0.0000                   (X_U5.76)    3.3000                       
+
+(X_U5.77)-99.76E+03                   (X_U5.78)-99.76E+03                       
+
+(X_U6.10)     .0137                   (X_U6.11)    6.8836                       
+
+(X_U6.12)    1.0010                   (X_U6.13)     .0500                       
+
+(X_U6.14)    2.6324                   (X_U6.15)   58.2600                       
+
+(X_U6.16)   -1.1950                   (X_U6.17)     .8009                       
+
+(X_U6.18)   -9.9800                   (X_U6.19)    9.9800                       
+
+(X_U6.20)     .0125                   (X_U6.21)    1.0010                       
+
+(X_U6.22)     .9993                   (X_U6.23)     .9993                       
+
+(X_U6.24)    3.3000                   (X_U6.25)     .9000                       
+
+(X_U6.26)    1.0025                   (X_U6.27) 100.9E+03                       
+
+(X_U6.28)    1.0003                   (X_U6.29)    1.0008                       
+
+(X_U6.30) 99.76E+03                   (X_U6.31) 100.9E+03                       
+
+(X_U6.32)    6.8836                   (X_U6.33)    1.0575                       
+
+(X_U6.34)   12.7100                   (X_U6.35)  -12.7100                       
+
+(X_U6.36)   13.7670                   (X_U6.37)-500.0E+03                       
+
+(X_U6.38) -100.7500                   (X_U6.39)  157.4900                       
+
+(X_U6.40) 99.76E+03                   (X_U6.41)     .0500                       
+
+(X_U6.42)    3.2500                   (X_U6.43)    -.2011                       
+
+(X_U6.44)    1.0008                   (X_U6.45)     .0117                       
+
+(X_U6.46)    6.8836                   (X_U6.47)     .3144                       
+
+(X_U6.48)     .1137                   (X_U6.49)     .0137                       
+
+(X_U6.50)     .1137                   (X_U6.51)     .0137                       
+
+(X_U6.52)   -4.9858                   (X_U6.53)    5.0133                       
+
+(X_U6.54)     .0143                   (X_U6.55)     .0133                       
+
+(X_U6.56)  -10.0000                   (X_U6.57)   10.0000                       
+
+(X_U6.58)-5000.0000                   (X_U6.59) 5000.0000                       
+
+(X_U6.60) -598.6700                   (X_U6.61)  401.2300                       
+
+(X_U6.62)    6.8837                   (X_U6.63)    1.0010                       
+
+(X_U6.64)    6.8836                   (X_U6.65)-12.70E-06                       
+
+(X_U6.66)     .0582                   (X_U6.67)   58.2600                       
+
+(X_U6.68)     .9993                   (X_U6.69) 1.319E+06                       
+
+(X_U6.70) 1.319E+06                   (X_U6.71)     .9459                       
+
+(X_U6.72)  140.0000                   (X_U6.73) -140.0000                       
+
+(X_U6.74) 6.600E-09                   (X_U6.75)    0.0000                       
+
+(X_U6.76)    3.3000                   (X_U6.77)-99.76E+03                       
+
+(X_U6.78)-99.76E+03                   (X_U7.10)     .0137                       
+
+(X_U7.11)    6.8808                   (X_U7.12)    1.0010                       
+
+(X_U7.13)     .0500                   (X_U7.14)    2.6328                       
+
+(X_U7.15)   58.2300                   (X_U7.16)   -1.1950                       
+
+(X_U7.17)     .8009                   (X_U7.18)   -9.9800                       
+
+(X_U7.19)    9.9800                   (X_U7.20)     .0125                       
+
+(X_U7.21)    1.0010                   (X_U7.22)     .9999                       
+
+(X_U7.23)     .9999                   (X_U7.24)    3.3000                       
+
+(X_U7.25)     .9000                   (X_U7.26)    1.0025                       
+
+(X_U7.27) 100.9E+03                   (X_U7.28)    1.0006                       
+
+(X_U7.29)    1.0014                   (X_U7.30) 99.88E+03                       
+
+(X_U7.31) 100.9E+03                   (X_U7.32)    6.8808                       
+
+(X_U7.33)    1.0578                   (X_U7.34)   12.7040                       
+
+(X_U7.35)  -12.7040                   (X_U7.36)   13.7620                       
+
+(X_U7.37)-500.0E+03                   (X_U7.38) -100.7800                       
+
+(X_U7.39)  157.5000                   (X_U7.40) 99.88E+03                       
+
+(X_U7.41)     .0500                   (X_U7.42)    3.2500                       
+
+(X_U7.43)    -.2012                   (X_U7.44)    1.0014                       
+
+(X_U7.45)     .0116                   (X_U7.46)    6.8808                       
+
+(X_U7.47)     .3144                   (X_U7.48)     .1137                       
+
+(X_U7.49)     .0137                   (X_U7.50)     .1137                       
+
+(X_U7.51)     .0137                   (X_U7.52)   -4.9858                       
+
+(X_U7.53)    5.0132                   (X_U7.54)     .0142                       
+
+(X_U7.55)     .0132                   (X_U7.56)  -10.0000                       
+
+(X_U7.57)   10.0000                   (X_U7.58)-5000.0000                       
+
+(X_U7.59) 5000.0000                   (X_U7.60) -598.6700                       
+
+(X_U7.61)  401.2300                   (X_U7.62)    6.8809                       
+
+(X_U7.63)    1.0010                   (X_U7.64)    6.8808                       
+
+(X_U7.65)-12.70E-06                   (X_U7.66)     .0582                       
+
+(X_U7.67)   58.2300                   (X_U7.68)     .9999                       
+
+(X_U7.69) 1.319E+06                   (X_U7.70) 1.319E+06                       
+
+(X_U7.71)     .9806                   (X_U7.72)  140.0000                       
+
+(X_U7.73) -140.0000                   (X_U7.74) 6.600E-09                       
+
+(X_U7.75)    0.0000                   (X_U7.76)    3.3000                       
+
+(X_U7.77)-99.88E+03                   (X_U7.78)-99.88E+03                       
+
+(X_U8.10)     .0137                   (X_U8.11)    6.8691                       
+
+(X_U8.12)    1.0010                   (X_U8.13)     .0500                       
+
+(X_U8.14)    2.6341                   (X_U8.15)   58.1020                       
+
+(X_U8.16)   -1.1950                   (X_U8.17)     .8009                       
+
+(X_U8.18)   -9.9800                   (X_U8.19)    9.9800                       
+
+(X_U8.20)     .0125                   (X_U8.21)    1.0010                       
+
+(X_U8.22)     .9992                   (X_U8.23)     .9992                       
+
+(X_U8.24)    3.3000                   (X_U8.25)     .9000                       
+
+(X_U8.26)    1.0025                   (X_U8.27) 100.9E+03                       
+
+(X_U8.28)    1.0002                   (X_U8.29)    1.0007                       
+
+(X_U8.30) 99.74E+03                   (X_U8.31) 100.9E+03                       
+
+(X_U8.32)    6.8691                   (X_U8.33)    1.0589                       
+
+(X_U8.34)   12.6790                   (X_U8.35)  -12.6790                       
+
+(X_U8.36)   13.7380                   (X_U8.37)-500.0E+03                       
+
+(X_U8.38) -100.8900                   (X_U8.39)  157.5200                       
+
+(X_U8.40) 99.74E+03                   (X_U8.41)     .0500                       
+
+(X_U8.42)    3.2500                   (X_U8.43)    -.2014                       
+
+(X_U8.44)    1.0007                   (X_U8.45)     .0116                       
+
+(X_U8.46)    6.8691                   (X_U8.47)     .3144                       
+
+(X_U8.48)     .1137                   (X_U8.49)     .0137                       
+
+(X_U8.50)     .1137                   (X_U8.51)     .0137                       
+
+(X_U8.52)   -4.9858                   (X_U8.53)    5.0132                       
+
+(X_U8.54)     .0142                   (X_U8.55)     .0132                       
+
+(X_U8.56)  -10.0000                   (X_U8.57)   10.0000                       
+
+(X_U8.58)-5000.0000                   (X_U8.59) 5000.0000                       
+
+(X_U8.60) -598.6700                   (X_U8.61)  401.2300                       
+
+(X_U8.62)    6.8692                   (X_U8.63)    1.0010                       
+
+(X_U8.64)    6.8691                   (X_U8.65)-12.67E-06                       
+
+(X_U8.66)     .0580                   (X_U8.67)   58.1020                       
+
+(X_U8.68)     .9992                   (X_U8.69) 1.319E+06                       
+
+(X_U8.70) 1.319E+06                   (X_U8.71)     .9802                       
+
+(X_U8.72)  140.0000                   (X_U8.73) -140.0000                       
+
+(X_U8.74) 6.600E-09                   (X_U8.75)    0.0000                       
+
+(X_U8.76)    3.3000                   (X_U8.77)-99.74E+03                       
+
+(X_U8.78)-99.74E+03                   (X_U9.10)     .0032                       
+
+(X_U9.11)    1.6176                   (X_U9.12)    1.0010                       
+
+(X_U9.13)     .0500                   (X_U9.14)    3.2481                       
+
+(X_U9.15)     .1818                   (X_U9.16)   -1.1971                       
+
+(X_U9.17)     .7988                   (X_U9.18)   -9.9800                       
+
+(X_U9.19)    9.9800                   (X_U9.20)     .0125                       
+
+(X_U9.21)    1.0010                   (X_U9.22)     .9992                       
+
+(X_U9.23)     .9992                   (X_U9.24)    3.3000                       
+
+(X_U9.25)     .9000                   (X_U9.26)    1.0025                       
+
+(X_U9.27) 100.9E+03                   (X_U9.28)    1.0002                       
+
+(X_U9.29)    1.0007                   (X_U9.30) 99.74E+03                       
+
+(X_U9.31) 100.9E+03                   (X_U9.32)    1.6176                       
+
+(X_U9.33)    1.5994                   (X_U9.34)    1.6358                       
+
+(X_U9.35)   -1.6358                   (X_U9.36)    3.2353                       
+
+(X_U9.37)-500.0E+03                   (X_U9.38) -154.9400                       
+
+(X_U9.39)  164.8600                   (X_U9.40) 99.74E+03                       
+
+(X_U9.41)     .0500                   (X_U9.42)    3.2500                       
+
+(X_U9.43)    -.3093                   (X_U9.44)    1.0007                       
+
+(X_U9.45) 36.37E-06                   (X_U9.46)    1.6176                       
+
+(X_U9.47)     .3291                   (X_U9.48)     .1032                       
+
+(X_U9.49)     .0032                   (X_U9.50)     .1032                       
+
+(X_U9.51)     .0032                   (X_U9.52)   -4.9963                       
+
+(X_U9.53)    5.0027                   (X_U9.54)     .0037                       
+
+(X_U9.55)     .0027                   (X_U9.56)  -10.0000                       
+
+(X_U9.57)   10.0000                   (X_U9.58)-5000.0000                       
+
+(X_U9.59) 5000.0000                   (X_U9.60) -599.7200                       
+
+(X_U9.61)  400.1800                   (X_U9.62)    1.6176                       
+
+(X_U9.63)    1.0010                   (X_U9.64)    1.6176                       
+
+(X_U9.65)-1.629E-06                   (X_U9.66) 181.7E-06                       
+
+(X_U9.67) 181.8E-06                   (X_U9.68)     .9992                       
+
+(X_U9.69) 1.319E+06                   (X_U9.70) 1.319E+06                       
+
+(X_U9.71)     .9802                   (X_U9.72)  140.0000                       
+
+(X_U9.73) -140.0000                   (X_U9.74) 6.600E-09                       
+
+(X_U9.75)    0.0000                   (X_U9.76)    3.3000                       
+
+(X_U9.77)-99.74E+03                   (X_U9.78)-99.74E+03                       
+
+(X_U10.10)     .0032                  (X_U10.11)    1.6213                      
+
+(X_U10.12)    1.0010                  (X_U10.13)     .0500                      
+
+(X_U10.14)    3.2476                  (X_U10.15)     .2221                      
+
+(X_U10.16)   -1.1970                  (X_U10.17)     .7988                      
+
+(X_U10.18)   -9.9800                  (X_U10.19)    9.9800                      
+
+(X_U10.20)     .0125                  (X_U10.21)    1.0010                      
+
+(X_U10.22)     .9992                  (X_U10.23)     .9992                      
+
+(X_U10.24)    3.3000                  (X_U10.25)     .9000                      
+
+(X_U10.26)    1.0025                  (X_U10.27) 100.9E+03                      
+
+(X_U10.28)    1.0002                  (X_U10.29)    1.0007                      
+
+(X_U10.30) 99.74E+03                  (X_U10.31) 100.9E+03                      
+
+(X_U10.32)    1.6212                  (X_U10.33)    1.5990                      
+
+(X_U10.34)    1.6435                  (X_U10.35)   -1.6435                      
+
+(X_U10.36)    3.2425                  (X_U10.37)-500.0E+03                      
+
+(X_U10.38) -154.9000                  (X_U10.39)  164.8600                      
+
+(X_U10.40) 99.74E+03                  (X_U10.41)     .0500                      
+
+(X_U10.42)    3.2500                  (X_U10.43)    -.3092                      
+
+(X_U10.44)    1.0007                  (X_U10.45) 44.41E-06                      
+
+(X_U10.46)    1.6213                  (X_U10.47)     .3291                      
+
+(X_U10.48)     .1032                  (X_U10.49)     .0032                      
+
+(X_U10.50)     .1032                  (X_U10.51)     .0032                      
+
+(X_U10.52)   -4.9963                  (X_U10.53)    5.0027                      
+
+(X_U10.54)     .0037                  (X_U10.55)     .0027                      
+
+(X_U10.56)  -10.0000                  (X_U10.57)   10.0000                      
+
+(X_U10.58)-5000.0000                  (X_U10.59) 5000.0000                      
+
+(X_U10.60) -599.7200                  (X_U10.61)  400.1800                      
+
+(X_U10.62)    1.6213                  (X_U10.63)    1.0010                      
+
+(X_U10.64)    1.6213                  (X_U10.65)-1.637E-06                      
+
+(X_U10.66) 221.9E-06                  (X_U10.67) 222.2E-06                      
+
+(X_U10.68)     .9992                  (X_U10.69) 1.319E+06                      
+
+(X_U10.70) 1.319E+06                  (X_U10.71)     .8290                      
+
+(X_U10.72)  140.0000                  (X_U10.73) -140.0000                      
+
+(X_U10.74) 6.600E-09                  (X_U10.75)    0.0000                      
+
+(X_U10.76)    3.3000                  (X_U10.77)-99.74E+03                      
+
+(X_U10.78)-99.74E+03                  (X_U11.10)     .0137                      
+
+(X_U11.11)    6.8691                  (X_U11.12)    1.0010                      
+
+(X_U11.13)     .0500                  (X_U11.14)    2.6341                      
+
+(X_U11.15)   58.1020                  (X_U11.16)   -1.1950                      
+
+(X_U11.17)     .8009                  (X_U11.18)   -9.9800                      
+
+(X_U11.19)    9.9800                  (X_U11.20)     .0125                      
+
+(X_U11.21)    1.0010                  (X_U11.22)     .9992                      
+
+(X_U11.23)     .9992                  (X_U11.24)    3.3000                      
+
+(X_U11.25)     .9000                  (X_U11.26)    1.0025                      
+
+(X_U11.27) 100.9E+03                  (X_U11.28)    1.0002                      
+
+(X_U11.29)    1.0007                  (X_U11.30) 99.74E+03                      
+
+(X_U11.31) 100.9E+03                  (X_U11.32)    6.8691                      
+
+(X_U11.33)    1.0589                  (X_U11.34)   12.6790                      
+
+(X_U11.35)  -12.6790                  (X_U11.36)   13.7380                      
+
+(X_U11.37)-500.0E+03                  (X_U11.38) -100.8900                      
+
+(X_U11.39)  157.5200                  (X_U11.40) 99.74E+03                      
+
+(X_U11.41)     .0500                  (X_U11.42)    3.2500                      
+
+(X_U11.43)    -.2014                  (X_U11.44)    1.0007                      
+
+(X_U11.45)     .0116                  (X_U11.46)    6.8691                      
+
+(X_U11.47)     .3144                  (X_U11.48)     .1137                      
+
+(X_U11.49)     .0137                  (X_U11.50)     .1137                      
+
+(X_U11.51)     .0137                  (X_U11.52)   -4.9858                      
+
+(X_U11.53)    5.0132                  (X_U11.54)     .0142                      
+
+(X_U11.55)     .0132                  (X_U11.56)  -10.0000                      
+
+(X_U11.57)   10.0000                  (X_U11.58)-5000.0000                      
+
+(X_U11.59) 5000.0000                  (X_U11.60) -598.6700                      
+
+(X_U11.61)  401.2300                  (X_U11.62)    6.8692                      
+
+(X_U11.63)    1.0010                  (X_U11.64)    6.8691                      
+
+(X_U11.65)-12.67E-06                  (X_U11.66)     .0580                      
+
+(X_U11.67)   58.1020                  (X_U11.68)     .9992                      
+
+(X_U11.69) 1.319E+06                  (X_U11.70) 1.319E+06                      
+
+(X_U11.71)    1.0431                  (X_U11.72)  140.0000                      
+
+(X_U11.73) -140.0000                  (X_U11.74) 6.600E-09                      
+
+(X_U11.75)    0.0000                  (X_U11.76)    3.3000                      
+
+(X_U11.77)-99.74E+03                  (X_U11.78)-99.74E+03                      
+
+(X_U1.XIn11.3)    0.0000              (X_U1.XIn11.4)    0.0000                  
+
+(X_U1.XIn11.5)    0.0000              (X_U1.XIn11.6)    0.0000                  
+
+(X_U1.XIn11.7)     .8338              (X_U1.XIn11.8)     .8338                  
+
+(X_U1.XR101.3) 3.307E-06              (X_U1.XR102.3) 6.600E-15                  
+
+(X_U1.XR103.3)-500.0E+03              (X_U1.XR104.3) 31.29E-06                  
+
+(X_U1.XR105.3) 1.008E-06              (X_U1.XR107.3) 1.009E-06                  
+
+(X_U1.XVn11.3)    0.0000              (X_U1.XVn11.4)    0.0000                  
+
+(X_U1.XVn11.5)    0.0000              (X_U1.XVn11.6)    0.0000                  
+
+(X_U1.XVn11.7)     .8338              (X_U1.XVn11.8)     .8338                  
+
+(X_U2.XIn11.3)    0.0000              (X_U2.XIn11.4)    0.0000                  
+
+(X_U2.XIn11.5)    0.0000              (X_U2.XIn11.6)    0.0000                  
+
+(X_U2.XIn11.7)     .8338              (X_U2.XIn11.8)     .8338                  
+
+(X_U2.XR101.3) 3.307E-06              (X_U2.XR102.3) 6.600E-15                  
+
+(X_U2.XR103.3)-500.0E+03              (X_U2.XR104.3) 31.29E-06                  
+
+(X_U2.XR105.3) 1.008E-06              (X_U2.XR107.3) 1.009E-06                  
+
+(X_U2.XVn11.3)    0.0000              (X_U2.XVn11.4)    0.0000                  
+
+(X_U2.XVn11.5)    0.0000              (X_U2.XVn11.6)    0.0000                  
+
+(X_U2.XVn11.7)     .8338              (X_U2.XVn11.8)     .8338                  
+
+(X_U3.XIn11.3)    0.0000              (X_U3.XIn11.4)    0.0000                  
+
+(X_U3.XIn11.5)    0.0000              (X_U3.XIn11.6)    0.0000                  
+
+(X_U3.XIn11.7)     .8338              (X_U3.XIn11.8)     .8338                  
+
+(X_U3.XR101.3) 3.307E-06              (X_U3.XR102.3) 6.600E-15                  
+
+(X_U3.XR103.3)-500.0E+03              (X_U3.XR104.3) 31.29E-06                  
+
+(X_U3.XR105.3) 1.008E-06              (X_U3.XR107.3) 1.009E-06                  
+
+(X_U3.XVn11.3)    0.0000              (X_U3.XVn11.4)    0.0000                  
+
+(X_U3.XVn11.5)    0.0000              (X_U3.XVn11.6)    0.0000                  
+
+(X_U3.XVn11.7)     .8338              (X_U3.XVn11.8)     .8338                  
+
+(X_U4.XIn11.3)    0.0000              (X_U4.XIn11.4)    0.0000                  
+
+(X_U4.XIn11.5)    0.0000              (X_U4.XIn11.6)    0.0000                  
+
+(X_U4.XIn11.7)     .8338              (X_U4.XIn11.8)     .8338                  
+
+(X_U4.XR101.3) 3.307E-06              (X_U4.XR102.3) 6.600E-15                  
+
+(X_U4.XR103.3)-500.0E+03              (X_U4.XR104.3) 31.29E-06                  
+
+(X_U4.XR105.3) 1.008E-06              (X_U4.XR107.3) 1.009E-06                  
+
+(X_U4.XVn11.3)    0.0000              (X_U4.XVn11.4)    0.0000                  
+
+(X_U4.XVn11.5)    0.0000              (X_U4.XVn11.6)    0.0000                  
+
+(X_U4.XVn11.7)     .8338              (X_U4.XVn11.8)     .8338                  
+
+(X_U5.XIn11.3)    0.0000              (X_U5.XIn11.4)    0.0000                  
+
+(X_U5.XIn11.5)    0.0000              (X_U5.XIn11.6)    0.0000                  
+
+(X_U5.XIn11.7)     .8338              (X_U5.XIn11.8)     .8338                  
+
+(X_U5.XR101.3) 3.307E-06              (X_U5.XR102.3) 6.600E-15                  
+
+(X_U5.XR103.3)-500.0E+03              (X_U5.XR104.3) 31.29E-06                  
+
+(X_U5.XR105.3) 1.008E-06              (X_U5.XR107.3) 1.009E-06                  
+
+(X_U5.XVn11.3)    0.0000              (X_U5.XVn11.4)    0.0000                  
+
+(X_U5.XVn11.5)    0.0000              (X_U5.XVn11.6)    0.0000                  
+
+(X_U5.XVn11.7)     .8338              (X_U5.XVn11.8)     .8338                  
+
+(X_U6.XIn11.3)    0.0000              (X_U6.XIn11.4)    0.0000                  
+
+(X_U6.XIn11.5)    0.0000              (X_U6.XIn11.6)    0.0000                  
+
+(X_U6.XIn11.7)     .8338              (X_U6.XIn11.8)     .8338                  
+
+(X_U6.XR101.3) 3.307E-06              (X_U6.XR102.3) 6.600E-15                  
+
+(X_U6.XR103.3)-500.0E+03              (X_U6.XR104.3) 31.29E-06                  
+
+(X_U6.XR105.3) 1.008E-06              (X_U6.XR107.3) 1.009E-06                  
+
+(X_U6.XVn11.3)    0.0000              (X_U6.XVn11.4)    0.0000                  
+
+(X_U6.XVn11.5)    0.0000              (X_U6.XVn11.6)    0.0000                  
+
+(X_U6.XVn11.7)     .8338              (X_U6.XVn11.8)     .8338                  
+
+(X_U7.XIn11.3)    0.0000              (X_U7.XIn11.4)    0.0000                  
+
+(X_U7.XIn11.5)    0.0000              (X_U7.XIn11.6)    0.0000                  
+
+(X_U7.XIn11.7)     .8338              (X_U7.XIn11.8)     .8338                  
+
+(X_U7.XR101.3) 3.307E-06              (X_U7.XR102.3) 6.600E-15                  
+
+(X_U7.XR103.3)-500.0E+03              (X_U7.XR104.3) 31.29E-06                  
+
+(X_U7.XR105.3) 1.008E-06              (X_U7.XR107.3) 1.009E-06                  
+
+(X_U7.XVn11.3)    0.0000              (X_U7.XVn11.4)    0.0000                  
+
+(X_U7.XVn11.5)    0.0000              (X_U7.XVn11.6)    0.0000                  
+
+(X_U7.XVn11.7)     .8338              (X_U7.XVn11.8)     .8338                  
+
+(X_U8.XIn11.3)    0.0000              (X_U8.XIn11.4)    0.0000                  
+
+(X_U8.XIn11.5)    0.0000              (X_U8.XIn11.6)    0.0000                  
+
+(X_U8.XIn11.7)     .8338              (X_U8.XIn11.8)     .8338                  
+
+(X_U8.XR101.3) 3.307E-06              (X_U8.XR102.3) 6.600E-15                  
+
+(X_U8.XR103.3)-500.0E+03              (X_U8.XR104.3) 31.29E-06                  
+
+(X_U8.XR105.3) 1.008E-06              (X_U8.XR107.3) 1.009E-06                  
+
+(X_U8.XVn11.3)    0.0000              (X_U8.XVn11.4)    0.0000                  
+
+(X_U8.XVn11.5)    0.0000              (X_U8.XVn11.6)    0.0000                  
+
+(X_U8.XVn11.7)     .8338              (X_U8.XVn11.8)     .8338                  
+
+(X_U9.XIn11.3)    0.0000              (X_U9.XIn11.4)    0.0000                  
+
+(X_U9.XIn11.5)    0.0000              (X_U9.XIn11.6)    0.0000                  
+
+(X_U9.XIn11.7)     .8338              (X_U9.XIn11.8)     .8338                  
+
+(X_U9.XR101.3) 3.307E-06              (X_U9.XR102.3) 6.600E-15                  
+
+(X_U9.XR103.3)-500.0E+03              (X_U9.XR104.3) 31.29E-06                  
+
+(X_U9.XR105.3) 1.008E-06              (X_U9.XR107.3) 1.009E-06                  
+
+(X_U9.XVn11.3)    0.0000              (X_U9.XVn11.4)    0.0000                  
+
+(X_U9.XVn11.5)    0.0000              (X_U9.XVn11.6)    0.0000                  
+
+(X_U9.XVn11.7)     .8338              (X_U9.XVn11.8)     .8338                  
+
+(X_U1.XR101.30) 6.600E-09             (X_U1.XR102.30)    0.0000                 
+
+(X_U1.XR103.30)-500.0E+03             (X_U1.XR104.30) 6.600E-09                 
+
+(X_U1.XR105.30) 6.600E-09             (X_U1.XR106a.3) 100.9E+03                 
+
+(X_U1.XR107.30) 6.600E-09             (X_U10.XIn11.3)    0.0000                 
+
+(X_U10.XIn11.4)    0.0000             (X_U10.XIn11.5)    0.0000                 
+
+(X_U10.XIn11.6)    0.0000             (X_U10.XIn11.7)     .8338                 
+
+(X_U10.XIn11.8)     .8338             (X_U10.XR101.3) 3.307E-06                 
+
+(X_U10.XR102.3) 6.600E-15             (X_U10.XR103.3)-500.0E+03                 
+
+(X_U10.XR104.3) 31.29E-06             (X_U10.XR105.3) 1.008E-06                 
+
+(X_U10.XR107.3) 1.009E-06             (X_U10.XVn11.3)    0.0000                 
+
+(X_U10.XVn11.4)    0.0000             (X_U10.XVn11.5)    0.0000                 
+
+(X_U10.XVn11.6)    0.0000             (X_U10.XVn11.7)     .8338                 
+
+(X_U10.XVn11.8)     .8338             (X_U11.XIn11.3)    0.0000                 
+
+(X_U11.XIn11.4)    0.0000             (X_U11.XIn11.5)    0.0000                 
+
+(X_U11.XIn11.6)    0.0000             (X_U11.XIn11.7)     .8338                 
+
+(X_U11.XIn11.8)     .8338             (X_U11.XR101.3) 3.307E-06                 
+
+(X_U11.XR102.3) 6.600E-15             (X_U11.XR103.3)-500.0E+03                 
+
+(X_U11.XR104.3) 31.29E-06             (X_U11.XR105.3) 1.008E-06                 
+
+(X_U11.XR107.3) 1.009E-06             (X_U11.XVn11.3)    0.0000                 
+
+(X_U11.XVn11.4)    0.0000             (X_U11.XVn11.5)    0.0000                 
+
+(X_U11.XVn11.6)    0.0000             (X_U11.XVn11.7)     .8338                 
+
+(X_U11.XVn11.8)     .8338             (X_U2.XR101.30) 6.600E-09                 
+
+(X_U2.XR102.30)    0.0000             (X_U2.XR103.30)-500.0E+03                 
+
+(X_U2.XR104.30) 6.600E-09             (X_U2.XR105.30) 6.600E-09                 
+
+(X_U2.XR106a.3) 100.9E+03             (X_U2.XR107.30) 6.600E-09                 
+
+(X_U3.XR101.30) 6.600E-09             (X_U3.XR102.30)    0.0000                 
+
+(X_U3.XR103.30)-500.0E+03             (X_U3.XR104.30) 6.600E-09                 
+
+(X_U3.XR105.30) 6.600E-09             (X_U3.XR106a.3) 100.9E+03                 
+
+(X_U3.XR107.30) 6.600E-09             (X_U4.XR101.30) 6.600E-09                 
+
+(X_U4.XR102.30)    0.0000             (X_U4.XR103.30)-500.0E+03                 
+
+(X_U4.XR104.30) 6.600E-09             (X_U4.XR105.30) 6.600E-09                 
+
+(X_U4.XR106a.3) 100.9E+03             (X_U4.XR107.30) 6.600E-09                 
+
+(X_U5.XR101.30) 6.600E-09             (X_U5.XR102.30)    0.0000                 
+
+(X_U5.XR103.30)-500.0E+03             (X_U5.XR104.30) 6.600E-09                 
+
+(X_U5.XR105.30) 6.600E-09             (X_U5.XR106a.3) 100.9E+03                 
+
+(X_U5.XR107.30) 6.600E-09             (X_U6.XR101.30) 6.600E-09                 
+
+(X_U6.XR102.30)    0.0000             (X_U6.XR103.30)-500.0E+03                 
+
+(X_U6.XR104.30) 6.600E-09             (X_U6.XR105.30) 6.600E-09                 
+
+(X_U6.XR106a.3) 100.9E+03             (X_U6.XR107.30) 6.600E-09                 
+
+(X_U7.XR101.30) 6.600E-09             (X_U7.XR102.30)    0.0000                 
+
+(X_U7.XR103.30)-500.0E+03             (X_U7.XR104.30) 6.600E-09                 
+
+(X_U7.XR105.30) 6.600E-09             (X_U7.XR106a.3) 100.9E+03                 
+
+(X_U7.XR107.30) 6.600E-09             (X_U8.XR101.30) 6.600E-09                 
+
+(X_U8.XR102.30)    0.0000             (X_U8.XR103.30)-500.0E+03                 
+
+(X_U8.XR104.30) 6.600E-09             (X_U8.XR105.30) 6.600E-09                 
+
+(X_U8.XR106a.3) 100.9E+03             (X_U8.XR107.30) 6.600E-09                 
+
+(X_U9.XR101.30) 6.600E-09             (X_U9.XR102.30)    0.0000                 
+
+(X_U9.XR103.30)-500.0E+03             (X_U9.XR104.30) 6.600E-09                 
+
+(X_U9.XR105.30) 6.600E-09             (X_U9.XR106a.3) 100.9E+03                 
+
+(X_U9.XR107.30) 6.600E-09             (X_U1.XR106a.30) 100.9E+03                
+
+(X_U1.XR107_2.3)    1.0003            (X_U1.XR107_3.3) 1.258E-06                
+
+(X_U10.XR101.30) 6.600E-09            (X_U10.XR102.30)    0.0000                
+
+(X_U10.XR103.30)-500.0E+03            (X_U10.XR104.30) 6.600E-09                
+
+(X_U10.XR105.30) 6.600E-09            (X_U10.XR106a.3) 100.9E+03                
+
+(X_U10.XR107.30) 6.600E-09            (X_U11.XR101.30) 6.600E-09                
+
+(X_U11.XR102.30)    0.0000            (X_U11.XR103.30)-500.0E+03                
+
+(X_U11.XR104.30) 6.600E-09            (X_U11.XR105.30) 6.600E-09                
+
+(X_U11.XR106a.3) 100.9E+03            (X_U11.XR107.30) 6.600E-09                
+
+(X_U2.XR106a.30) 100.9E+03            (X_U2.XR107_2.3)    1.0003                
+
+(X_U2.XR107_3.3) 1.258E-06            (X_U3.XR106a.30) 100.9E+03                
+
+(X_U3.XR107_2.3)    1.0003            (X_U3.XR107_3.3) 1.258E-06                
+
+(X_U4.XR106a.30) 100.9E+03            (X_U4.XR107_2.3)    1.0003                
+
+(X_U4.XR107_3.3) 1.258E-06            (X_U5.XR106a.30) 100.9E+03                
+
+(X_U5.XR107_2.3)    1.0003            (X_U5.XR107_3.3) 1.258E-06                
+
+(X_U6.XR106a.30) 100.9E+03            (X_U6.XR107_2.3)    1.0003                
+
+(X_U6.XR107_3.3) 1.258E-06            (X_U7.XR106a.30) 100.9E+03                
+
+(X_U7.XR107_2.3)    1.0006            (X_U7.XR107_3.3) 1.258E-06                
+
+(X_U8.XR106a.30) 100.9E+03            (X_U8.XR107_2.3)    1.0002                
+
+(X_U8.XR107_3.3) 1.257E-06            (X_U9.XR106a.30) 100.9E+03                
+
+(X_U9.XR107_2.3)    1.0002            (X_U9.XR107_3.3) 1.257E-06                
+
+(X_U1.XR107_2.30)    1.0003           (X_U1.XR107_3.30) 6.600E-09               
+
+(X_U10.XR106a.30) 100.9E+03           (X_U10.XR107_2.3)    1.0002               
+
+(X_U10.XR107_3.3) 1.257E-06           (X_U11.XR106a.30) 100.9E+03               
+
+(X_U11.XR107_2.3)    1.0002           (X_U11.XR107_3.3) 1.257E-06               
+
+(X_U2.XR107_2.30)    1.0003           (X_U2.XR107_3.30) 6.600E-09               
+
+(X_U3.XR107_2.30)    1.0003           (X_U3.XR107_3.30) 6.600E-09               
+
+(X_U4.XR107_2.30)    1.0003           (X_U4.XR107_3.30) 6.600E-09               
+
+(X_U5.XR107_2.30)    1.0003           (X_U5.XR107_3.30) 6.600E-09               
+
+(X_U6.XR107_2.30)    1.0003           (X_U6.XR107_3.30) 6.600E-09               
+
+(X_U7.XR107_2.30)    1.0006           (X_U7.XR107_3.30) 6.600E-09               
+
+(X_U8.XR107_2.30)    1.0002           (X_U8.XR107_3.30) 6.600E-09               
+
+(X_U9.XR107_2.30)    1.0002           (X_U9.XR107_3.30) 6.600E-09               
+
+(X_U10.XR107_2.30)    1.0002          (X_U10.XR107_3.30) 6.600E-09              
+
+(X_U11.XR107_2.30)    1.0002          (X_U11.XR107_3.30) 6.600E-09          
+
+
+
+
+    VOLTAGE SOURCE CURRENTS
+    NAME         CURRENT
+
+    V_V2        -1.650E+03
+    V_V6         0.000E+00
+    V_V7        -6.371E-03
+    V_V8        -6.371E-03
+    V_V10       -1.650E+03
+    V_V9         0.000E+00
+    V_V13       -1.650E+03
+    V_V12       -8.320E-04
+    V_V15       -1.650E+03
+    V_V14       -1.665E-04
+    V_V16       -1.650E+03
+    V_V21       -1.650E+03
+    V_V19       -8.517E-05
+    V_V20        0.000E+00
+    V_V24       -1.650E+03
+    V_V23       -4.993E-01
+    V_V25       -1.650E+03
+    V_V17        0.000E+00
+    V_V26       -8.517E-05
+    V_V27       -1.650E+03
+    V_V28       -1.650E+03
+    V_V29       -1.650E+03
+    V_V30       -1.916E-04
+    V_V31       -8.517E-05
+    X_U1.V2     -1.446E-13
+    X_U1.V8     -5.000E-07
+    X_U1.V7      2.632E-05
+    X_U1.Vos     4.950E-06
+    X_U1.Vor_4  -5.099E-07
+    X_U1.Vor_1   4.900E-07
+    X_U1.V11    -1.100E-07
+    X_U1.V10    -8.999E-08
+    X_U1.Vor_2  -4.900E-07
+    X_U1.Vor_3  -5.099E-07
+    X_U1.V6      0.000E+00
+    X_U1.V5      0.000E+00
+    X_U1.VCCVS1_in   5.826E-02
+    X_U2.V2     -1.446E-13
+    X_U2.V8     -5.000E-07
+    X_U2.V7      2.632E-05
+    X_U2.Vos     4.950E-06
+    X_U2.Vor_4  -5.099E-07
+    X_U2.Vor_1   4.900E-07
+    X_U2.V11    -1.100E-07
+    X_U2.V10    -8.999E-08
+    X_U2.Vor_2  -4.900E-07
+    X_U2.Vor_3  -5.099E-07
+    X_U2.V6      0.000E+00
+    X_U2.V5      0.000E+00
+    X_U2.VCCVS1_in   5.826E-02
+    X_U3.V2     -1.446E-13
+    X_U3.V8     -5.000E-07
+    X_U3.V7      2.632E-05
+    X_U3.Vos     4.950E-06
+    X_U3.Vor_4  -5.099E-07
+    X_U3.Vor_1   4.900E-07
+    X_U3.V11    -1.100E-07
+    X_U3.V10    -8.999E-08
+    X_U3.Vor_2  -4.900E-07
+    X_U3.Vor_3  -5.099E-07
+    X_U3.V6      0.000E+00
+    X_U3.V5      0.000E+00
+    X_U3.VCCVS1_in   5.826E-02
+    X_U4.V2     -1.446E-13
+    X_U4.V8     -5.000E-07
+    X_U4.V7      2.632E-05
+    X_U4.Vos     4.950E-06
+    X_U4.Vor_4  -5.099E-07
+    X_U4.Vor_1   4.900E-07
+    X_U4.V11    -1.100E-07
+    X_U4.V10    -8.999E-08
+    X_U4.Vor_2  -4.900E-07
+    X_U4.Vor_3  -5.099E-07
+    X_U4.V6      0.000E+00
+    X_U4.V5      0.000E+00
+    X_U4.VCCVS1_in   5.826E-02
+    X_U5.V2     -1.448E-13
+    X_U5.V8     -5.000E-07
+    X_U5.V7      2.632E-05
+    X_U5.Vos     4.950E-06
+    X_U5.Vor_4  -5.099E-07
+    X_U5.Vor_1   4.900E-07
+    X_U5.V11    -1.100E-07
+    X_U5.V10    -8.999E-08
+    X_U5.Vor_2  -4.900E-07
+    X_U5.Vor_3  -5.099E-07
+    X_U5.V6      0.000E+00
+    X_U5.V5      0.000E+00
+    X_U5.VCCVS1_in   5.826E-02
+    X_U6.V2     -1.448E-13
+    X_U6.V8     -5.000E-07
+    X_U6.V7      2.632E-05
+    X_U6.Vos     4.950E-06
+    X_U6.Vor_4  -5.099E-07
+    X_U6.Vor_1   4.900E-07
+    X_U6.V11    -1.100E-07
+    X_U6.V10    -8.999E-08
+    X_U6.Vor_2  -4.900E-07
+    X_U6.Vor_3  -5.099E-07
+    X_U6.V6      0.000E+00
+    X_U6.V5      0.000E+00
+    X_U6.VCCVS1_in   5.826E-02
+    X_U7.V2     -1.465E-13
+    X_U7.V8     -5.000E-07
+    X_U7.V7      2.633E-05
+    X_U7.Vos     4.950E-06
+    X_U7.Vor_4  -5.099E-07
+    X_U7.Vor_1   4.900E-07
+    X_U7.V11    -1.100E-07
+    X_U7.V10    -8.999E-08
+    X_U7.Vor_2  -4.900E-07
+    X_U7.Vor_3  -5.099E-07
+    X_U7.V6      0.000E+00
+    X_U7.V5      0.000E+00
+    X_U7.VCCVS1_in   5.823E-02
+    X_U8.V2     -1.445E-13
+    X_U8.V8     -5.000E-07
+    X_U8.V7      2.634E-05
+    X_U8.Vos     4.950E-06
+    X_U8.Vor_4  -5.099E-07
+    X_U8.Vor_1   4.900E-07
+    X_U8.V11    -1.100E-07
+    X_U8.V10    -8.999E-08
+    X_U8.Vor_2  -4.900E-07
+    X_U8.Vor_3  -5.099E-07
+    X_U8.V6      0.000E+00
+    X_U8.V5      0.000E+00
+    X_U8.VCCVS1_in   5.810E-02
+    X_U9.V2     -1.445E-13
+    X_U9.V8     -5.000E-07
+    X_U9.V7      3.248E-05
+    X_U9.Vos     4.950E-06
+    X_U9.Vor_4  -5.099E-07
+    X_U9.Vor_1   4.900E-07
+    X_U9.V11    -1.100E-07
+    X_U9.V10    -8.999E-08
+    X_U9.Vor_2  -4.900E-07
+    X_U9.Vor_3  -5.099E-07
+    X_U9.V6      0.000E+00
+    X_U9.V5      0.000E+00
+    X_U9.VCCVS1_in   1.818E-04
+    X_U10.V2    -1.445E-13
+    X_U10.V8    -5.000E-07
+    X_U10.V7     3.248E-05
+    X_U10.Vos    4.950E-06
+    X_U10.Vor_4  -5.099E-07
+    X_U10.Vor_1   4.900E-07
+    X_U10.V11   -1.100E-07
+    X_U10.V10   -8.999E-08
+    X_U10.Vor_2  -4.900E-07
+    X_U10.Vor_3  -5.099E-07
+    X_U10.V6     0.000E+00
+    X_U10.V5     0.000E+00
+    X_U10.VCCVS1_in   2.221E-04
+    X_U11.V2    -1.445E-13
+    X_U11.V8    -5.000E-07
+    X_U11.V7     2.634E-05
+    X_U11.Vos    4.950E-06
+    X_U11.Vor_4  -5.099E-07
+    X_U11.Vor_1   4.900E-07
+    X_U11.V11   -1.100E-07
+    X_U11.V10   -8.999E-08
+    X_U11.Vor_2  -4.900E-07
+    X_U11.Vor_3  -5.099E-07
+    X_U11.V6     0.000E+00
+    X_U11.V5     0.000E+00
+    X_U11.VCCVS1_in   5.810E-02
+    X_U1.XR107.VSENSE   1.002E-06
+    X_U1.XR107_2.VSENSE  -1.250E-06
+    X_U1.XR107_3.VSENSE   1.251E-06
+    X_U1.XR106a.VSENSE   9.000E-07
+    X_U1.XR102.VSENSE   6.600E-15
+    X_U1.XR101.VSENSE   3.300E-06
+    X_U1.XR105.VSENSE   1.001E-06
+    X_U1.XR104.VSENSE   3.128E-05
+    X_U1.XR103.VSENSE   5.000E-01
+    X_U2.XR107.VSENSE   1.002E-06
+    X_U2.XR107_2.VSENSE  -1.250E-06
+    X_U2.XR107_3.VSENSE   1.251E-06
+    X_U2.XR106a.VSENSE   9.000E-07
+    X_U2.XR102.VSENSE   6.600E-15
+    X_U2.XR101.VSENSE   3.300E-06
+    X_U2.XR105.VSENSE   1.001E-06
+    X_U2.XR104.VSENSE   3.128E-05
+    X_U2.XR103.VSENSE   5.000E-01
+    X_U3.XR107.VSENSE   1.002E-06
+    X_U3.XR107_2.VSENSE  -1.250E-06
+    X_U3.XR107_3.VSENSE   1.251E-06
+    X_U3.XR106a.VSENSE   9.000E-07
+    X_U3.XR102.VSENSE   6.600E-15
+    X_U3.XR101.VSENSE   3.300E-06
+    X_U3.XR105.VSENSE   1.001E-06
+    X_U3.XR104.VSENSE   3.128E-05
+    X_U3.XR103.VSENSE   5.000E-01
+    X_U4.XR107.VSENSE   1.002E-06
+    X_U4.XR107_2.VSENSE  -1.250E-06
+    X_U4.XR107_3.VSENSE   1.251E-06
+    X_U4.XR106a.VSENSE   9.000E-07
+    X_U4.XR102.VSENSE   6.600E-15
+    X_U4.XR101.VSENSE   3.300E-06
+    X_U4.XR105.VSENSE   1.001E-06
+    X_U4.XR104.VSENSE   3.128E-05
+    X_U4.XR103.VSENSE   5.000E-01
+    X_U5.XR107.VSENSE   1.002E-06
+    X_U5.XR107_2.VSENSE  -1.250E-06
+    X_U5.XR107_3.VSENSE   1.251E-06
+    X_U5.XR106a.VSENSE   9.001E-07
+    X_U5.XR102.VSENSE   6.600E-15
+    X_U5.XR101.VSENSE   3.300E-06
+    X_U5.XR105.VSENSE   1.001E-06
+    X_U5.XR104.VSENSE   3.128E-05
+    X_U5.XR103.VSENSE   5.000E-01
+    X_U6.XR107.VSENSE   1.002E-06
+    X_U6.XR107_2.VSENSE  -1.250E-06
+    X_U6.XR107_3.VSENSE   1.251E-06
+    X_U6.XR106a.VSENSE   9.000E-07
+    X_U6.XR102.VSENSE   6.600E-15
+    X_U6.XR101.VSENSE   3.300E-06
+    X_U6.XR105.VSENSE   1.001E-06
+    X_U6.XR104.VSENSE   3.128E-05
+    X_U6.XR103.VSENSE   5.000E-01
+    X_U7.XR107.VSENSE   1.002E-06
+    X_U7.XR107_2.VSENSE  -1.251E-06
+    X_U7.XR107_3.VSENSE   1.252E-06
+    X_U7.XR106a.VSENSE   9.000E-07
+    X_U7.XR102.VSENSE   6.600E-15
+    X_U7.XR101.VSENSE   3.300E-06
+    X_U7.XR105.VSENSE   1.001E-06
+    X_U7.XR104.VSENSE   3.128E-05
+    X_U7.XR103.VSENSE   5.000E-01
+    X_U8.XR107.VSENSE   1.002E-06
+    X_U8.XR107_2.VSENSE  -1.250E-06
+    X_U8.XR107_3.VSENSE   1.251E-06
+    X_U8.XR106a.VSENSE   9.000E-07
+    X_U8.XR102.VSENSE   6.600E-15
+    X_U8.XR101.VSENSE   3.300E-06
+    X_U8.XR105.VSENSE   1.001E-06
+    X_U8.XR104.VSENSE   3.128E-05
+    X_U8.XR103.VSENSE   5.000E-01
+    X_U9.XR107.VSENSE   1.002E-06
+    X_U9.XR107_2.VSENSE  -1.250E-06
+    X_U9.XR107_3.VSENSE   1.251E-06
+    X_U9.XR106a.VSENSE   9.000E-07
+    X_U9.XR102.VSENSE   6.600E-15
+    X_U9.XR101.VSENSE   3.300E-06
+    X_U9.XR105.VSENSE   1.001E-06
+    X_U9.XR104.VSENSE   3.128E-05
+    X_U9.XR103.VSENSE   5.000E-01
+    X_U10.XR107.VSENSE   1.002E-06
+    X_U10.XR107_2.VSENSE  -1.250E-06
+    X_U10.XR107_3.VSENSE   1.251E-06
+    X_U10.XR106a.VSENSE   9.000E-07
+    X_U10.XR102.VSENSE   6.600E-15
+    X_U10.XR101.VSENSE   3.300E-06
+    X_U10.XR105.VSENSE   1.001E-06
+    X_U10.XR104.VSENSE   3.128E-05
+    X_U10.XR103.VSENSE   5.000E-01
+    X_U11.XR107.VSENSE   1.002E-06
+    X_U11.XR107_2.VSENSE  -1.250E-06
+    X_U11.XR107_3.VSENSE   1.251E-06
+    X_U11.XR106a.VSENSE   9.000E-07
+    X_U11.XR102.VSENSE   6.600E-15
+    X_U11.XR101.VSENSE   3.300E-06
+    X_U11.XR105.VSENSE   1.001E-06
+    X_U11.XR104.VSENSE   3.128E-05
+    X_U11.XR103.VSENSE   5.000E-01
+
+    TOTAL POWER DISSIPATION   5.99E+04  WATTS
+
+
+
+          JOB CONCLUDED
+
+**** 11/08/17 16:31:06 ****** PSpice 17.2.0 (March 2016) ****** ID# 0 ********
+
+ ** Profile: "SCHEMATIC1-SeniorDesign2"  [ U:\SeniorDesign\Orcad\seniordesign2-pspicefiles\schematic1\seniordesign2.sim ] 
+
+
+ ****     JOB STATISTICS SUMMARY
+
+
+******************************************************************************
+
+
+
+  Total job time (using Solver 1)   =        5.09
+

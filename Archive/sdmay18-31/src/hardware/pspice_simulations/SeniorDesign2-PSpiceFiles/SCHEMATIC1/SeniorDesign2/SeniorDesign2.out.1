@@ -1,0 +1,3642 @@
+
+**** 11/08/17 16:27:38 ****** PSpice 17.2.0 (March 2016) ****** ID# 0 ********
+
+ ** Profile: "SCHEMATIC1-SeniorDesign2"  [ U:\SeniorDesign\Orcad\seniordesign2-pspicefiles\schematic1\seniordesign2.sim ] 
+
+
+ ****     CIRCUIT DESCRIPTION
+
+
+******************************************************************************
+
+
+
+
+** Creating circuit file "SeniorDesign2.cir" 
+** WARNING: THIS AUTOMATICALLY GENERATED FILE MAY BE OVERWRITTEN BY SUBSEQUENT SIMULATIONS
+
+*Libraries: 
+* Profile Libraries :
+* Local Libraries :
+* From [PSPICE NETLIST] section of C:\cdssetup\OrCAD_PSpice\17.2.0\PSpice.ini file:
+.lib "U:\SeniorDesign\Orcad\sboma53\OPA4830.lib" 
+.lib "nom.lib" 
+
+*Analysis directives: 
+.TRAN  0 1ms 0 
+.OPTIONS ADVCONV
+.OPTIONS VNTOL= 100n
+.PROBE64 V(alias(*)) I(alias(*)) W(alias(*)) D(alias(*)) NOISE(alias(*)) 
+.INC "..\SCHEMATIC1.net" 
+
+
+
+**** INCLUDING SCHEMATIC1.net ****
+* source SENIORDESIGN2
+C_C1         N00285 N00278  27n  TC=0,0 
+R_R1         0 N00278  1.2k TC=0,0 
+V_V2         N00244 0 3.3
+X_U1         N00278 N00251 N00244 0 N00251 OPA4830 
+R_R5         0 N00251  1k TC=0,0 
+V_V6         N00285 0  
++SIN 2 0.5 1k 0 0 0
+R_R6         N00278 N051790  360 TC=0,0 
+V_V7         N051790 0 3.3Vdc
+V_V8         N061140 0 3.3Vdc
+R_R7         N06186 N061140  360 TC=0,0 
+V_V10         N06314 0 3.3
+R_R8         0 N06186  1.2k TC=0,0 
+R_R9         0 N06262  1k TC=0,0 
+C_C2         N06626 N06186  27n  TC=0,0 
+X_U2         N06186 N06262 N06314 0 N06262 OPA4830 
+V_V9         N06507 0  
++SIN 2 0.5 1k 0 0 0
+R_R10         0 N06626  1.2k TC=0,0 
+C_C3         N06727 N06626  27n  TC=0,0 
+C_C4         N06828 N06727  27n  TC=0,0 
+R_R11         0 N06727  1.2k TC=0,0 
+R_R12         0 N06828  1.2k TC=0,0 
+C_C5         N07071 N06828  27n  TC=0,0 
+R_R13         0 N07071  1.2k TC=0,0 
+C_C6         N06507 N07071  27n  TC=0,0 
+R_R16         0 N08250  1k TC=0,0 
+X_U3         N08174 N08250 N08302 0 N08250 OPA4830 
+V_V13         N08302 0 3.3
+V_V12         N08164 0  
++SIN 2 0.5 40k 0 0 0
+C_C7         0 N08174  6.8n  TC=0,0 
+R_R15         N08174 N08164  1.2k TC=0,0 
+R_R17         N08963 N09396  1.2k TC=0,0 
+C_C8         0 N08963  6.8n  TC=0,0 
+R_R18         0 N09035  1k TC=0,0 
+X_U4         N08963 N09035 N09089 0 N09035 OPA4830 
+V_V15         N09089 0 3.3
+V_V14         N09846 0  
++SIN 2 0.5 1k 0 0 0
+R_R19         N09396 N09496  1.2k TC=0,0 
+C_C9         0 N09396  6.8n  TC=0,0 
+C_C10         0 N09496  6.8n  TC=0,0 
+R_R20         N09496 N09596  1.2k TC=0,0 
+C_C11         0 N09596  6.8n  TC=0,0 
+R_R21         N09596 N09703  1.2k TC=0,0 
+C_C12         0 N09703  6.8n  TC=0,0 
+R_R22         N09703 N09846  1.2k TC=0,0 
+R_R25         0 N10449  1k TC=0,0 
+V_V16         N10501 0 3.3
+X_U5         N10387 N10449 N10501 0 N10449 OPA4830 
+R_R30         0 N12282  1k TC=0,0 
+V_V21         N12334 0 3.3
+X_U6         N21679 N12282 N12334 0 N12282 OPA4830 
+V_V19         N120820 0 3.3Vdc
+R_R27         N12194 N120820  27k TC=0,0 
+R_R28         N12922 N12773  1.2k TC=0,0 
+R_R29         0 N12773  1.2k TC=0,0 
+C_C16         0 N12922  18n  TC=0,0 
+V_V20         N12763 0  
++SIN 2 0.5 20k 0 0 0
+C_C15         N12763 N12773  18n  TC=0,0 
+R_R31         N13090 N13076  1.2k TC=0,0 
+C_C18         0 N13090  18n  TC=0,0 
+R_R32         0 N13076  1.2k TC=0,0 
+C_C17         N20417 N13076  18n  TC=0,0 
+C_C19         N21161 N13390  18n  TC=0,0 
+R_R34         0 N13390  1.2k TC=0,0 
+C_C20         0 N12194  18n  TC=0,0 
+R_R33         N12194 N13390  1.2k TC=0,0 
+X_U7         N14077 N14149 N14201 0 N14149 OPA4830 
+R_R37         0 N14149  1k TC=0,0 
+V_V24         N14201 0 3.3
+V_V23         N14063 0  
++SIN 2 0.5 1k 0 0 0
+C_C21         0 N14488  150u  TC=0,0 
+R_R36         N14077 N14063  1 TC=0,0 
+L_L1         N14077 N14488  47m  
+X_U8         N15179 N14850 N15586 0 N10387 OPA4830 
+V_V25         N15586 0 3.3
+R_R39         N14850 N10387  2.7k TC=0,0 
+R_R24         0 N15165  1.2k TC=0,0 
+C_C13         N15155 N15165  18n  TC=0,0 
+R_R23         N15179 N15165  1.2k TC=0,0 
+V_V17         N15155 0  
++SIN 2 0.5 40k 0 0 0
+C_C14         0 N15179  18n  TC=0,0 
+R_R38         0 N14850  1k TC=0,0 
+R_R40         N15179 N162640  27k TC=0,0 
+V_V26         N162640 0 3.3Vdc
+V_V27         N20427 0 3.3
+X_U9         N12922 N20407 N20427 0 N20417 OPA4830 
+R_R42         N20407 N20417  3.3k TC=0,0 
+R_R41         0 N20407  1k TC=0,0 
+X_U10         N13090 N21151 N21171 0 N21161 OPA4830 
+R_R43         0 N21151  1k TC=0,0 
+V_V28         N21171 0 3.3
+R_R44         N21151 N21161  3.3k TC=0,0 
+V_V29         N21689 0 3.3
+R_R46         N21669 N21679  2.7k TC=0,0 
+R_R45         0 N21669  1k TC=0,0 
+X_U11         N12194 N21669 N21689 0 N21679 OPA4830 
+V_V30         N222440 0 3.3Vdc
+R_R47         N12922 N222440  12k TC=0,0 
+R_R48         N13090 N223690  27k TC=0,0 
+V_V31         N223690 0 3.3Vdc
+
+**** RESUMING SeniorDesign2.cir ****
+.END
+
+**** 11/08/17 16:27:38 ****** PSpice 17.2.0 (March 2016) ****** ID# 0 ********
+
+ ** Profile: "SCHEMATIC1-SeniorDesign2"  [ U:\SeniorDesign\Orcad\seniordesign2-pspicefiles\schematic1\seniordesign2.sim ] 
+
+
+ ****     Diode MODEL PARAMETERS
+
+
+******************************************************************************
+
+
+
+
+               X_U1.XU9.DNOM   X_U1.XIn11.DVNF X_U1.XVn11.DVN  X_U2.XU9.DNOM   
+          IS    1.000000E-15  100.000000E-18  100.000000E-18    1.000000E-15 
+          RS    1.000000E-03                                    1.000000E-03 
+          TT   10.000000E-12                                   10.000000E-12 
+         CJO    1.000000E-18                                    1.000000E-18 
+          KF                  184.390900E-12   56.568540E-12                 
+
+
+               X_U2.XIn11.DVNF X_U2.XVn11.DVN  X_U3.XU9.DNOM   X_U3.XIn11.DVNF 
+          IS  100.000000E-18  100.000000E-18    1.000000E-15  100.000000E-18 
+          RS                                    1.000000E-03                 
+          TT                                   10.000000E-12                 
+         CJO                                    1.000000E-18                 
+          KF  184.390900E-12   56.568540E-12                  184.390900E-12 
+
+
+               X_U3.XVn11.DVN  X_U4.XU9.DNOM   X_U4.XIn11.DVNF X_U4.XVn11.DVN  
+          IS  100.000000E-18    1.000000E-15  100.000000E-18  100.000000E-18 
+          RS                    1.000000E-03                                 
+          TT                   10.000000E-12                                 
+         CJO                    1.000000E-18                                 
+          KF   56.568540E-12                  184.390900E-12   56.568540E-12 
+
+
+               X_U5.XU9.DNOM   X_U5.XIn11.DVNF X_U5.XVn11.DVN  X_U6.XU9.DNOM   
+          IS    1.000000E-15  100.000000E-18  100.000000E-18    1.000000E-15 
+          RS    1.000000E-03                                    1.000000E-03 
+          TT   10.000000E-12                                   10.000000E-12 
+         CJO    1.000000E-18                                    1.000000E-18 
+          KF                  184.390900E-12   56.568540E-12                 
+
+
+               X_U6.XIn11.DVNF X_U6.XVn11.DVN  X_U7.XU9.DNOM   X_U7.XIn11.DVNF 
+          IS  100.000000E-18  100.000000E-18    1.000000E-15  100.000000E-18 
+          RS                                    1.000000E-03                 
+          TT                                   10.000000E-12                 
+         CJO                                    1.000000E-18                 
+          KF  184.390900E-12   56.568540E-12                  184.390900E-12 
+
+
+               X_U7.XVn11.DVN  X_U8.XU9.DNOM   X_U8.XIn11.DVNF X_U8.XVn11.DVN  
+          IS  100.000000E-18    1.000000E-15  100.000000E-18  100.000000E-18 
+          RS                    1.000000E-03                                 
+          TT                   10.000000E-12                                 
+         CJO                    1.000000E-18                                 
+          KF   56.568540E-12                  184.390900E-12   56.568540E-12 
+
+
+               X_U9.XU9.DNOM   X_U9.XIn11.DVNF X_U9.XVn11.DVN  X_U10.XU9.DNOM  
+          IS    1.000000E-15  100.000000E-18  100.000000E-18    1.000000E-15 
+          RS    1.000000E-03                                    1.000000E-03 
+          TT   10.000000E-12                                   10.000000E-12 
+         CJO    1.000000E-18                                    1.000000E-18 
+          KF                  184.390900E-12   56.568540E-12                 
+
+
+               X_U10.XIn11.DVNF                X_U10.XVn11.DVN X_U11.XU9.DNOM  
+          IS  100.000000E-18                  100.000000E-18    1.000000E-15 
+          RS                    1.000000E-03 
+          TT                   10.000000E-12 
+         CJO                    1.000000E-18 
+          KF  184.390900E-12                   56.568540E-12                 
+
+
+               X_U11.XIn11.DVNF                X_U11.XVn11.DVN 
+          IS  100.000000E-18                  100.000000E-18 
+          KF  184.390900E-12                   56.568540E-12 
+
+
+**** 11/08/17 16:27:38 ****** PSpice 17.2.0 (March 2016) ****** ID# 0 ********
+
+ ** Profile: "SCHEMATIC1-SeniorDesign2"  [ U:\SeniorDesign\Orcad\seniordesign2-pspicefiles\schematic1\seniordesign2.sim ] 
+
+
+ ****     Voltage Controlled Switch MODEL PARAMETERS
+
+
+******************************************************************************
+
+
+
+
+               X_U1.S_VSWITCH_1 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U1.S_VSWITCH_2 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U1.S_VSWITCH_3 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U1.S_VSWITCH_4 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U1.S_VSWITCH_5 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON    -.01         
+        VOFF    0            
+
+
+               X_U1.S_VSWITCH_6 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON     .01         
+        VOFF    0            
+
+
+               X_U1.S_VSWITCH_7 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U1.S_VSWITCH_8 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U1.S_VSWITCH_9 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U1.S_VSWITCH_10 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U1.S_VSWITCH_11 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U1.S_VSWITCH_12 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U2.S_VSWITCH_1 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U2.S_VSWITCH_2 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U2.S_VSWITCH_3 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U2.S_VSWITCH_4 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U2.S_VSWITCH_5 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON    -.01         
+        VOFF    0            
+
+
+               X_U2.S_VSWITCH_6 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON     .01         
+        VOFF    0            
+
+
+               X_U2.S_VSWITCH_7 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U2.S_VSWITCH_8 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U2.S_VSWITCH_9 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U2.S_VSWITCH_10 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U2.S_VSWITCH_11 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U2.S_VSWITCH_12 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U3.S_VSWITCH_1 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U3.S_VSWITCH_2 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U3.S_VSWITCH_3 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U3.S_VSWITCH_4 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U3.S_VSWITCH_5 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON    -.01         
+        VOFF    0            
+
+
+               X_U3.S_VSWITCH_6 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON     .01         
+        VOFF    0            
+
+
+               X_U3.S_VSWITCH_7 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U3.S_VSWITCH_8 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U3.S_VSWITCH_9 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U3.S_VSWITCH_10 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U3.S_VSWITCH_11 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U3.S_VSWITCH_12 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U4.S_VSWITCH_1 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U4.S_VSWITCH_2 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U4.S_VSWITCH_3 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U4.S_VSWITCH_4 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U4.S_VSWITCH_5 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON    -.01         
+        VOFF    0            
+
+
+               X_U4.S_VSWITCH_6 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON     .01         
+        VOFF    0            
+
+
+               X_U4.S_VSWITCH_7 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U4.S_VSWITCH_8 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U4.S_VSWITCH_9 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U4.S_VSWITCH_10 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U4.S_VSWITCH_11 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U4.S_VSWITCH_12 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U5.S_VSWITCH_1 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U5.S_VSWITCH_2 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U5.S_VSWITCH_3 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U5.S_VSWITCH_4 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U5.S_VSWITCH_5 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON    -.01         
+        VOFF    0            
+
+
+               X_U5.S_VSWITCH_6 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON     .01         
+        VOFF    0            
+
+
+               X_U5.S_VSWITCH_7 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U5.S_VSWITCH_8 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U5.S_VSWITCH_9 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U5.S_VSWITCH_10 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U5.S_VSWITCH_11 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U5.S_VSWITCH_12 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U6.S_VSWITCH_1 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U6.S_VSWITCH_2 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U6.S_VSWITCH_3 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U6.S_VSWITCH_4 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U6.S_VSWITCH_5 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON    -.01         
+        VOFF    0            
+
+
+               X_U6.S_VSWITCH_6 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON     .01         
+        VOFF    0            
+
+
+               X_U6.S_VSWITCH_7 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U6.S_VSWITCH_8 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U6.S_VSWITCH_9 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U6.S_VSWITCH_10 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U6.S_VSWITCH_11 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U6.S_VSWITCH_12 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U7.S_VSWITCH_1 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U7.S_VSWITCH_2 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U7.S_VSWITCH_3 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U7.S_VSWITCH_4 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U7.S_VSWITCH_5 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON    -.01         
+        VOFF    0            
+
+
+               X_U7.S_VSWITCH_6 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON     .01         
+        VOFF    0            
+
+
+               X_U7.S_VSWITCH_7 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U7.S_VSWITCH_8 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U7.S_VSWITCH_9 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U7.S_VSWITCH_10 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U7.S_VSWITCH_11 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U7.S_VSWITCH_12 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U8.S_VSWITCH_1 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U8.S_VSWITCH_2 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U8.S_VSWITCH_3 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U8.S_VSWITCH_4 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U8.S_VSWITCH_5 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON    -.01         
+        VOFF    0            
+
+
+               X_U8.S_VSWITCH_6 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON     .01         
+        VOFF    0            
+
+
+               X_U8.S_VSWITCH_7 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U8.S_VSWITCH_8 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U8.S_VSWITCH_9 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U8.S_VSWITCH_10 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U8.S_VSWITCH_11 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U8.S_VSWITCH_12 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U9.S_VSWITCH_1 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U9.S_VSWITCH_2 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U9.S_VSWITCH_3 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U9.S_VSWITCH_4 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U9.S_VSWITCH_5 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON    -.01         
+        VOFF    0            
+
+
+               X_U9.S_VSWITCH_6 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON     .01         
+        VOFF    0            
+
+
+               X_U9.S_VSWITCH_7 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U9.S_VSWITCH_8 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U9.S_VSWITCH_9 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U9.S_VSWITCH_10 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U9.S_VSWITCH_11 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U9.S_VSWITCH_12 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U10.S_VSWITCH_1 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U10.S_VSWITCH_2 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U10.S_VSWITCH_3 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U10.S_VSWITCH_4 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U10.S_VSWITCH_5 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON    -.01         
+        VOFF    0            
+
+
+               X_U10.S_VSWITCH_6 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON     .01         
+        VOFF    0            
+
+
+               X_U10.S_VSWITCH_7 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U10.S_VSWITCH_8 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U10.S_VSWITCH_9 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U10.S_VSWITCH_10 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U10.S_VSWITCH_11 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U10.S_VSWITCH_12 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U11.S_VSWITCH_1 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U11.S_VSWITCH_2 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON     .1          
+        VOFF    -.1          
+
+
+               X_U11.S_VSWITCH_3 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U11.S_VSWITCH_4 
+         RON    1            
+        ROFF  100.000000E+06 
+         VON  150            
+        VOFF    0            
+
+
+               X_U11.S_VSWITCH_5 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON    -.01         
+        VOFF    0            
+
+
+               X_U11.S_VSWITCH_6 
+         RON    1.000000E-03 
+        ROFF   10.000000E+06 
+         VON     .01         
+        VOFF    0            
+
+
+               X_U11.S_VSWITCH_7 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U11.S_VSWITCH_8 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON    1            
+        VOFF   -1            
+
+
+               X_U11.S_VSWITCH_9 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U11.S_VSWITCH_10 
+         RON    1            
+        ROFF    1.000000E+09 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U11.S_VSWITCH_11 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+               X_U11.S_VSWITCH_12 
+         RON    1            
+        ROFF   10.000000E+06 
+         VON   10            
+        VOFF  -10            
+
+
+Starting pseudo-transient algorithm.
+
+WARNING(ORPSIM-16534): Using high values of ITL4 for Speed Level > 0 may increase total simulation job time.
+
+ERROR -- Convergence problem in transient bias point calculation
+
+
+  Last node voltages tried were:
+
+ NODE   VOLTAGE     NODE   VOLTAGE     NODE   VOLTAGE     NODE   VOLTAGE
+
+
+(N00244)    3.3000 (N00251)    2.1658 (N00278)    2.0000 (N00285)    2.0000     
+
+(N06186)    1.9999 (N06262)    2.1658 (N06314)    3.3000 (N06507)    2.0000     
+
+(N06626)    1.9999 (N06727)    1.9999 (N06828)    1.9999 (N07071)    2.0000     
+
+(N08164)    2.0000 (N08174) 216.6E-06 (N08250)     .7674 (N08302)    3.3000     
+
+(N08963) 215.4E-06 (N09035)     .7674 (N09089)    3.3000 (N09396) 92.88E-12     
+
+(N09496) 23.20E-18 (N09596) 388.9E-15 (N09703) 1.247E-06 (N09846)    2.0000     
+
+(N10387)    2.2089 (N10449)    2.2067 (N10501)    3.3000 (N12194) 58.72E-06     
+
+(N12282)    2.2067 (N12334)    3.3000 (N12763)    2.0000 (N12773)    2.0000     
+
+(N12922) 58.54E-06 (N13076)    3.2192 (N13090) 58.79E-06 (N13390)    3.2192     
+
+(N14063)    2.0000 (N14077)    2.0358 (N14149)    2.1729 (N14201)    3.3000     
+
+(N14488) 3.289E-18 (N14850)     .2560 (N15155)    2.0000 (N15165)    2.0000     
+
+(N15179) 58.43E-06 (N15586)    3.3000 (N20407)     .2571 (N20417)    3.2192     
+
+(N20427)    3.3000 (N21151)     .2571 (N21161)    3.2192 (N21171)    3.3000     
+
+(N21669)     .2560 (N21679)    2.2089 (N21689)    3.3000 (X_U1.6)    1.8943     
+
+(X_U1.7) 16.79E-18 (X_U1.8)    2.4766 (X_U1.9)   12.6690 (X_U2.6)    1.8943     
+
+(X_U2.7) 16.79E-18 (X_U2.8)    2.4772 (X_U2.9)   12.6690 (X_U3.6)     .1099     
+
+(X_U3.7) 16.79E-18 (X_U3.8)    -.0944 (X_U3.9)  159.6900 (X_U4.6)     .1099     
+
+(X_U4.7) 16.79E-18 (X_U4.8)    -.1117 (X_U4.9)  159.6900 (X_U5.6)    1.9024     
+
+(X_U5.7) 16.79E-18 (X_U5.8)   20.6630 (X_U5.9)   12.3320 (X_U6.6)    1.9024     
+
+(X_U6.7) 16.79E-18 (X_U6.8)   21.1430 (X_U6.9)   12.3320 (X_U7.6)    1.8895     
+
+(X_U7.7) 16.79E-18 (X_U7.8)    6.4087 (X_U7.9)   12.6110 (X_U8.6)     .0064     
+
+(X_U8.7) 16.79E-18 (X_U8.8)    -.5423 (X_U8.9)   12.3130 (X_U9.6)     .0066     
+
+(X_U9.7)-21.18E-18 (X_U9.8)    -.6619 (X_U9.9)    3.8455 (N051790)    3.3000    
+
+(N061140)    3.3000                   (N120820)    3.3000                       
+
+(N162640)    3.3000                   (N222440)    3.3000                       
+
+(N223690)    3.3000                   (X_U1.10)   12.6680                       
+
+(X_U1.11)   12.6670                   (X_U1.12)    8.0183                       
+
+(X_U1.13)     .0500                   (X_U1.14)    2.1368                       
+
+(X_U1.15)  105.0200                   (X_U1.16)    9.1754                       
+
+(X_U1.17)  980.5600                   (X_U1.18)-4971.0000                       
+
+(X_U1.19) 2943.8000                   (X_U1.20)    8.0098                       
+
+(X_U1.21)    8.0183                   (X_U1.22)    2.0717                       
+
+(X_U1.23)    1.7170                   (X_U1.24)    3.3000                       
+
+(X_U1.25)     .9000                   (X_U1.26)  158.0300                       
+
+(X_U1.27)-2965.7000                   (X_U1.28)    2.0630                       
+
+(X_U1.29)    2.0732                   (X_U1.30)    2.4766                       
+
+(X_U1.31)-2973.8000                   (X_U1.32)   12.6670                       
+
+(X_U1.33)    2.1658                   (X_U1.34)   23.1690                       
+
+(X_U1.35)  -23.1690                   (X_U1.36)   25.3350                       
+
+(X_U1.37)  -58.2240                   (X_U1.38) -211.5800                       
+
+(X_U1.39)   -2.8992                   (X_U1.40)    2.4766                       
+
+(X_U1.41)     .0500                   (X_U1.42)    3.2500                       
+
+(X_U1.43) -204.6900                   (X_U1.44)    2.0732                       
+
+(X_U1.45)    6.1517                   (X_U1.46)   12.6670                       
+
+(X_U1.47)   -2.8800                   (X_U1.48)   12.7680                       
+
+(X_U1.49)   12.6680                   (X_U1.50)   12.7680                       
+
+(X_U1.51)   12.6680                   (X_U1.52)    7.6683                       
+
+(X_U1.53)   17.6670                   (X_U1.54)   12.6680                       
+
+(X_U1.55)   12.6670                   (X_U1.56)  -10.0000                       
+
+(X_U1.57)   10.0000                   (X_U1.58)-5000.0000                       
+
+(X_U1.59) 3498.5000                   (X_U1.60)  -35.0010                       
+
+(X_U1.61)  964.9000                   (X_U1.62)   12.6670                       
+
+(X_U1.63)    7.5923                   (X_U1.64)   12.6670                       
+
+(X_U1.65)-23.17E-06                   (X_U1.66)     .1049                       
+
+(X_U1.67)  105.0200                   (X_U1.68)    2.0717                       
+
+(X_U1.69) 534.1E-12                   (X_U1.70)     .0013                       
+
+(X_U1.71)    2.0617                   (X_U1.72)  140.0000                       
+
+(X_U1.73) -140.0000                   (X_U1.74) 16.79E-18                       
+
+(X_U1.75)    0.0000                   (X_U1.76)    3.3000                       
+
+(X_U1.77)    -.4145                   (X_U1.78)    -.4149                       
+
+(X_U10.6)     .0066                   (X_U10.7) 16.79E-18                       
+
+(X_U10.8)    -.5466                   (X_U10.9)    3.8455                       
+
+(X_U11.6)     .0064                   (X_U11.7) 16.79E-18                       
+
+(X_U11.8)    -.4784                   (X_U11.9)   12.3130                       
+
+(X_U2.10)   12.6680                   (X_U2.11)   12.6680                       
+
+(X_U2.12)    8.0187                   (X_U2.13)     .0500                       
+
+(X_U2.14)    2.1368                   (X_U2.15)  105.0200                       
+
+(X_U2.16)    9.1890                   (X_U2.17)  980.5600                       
+
+(X_U2.18)-4971.0000                   (X_U2.19) 2943.2000                       
+
+(X_U2.20)    8.0102                   (X_U2.21)    8.0187                       
+
+(X_U2.22)    2.0716                   (X_U2.23)    1.7170                       
+
+(X_U2.24)    3.3000                   (X_U2.25)     .9000                       
+
+(X_U2.26)  158.0300                   (X_U2.27)-2965.4000                       
+
+(X_U2.28)    2.0629                   (X_U2.29)    2.0731                       
+
+(X_U2.30)    2.4772                   (X_U2.31)-2973.5000                       
+
+(X_U2.32)   12.6680                   (X_U2.33)    2.1658                       
+
+(X_U2.34)   23.1700                   (X_U2.35)  -23.1700                       
+
+(X_U2.36)   25.3360                   (X_U2.37)  -58.2920                       
+
+(X_U2.38) -211.5800                   (X_U2.39)   -2.8991                       
+
+(X_U2.40)    2.4772                   (X_U2.41)     .0500                       
+
+(X_U2.42)    3.2500                   (X_U2.43) -204.6800                       
+
+(X_U2.44)    2.0731                   (X_U2.45)    6.1519                       
+
+(X_U2.46)   12.6680                   (X_U2.47)   -2.8800                       
+
+(X_U2.48)   12.7680                   (X_U2.49)   12.6680                       
+
+(X_U2.50)   12.7680                   (X_U2.51)   12.6680                       
+
+(X_U2.52)    7.6688                   (X_U2.53)   17.6680                       
+
+(X_U2.54)   12.6690                   (X_U2.55)   12.6680                       
+
+(X_U2.56)  -10.0000                   (X_U2.57)   10.0000                       
+
+(X_U2.58)-5000.0000                   (X_U2.59) 3497.9000                       
+
+(X_U2.60)  -34.9960                   (X_U2.61)  964.9000                       
+
+(X_U2.62)   12.6680                   (X_U2.63)    7.5929                       
+
+(X_U2.64)   12.6680                   (X_U2.65)-23.17E-06                       
+
+(X_U2.66)     .1049                   (X_U2.67)  105.0200                       
+
+(X_U2.68)    2.0716                   (X_U2.69) 534.1E-12                       
+
+(X_U2.70)     .0013                   (X_U2.71)    2.0616                       
+
+(X_U2.72)  140.0000                   (X_U2.73) -140.0000                       
+
+(X_U2.74) 16.79E-18                   (X_U2.75)    0.0000                       
+
+(X_U2.76)    3.3000                   (X_U2.77)    -.4152                       
+
+(X_U2.78)    -.4156                   (X_U3.10)   14.7710                       
+
+(X_U3.11)   14.7710                   (X_U3.12)    9.1816                       
+
+(X_U3.13)     .0500                   (X_U3.14)    1.7656                       
+
+(X_U3.15)  140.0400                   (X_U3.16)  105.3600                       
+
+(X_U3.17)  612.8500                   (X_U3.18)-4971.0000                       
+
+(X_U3.19)   -3.7184                   (X_U3.20)    8.6238                       
+
+(X_U3.21)    9.1816                   (X_U3.22)     .1099                       
+
+(X_U3.23)     .1099                   (X_U3.24)    3.3000                       
+
+(X_U3.25)     .9000                   (X_U3.26)  159.7100                       
+
+(X_U3.27) 3434.4000                   (X_U3.28)     .6281                       
+
+(X_U3.29)     .1114                   (X_U3.30)    -.0944                       
+
+(X_U3.31) 3425.2000                   (X_U3.32)   14.7710                       
+
+(X_U3.33)     .7674                   (X_U3.34)   28.7750                       
+
+(X_U3.35)  -28.7750                   (X_U3.36)   29.5420                       
+
+(X_U3.37)   20.4340                   (X_U3.38)  -71.7370                       
+
+(X_U3.39)   99.8230                   (X_U3.40)    -.0944                       
+
+(X_U3.41)     .0500                   (X_U3.42)    3.2500                       
+
+(X_U3.43)  -67.5720                   (X_U3.44)     .1114                       
+
+(X_U3.45)    6.9478                   (X_U3.46)   14.7710                       
+
+(X_U3.47)  102.9900                   (X_U3.48)   14.8710                       
+
+(X_U3.49)   14.7710                   (X_U3.50)   14.8710                       
+
+(X_U3.51)   14.7710                   (X_U3.52)    9.7716                       
+
+(X_U3.53)   14.8760                   (X_U3.54)   14.7720                       
+
+(X_U3.55)    9.8760                   (X_U3.56)  -10.0000                       
+
+(X_U3.57)   10.0000                   (X_U3.58)-5000.0000                       
+
+(X_U3.59)   -3.7180                   (X_U3.60)   58.9990                       
+
+(X_U3.61)  569.4400                   (X_U3.62)  159.6900                       
+
+(X_U3.63)    9.6749                   (X_U3.64)   14.7700                       
+
+(X_U3.65)-28.77E-06                   (X_U3.66)     .1399                       
+
+(X_U3.67)  140.0400                   (X_U3.68)     .1099                       
+
+(X_U3.69) 534.1E-12                   (X_U3.70)     .0013                       
+
+(X_U3.71)     .6268                   (X_U3.72)  140.0000                       
+
+(X_U3.73) -140.0000                   (X_U3.74) 16.79E-18                       
+
+(X_U3.75)    0.0000                   (X_U3.76)    3.3000                       
+
+(X_U3.77)     .7212                   (X_U3.78)     .7212                       
+
+(X_U4.10)   14.7710                   (X_U4.11)   14.7710                       
+
+(X_U4.12)    9.1816                   (X_U4.13)     .0500                       
+
+(X_U4.14)    1.7656                   (X_U4.15)  140.0400                       
+
+(X_U4.16)  105.3600                   (X_U4.17)  612.8500                       
+
+(X_U4.18)-4971.0000                   (X_U4.19)   -3.7184                       
+
+(X_U4.20)    8.6238                   (X_U4.21)    9.1816                       
+
+(X_U4.22)     .1099                   (X_U4.23)     .1099                       
+
+(X_U4.24)    3.3000                   (X_U4.25)     .9000                       
+
+(X_U4.26)  159.7100                   (X_U4.27) 3433.5000                       
+
+(X_U4.28)     .6281                   (X_U4.29)     .1114                       
+
+(X_U4.30)    -.1117                   (X_U4.31) 3424.4000                       
+
+(X_U4.32)   14.7710                   (X_U4.33)     .7674                       
+
+(X_U4.34)   28.7750                   (X_U4.35)  -28.7750                       
+
+(X_U4.36)   29.5420                   (X_U4.37)   22.1640                       
+
+(X_U4.38)  -71.7370                   (X_U4.39)   99.8230                       
+
+(X_U4.40)    -.1117                   (X_U4.41)     .0500                       
+
+(X_U4.42)    3.2500                   (X_U4.43)  -67.5720                       
+
+(X_U4.44)     .1114                   (X_U4.45)    6.9478                       
+
+(X_U4.46)   14.7710                   (X_U4.47)  102.9900                       
+
+(X_U4.48)   14.8710                   (X_U4.49)   14.7710                       
+
+(X_U4.50)   14.8710                   (X_U4.51)   14.7710                       
+
+(X_U4.52)    9.7716                   (X_U4.53)   14.8760                       
+
+(X_U4.54)   14.7720                   (X_U4.55)    9.8760                       
+
+(X_U4.56)  -10.0000                   (X_U4.57)   10.0000                       
+
+(X_U4.58)-5000.0000                   (X_U4.59)   -3.7180                       
+
+(X_U4.60)   59.0010                   (X_U4.61)  569.4400                       
+
+(X_U4.62)  159.6900                   (X_U4.63)    9.6749                       
+
+(X_U4.64)   14.7700                   (X_U4.65)-28.77E-06                       
+
+(X_U4.66)     .1399                   (X_U4.67)  140.0400                       
+
+(X_U4.68)     .1099                   (X_U4.69) 534.1E-12                       
+
+(X_U4.70)     .0013                   (X_U4.71)     .6268                       
+
+(X_U4.72)  140.0000                   (X_U4.73) -140.0000                       
+
+(X_U4.74) 16.79E-18                   (X_U4.75)    0.0000                       
+
+(X_U4.76)    3.3000                   (X_U4.77)     .7385                       
+
+(X_U4.78)     .7385                   (X_U5.10)   12.3320                       
+
+(X_U5.11)   12.3300                   (X_U5.12)    8.8287                       
+
+(X_U5.13)     .0500                   (X_U5.14)    2.1769                       
+
+(X_U5.15)  101.2400                   (X_U5.16)  -16.7970                       
+
+(X_U5.17)  849.8500                   (X_U5.18)-4971.0000                       
+
+(X_U5.19) 2268.9000                   (X_U5.20)    8.8741                       
+
+(X_U5.21)    8.8287                   (X_U5.22)    2.1071                       
+
+(X_U5.23)    1.6977                   (X_U5.24)    3.3000                       
+
+(X_U5.25)     .9000                   (X_U5.26)  159.2100                       
+
+(X_U5.27)     .1964                   (X_U5.28)    2.1077                       
+
+(X_U5.29)    2.1086                   (X_U5.30)   20.6630                       
+
+(X_U5.31)   -8.6324                   (X_U5.32)   12.3300                       
+
+(X_U5.33)    2.2067                   (X_U5.34)   22.4540                       
+
+(X_U5.35)  -22.4540                   (X_U5.36)   24.6610                       
+
+(X_U5.37)-1876.1000                   (X_U5.38) -215.6700                       
+
+(X_U5.39)   -2.9815                   (X_U5.40)   20.6630                       
+
+(X_U5.41)     .0500                   (X_U5.42)    3.2500                       
+
+(X_U5.43) -197.5600                   (X_U5.44)    2.1086                       
+
+(X_U5.45)    6.5697                   (X_U5.46)   12.3300                       
+
+(X_U5.47)   -2.9042                   (X_U5.48)   12.4320                       
+
+(X_U5.49)   12.3320                   (X_U5.50)   12.4320                       
+
+(X_U5.51)   12.3320                   (X_U5.52)    7.3323                       
+
+(X_U5.53)   17.3310                   (X_U5.54)   12.3320                       
+
+(X_U5.55)   12.3310                   (X_U5.56)  -10.0000                       
+
+(X_U5.57)   10.0000                   (X_U5.58)-5000.0000                       
+
+(X_U5.59) 3876.3000                   (X_U5.60) -149.6500                       
+
+(X_U5.61)  850.2500                   (X_U5.62)   12.3300                       
+
+(X_U5.63)    8.8287                   (X_U5.64)   12.3300                       
+
+(X_U5.65)-22.45E-06                   (X_U5.66)     .1011                       
+
+(X_U5.67)  101.2400                   (X_U5.68)    2.1071                       
+
+(X_U5.69) 534.1E-12                   (X_U5.70)     .0013                       
+
+(X_U5.71)    2.1063                   (X_U5.72)  140.0000                       
+
+(X_U5.73) -140.0000                   (X_U5.74) 16.79E-18                       
+
+(X_U5.75)    0.0000                   (X_U5.76)    3.3000                       
+
+(X_U5.77)  -18.5560                   (X_U5.78)  -18.5570                       
+
+(X_U6.10)   12.3320                   (X_U6.11)   12.3300                       
+
+(X_U6.12)    8.8287                   (X_U6.13)     .0500                       
+
+(X_U6.14)    2.1769                   (X_U6.15)  101.2400                       
+
+(X_U6.16)  -16.7970                   (X_U6.17)  849.8500                       
+
+(X_U6.18)-4971.0000                   (X_U6.19) 2268.9000                       
+
+(X_U6.20)    8.8741                   (X_U6.21)    8.8287                       
+
+(X_U6.22)    2.1071                   (X_U6.23)    1.6977                       
+
+(X_U6.24)    3.3000                   (X_U6.25)     .9000                       
+
+(X_U6.26)  159.2100                   (X_U6.27)     .2913                       
+
+(X_U6.28)    2.1077                   (X_U6.29)    2.1086                       
+
+(X_U6.30)   21.1430                   (X_U6.31)   -8.5374                       
+
+(X_U6.32)   12.3300                   (X_U6.33)    2.2067                       
+
+(X_U6.34)   22.4540                   (X_U6.35)  -22.4540                       
+
+(X_U6.36)   24.6610                   (X_U6.37)-1924.0000                       
+
+(X_U6.38) -215.6700                   (X_U6.39)   -2.9815                       
+
+(X_U6.40)   21.1430                   (X_U6.41)     .0500                       
+
+(X_U6.42)    3.2500                   (X_U6.43) -197.5600                       
+
+(X_U6.44)    2.1086                   (X_U6.45)    6.5697                       
+
+(X_U6.46)   12.3300                   (X_U6.47)   -2.9042                       
+
+(X_U6.48)   12.4320                   (X_U6.49)   12.3320                       
+
+(X_U6.50)   12.4320                   (X_U6.51)   12.3320                       
+
+(X_U6.52)    7.3323                   (X_U6.53)   17.3310                       
+
+(X_U6.54)   12.3320                   (X_U6.55)   12.3310                       
+
+(X_U6.56)  -10.0000                   (X_U6.57)   10.0000                       
+
+(X_U6.58)-5000.0000                   (X_U6.59) 3876.3000                       
+
+(X_U6.60) -149.6500                   (X_U6.61)  850.2500                       
+
+(X_U6.62)   12.3300                   (X_U6.63)    8.8287                       
+
+(X_U6.64)   12.3300                   (X_U6.65)-22.45E-06                       
+
+(X_U6.66)     .1011                   (X_U6.67)  101.2400                       
+
+(X_U6.68)    2.1071                   (X_U6.69) 534.1E-12                       
+
+(X_U6.70)     .0013                   (X_U6.71)    2.1063                       
+
+(X_U6.72)  140.0000                   (X_U6.73) -140.0000                       
+
+(X_U6.74) 16.79E-18                   (X_U6.75)    0.0000                       
+
+(X_U6.76)    3.3000                   (X_U6.77)  -19.0360                       
+
+(X_U6.78)  -19.0360                   (X_U7.10)   12.6100                       
+
+(X_U7.11)   12.6090                   (X_U7.12)    8.3710                       
+
+(X_U7.13)     .0500                   (X_U7.14)    2.1437                       
+
+(X_U7.15)  104.3700                   (X_U7.16)   -8.1509                       
+
+(X_U7.17)  935.8800                   (X_U7.18)-4971.0000                       
+
+(X_U7.19) 2690.3000                   (X_U7.20)    8.4100                       
+
+(X_U7.21)    8.3710                   (X_U7.22)    2.0701                       
+
+(X_U7.23)    1.7089                   (X_U7.24)    3.3000                       
+
+(X_U7.25)     .9000                   (X_U7.26)  158.5400                       
+
+(X_U7.27)    -.5662                   (X_U7.28)    2.0707                       
+
+(X_U7.29)    2.0716                   (X_U7.30)    6.4087                       
+
+(X_U7.31)   -8.9372                   (X_U7.32)   12.6090                       
+
+(X_U7.33)    2.1729                   (X_U7.34)   23.0460                       
+
+(X_U7.35)  -23.0460                   (X_U7.36)   25.2190                       
+
+(X_U7.37) -451.9200                   (X_U7.38) -212.2900                       
+
+(X_U7.39)   -2.9189                   (X_U7.40)    6.4087                       
+
+(X_U7.41)     .0500                   (X_U7.42)    3.2500                       
+
+(X_U7.43) -202.0100                   (X_U7.44)    2.0716                       
+
+(X_U7.45)    6.3571                   (X_U7.46)   12.6090                       
+
+(X_U7.47)   -2.8857                   (X_U7.48)   12.7100                       
+
+(X_U7.49)   12.6100                   (X_U7.50)   12.7100                       
+
+(X_U7.51)   12.6100                   (X_U7.52)    7.6105                       
+
+(X_U7.53)   17.6100                   (X_U7.54)   12.6110                       
+
+(X_U7.55)   12.6100                   (X_U7.56)  -10.0000                       
+
+(X_U7.57)   10.0000                   (X_U7.58)-5000.0000                       
+
+(X_U7.59) 3563.5000                   (X_U7.60)  -76.0440                       
+
+(X_U7.61)  923.8600                   (X_U7.62)   12.6090                       
+
+(X_U7.63)    8.3710                   (X_U7.64)   12.6090                       
+
+(X_U7.65)-23.05E-06                   (X_U7.66)     .1043                       
+
+(X_U7.67)  104.3700                   (X_U7.68)    2.0701                       
+
+(X_U7.69) 534.1E-12                   (X_U7.70)     .0013                       
+
+(X_U7.71)    2.0694                   (X_U7.72)  140.0000                       
+
+(X_U7.73) -140.0000                   (X_U7.74) 16.79E-18                       
+
+(X_U7.75)    0.0000                   (X_U7.76)    3.3000                       
+
+(X_U7.77)   -4.3389                   (X_U7.78)   -4.3393                       
+
+(X_U8.10)   12.3140                   (X_U8.11)   12.3120                       
+
+(X_U8.12)    8.8337                   (X_U8.13)     .0500                       
+
+(X_U8.14)    2.1790                   (X_U8.15)  101.0300                       
+
+(X_U8.16)  -18.1050                   (X_U8.17)  850.2200                       
+
+(X_U8.18)-4971.0000                   (X_U8.19) 2286.7000                       
+
+(X_U8.20)    8.8713                   (X_U8.21)    8.8337                       
+
+(X_U8.22)     .0064                   (X_U8.23)     .0064                       
+
+(X_U8.24)    3.3000                   (X_U8.25)     .9000                       
+
+(X_U8.26)  159.2100                   (X_U8.27)   20.4100                       
+
+(X_U8.28)     .2556                   (X_U8.29)     .0079                       
+
+(X_U8.30)    -.5423                   (X_U8.31)   11.5760                       
+
+(X_U8.32)   12.3120                   (X_U8.33)    2.2089                       
+
+(X_U8.34)   22.4160                   (X_U8.35)  -22.4160                       
+
+(X_U8.36)   24.6250                   (X_U8.37)   54.8660                       
+
+(X_U8.38) -215.8900                   (X_U8.39)   -2.9831                       
+
+(X_U8.40)    -.5423                   (X_U8.41)     .0500                       
+
+(X_U8.42)    3.2500                   (X_U8.43) -197.7500                       
+
+(X_U8.44)     .0079                   (X_U8.45)    6.5658                       
+
+(X_U8.46)   12.3120                   (X_U8.47)   -2.9054                       
+
+(X_U8.48)   12.4140                   (X_U8.49)   12.3140                       
+
+(X_U8.50)   12.4140                   (X_U8.51)   12.3140                       
+
+(X_U8.52)    7.3141                   (X_U8.53)   17.3130                       
+
+(X_U8.54)   12.3140                   (X_U8.55)   12.3130                       
+
+(X_U8.56)  -10.0000                   (X_U8.57)   10.0000                       
+
+(X_U8.58)-5000.0000                   (X_U8.59) 3896.6000                       
+
+(X_U8.60) -151.9500                   (X_U8.61)  847.9500                       
+
+(X_U8.62)   12.3120                   (X_U8.63)    8.8337                       
+
+(X_U8.64)   12.3120                   (X_U8.65)-22.42E-06                       
+
+(X_U8.66)     .1009                   (X_U8.67)  101.0300                       
+
+(X_U8.68)     .0064                   (X_U8.69) 534.1E-12                       
+
+(X_U8.70)     .0013                   (X_U8.71)     .2543                       
+
+(X_U8.72)  140.0000                   (X_U8.73) -140.0000                       
+
+(X_U8.74) 16.79E-18                   (X_U8.75)    0.0000                       
+
+(X_U8.76)    3.3000                   (X_U8.77)     .7965                       
+
+(X_U8.78)     .7965                   (X_U9.10)    3.8455                       
+
+(X_U9.11)    3.8455                   (X_U9.12)    1.0024                       
+
+(X_U9.13)     .0500                   (X_U9.14)    3.1836                       
+
+(X_U9.15)    6.2628                   (X_U9.16) -214.3400                       
+
+(X_U9.17)  779.7500                   (X_U9.18)-4971.0000                       
+
+(X_U9.19) 4971.0000                   (X_U9.20)     .9959                       
+
+(X_U9.21)    1.0024                   (X_U9.22)     .0066                       
+
+(X_U9.23)     .0066                   (X_U9.24)    3.3000                       
+
+(X_U9.25)     .9000                   (X_U9.26)  147.8200                       
+
+(X_U9.27)    8.8639                   (X_U9.28)     .2565                       
+
+(X_U9.29)     .0081                   (X_U9.30)    -.6619                       
+
+(X_U9.31)    7.8616                   (X_U9.32)    3.8455                       
+
+(X_U9.33)    3.2192                   (X_U9.34)    4.4718                       
+
+(X_U9.35)   -4.4718                   (X_U9.36)    7.6910                       
+
+(X_U9.37)   66.8500                   (X_U9.38) -316.9200                       
+
+(X_U9.39)   -3.5574                   (X_U9.40)    -.6619                       
+
+(X_U9.41)     .0500                   (X_U9.42)    3.2500                       
+
+(X_U9.43) -315.1100                   (X_U9.44)     .0081                       
+
+(X_U9.45)     .3092                   (X_U9.46)    3.8455                       
+
+(X_U9.47)   -3.5575                   (X_U9.48)    3.9455                       
+
+(X_U9.49)    3.8455                   (X_U9.50)    3.9455                       
+
+(X_U9.51)    3.8455                   (X_U9.52)   -1.1540                       
+
+(X_U9.53)    8.8450                   (X_U9.54)    3.8460                       
+
+(X_U9.55)    3.8450                   (X_U9.56)  -10.0000                       
+
+(X_U9.57)   10.0000                   (X_U9.58)-5000.0000                       
+
+(X_U9.59) 5000.0000                   (X_U9.60) -215.6400                       
+
+(X_U9.61)  784.2600                   (X_U9.62)    3.8441                       
+
+(X_U9.63)    1.0024                   (X_U9.64)    3.8455                       
+
+(X_U9.65)-4.472E-06                   (X_U9.66)     .0063                       
+
+(X_U9.67)    6.2628                   (X_U9.68)     .0066                       
+
+(X_U9.69) 534.1E-12                   (X_U9.70)     .0013                       
+
+(X_U9.71)     .2552                   (X_U9.72)  140.0000                       
+
+(X_U9.73) -140.0000                   (X_U9.74) 16.79E-18                       
+
+(X_U9.75)    0.0000                   (X_U9.76)    3.3000                       
+
+(X_U9.77)     .9171                   (X_U9.78)     .9171                       
+
+(X_U10.10)    3.8455                  (X_U10.11)    3.8455                      
+
+(X_U10.12)    1.0024                  (X_U10.13)     .0500                      
+
+(X_U10.14)    3.1836                  (X_U10.15)    6.2628                      
+
+(X_U10.16) -214.3400                  (X_U10.17)  779.7500                      
+
+(X_U10.18)-4971.0000                  (X_U10.19) 4971.0000                      
+
+(X_U10.20)     .9959                  (X_U10.21)    1.0024                      
+
+(X_U10.22)     .0066                  (X_U10.23)     .0066                      
+
+(X_U10.24)    3.3000                  (X_U10.25)     .9000                      
+
+(X_U10.26)  147.8200                  (X_U10.27)    9.5697                      
+
+(X_U10.28)     .2565                  (X_U10.29)     .0081                      
+
+(X_U10.30)    -.5466                  (X_U10.31)    8.5673                      
+
+(X_U10.32)    3.8455                  (X_U10.33)    3.2192                      
+
+(X_U10.34)    4.4718                  (X_U10.35)   -4.4718                      
+
+(X_U10.36)    7.6910                  (X_U10.37)   55.3170                      
+
+(X_U10.38) -316.9200                  (X_U10.39)   -3.5574                      
+
+(X_U10.40)    -.5466                  (X_U10.41)     .0500                      
+
+(X_U10.42)    3.2500                  (X_U10.43) -315.1100                      
+
+(X_U10.44)     .0081                  (X_U10.45)     .3092                      
+
+(X_U10.46)    3.8455                  (X_U10.47)   -3.5575                      
+
+(X_U10.48)    3.9455                  (X_U10.49)    3.8455                      
+
+(X_U10.50)    3.9455                  (X_U10.51)    3.8455                      
+
+(X_U10.52)   -1.1540                  (X_U10.53)    8.8450                      
+
+(X_U10.54)    3.8460                  (X_U10.55)    3.8450                      
+
+(X_U10.56)  -10.0000                  (X_U10.57)   10.0000                      
+
+(X_U10.58)-5000.0000                  (X_U10.59) 5000.0000                      
+
+(X_U10.60) -215.6400                  (X_U10.61)  784.2600                      
+
+(X_U10.62)    3.8441                  (X_U10.63)    1.0024                      
+
+(X_U10.64)    3.8455                  (X_U10.65)-4.472E-06                      
+
+(X_U10.66)     .0063                  (X_U10.67)    6.2628                      
+
+(X_U10.68)     .0066                  (X_U10.69) 534.1E-12                      
+
+(X_U10.70)     .0013                  (X_U10.71)     .2552                      
+
+(X_U10.72)  140.0000                  (X_U10.73) -140.0000                      
+
+(X_U10.74) 16.79E-18                  (X_U10.75)    0.0000                      
+
+(X_U10.76)    3.3000                  (X_U10.77)     .8018                      
+
+(X_U10.78)     .8018                  (X_U11.10)   12.3140                      
+
+(X_U11.11)   12.3120                  (X_U11.12)    8.8336                      
+
+(X_U11.13)     .0500                  (X_U11.14)    2.1790                      
+
+(X_U11.15)  101.0300                  (X_U11.16)  -18.1050                      
+
+(X_U11.17)  850.2200                  (X_U11.18)-4971.0000                      
+
+(X_U11.19) 2286.7000                  (X_U11.20)    8.8713                      
+
+(X_U11.21)    8.8336                  (X_U11.22)     .0064                      
+
+(X_U11.23)     .0064                  (X_U11.24)    3.3000                      
+
+(X_U11.25)     .9000                  (X_U11.26)  159.2100                      
+
+(X_U11.27)   19.7660                  (X_U11.28)     .2556                      
+
+(X_U11.29)     .0079                  (X_U11.30)    -.4784                      
+
+(X_U11.31)   10.9320                  (X_U11.32)   12.3120                      
+
+(X_U11.33)    2.2089                  (X_U11.34)   22.4160                      
+
+(X_U11.35)  -22.4160                  (X_U11.36)   24.6250                      
+
+(X_U11.37)   48.4820                  (X_U11.38) -215.8900                      
+
+(X_U11.39)   -2.9831                  (X_U11.40)    -.4784                      
+
+(X_U11.41)     .0500                  (X_U11.42)    3.2500                      
+
+(X_U11.43) -197.7500                  (X_U11.44)     .0079                      
+
+(X_U11.45)    6.5658                  (X_U11.46)   12.3120                      
+
+(X_U11.47)   -2.9054                  (X_U11.48)   12.4140                      
+
+(X_U11.49)   12.3140                  (X_U11.50)   12.4140                      
+
+(X_U11.51)   12.3140                  (X_U11.52)    7.3141                      
+
+(X_U11.53)   17.3130                  (X_U11.54)   12.3140                      
+
+(X_U11.55)   12.3130                  (X_U11.56)  -10.0000                      
+
+(X_U11.57)   10.0000                  (X_U11.58)-5000.0000                      
+
+(X_U11.59) 3896.6000                  (X_U11.60) -151.9500                      
+
+(X_U11.61)  847.9500                  (X_U11.62)   12.3120                      
+
+(X_U11.63)    8.8336                  (X_U11.64)   12.3120                      
+
+(X_U11.65)-22.42E-06                  (X_U11.66)     .1009                      
+
+(X_U11.67)  101.0300                  (X_U11.68)     .0064                      
+
+(X_U11.69) 534.1E-12                  (X_U11.70)     .0013                      
+
+(X_U11.71)     .2543                  (X_U11.72)  140.0000                      
+
+(X_U11.73) -140.0000                  (X_U11.74) 16.79E-18                      
+
+(X_U11.75)    0.0000                  (X_U11.76)    3.3000                      
+
+(X_U11.77)     .7327                  (X_U11.78)     .7327                      
+
+(X_U1.XIn11.3)    0.0000              (X_U1.XIn11.4)    0.0000                  
+
+(X_U1.XIn11.5)    0.0000              (X_U1.XIn11.6)    0.0000                  
+
+(X_U1.XIn11.7)     .8338              (X_U1.XIn11.8)     .8338                  
+
+(X_U1.XR101.3) 3.300E-06              (X_U1.XR102.3)    0.0000                  
+
+(X_U1.XR103.3)  -58.2240              (X_U1.XR104.3) 250.6E-06                  
+
+(X_U1.XR105.3) 8.018E-06              (X_U1.XR107.3) 158.0E-06                  
+
+(X_U1.XVn11.3)    0.0000              (X_U1.XVn11.4)    0.0000                  
+
+(X_U1.XVn11.5)    0.0000              (X_U1.XVn11.6)    0.0000                  
+
+(X_U1.XVn11.7)     .8338              (X_U1.XVn11.8)     .8338                  
+
+(X_U2.XIn11.3)    0.0000              (X_U2.XIn11.4)    0.0000                  
+
+(X_U2.XIn11.5)    0.0000              (X_U2.XIn11.6)    0.0000                  
+
+(X_U2.XIn11.7)     .8338              (X_U2.XIn11.8)     .8338                  
+
+(X_U2.XR101.3) 3.300E-06              (X_U2.XR102.3)    0.0000                  
+
+(X_U2.XR103.3)  -58.2920              (X_U2.XR104.3) 250.6E-06                  
+
+(X_U2.XR105.3) 8.019E-06              (X_U2.XR107.3) 158.0E-06                  
+
+(X_U2.XVn11.3)    0.0000              (X_U2.XVn11.4)    0.0000                  
+
+(X_U2.XVn11.5)    0.0000              (X_U2.XVn11.6)    0.0000                  
+
+(X_U2.XVn11.7)     .8338              (X_U2.XVn11.8)     .8338                  
+
+(X_U3.XIn11.3)    0.0000              (X_U3.XIn11.4)    0.0000                  
+
+(X_U3.XIn11.5)    0.0000              (X_U3.XIn11.6)    0.0000                  
+
+(X_U3.XIn11.7)     .8338              (X_U3.XIn11.8)     .8338                  
+
+(X_U3.XR101.3) 3.300E-06              (X_U3.XR102.3)    0.0000                  
+
+(X_U3.XR103.3)   20.4340              (X_U3.XR104.3) 286.9E-06                  
+
+(X_U3.XR105.3) 9.182E-06              (X_U3.XR107.3) 159.7E-06                  
+
+(X_U3.XVn11.3)    0.0000              (X_U3.XVn11.4)    0.0000                  
+
+(X_U3.XVn11.5)    0.0000              (X_U3.XVn11.6)    0.0000                  
+
+(X_U3.XVn11.7)     .8338              (X_U3.XVn11.8)     .8338                  
+
+(X_U4.XIn11.3)    0.0000              (X_U4.XIn11.4)    0.0000                  
+
+(X_U4.XIn11.5)    0.0000              (X_U4.XIn11.6)    0.0000                  
+
+(X_U4.XIn11.7)     .8338              (X_U4.XIn11.8)     .8338                  
+
+(X_U4.XR101.3) 3.300E-06              (X_U4.XR102.3)    0.0000                  
+
+(X_U4.XR103.3)   22.1640              (X_U4.XR104.3) 286.9E-06                  
+
+(X_U4.XR105.3) 9.182E-06              (X_U4.XR107.3) 159.7E-06                  
+
+(X_U4.XVn11.3)    0.0000              (X_U4.XVn11.4)    0.0000                  
+
+(X_U4.XVn11.5)    0.0000              (X_U4.XVn11.6)    0.0000                  
+
+(X_U4.XVn11.7)     .8338              (X_U4.XVn11.8)     .8338                  
+
+(X_U5.XIn11.3)    0.0000              (X_U5.XIn11.4)    0.0000                  
+
+(X_U5.XIn11.5)    0.0000              (X_U5.XIn11.6)    0.0000                  
+
+(X_U5.XIn11.7)     .8338              (X_U5.XIn11.8)     .8338                  
+
+(X_U5.XR101.3) 3.300E-06              (X_U5.XR102.3)    0.0000                  
+
+(X_U5.XR103.3)-1876.1000              (X_U5.XR104.3) 275.9E-06                  
+
+(X_U5.XR105.3) 8.829E-06              (X_U5.XR107.3) 159.2E-06                  
+
+(X_U5.XVn11.3)    0.0000              (X_U5.XVn11.4)    0.0000                  
+
+(X_U5.XVn11.5)    0.0000              (X_U5.XVn11.6)    0.0000                  
+
+(X_U5.XVn11.7)     .8338              (X_U5.XVn11.8)     .8338                  
+
+(X_U6.XIn11.3)    0.0000              (X_U6.XIn11.4)    0.0000                  
+
+(X_U6.XIn11.5)    0.0000              (X_U6.XIn11.6)    0.0000                  
+
+(X_U6.XIn11.7)     .8338              (X_U6.XIn11.8)     .8338                  
+
+(X_U6.XR101.3) 3.300E-06              (X_U6.XR102.3)    0.0000                  
+
+(X_U6.XR103.3)-1924.0000              (X_U6.XR104.3) 275.9E-06                  
+
+(X_U6.XR105.3) 8.829E-06              (X_U6.XR107.3) 159.2E-06                  
+
+(X_U6.XVn11.3)    0.0000              (X_U6.XVn11.4)    0.0000                  
+
+(X_U6.XVn11.5)    0.0000              (X_U6.XVn11.6)    0.0000                  
+
+(X_U6.XVn11.7)     .8338              (X_U6.XVn11.8)     .8338                  
+
+(X_U7.XIn11.3)    0.0000              (X_U7.XIn11.4)    0.0000                  
+
+(X_U7.XIn11.5)    0.0000              (X_U7.XIn11.6)    0.0000                  
+
+(X_U7.XIn11.7)     .8338              (X_U7.XIn11.8)     .8338                  
+
+(X_U7.XR101.3) 3.300E-06              (X_U7.XR102.3)    0.0000                  
+
+(X_U7.XR103.3) -451.9200              (X_U7.XR104.3) 261.6E-06                  
+
+(X_U7.XR105.3) 8.371E-06              (X_U7.XR107.3) 158.5E-06                  
+
+(X_U7.XVn11.3)    0.0000              (X_U7.XVn11.4)    0.0000                  
+
+(X_U7.XVn11.5)    0.0000              (X_U7.XVn11.6)    0.0000                  
+
+(X_U7.XVn11.7)     .8338              (X_U7.XVn11.8)     .8338                  
+
+(X_U8.XIn11.3)    0.0000              (X_U8.XIn11.4)    0.0000                  
+
+(X_U8.XIn11.5)    0.0000              (X_U8.XIn11.6)    0.0000                  
+
+(X_U8.XIn11.7)     .8338              (X_U8.XIn11.8)     .8338                  
+
+(X_U8.XR101.3) 3.300E-06              (X_U8.XR102.3)    0.0000                  
+
+(X_U8.XR103.3)   54.8660              (X_U8.XR104.3) 276.0E-06                  
+
+(X_U8.XR105.3) 8.834E-06              (X_U8.XR107.3) 159.2E-06                  
+
+(X_U8.XVn11.3)    0.0000              (X_U8.XVn11.4)    0.0000                  
+
+(X_U8.XVn11.5)    0.0000              (X_U8.XVn11.6)    0.0000                  
+
+(X_U8.XVn11.7)     .8338              (X_U8.XVn11.8)     .8338                  
+
+(X_U9.XIn11.3)    0.0000              (X_U9.XIn11.4)    0.0000                  
+
+(X_U9.XIn11.5)    0.0000              (X_U9.XIn11.6)    0.0000                  
+
+(X_U9.XIn11.7)     .8338              (X_U9.XIn11.8)     .8338                  
+
+(X_U9.XR101.3) 3.300E-06              (X_U9.XR102.3)    0.0000                  
+
+(X_U9.XR103.3)   66.8500              (X_U9.XR104.3) 31.32E-06                  
+
+(X_U9.XR105.3) 1.002E-06              (X_U9.XR107.3) 147.8E-06                  
+
+(X_U9.XVn11.3)    0.0000              (X_U9.XVn11.4)    0.0000                  
+
+(X_U9.XVn11.5)    0.0000              (X_U9.XVn11.6)    0.0000                  
+
+(X_U9.XVn11.7)     .8338              (X_U9.XVn11.8)     .8338                  
+
+(X_U1.XR101.30) 16.79E-18             (X_U1.XR102.30)    0.0000                 
+
+(X_U1.XR103.30)  -58.2240             (X_U1.XR104.30) 16.79E-18                 
+
+(X_U1.XR105.30) 16.79E-18             (X_U1.XR106a.3)-2973.8000                 
+
+(X_U1.XR107.30) 16.79E-18             (X_U10.XIn11.3)    0.0000                 
+
+(X_U10.XIn11.4)    0.0000             (X_U10.XIn11.5)    0.0000                 
+
+(X_U10.XIn11.6)    0.0000             (X_U10.XIn11.7)     .8338                 
+
+(X_U10.XIn11.8)     .8338             (X_U10.XR101.3) 3.300E-06                 
+
+(X_U10.XR102.3)    0.0000             (X_U10.XR103.3)   55.3170                 
+
+(X_U10.XR104.3) 31.32E-06             (X_U10.XR105.3) 1.002E-06                 
+
+(X_U10.XR107.3) 147.8E-06             (X_U10.XVn11.3)    0.0000                 
+
+(X_U10.XVn11.4)    0.0000             (X_U10.XVn11.5)    0.0000                 
+
+(X_U10.XVn11.6)    0.0000             (X_U10.XVn11.7)     .8338                 
+
+(X_U10.XVn11.8)     .8338             (X_U11.XIn11.3)    0.0000                 
+
+(X_U11.XIn11.4)    0.0000             (X_U11.XIn11.5)    0.0000                 
+
+(X_U11.XIn11.6)    0.0000             (X_U11.XIn11.7)     .8338                 
+
+(X_U11.XIn11.8)     .8338             (X_U11.XR101.3) 3.300E-06                 
+
+(X_U11.XR102.3)    0.0000             (X_U11.XR103.3)   48.4820                 
+
+(X_U11.XR104.3) 276.0E-06             (X_U11.XR105.3) 8.834E-06                 
+
+(X_U11.XR107.3) 159.2E-06             (X_U11.XVn11.3)    0.0000                 
+
+(X_U11.XVn11.4)    0.0000             (X_U11.XVn11.5)    0.0000                 
+
+(X_U11.XVn11.6)    0.0000             (X_U11.XVn11.7)     .8338                 
+
+(X_U11.XVn11.8)     .8338             (X_U2.XR101.30) 16.79E-18                 
+
+(X_U2.XR102.30)    0.0000             (X_U2.XR103.30)  -58.2920                 
+
+(X_U2.XR104.30) 16.79E-18             (X_U2.XR105.30) 16.79E-18                 
+
+(X_U2.XR106a.3)-2973.5000             (X_U2.XR107.30) 16.79E-18                 
+
+(X_U3.XR101.30) 16.79E-18             (X_U3.XR102.30)    0.0000                 
+
+(X_U3.XR103.30)   20.4340             (X_U3.XR104.30) 16.79E-18                 
+
+(X_U3.XR105.30) 16.79E-18             (X_U3.XR106a.3) 3425.2000                 
+
+(X_U3.XR107.30) 16.79E-18             (X_U4.XR101.30) 16.79E-18                 
+
+(X_U4.XR102.30)    0.0000             (X_U4.XR103.30)   22.1640                 
+
+(X_U4.XR104.30) 16.79E-18             (X_U4.XR105.30) 16.79E-18                 
+
+(X_U4.XR106a.3) 3424.4000             (X_U4.XR107.30) 16.79E-18                 
+
+(X_U5.XR101.30) 16.79E-18             (X_U5.XR102.30)    0.0000                 
+
+(X_U5.XR103.30)-1876.1000             (X_U5.XR104.30) 16.79E-18                 
+
+(X_U5.XR105.30) 16.79E-18             (X_U5.XR106a.3)   -8.6324                 
+
+(X_U5.XR107.30) 16.79E-18             (X_U6.XR101.30) 16.79E-18                 
+
+(X_U6.XR102.30)    0.0000             (X_U6.XR103.30)-1924.0000                 
+
+(X_U6.XR104.30) 16.79E-18             (X_U6.XR105.30) 16.79E-18                 
+
+(X_U6.XR106a.3)   -8.5374             (X_U6.XR107.30) 16.79E-18                 
+
+(X_U7.XR101.30) 16.79E-18             (X_U7.XR102.30)    0.0000                 
+
+(X_U7.XR103.30) -451.9200             (X_U7.XR104.30) 16.79E-18                 
+
+(X_U7.XR105.30) 16.79E-18             (X_U7.XR106a.3)   -8.9372                 
+
+(X_U7.XR107.30) 16.79E-18             (X_U8.XR101.30) 16.79E-18                 
+
+(X_U8.XR102.30)    0.0000             (X_U8.XR103.30)   54.8660                 
+
+(X_U8.XR104.30) 16.79E-18             (X_U8.XR105.30) 16.79E-18                 
+
+(X_U8.XR106a.3)   11.5760             (X_U8.XR107.30) 16.79E-18                 
+
+(X_U9.XR101.30) 16.79E-18             (X_U9.XR102.30)    0.0000                 
+
+(X_U9.XR103.30)   66.8500             (X_U9.XR104.30)-21.18E-18                 
+
+(X_U9.XR105.30)-21.18E-18             (X_U9.XR106a.3)    7.8616                 
+
+(X_U9.XR107.30)-21.18E-18             (X_U1.XR106a.30)-2973.8000                
+
+(X_U1.XR107_2.3)    2.0630            (X_U1.XR107_3.3) 2.591E-06                
+
+(X_U10.XR101.30) 16.79E-18            (X_U10.XR102.30)    0.0000                
+
+(X_U10.XR103.30)   55.3170            (X_U10.XR104.30) 16.79E-18                
+
+(X_U10.XR105.30) 16.79E-18            (X_U10.XR106a.3)    8.5673                
+
+(X_U10.XR107.30) 16.79E-18            (X_U11.XR101.30) 16.79E-18                
+
+(X_U11.XR102.30)    0.0000            (X_U11.XR103.30)   48.4820                
+
+(X_U11.XR104.30) 16.79E-18            (X_U11.XR105.30) 16.79E-18                
+
+(X_U11.XR106a.3)   10.9320            (X_U11.XR107.30) 16.79E-18                
+
+(X_U2.XR106a.30)-2973.5000            (X_U2.XR107_2.3)    2.0629                
+
+(X_U2.XR107_3.3) 2.591E-06            (X_U3.XR106a.30) 3425.2000                
+
+(X_U3.XR107_2.3)     .6281            (X_U3.XR107_3.3) 139.3E-09                
+
+(X_U4.XR106a.30) 3424.4000            (X_U4.XR107_2.3)     .6281                
+
+(X_U4.XR107_3.3) 139.3E-09            (X_U5.XR106a.30)   -8.6324                
+
+(X_U5.XR107_2.3)    2.1077            (X_U5.XR107_3.3) 2.636E-06                
+
+(X_U6.XR106a.30)   -8.5374            (X_U6.XR107_2.3)    2.1077                
+
+(X_U6.XR107_3.3) 2.636E-06            (X_U7.XR106a.30)   -8.9372                
+
+(X_U7.XR107_2.3)    2.0707            (X_U7.XR107_3.3) 2.590E-06                
+
+(X_U8.XR106a.30)   11.5760            (X_U8.XR107_2.3)     .2556                
+
+(X_U8.XR107_3.3) 9.888E-09            (X_U9.XR106a.30)    7.8616                
+
+(X_U9.XR107_2.3)     .2565            (X_U9.XR107_3.3) 10.11E-09                
+
+(X_U1.XR107_2.30)    2.0630           (X_U1.XR107_3.30) 16.79E-18               
+
+(X_U10.XR106a.30)    8.5673           (X_U10.XR107_2.3)     .2565               
+
+(X_U10.XR107_3.3) 10.11E-09           (X_U11.XR106a.30)   10.9320               
+
+(X_U11.XR107_2.3)     .2556           (X_U11.XR107_3.3) 9.888E-09               
+
+(X_U2.XR107_2.30)    2.0629           (X_U2.XR107_3.30) 16.79E-18               
+
+(X_U3.XR107_2.30)     .6281           (X_U3.XR107_3.30) 16.79E-18               
+
+(X_U4.XR107_2.30)     .6281           (X_U4.XR107_3.30) 16.79E-18               
+
+(X_U5.XR107_2.30)    2.1077           (X_U5.XR107_3.30) 16.79E-18               
+
+(X_U6.XR107_2.30)    2.1077           (X_U6.XR107_3.30) 16.79E-18               
+
+(X_U7.XR107_2.30)    2.0707           (X_U7.XR107_3.30) 16.79E-18               
+
+(X_U8.XR107_2.30)     .2556           (X_U8.XR107_3.30) 16.79E-18               
+
+(X_U9.XR107_2.30)     .2565           (X_U9.XR107_3.30)-21.18E-18               
+
+(X_U10.XR107_2.30)     .2565          (X_U10.XR107_3.30) 16.79E-18              
+
+(X_U11.XR107_2.30)     .2556          (X_U11.XR107_3.30) 16.79E-18          
+
+
+  These voltages failed to converge:
+
+    V(N00278)                 =     1.006V  \     2.000V
+    V(N00251)                 =   692.67mV  \     2.166V
+    V(N06186)                 =     1.006V  \     2.000V
+    V(N06262)                 =   692.37mV  \     2.166V
+    V(N06626)                 =         0V  \     2.000V
+    V(N06727)                 =         0V  \     2.000V
+    V(N06828)                 =         0V  \     2.000V
+    V(N07071)                 =         0V  \     2.000V
+    V(N08250)                 =     1.141V  \   767.37mV
+    V(N08174)                 =     1.002V  \   216.64uV
+    V(N08963)                 =     1.001V  \   215.39uV
+    V(N09396)                 =     1.201V  \    92.88pV
+    V(N09035)                 =     1.141V  \   767.37mV
+    V(N09496)                 =     1.401V  \ 23.20e-18V
+    V(N09596)                 =     1.600V  \   388.86fV
+    V(N09703)                 =     1.800V  \    1.247uV
+    V(N10449)                 =   829.53mV  \     2.207V
+    V(N12282)                 =   829.53mV  \     2.207V
+    V(N12194)                 =     1.000V  \    58.72uV
+    V(N12922)                 =     1.001V  \    58.54uV
+    V(N12773)                 =   500.24mV  \     2.000V
+    V(N13090)                 =     1.000V  \    58.79uV
+    V(N13076)                 =   500.19mV  \     3.219V
+    V(N20417)                 =     3.383V  \     3.219V
+    V(N21161)                 =     3.383V  \     3.219V
+    V(N13390)                 =   500.19mV  \     3.219V
+    V(N14149)                 =   724.77mV  \     2.173V
+    V(N14488)                 =     1.501V  \ 3.289e-18V
+    V(N14077)                 =     1.501V  \     2.036V
+    V(N14850)                 =     0.999V  \   256.04mV
+    V(N10387)                 =   836.14mV  \     2.209V
+    V(N15165)                 =   500.19mV  \     2.000V
+    V(N15179)                 =     1.000V  \    58.43uV
+    V(N20407)                 =     1.000V  \   257.14mV
+    V(N21151)                 =     1.000V  \   257.14mV
+    V(N21669)                 =     0.999V  \   256.04mV
+    V(N21679)                 =   836.14mV  \     2.209V
+    V(X_U1.30)                =   -1.219MV  \     2.477V
+    V(X_U1.22)                =     0.999V  \     2.072V
+    V(X_U1.44)                =     1.001V  \     2.073V
+    V(X_U1.48)                =    40.31mV  \     12.77V
+    V(X_U1.49)                =   -59.69mV  \     12.67V
+    V(X_U1.50)                =    39.40mV  \     12.77V
+    V(X_U1.51)                =   -60.60mV  \     12.67V
+    V(X_U1.53)                =    820.25V  \     17.67V
+    V(X_U1.55)                =    815.25V  \     12.67V
+    V(X_U1.54)                =    -94.82V  \     12.67V
+    V(X_U1.52)                =    -99.82V  \     7.668V
+    V(X_U1.23)                =     0.999V  \     1.717V
+    V(X_U1.6)                 =     0.999V  \     1.894V
+    V(X_U1.26)                =     1.004V  \    158.03V
+    V(X_U1.9)                 =    549.57V  \     12.67V
+    V(X_U1.11)                =    -29.95V  \     12.67V
+    V(X_U1.27)                =   660.46KV  \   -2.966KV
+    V(X_U1.28)                =     1.000V  \     2.063V
+    V(X_U1.29)                =     1.001V  \     2.073V
+    V(X_U1.31)                =   659.90KV  \   -2.974KV
+    V(X_U1.32)                =    -29.95V  \     12.67V
+    V(X_U1.40)                =   -1.219MV  \     2.477V
+    V(X_U1.8)                 =   -1.219MV  \     2.477V
+    V(X_U1.14)                =     6.498V  \     2.137V
+    V(X_U1.19)                =     89.11V  \    2.944KV
+    V(X_U1.43)                =  -128.28mV  \   -204.69V
+    V(X_U1.17)                =     51.83V  \    980.56V
+    V(X_U1.20)                =     1.129V  \     8.010V
+    V(X_U1.12)                =    560.56V  \     8.018V
+    V(X_U1.10)                =   -59.78mV  \     12.67V
+    V(X_U1.45)                =   -61.27mV  \     6.152V
+    V(X_U1.15)                =   -306.43V  \    105.02V
+    V(X_U1.16)                =   -131.81V  \     9.175V
+    V(X_U1.18)                =     -9.98V  \   -4.971KV
+    V(X_U1.47)                =     1.159V  \    -2.880V
+    V(X_U1.46)                =    -29.95V  \     12.67V
+    V(X_U1.59)                =    44.64KV  \    3.499KV
+    V(X_U1.38)                =    -64.27V  \   -211.58V
+    V(X_U1.39)                =    580.54V  \    -2.899V
+    V(X_U1.60)                =   -66.04KV  \    -35.00V
+    V(X_U1.61)                =    25.97KV  \    964.90V
+    V(X_U1.62)                =    549.58V  \     12.67V
+    V(X_U1.63)                =    560.31V  \     7.592V
+    V(X_U1.64)                =    -29.96V  \     12.67V
+    V(X_U1.34)                =    -60.59V  \     23.17V
+    V(X_U1.33)                =   692.67mV  \     2.166V
+    V(X_U1.66)                =  -306.12mV  \   104.91mV
+    V(X_U1.67)                =   -306.43V  \    105.02V
+    V(X_U1.68)                =     0.999V  \     2.072V
+    V(X_U1.35)                =     60.59V  \    -23.17V
+    V(X_U1.36)                =    -59.90V  \     25.34V
+    V(X_U1.65)                =    60.60uV  \   -23.17uV
+    V(X_U1.69)                =    1.319MV  \   534.09pV
+    V(X_U1.21)                =    560.56V  \     8.018V
+    V(X_U1.70)                =    1.319MV  \    1.320mV
+    V(X_U1.77)                =   -99.70KV  \  -414.50mV
+    V(X_U1.78)                =   -99.70KV  \  -414.91mV
+    V(X_U1.71)                =   -1.319MV  \     2.062V
+    V(X_U2.30)                =   -1.219MV  \     2.477V
+    V(X_U2.22)                =     0.999V  \     2.072V
+    V(X_U2.44)                =     1.001V  \     2.073V
+    V(X_U2.48)                =    40.25mV  \     12.77V
+    V(X_U2.49)                =   -59.75mV  \     12.67V
+    V(X_U2.50)                =    39.34mV  \     12.77V
+    V(X_U2.51)                =   -60.66mV  \     12.67V
+    V(X_U2.53)                =    820.81V  \     17.67V
+    V(X_U2.55)                =    815.81V  \     12.67V
+    V(X_U2.54)                =    -94.82V  \     12.67V
+    V(X_U2.52)                =    -99.82V  \     7.669V
+    V(X_U2.23)                =     0.999V  \     1.717V
+    V(X_U2.6)                 =     0.999V  \     1.894V
+    V(X_U2.26)                =     1.004V  \    158.03V
+    V(X_U2.9)                 =    549.89V  \     12.67V
+    V(X_U2.11)                =    -29.98V  \     12.67V
+    V(X_U2.27)                =   660.46KV  \   -2.965KV
+    V(X_U2.28)                =     1.000V  \     2.063V
+    V(X_U2.29)                =     1.001V  \     2.073V
+    V(X_U2.31)                =   659.90KV  \   -2.974KV
+    V(X_U2.32)                =    -29.98V  \     12.67V
+    V(X_U2.40)                =   -1.219MV  \     2.477V
+    V(X_U2.8)                 =   -1.219MV  \     2.477V
+    V(X_U2.14)                =     6.501V  \     2.137V
+    V(X_U2.19)                =     89.17V  \    2.943KV
+    V(X_U2.43)                =  -128.22mV  \   -204.68V
+    V(X_U2.17)                =     51.95V  \    980.56V
+    V(X_U2.20)                =     1.129V  \     8.010V
+    V(X_U2.12)                =    560.56V  \     8.019V
+    V(X_U2.10)                =   -59.84mV  \     12.67V
+    V(X_U2.45)                =   -61.34mV  \     6.152V
+    V(X_U2.15)                =   -306.73V  \    105.02V
+    V(X_U2.16)                =   -131.81V  \     9.189V
+    V(X_U2.18)                =     -9.98V  \   -4.971KV
+    V(X_U2.47)                =     1.160V  \    -2.880V
+    V(X_U2.46)                =    -29.98V  \     12.67V
+    V(X_U2.59)                =    44.67KV  \    3.498KV
+    V(X_U2.38)                =    -64.24V  \   -211.58V
+    V(X_U2.39)                =    580.90V  \    -2.899V
+    V(X_U2.60)                =   -66.04KV  \    -35.00V
+    V(X_U2.61)                =    26.03KV  \    964.90V
+    V(X_U2.62)                =    549.90V  \     12.67V
+    V(X_U2.63)                =    560.31V  \     7.593V
+    V(X_U2.64)                =    -29.99V  \     12.67V
+    V(X_U2.34)                =    -60.65V  \     23.17V
+    V(X_U2.33)                =   692.37mV  \     2.166V
+    V(X_U2.66)                =  -306.43mV  \   104.92mV
+    V(X_U2.67)                =   -306.73V  \    105.02V
+    V(X_U2.68)                =     0.999V  \     2.072V
+    V(X_U2.35)                =     60.66V  \    -23.17V
+    V(X_U2.36)                =    -59.96V  \     25.34V
+    V(X_U2.65)                =    60.66uV  \   -23.17uV
+    V(X_U2.69)                =    1.319MV  \   534.09pV
+    V(X_U2.21)                =    560.56V  \     8.019V
+    V(X_U2.70)                =    1.319MV  \    1.320mV
+    V(X_U2.77)                =   -99.70KV  \  -415.20mV
+    V(X_U2.78)                =   -99.70KV  \  -415.61mV
+    V(X_U2.71)                =   -1.319MV  \     2.062V
+    V(X_U3.30)                =   -1.219MV  \   -94.40mV
+    V(X_U3.22)                =     0.999V  \   109.93mV
+    V(X_U3.44)                =     1.001V  \   111.43mV
+    V(X_U3.48)                =   130.58mV  \     14.87V
+    V(X_U3.49)                =    30.58mV  \     14.77V
+    V(X_U3.50)                =   130.49mV  \     14.87V
+    V(X_U3.51)                =    30.49mV  \     14.77V
+    V(X_U3.53)                =   717.85mV  \     14.88V
+    V(X_U3.55)                =    -4.282V  \      9.88V
+    V(X_U3.54)                =    -94.73V  \     14.77V
+    V(X_U3.52)                =    -99.73V  \      9.77V
+    V(X_U3.23)                =     0.999V  \   109.93mV
+    V(X_U3.6)                 =     0.999V  \   109.93mV
+    V(X_U3.26)                =     1.004V  \    159.72V
+    V(X_U3.9)                 =    -12.03V  \    159.69V
+    V(X_U3.11)                =     15.28V  \     14.77V
+    V(X_U3.27)                =   658.84KV  \    3.434KV
+    V(X_U3.28)                =     1.000V  \   628.10mV
+    V(X_U3.29)                =     1.001V  \   111.43mV
+    V(X_U3.31)                =   658.28KV  \    3.425KV
+    V(X_U3.32)                =     15.28V  \     14.77V
+    V(X_U3.40)                =   -1.219MV  \   -94.40mV
+    V(X_U3.8)                 =   -1.219MV  \   -94.40mV
+    V(X_U3.14)                =     1.752V  \     1.766V
+    V(X_U3.19)                =  -267.50mV  \    -3.718V
+    V(X_U3.43)                =  -217.68mV  \    -67.57V
+    V(X_U3.17)                =   -111.42V  \    612.85V
+    V(X_U3.20)                =     1.126V  \     8.624V
+    V(X_U3.12)                =    558.94V  \     9.182V
+    V(X_U3.10)                =    30.49mV  \     14.77V
+    V(X_U3.45)                =    28.26mV  \     6.948V
+    V(X_U3.15)                =    141.34V  \    140.04V
+    V(X_U3.16)                =   -131.47V  \    105.36V
+    V(X_U3.18)                =     -9.98V  \   -4.971KV
+    V(X_U3.47)                =   122.00mV  \    102.99V
+    V(X_U3.46)                =     15.28V  \     14.77V
+    V(X_U3.59)                =   -134.02V  \    -3.718V
+    V(X_U3.38)                =   -109.06V  \    -71.74V
+    V(X_U3.39)                =     61.12V  \     99.82V
+    V(X_U3.60)                =   -65.87KV  \     59.00V
+    V(X_U3.61)                =   -55.82KV  \    569.44V
+    V(X_U3.62)                =    -12.03V  \    159.69V
+    V(X_U3.63)                =    550.68V  \      9.68V
+    V(X_U3.64)                =     15.28V  \     14.77V
+    V(X_U3.34)                =     29.41V  \     28.78V
+    V(X_U3.33)                =     1.141V  \   767.37mV
+    V(X_U3.66)                =   141.20mV  \   139.90mV
+    V(X_U3.67)                =    141.34V  \    140.04V
+    V(X_U3.68)                =     0.999V  \   109.93mV
+    V(X_U3.35)                =    -29.41V  \    -28.78V
+    V(X_U3.36)                =     30.55V  \     29.54V
+    V(X_U3.65)                =   -29.40uV  \   -28.78uV
+    V(X_U3.69)                =    1.319MV  \   534.09pV
+    V(X_U3.21)                =    558.94V  \     9.182V
+    V(X_U3.70)                =    1.319MV  \    1.320mV
+    V(X_U3.77)                =   -99.76KV  \   721.21mV
+    V(X_U3.78)                =   -99.76KV  \   721.19mV
+    V(X_U3.71)                =   -1.319MV  \   626.78mV
+    V(X_U4.30)                =   -1.219MV  \  -111.71mV
+    V(X_U4.22)                =     0.999V  \   109.93mV
+    V(X_U4.44)                =     1.001V  \   111.43mV
+    V(X_U4.48)                =   130.58mV  \     14.87V
+    V(X_U4.49)                =    30.58mV  \     14.77V
+    V(X_U4.50)                =   130.49mV  \     14.87V
+    V(X_U4.51)                =    30.49mV  \     14.77V
+    V(X_U4.53)                =   717.85mV  \     14.88V
+    V(X_U4.55)                =    -4.282V  \      9.88V
+    V(X_U4.54)                =    -94.73V  \     14.77V
+    V(X_U4.52)                =    -99.73V  \      9.77V
+    V(X_U4.23)                =     0.999V  \   109.93mV
+    V(X_U4.6)                 =     0.999V  \   109.93mV
+    V(X_U4.26)                =     1.004V  \    159.72V
+    V(X_U4.9)                 =    -12.03V  \    159.69V
+    V(X_U4.11)                =     15.28V  \     14.77V
+    V(X_U4.27)                =   658.84KV  \    3.434KV
+    V(X_U4.28)                =     1.000V  \   628.10mV
+    V(X_U4.29)                =     1.001V  \   111.43mV
+    V(X_U4.31)                =   658.28KV  \    3.424KV
+    V(X_U4.32)                =     15.28V  \     14.77V
+    V(X_U4.40)                =   -1.219MV  \  -111.71mV
+    V(X_U4.8)                 =   -1.219MV  \  -111.71mV
+    V(X_U4.14)                =     1.752V  \     1.766V
+    V(X_U4.19)                =  -267.50mV  \    -3.718V
+    V(X_U4.43)                =  -217.68mV  \    -67.57V
+    V(X_U4.17)                =   -111.42V  \    612.85V
+    V(X_U4.20)                =     1.126V  \     8.624V
+    V(X_U4.12)                =    558.94V  \     9.182V
+    V(X_U4.10)                =    30.49mV  \     14.77V
+    V(X_U4.45)                =    28.26mV  \     6.948V
+    V(X_U4.15)                =    141.34V  \    140.04V
+    V(X_U4.16)                =   -131.47V  \    105.36V
+    V(X_U4.18)                =     -9.98V  \   -4.971KV
+    V(X_U4.47)                =   122.00mV  \    102.99V
+    V(X_U4.46)                =     15.28V  \     14.77V
+    V(X_U4.59)                =   -134.02V  \    -3.718V
+    V(X_U4.38)                =   -109.06V  \    -71.74V
+    V(X_U4.39)                =     61.12V  \     99.82V
+    V(X_U4.60)                =   -65.87KV  \     59.00V
+    V(X_U4.61)                =   -55.82KV  \    569.44V
+    V(X_U4.62)                =    -12.03V  \    159.69V
+    V(X_U4.63)                =    550.68V  \      9.68V
+    V(X_U4.64)                =     15.28V  \     14.77V
+    V(X_U4.34)                =     29.41V  \     28.78V
+    V(X_U4.33)                =     1.141V  \   767.37mV
+    V(X_U4.66)                =   141.20mV  \   139.90mV
+    V(X_U4.67)                =    141.34V  \    140.04V
+    V(X_U4.68)                =     0.999V  \   109.93mV
+    V(X_U4.35)                =    -29.41V  \    -28.78V
+    V(X_U4.36)                =     30.55V  \     29.54V
+    V(X_U4.65)                =   -29.40uV  \   -28.78uV
+    V(X_U4.69)                =    1.319MV  \   534.09pV
+    V(X_U4.21)                =    558.94V  \     9.182V
+    V(X_U4.70)                =    1.319MV  \    1.320mV
+    V(X_U4.77)                =   -99.76KV  \   738.51mV
+    V(X_U4.78)                =   -99.76KV  \   738.49mV
+    V(X_U4.71)                =   -1.319MV  \   626.78mV
+    V(X_U5.30)                =   -1.219MV  \     20.66V
+    V(X_U5.22)                =     0.999V  \     2.107V
+    V(X_U5.44)                =     1.000V  \     2.109V
+    V(X_U5.48)                =    67.92mV  \     12.43V
+    V(X_U5.49)                =   -32.08mV  \     12.33V
+    V(X_U5.50)                =    67.26mV  \     12.43V
+    V(X_U5.51)                =   -32.74mV  \     12.33V
+    V(X_U5.53)                =    570.11V  \     17.33V
+    V(X_U5.55)                =    565.11V  \     12.33V
+    V(X_U5.54)                =    -94.79V  \     12.33V
+    V(X_U5.52)                =    -99.79V  \     7.332V
+    V(X_U5.23)                =     0.999V  \     1.698V
+    V(X_U5.6)                 =     0.999V  \     1.902V
+    V(X_U5.26)                =     1.003V  \    159.21V
+    V(X_U5.9)                 =    408.21V  \     12.33V
+    V(X_U5.11)                =    -16.12V  \     12.33V
+    V(X_U5.27)                =   100.87KV  \   196.38mV
+    V(X_U5.28)                =     1.000V  \     2.108V
+    V(X_U5.29)                =     1.000V  \     2.109V
+    V(X_U5.31)                =   100.87KV  \    -8.632V
+    V(X_U5.32)                =    -16.12V  \     12.33V
+    V(X_U5.40)                =   -1.219MV  \     20.66V
+    V(X_U5.8)                 =   -1.219MV  \     20.66V
+    V(X_U5.14)                =     5.047V  \     2.177V
+    V(X_U5.19)                =     61.78V  \    2.269KV
+    V(X_U5.43)                =  -155.60mV  \   -197.56V
+    V(X_U5.17)                =    113.60V  \    849.85V
+    V(X_U5.20)                =    12.46mV  \     8.874V
+    V(X_U5.12)                =   967.56mV  \     8.829V
+    V(X_U5.10)                =   -32.18mV  \     12.33V
+    V(X_U5.45)                =   -33.89mV  \     6.570V
+    V(X_U5.15)                =   -169.50V  \    101.24V
+    V(X_U5.16)                =    -20.11V  \    -16.80V
+    V(X_U5.18)                =     -9.98V  \   -4.971KV
+    V(X_U5.47)                =   841.75mV  \    -2.904V
+    V(X_U5.46)                =    -16.12V  \     12.33V
+    V(X_U5.59)                =    30.95KV  \    3.876KV
+    V(X_U5.38)                =    -77.95V  \   -215.67V
+    V(X_U5.39)                =    421.72V  \    -2.981V
+    V(X_U5.60)                =   -10.08KV  \   -149.65V
+    V(X_U5.61)                =    56.92KV  \    850.25V
+    V(X_U5.62)                =    408.21V  \     12.33V
+    V(X_U5.63)                =   800.21mV  \     8.829V
+    V(X_U5.64)                =    -16.13V  \     12.33V
+    V(X_U5.34)                =    -33.07V  \     22.45V
+    V(X_U5.33)                =   829.53mV  \     2.207V
+    V(X_U5.66)                =  -169.33mV  \   101.14mV
+    V(X_U5.67)                =   -169.50V  \    101.24V
+    V(X_U5.68)                =     0.999V  \     2.107V
+    V(X_U5.35)                =     33.07V  \    -22.45V
+    V(X_U5.36)                =    -32.24V  \     24.66V
+    V(X_U5.65)                =    33.08uV  \   -22.45uV
+    V(X_U5.69)                =    1.319MV  \   534.09pV
+    V(X_U5.21)                =   967.56mV  \     8.829V
+    V(X_U5.70)                =    1.319MV  \    1.320mV
+    V(X_U5.77)                =   -99.67KV  \    -18.56V
+    V(X_U5.78)                =   -99.67KV  \    -18.56V
+    V(X_U5.71)                =   -1.319MV  \     2.106V
+    V(X_U6.30)                =   -1.219MV  \     21.14V
+    V(X_U6.22)                =     0.999V  \     2.107V
+    V(X_U6.44)                =     1.000V  \     2.109V
+    V(X_U6.48)                =    67.92mV  \     12.43V
+    V(X_U6.49)                =   -32.08mV  \     12.33V
+    V(X_U6.50)                =    67.26mV  \     12.43V
+    V(X_U6.51)                =   -32.74mV  \     12.33V
+    V(X_U6.53)                =    570.11V  \     17.33V
+    V(X_U6.55)                =    565.11V  \     12.33V
+    V(X_U6.54)                =    -94.79V  \     12.33V
+    V(X_U6.52)                =    -99.79V  \     7.332V
+    V(X_U6.23)                =     0.999V  \     1.698V
+    V(X_U6.6)                 =     0.999V  \     1.902V
+    V(X_U6.26)                =     1.003V  \    159.21V
+    V(X_U6.9)                 =    408.21V  \     12.33V
+    V(X_U6.11)                =    -16.12V  \     12.33V
+    V(X_U6.27)                =   100.87KV  \   291.34mV
+    V(X_U6.28)                =     1.000V  \     2.108V
+    V(X_U6.29)                =     1.000V  \     2.109V
+    V(X_U6.31)                =   100.87KV  \    -8.537V
+    V(X_U6.32)                =    -16.12V  \     12.33V
+    V(X_U6.40)                =   -1.219MV  \     21.14V
+    V(X_U6.8)                 =   -1.219MV  \     21.14V
+    V(X_U6.14)                =     5.047V  \     2.177V
+    V(X_U6.19)                =     61.78V  \    2.269KV
+    V(X_U6.43)                =  -155.60mV  \   -197.56V
+    V(X_U6.17)                =    113.60V  \    849.85V
+    V(X_U6.20)                =    12.46mV  \     8.874V
+    V(X_U6.12)                =   967.56mV  \     8.829V
+    V(X_U6.10)                =   -32.18mV  \     12.33V
+    V(X_U6.45)                =   -33.89mV  \     6.570V
+    V(X_U6.15)                =   -169.50V  \    101.24V
+    V(X_U6.16)                =    -20.11V  \    -16.80V
+    V(X_U6.18)                =     -9.98V  \   -4.971KV
+    V(X_U6.47)                =   841.75mV  \    -2.904V
+    V(X_U6.46)                =    -16.12V  \     12.33V
+    V(X_U6.59)                =    30.95KV  \    3.876KV
+    V(X_U6.38)                =    -77.95V  \   -215.67V
+    V(X_U6.39)                =    421.72V  \    -2.981V
+    V(X_U6.60)                =   -10.08KV  \   -149.65V
+    V(X_U6.61)                =    56.92KV  \    850.25V
+    V(X_U6.62)                =    408.21V  \     12.33V
+    V(X_U6.63)                =   800.21mV  \     8.829V
+    V(X_U6.64)                =    -16.13V  \     12.33V
+    V(X_U6.34)                =    -33.07V  \     22.45V
+    V(X_U6.33)                =   829.53mV  \     2.207V
+    V(X_U6.66)                =  -169.33mV  \   101.14mV
+    V(X_U6.67)                =   -169.50V  \    101.24V
+    V(X_U6.68)                =     0.999V  \     2.107V
+    V(X_U6.35)                =     33.07V  \    -22.45V
+    V(X_U6.36)                =    -32.24V  \     24.66V
+    V(X_U6.65)                =    33.08uV  \   -22.45uV
+    V(X_U6.69)                =    1.319MV  \   534.09pV
+    V(X_U6.21)                =   967.56mV  \     8.829V
+    V(X_U6.70)                =    1.319MV  \    1.320mV
+    V(X_U6.77)                =   -99.67KV  \    -19.04V
+    V(X_U6.78)                =   -99.67KV  \    -19.04V
+    V(X_U6.71)                =   -1.319MV  \     2.106V
+    V(X_U7.30)                =   -1.219MV  \     6.409V
+    V(X_U7.22)                =     1.000V  \     2.070V
+    V(X_U7.44)                =     1.001V  \     2.072V
+    V(X_U7.48)                =    46.72mV  \     12.71V
+    V(X_U7.49)                =   -53.28mV  \     12.61V
+    V(X_U7.50)                =    45.86mV  \     12.71V
+    V(X_U7.51)                =   -54.14mV  \     12.61V
+    V(X_U7.53)                =    762.24V  \     17.61V
+    V(X_U7.55)                =    757.24V  \     12.61V
+    V(X_U7.54)                =    -94.81V  \     12.61V
+    V(X_U7.52)                =    -99.81V  \     7.611V
+    V(X_U7.23)                =     1.000V  \     1.709V
+    V(X_U7.6)                 =     1.000V  \     1.890V
+    V(X_U7.26)                =     1.003V  \    158.54V
+    V(X_U7.9)                 =    516.82V  \     12.61V
+    V(X_U7.11)                =    -26.74V  \     12.61V
+    V(X_U7.27)                =   100.85KV  \  -566.24mV
+    V(X_U7.28)                =     1.000V  \     2.071V
+    V(X_U7.29)                =     1.001V  \     2.072V
+    V(X_U7.31)                =   100.85KV  \    -8.937V
+    V(X_U7.32)                =    -26.74V  \     12.61V
+    V(X_U7.40)                =   -1.219MV  \     6.409V
+    V(X_U7.8)                 =   -1.219MV  \     6.409V
+    V(X_U7.14)                =     6.162V  \     2.144V
+    V(X_U7.19)                =     82.77V  \    2.690KV
+    V(X_U7.43)                =  -134.68mV  \   -202.01V
+    V(X_U7.17)                =    151.95V  \    935.88V
+    V(X_U7.20)                =    12.42mV  \     8.410V
+    V(X_U7.12)                =   951.15mV  \     8.371V
+    V(X_U7.10)                =   -53.38mV  \     12.61V
+    V(X_U7.45)                =   -54.92mV  \     6.357V
+    V(X_U7.15)                =   -274.67V  \    104.37V
+    V(X_U7.16)                =    -20.11V  \    -8.151V
+    V(X_U7.18)                =     -9.98V  \   -4.971KV
+    V(X_U7.47)                =     1.085V  \    -2.886V
+    V(X_U7.46)                =    -26.74V  \     12.61V
+    V(X_U7.59)                =    41.47KV  \    3.564KV
+    V(X_U7.38)                =    -67.48V  \   -212.29V
+    V(X_U7.39)                =    543.68V  \    -2.919V
+    V(X_U7.60)                =   -10.08KV  \    -76.04V
+    V(X_U7.61)                =    76.13KV  \    923.86V
+    V(X_U7.62)                =    516.82V  \     12.61V
+    V(X_U7.63)                =   701.58mV  \     8.371V
+    V(X_U7.64)                =    -26.75V  \     12.61V
+    V(X_U7.34)                =    -54.21V  \     23.05V
+    V(X_U7.33)                =   724.77mV  \     2.173V
+    V(X_U7.66)                =  -274.40mV  \   104.26mV
+    V(X_U7.67)                =   -274.67V  \    104.37V
+    V(X_U7.68)                =     1.000V  \     2.070V
+    V(X_U7.35)                =     54.21V  \    -23.05V
+    V(X_U7.36)                =    -53.49V  \     25.22V
+    V(X_U7.65)                =    54.22uV  \   -23.05uV
+    V(X_U7.69)                =    1.319MV  \   534.09pV
+    V(X_U7.21)                =   951.15mV  \     8.371V
+    V(X_U7.70)                =    1.319MV  \    1.320mV
+    V(X_U7.77)                =   -99.84KV  \    -4.339V
+    V(X_U7.78)                =   -99.84KV  \    -4.339V
+    V(X_U7.71)                =   -1.319MV  \     2.069V
+    V(X_U8.30)                =   -1.219MV  \  -542.25mV
+    V(X_U8.22)                =     0.999V  \    6.410mV
+    V(X_U8.44)                =     1.001V  \    7.910mV
+    V(X_U8.48)                =    68.97mV  \     12.41V
+    V(X_U8.49)                =   -31.03mV  \     12.31V
+    V(X_U8.50)                =    68.32mV  \     12.41V
+    V(X_U8.51)                =   -31.68mV  \     12.31V
+    V(X_U8.53)                =    560.60V  \     17.31V
+    V(X_U8.55)                =    555.60V  \     12.31V
+    V(X_U8.54)                =    -94.79V  \     12.31V
+    V(X_U8.52)                =    -99.79V  \     7.314V
+    V(X_U8.23)                =     0.999V  \    6.410mV
+    V(X_U8.6)                 =     0.999V  \    6.410mV
+    V(X_U8.26)                =     1.004V  \    159.21V
+    V(X_U8.9)                 =    402.69V  \     12.31V
+    V(X_U8.11)                =    -15.59V  \     12.31V
+    V(X_U8.27)                =   660.50KV  \     20.41V
+    V(X_U8.28)                =     1.000V  \   255.58mV
+    V(X_U8.29)                =     1.001V  \    7.910mV
+    V(X_U8.31)                =   659.94KV  \     11.58V
+    V(X_U8.32)                =    -15.59V  \     12.31V
+    V(X_U8.40)                =   -1.219MV  \  -542.25mV
+    V(X_U8.8)                 =   -1.219MV  \  -542.25mV
+    V(X_U8.14)                =     4.992V  \     2.179V
+    V(X_U8.19)                =     60.74V  \    2.287KV
+    V(X_U8.43)                =  -156.91mV  \   -197.75V
+    V(X_U8.17)                =   -1.375mV  \    850.22V
+    V(X_U8.20)                =     1.130V  \     8.871V
+    V(X_U8.12)                =    560.60V  \     8.834V
+    V(X_U8.10)                =   -31.12mV  \     12.31V
+    V(X_U8.45)                =   -32.85mV  \     6.566V
+    V(X_U8.15)                =   -164.29V  \    101.03V
+    V(X_U8.16)                =   -131.82V  \    -18.11V
+    V(X_U8.18)                =     -9.98V  \   -4.971KV
+    V(X_U8.47)                =   829.41mV  \    -2.905V
+    V(X_U8.46)                =    -15.59V  \     12.31V
+    V(X_U8.59)                =    30.43KV  \    3.897KV
+    V(X_U8.38)                =    -78.61V  \   -215.89V
+    V(X_U8.39)                =    415.53V  \    -2.983V
+    V(X_U8.60)                =   -66.04KV  \   -151.95V
+    V(X_U8.61)                =  -688.88mV  \    847.95V
+    V(X_U8.62)                =    402.69V  \     12.31V
+    V(X_U8.63)                =    560.63V  \     8.834V
+    V(X_U8.64)                =    -15.60V  \     12.31V
+    V(X_U8.34)                =    -32.02V  \     22.42V
+    V(X_U8.33)                =   836.14mV  \     2.209V
+    V(X_U8.66)                =  -164.13mV  \   100.93mV
+    V(X_U8.67)                =   -164.29V  \    101.03V
+    V(X_U8.68)                =     0.999V  \    6.410mV
+    V(X_U8.35)                =     32.02V  \    -22.42V
+    V(X_U8.36)                =    -31.19V  \     24.63V
+    V(X_U8.65)                =    32.03uV  \   -22.42uV
+    V(X_U8.69)                =    1.319MV  \   534.09pV
+    V(X_U8.21)                =    560.60V  \     8.834V
+    V(X_U8.70)                =    1.319MV  \    1.320mV
+    V(X_U8.77)                =   -99.74KV  \   796.51mV
+    V(X_U8.78)                =   -99.74KV  \   796.51mV
+    V(X_U8.71)                =   -1.319MV  \   254.26mV
+    V(X_U9.30)                =   -1.219MV  \  -661.91mV
+    V(X_U9.22)                =     0.999V  \    6.590mV
+    V(X_U9.44)                =     1.001V  \    8.090mV
+    V(X_U9.48)                =   106.99mV  \     3.946V
+    V(X_U9.49)                =    6.992mV  \     3.846V
+    V(X_U9.50)                =   106.81mV  \     3.946V
+    V(X_U9.51)                =    6.806mV  \     3.846V
+    V(X_U9.53)                =     96.05V  \     8.845V
+    V(X_U9.55)                =     91.05V  \     3.845V
+    V(X_U9.54)                =    -94.75V  \     3.846V
+    V(X_U9.52)                =    -99.75V  \    -1.154V
+    V(X_U9.23)                =     0.999V  \    6.590mV
+    V(X_U9.6)                 =     0.999V  \    6.590mV
+    V(X_U9.26)                =     1.004V  \    147.82V
+    V(X_U9.9)                 =     3.316V  \     3.846V
+    V(X_U9.11)                =     3.456V  \     3.846V
+    V(X_U9.27)                =   660.53KV  \     8.864V
+    V(X_U9.28)                =     1.000V  \   256.49mV
+    V(X_U9.29)                =     1.001V  \    8.090mV
+    V(X_U9.31)                =   659.97KV  \     7.862V
+    V(X_U9.32)                =     3.456V  \     3.846V
+    V(X_U9.40)                =   -1.219MV  \  -661.91mV
+    V(X_U9.8)                 =   -1.219MV  \  -661.91mV
+    V(X_U9.14)                =     3.242V  \     3.184V
+    V(X_U9.19)                =      9.98V  \    4.971KV
+    V(X_U9.43)                =  -665.34mV  \   -315.11V
+    V(X_U9.17)                =    -92.73V  \    779.75V
+    V(X_U9.20)                =     1.130V  \     0.996V
+    V(X_U9.12)                =    560.63V  \     1.002V
+    V(X_U9.10)                =    6.897mV  \     3.846V
+    V(X_U9.45)                =   144.43uV  \   309.20mV
+    V(X_U9.15)                =   722.25mV  \     6.263V
+    V(X_U9.16)                =   -131.81V  \   -214.34V
+    V(X_U9.18)                =     -9.98V  \   -4.971KV
+    V(X_U9.47)                =   -28.15mV  \    -3.558V
+    V(X_U9.46)                =     3.456V  \     3.846V
+    V(X_U9.38)                =   -333.34V  \   -316.92V
+    V(X_U9.39)                =    -14.10V  \    -3.557V
+    V(X_U9.60)                =   -66.04KV  \   -215.64V
+    V(X_U9.61)                =   -46.46KV  \    784.26V
+    V(X_U9.62)                =     3.316V  \     3.844V
+    V(X_U9.63)                =    560.81V  \     1.002V
+    V(X_U9.64)                =     3.456V  \     3.846V
+    V(X_U9.34)                =     3.528V  \     4.472V
+    V(X_U9.33)                =     3.383V  \     3.219V
+    V(X_U9.66)                =   721.54uV  \    6.257mV
+    V(X_U9.67)                =   722.25mV  \     6.263V
+    V(X_U9.68)                =     0.999V  \    6.590mV
+    V(X_U9.35)                =    -3.528V  \    -4.472V
+    V(X_U9.36)                =     6.911V  \     7.691V
+    V(X_U9.65)                =   -3.521uV  \   -4.472uV
+    V(X_U9.69)                =    1.319MV  \   534.09pV
+    V(X_U9.21)                =    560.63V  \     1.002V
+    V(X_U9.70)                =    1.319MV  \    1.320mV
+    V(X_U9.77)                =   -99.74KV  \   917.09mV
+    V(X_U9.78)                =   -99.74KV  \   917.08mV
+    V(X_U9.71)                =   -1.319MV  \   255.17mV
+    V(X_U10.30)               =   -1.219MV  \  -546.58mV
+    V(X_U10.22)               =     0.999V  \    6.590mV
+    V(X_U10.44)               =     1.001V  \    8.090mV
+    V(X_U10.48)               =   106.99mV  \     3.946V
+    V(X_U10.49)               =    6.992mV  \     3.846V
+    V(X_U10.50)               =   106.81mV  \     3.946V
+    V(X_U10.51)               =    6.806mV  \     3.846V
+    V(X_U10.53)               =     96.05V  \     8.845V
+    V(X_U10.55)               =     91.05V  \     3.845V
+    V(X_U10.54)               =    -94.75V  \     3.846V
+    V(X_U10.52)               =    -99.75V  \    -1.154V
+    V(X_U10.23)               =     0.999V  \    6.590mV
+    V(X_U10.6)                =     0.999V  \    6.590mV
+    V(X_U10.26)               =     1.004V  \    147.82V
+    V(X_U10.9)                =     3.316V  \     3.846V
+    V(X_U10.11)               =     3.456V  \     3.846V
+    V(X_U10.27)               =   660.53KV  \      9.57V
+    V(X_U10.28)               =     1.000V  \   256.49mV
+    V(X_U10.29)               =     1.001V  \    8.090mV
+    V(X_U10.31)               =   659.97KV  \     8.567V
+    V(X_U10.32)               =     3.456V  \     3.846V
+    V(X_U10.40)               =   -1.219MV  \  -546.58mV
+    V(X_U10.8)                =   -1.219MV  \  -546.58mV
+    V(X_U10.14)               =     3.242V  \     3.184V
+    V(X_U10.19)               =      9.98V  \    4.971KV
+    V(X_U10.43)               =  -665.34mV  \   -315.11V
+    V(X_U10.17)               =    -92.73V  \    779.75V
+    V(X_U10.20)               =     1.130V  \     0.996V
+    V(X_U10.12)               =    560.63V  \     1.002V
+    V(X_U10.10)               =    6.897mV  \     3.846V
+    V(X_U10.45)               =   144.43uV  \   309.20mV
+    V(X_U10.15)               =   722.25mV  \     6.263V
+    V(X_U10.16)               =   -131.81V  \   -214.34V
+    V(X_U10.18)               =     -9.98V  \   -4.971KV
+    V(X_U10.47)               =   -28.15mV  \    -3.558V
+    V(X_U10.46)               =     3.456V  \     3.846V
+    V(X_U10.38)               =   -333.34V  \   -316.92V
+    V(X_U10.39)               =    -14.10V  \    -3.557V
+    V(X_U10.60)               =   -66.04KV  \   -215.64V
+    V(X_U10.61)               =   -46.46KV  \    784.26V
+    V(X_U10.62)               =     3.316V  \     3.844V
+    V(X_U10.63)               =    560.81V  \     1.002V
+    V(X_U10.64)               =     3.456V  \     3.846V
+    V(X_U10.34)               =     3.528V  \     4.472V
+    V(X_U10.33)               =     3.383V  \     3.219V
+    V(X_U10.66)               =   721.54uV  \    6.257mV
+    V(X_U10.67)               =   722.25mV  \     6.263V
+    V(X_U10.68)               =     0.999V  \    6.590mV
+    V(X_U10.35)               =    -3.528V  \    -4.472V
+    V(X_U10.36)               =     6.911V  \     7.691V
+    V(X_U10.65)               =   -3.521uV  \   -4.472uV
+    V(X_U10.69)               =    1.319MV  \   534.09pV
+    V(X_U10.21)               =    560.63V  \     1.002V
+    V(X_U10.70)               =    1.319MV  \    1.320mV
+    V(X_U10.77)               =   -99.74KV  \   801.76mV
+    V(X_U10.78)               =   -99.74KV  \   801.76mV
+    V(X_U10.71)               =   -1.319MV  \   255.17mV
+    V(X_U11.30)               =   -1.219MV  \  -478.41mV
+    V(X_U11.22)               =     0.999V  \    6.411mV
+    V(X_U11.44)               =     1.001V  \    7.911mV
+    V(X_U11.48)               =    68.97mV  \     12.41V
+    V(X_U11.49)               =   -31.03mV  \     12.31V
+    V(X_U11.50)               =    68.32mV  \     12.41V
+    V(X_U11.51)               =   -31.68mV  \     12.31V
+    V(X_U11.53)               =    560.60V  \     17.31V
+    V(X_U11.55)               =    555.60V  \     12.31V
+    V(X_U11.54)               =    -94.79V  \     12.31V
+    V(X_U11.52)               =    -99.79V  \     7.314V
+    V(X_U11.23)               =     0.999V  \    6.411mV
+    V(X_U11.6)                =     0.999V  \    6.411mV
+    V(X_U11.26)               =     1.004V  \    159.21V
+    V(X_U11.9)                =    402.69V  \     12.31V
+    V(X_U11.11)               =    -15.59V  \     12.31V
+    V(X_U11.27)               =   660.50KV  \     19.77V
+    V(X_U11.28)               =     1.000V  \   255.58mV
+    V(X_U11.29)               =     1.001V  \    7.911mV
+    V(X_U11.31)               =   659.94KV  \     10.93V
+    V(X_U11.32)               =    -15.59V  \     12.31V
+    V(X_U11.40)               =   -1.219MV  \  -478.41mV
+    V(X_U11.8)                =   -1.219MV  \  -478.41mV
+    V(X_U11.14)               =     4.992V  \     2.179V
+    V(X_U11.19)               =     60.74V  \    2.287KV
+    V(X_U11.43)               =  -156.91mV  \   -197.75V
+    V(X_U11.17)               =   -1.376mV  \    850.22V
+    V(X_U11.20)               =     1.130V  \     8.871V
+    V(X_U11.12)               =    560.60V  \     8.834V
+    V(X_U11.10)               =   -31.12mV  \     12.31V
+    V(X_U11.45)               =   -32.85mV  \     6.566V
+    V(X_U11.15)               =   -164.29V  \    101.03V
+    V(X_U11.16)               =   -131.82V  \    -18.11V
+    V(X_U11.18)               =     -9.98V  \   -4.971KV
+    V(X_U11.47)               =   829.41mV  \    -2.905V
+    V(X_U11.46)               =    -15.59V  \     12.31V
+    V(X_U11.59)               =    30.43KV  \    3.897KV
+    V(X_U11.38)               =    -78.61V  \   -215.89V
+    V(X_U11.39)               =    415.53V  \    -2.983V
+    V(X_U11.60)               =   -66.04KV  \   -151.95V
+    V(X_U11.61)               =  -689.59mV  \    847.95V
+    V(X_U11.62)               =    402.69V  \     12.31V
+    V(X_U11.63)               =    560.63V  \     8.834V
+    V(X_U11.64)               =    -15.60V  \     12.31V
+    V(X_U11.34)               =    -32.02V  \     22.42V
+    V(X_U11.33)               =   836.14mV  \     2.209V
+    V(X_U11.66)               =  -164.13mV  \   100.93mV
+    V(X_U11.67)               =   -164.29V  \    101.03V
+    V(X_U11.68)               =     0.999V  \    6.411mV
+    V(X_U11.35)               =     32.02V  \    -22.42V
+    V(X_U11.36)               =    -31.19V  \     24.63V
+    V(X_U11.65)               =    32.03uV  \   -22.42uV
+    V(X_U11.69)               =    1.319MV  \   534.09pV
+    V(X_U11.21)               =    560.60V  \     8.834V
+    V(X_U11.70)               =    1.319MV  \    1.320mV
+    V(X_U11.77)               =   -99.74KV  \   732.67mV
+    V(X_U11.78)               =   -99.74KV  \   732.66mV
+    V(X_U11.71)               =   -1.319MV  \   254.26mV
+    V(X_U1.XR107.3)           =    1.010uV  \   158.03uV
+    V(X_U1.XR107_2.3)         =     1.000V  \     2.063V
+    V(X_U1.XR107_2.30)        =     1.000V  \     2.063V
+    V(X_U1.XR107_3.3)         =    1.257uV  \    2.592uV
+    V(X_U1.37)                =   121.90MV  \    -58.22V
+    V(X_U1.XR106a.3)          =   659.90KV  \   -2.974KV
+    V(X_U1.XR106a.30)         =   659.90KV  \   -2.974KV
+    V(X_U1.XR105.3)           =   560.57uV  \    8.018uV
+    V(X_U1.XR104.3)           =    17.52mV  \   250.56uV
+    V(X_U1.XR103.3)           =   121.90MV  \    -58.22V
+    V(X_U1.XR103.30)          =   121.90MV  \    -58.22V
+    V(X_U2.XR107.3)           =    1.010uV  \   158.03uV
+    V(X_U2.XR107_2.3)         =     1.000V  \     2.063V
+    V(X_U2.XR107_2.30)        =     1.000V  \     2.063V
+    V(X_U2.XR107_3.3)         =    1.257uV  \    2.591uV
+    V(X_U2.37)                =   121.90MV  \    -58.29V
+    V(X_U2.XR106a.3)          =   659.90KV  \   -2.974KV
+    V(X_U2.XR106a.30)         =   659.90KV  \   -2.974KV
+    V(X_U2.XR105.3)           =   560.57uV  \    8.019uV
+    V(X_U2.XR104.3)           =    17.52mV  \   250.58uV
+    V(X_U2.XR103.3)           =   121.90MV  \    -58.29V
+    V(X_U2.XR103.30)          =   121.90MV  \    -58.29V
+    V(X_U3.XR107.3)           =    1.010uV  \   159.72uV
+    V(X_U3.XR107_2.3)         =     1.000V  \   628.10mV
+    V(X_U3.XR107_2.30)        =     1.000V  \   628.10mV
+    V(X_U3.XR107_3.3)         =    1.258uV  \   139.29nV
+    V(X_U3.37)                =   121.89MV  \     20.43V
+    V(X_U3.XR106a.3)          =   658.28KV  \    3.425KV
+    V(X_U3.XR106a.30)         =   658.28KV  \    3.425KV
+    V(X_U3.XR105.3)           =   558.95uV  \    9.182uV
+    V(X_U3.XR104.3)           =    17.47mV  \   286.92uV
+    V(X_U3.XR103.3)           =   121.89MV  \     20.43V
+    V(X_U3.XR103.30)          =   121.89MV  \     20.43V
+    V(X_U4.XR107.3)           =    1.010uV  \   159.72uV
+    V(X_U4.XR107_2.3)         =     1.000V  \   628.10mV
+    V(X_U4.XR107_2.30)        =     1.000V  \   628.10mV
+    V(X_U4.XR107_3.3)         =    1.258uV  \   139.29nV
+    V(X_U4.37)                =   121.89MV  \     22.16V
+    V(X_U4.XR106a.3)          =   658.28KV  \    3.424KV
+    V(X_U4.XR106a.30)         =   658.28KV  \    3.424KV
+    V(X_U4.XR105.3)           =   558.95uV  \    9.182uV
+    V(X_U4.XR104.3)           =    17.47mV  \   286.92uV
+    V(X_U4.XR103.3)           =   121.89MV  \     22.16V
+    V(X_U4.XR103.30)          =   121.89MV  \     22.16V
+    V(X_U5.XR107.3)           =    1.009uV  \   159.21uV
+    V(X_U5.XR107_2.3)         =     1.000V  \     2.108V
+    V(X_U5.XR107_2.30)        =     1.000V  \     2.108V
+    V(X_U5.XR107_3.3)         =    1.257uV  \    2.636uV
+    V(X_U5.37)                =   121.90MV  \   -1.876KV
+    V(X_U5.XR106a.3)          =   100.87KV  \    -8.632V
+    V(X_U5.XR106a.30)         =   100.87KV  \    -8.632V
+    V(X_U5.XR105.3)           =   974.15nV  \    8.829uV
+    V(X_U5.XR104.3)           =    30.24uV  \   275.89uV
+    V(X_U5.XR103.3)           =   121.90MV  \   -1.876KV
+    V(X_U5.XR103.30)          =   121.90MV  \   -1.876KV
+    V(X_U6.XR107.3)           =    1.009uV  \   159.21uV
+    V(X_U6.XR107_2.3)         =     1.000V  \     2.108V
+    V(X_U6.XR107_2.30)        =     1.000V  \     2.108V
+    V(X_U6.XR107_3.3)         =    1.257uV  \    2.636uV
+    V(X_U6.37)                =   121.90MV  \   -1.924KV
+    V(X_U6.XR106a.3)          =   100.87KV  \    -8.537V
+    V(X_U6.XR106a.30)         =   100.87KV  \    -8.537V
+    V(X_U6.XR105.3)           =   974.15nV  \    8.829uV
+    V(X_U6.XR104.3)           =    30.24uV  \   275.89uV
+    V(X_U6.XR103.3)           =   121.90MV  \   -1.924KV
+    V(X_U6.XR103.30)          =   121.90MV  \   -1.924KV
+    V(X_U7.XR107.3)           =    1.009uV  \   158.54uV
+    V(X_U7.XR107_2.3)         =     1.000V  \     2.071V
+    V(X_U7.XR107_2.30)        =     1.000V  \     2.071V
+    V(X_U7.XR107_3.3)         =    1.258uV  \    2.590uV
+    V(X_U7.37)                =   121.88MV  \   -451.92V
+    V(X_U7.XR106a.3)          =   100.85KV  \    -8.937V
+    V(X_U7.XR106a.30)         =   100.85KV  \    -8.937V
+    V(X_U7.XR105.3)           =   957.74nV  \    8.371uV
+    V(X_U7.XR104.3)           =    29.73uV  \   261.59uV
+    V(X_U7.XR103.3)           =   121.88MV  \   -451.92V
+    V(X_U7.XR103.30)          =   121.88MV  \   -451.92V
+    V(X_U8.XR107.3)           =    1.010uV  \   159.21uV
+    V(X_U8.XR107_2.3)         =     1.000V  \   255.58mV
+    V(X_U8.XR107_2.30)        =     1.000V  \   255.58mV
+    V(X_U8.XR107_3.3)         =    1.258uV  \     9.89nV
+    V(X_U8.37)                =   121.89MV  \     54.87V
+    V(X_U8.XR106a.3)          =   659.94KV  \     11.58V
+    V(X_U8.XR106a.30)         =   659.94KV  \     11.58V
+    V(X_U8.XR105.3)           =   560.61uV  \    8.834uV
+    V(X_U8.XR104.3)           =    17.52mV  \   276.04uV
+    V(X_U8.XR103.3)           =   121.89MV  \     54.87V
+    V(X_U8.XR103.30)          =   121.89MV  \     54.87V
+    V(X_U9.XR107.3)           =    1.010uV  \   147.82uV
+    V(X_U9.XR107_2.3)         =     1.000V  \   256.49mV
+    V(X_U9.XR107_2.30)        =     1.000V  \   256.49mV
+    V(X_U9.XR107_3.3)         =    1.258uV  \    10.11nV
+    V(X_U9.37)                =   121.89MV  \     66.85V
+    V(X_U9.XR106a.3)          =   659.97KV  \     7.862V
+    V(X_U9.XR106a.30)         =   659.97KV  \     7.862V
+    V(X_U9.XR105.3)           =   560.64uV  \    1.002uV
+    V(X_U9.XR104.3)           =    17.52mV  \    31.32uV
+    V(X_U9.XR103.3)           =   121.89MV  \     66.85V
+    V(X_U9.XR103.30)          =   121.89MV  \     66.85V
+    V(X_U10.XR107.3)          =    1.010uV  \   147.82uV
+    V(X_U10.XR107_2.3)        =     1.000V  \   256.49mV
+    V(X_U10.XR107_2.30)       =     1.000V  \   256.49mV
+    V(X_U10.XR107_3.3)        =    1.258uV  \    10.11nV
+    V(X_U10.37)               =   121.89MV  \     55.32V
+    V(X_U10.XR106a.3)         =   659.97KV  \     8.567V
+    V(X_U10.XR106a.30)        =   659.97KV  \     8.567V
+    V(X_U10.XR105.3)          =   560.64uV  \    1.002uV
+    V(X_U10.XR104.3)          =    17.52mV  \    31.32uV
+    V(X_U10.XR103.3)          =   121.89MV  \     55.32V
+    V(X_U10.XR103.30)         =   121.89MV  \     55.32V
+    V(X_U11.XR107.3)          =    1.010uV  \   159.21uV
+    V(X_U11.XR107_2.3)        =     1.000V  \   255.58mV
+    V(X_U11.XR107_2.30)       =     1.000V  \   255.58mV
+    V(X_U11.XR107_3.3)        =    1.258uV  \     9.89nV
+    V(X_U11.37)               =   121.89MV  \     48.48V
+    V(X_U11.XR106a.3)         =   659.94KV  \     10.93V
+    V(X_U11.XR106a.30)        =   659.94KV  \     10.93V
+    V(X_U11.XR105.3)          =   560.61uV  \    8.834uV
+    V(X_U11.XR104.3)          =    17.52mV  \   276.04uV
+    V(X_U11.XR103.3)          =   121.89MV  \     48.48V
+    V(X_U11.XR103.30)         =   121.89MV  \     48.48V
+
+  These supply currents failed to converge:
+
+    I(X_U1.EVCVS7)            =   -1.738pA  \   177.36mA
+    I(X_U1.EVCVS4)            =    1.696pA  \  -177.36mA
+    I(X_U1.EVCVS10)           =   -60.59uA  \    23.17uA
+    I(X_U1.EVCVS34)           =  -301.81mA  \    29.71mA
+    I(X_U1.EVCVSCM)           =   -6.269uA  \   -5.050uA
+    I(X_U1.EVCVS3)            =     29.89A  \   349.73uA
+    I(X_U2.EVCVS7)            =   -1.738pA  \   177.31mA
+    I(X_U2.EVCVS4)            =    1.696pA  \  -177.31mA
+    I(X_U2.EVCVS10)           =   -60.66uA  \    23.17uA
+    I(X_U2.EVCVS34)           =  -302.12mA  \    29.72mA
+    I(X_U2.EVCVSCM)           =   -6.269uA  \   -5.050uA
+    I(X_U2.EVCVS3)            =     29.92A  \   349.78uA
+    I(X_U3.EVCVS7)            =    98.30fA  \   -4.815nA
+    I(X_U3.EVCVS4)            =  -235.15fA  \    4.815nA
+    I(X_U3.EVCVS10)           =    29.41uA  \    28.78uA
+    I(X_U3.EVCVS34)           =   141.20mA  \    28.19mA
+    I(X_U3.EVCVSCM)           =   -6.269uA  \   -5.050uA
+    I(X_U3.EVCVS3)            =    -15.24A  \   -53.10uA
+    I(X_U4.EVCVS7)            =    98.30fA  \   -4.815nA
+    I(X_U4.EVCVS4)            =  -235.15fA  \    4.815nA
+    I(X_U4.EVCVS10)           =    29.41uA  \    28.78uA
+    I(X_U4.EVCVS34)           =   140.54mA  \    22.73mA
+    I(X_U4.EVCVSCM)           =   -6.269uA  \   -5.050uA
+    I(X_U4.EVCVS3)            =    -15.24A  \   -53.10uA
+    I(X_U5.EVCVS7)            =   -1.612pA  \   204.70mA
+    I(X_U5.EVCVS4)            =    1.570pA  \  -204.70mA
+    I(X_U5.EVCVS10)           =   -33.07uA  \    22.45uA
+    I(X_U5.EVCVS34)           =  -334.67mA  \   198.81mA
+    I(X_U5.EVCVSCM)           =   -6.269uA  \   -5.050uA
+    I(X_U5.EVCVS3)            =     16.09A  \    1.266mA
+    I(X_U6.EVCVS7)            =   -1.612pA  \   204.70mA
+    I(X_U6.EVCVS4)            =    1.570pA  \  -204.70mA
+    I(X_U6.EVCVS10)           =   -33.07uA  \    22.45uA
+    I(X_U6.EVCVS34)           =  -334.67mA  \   198.81mA
+    I(X_U6.EVCVSCM)           =   -6.269uA  \   -5.050uA
+    I(X_U6.EVCVS3)            =     16.09A  \    1.266mA
+    I(X_U7.EVCVS7)            =   -1.659pA  \   180.62mA
+    I(X_U7.EVCVS4)            =    1.807pA  \  -180.62mA
+    I(X_U7.EVCVS10)           =   -54.21uA  \    23.05uA
+    I(X_U7.EVCVS34)           =   223.81mA  \    66.33mA
+    I(X_U7.EVCVSCM)           =   -6.269uA  \   -5.050uA
+    I(X_U7.EVCVS3)            =     26.69A  \   548.39uA
+    I(X_U8.EVCVS7)            =    98.20fA  \   -5.170nA
+    I(X_U8.EVCVS4)            =  -235.03fA  \    5.170nA
+    I(X_U8.EVCVS10)           =   -32.02uA  \    22.42uA
+    I(X_U8.EVCVS34)           =   -1.494mA  \   -7.225mA
+    I(X_U8.EVCVSCM)           =   -6.269uA  \   -5.050uA
+    I(X_U8.EVCVS3)            =     15.56A  \    1.269mA
+    I(X_U9.EVCVS7)            =    98.20fA  \   -5.205nA
+    I(X_U9.EVCVS4)            =  -235.03fA  \    5.205nA
+    I(X_U9.EVCVS10)           =    3.528uA  \    4.472uA
+    I(X_U9.EVCVS34)           =  -458.03uA  \   -7.316mA
+    I(X_U9.EVCVSCM)           =   -6.269uA  \   -5.050uA
+    I(X_U9.EVCVS3)            =    -3.449A  \   461.69nA
+    I(X_U10.EVCVS7)           =    98.20fA  \   -5.205nA
+    I(X_U10.EVCVS4)           =  -235.03fA  \    5.205nA
+    I(X_U10.EVCVS10)          =    3.528uA  \    4.472uA
+    I(X_U10.EVCVS34)          =  -564.45uA  \   -7.316mA
+    I(X_U10.EVCVSCM)          =   -6.269uA  \   -5.050uA
+    I(X_U10.EVCVS3)           =    -3.449A  \   461.67nA
+    I(X_U11.EVCVS7)           =    98.20fA  \   -5.170nA
+    I(X_U11.EVCVS4)           =  -235.03fA  \    5.170nA
+    I(X_U11.EVCVS10)          =   -32.02uA  \    22.42uA
+    I(X_U11.EVCVS34)          =   -1.494mA  \   -7.225mA
+    I(X_U11.EVCVSCM)          =   -6.269uA  \   -5.050uA
+    I(X_U11.EVCVS3)           =     15.56A  \    1.269mA
+    I(X_U1.XR107.ERES)        =    1.004uA  \   158.03uA
+    I(X_U1.XR107_2.ERES)      =   -1.250uA  \   -2.579uA
+    I(X_U1.XR107_3.ERES)      =    1.251uA  \    2.592uA
+    I(X_U1.XU23.E1)           =    64.98uA  \    21.37uA
+    I(X_U1.XU7.E1)            =   306.49mA  \  -105.04mA
+    I(X_U1.XU6.E1)            =    2.995uA  \   -1.267uA
+    I(X_U1.XU5.E1)            =   -25.91KA  \     15.66A
+    I(X_U1.XU3.E1)            =    65.92KA  \     86.77A
+    I(X_U1.XVn11.E3)          =   -4.950uA  \   -39.44uA
+    I(X_U1.XU25.E1)           =    6.269uA  \    5.050uA
+    I(X_U1.XU22.E1)           =   -44.55KA  \   -554.63A
+    I(X_U1.XU21.E1)           =    4.990KA  \     29.03A
+    I(X_U1.XU20.E1)           =     64.16A  \     6.895A
+    I(X_U1.XU19.E1)           =   -579.95A  \   164.52mA
+    I(X_U1.XR106a.ERES)       =   559.90uA  \    8.021uA
+    I(X_U1.XR105.ERES)        =   560.56uA  \    8.018uA
+    I(X_U1.XR104.ERES)        =    17.52mA  \   250.56uA
+    I(X_U1.XR103.ERES)        =   -121.90A  \    58.22uA
+    I(X_U2.XR107.ERES)        =    1.004uA  \   158.03uA
+    I(X_U2.XR107_2.ERES)      =   -1.250uA  \   -2.579uA
+    I(X_U2.XR107_3.ERES)      =    1.251uA  \    2.591uA
+    I(X_U2.XU23.E1)           =    65.01uA  \    21.37uA
+    I(X_U2.XU7.E1)            =   306.80mA  \  -105.04mA
+    I(X_U2.XU6.E1)            =    2.998uA  \   -1.267uA
+    I(X_U2.XU5.E1)            =   -25.96KA  \     15.65A
+    I(X_U2.XU3.E1)            =    65.92KA  \     86.77A
+    I(X_U2.XVn11.E3)          =   -4.950uA  \   -39.43uA
+    I(X_U2.XU25.E1)           =    6.269uA  \    5.050uA
+    I(X_U2.XU22.E1)           =   -44.58KA  \   -554.64A
+    I(X_U2.XU21.E1)           =    4.990KA  \     29.03A
+    I(X_U2.XU20.E1)           =     64.13A  \     6.895A
+    I(X_U2.XU19.E1)           =   -580.31A  \   164.52mA
+    I(X_U2.XR106a.ERES)       =   559.90uA  \    8.022uA
+    I(X_U2.XR105.ERES)        =   560.56uA  \    8.019uA
+    I(X_U2.XR104.ERES)        =    17.52mA  \   250.58uA
+    I(X_U2.XR103.ERES)        =   -121.90A  \    58.29uA
+    I(X_U3.XR107.ERES)        =    1.004uA  \   159.72uA
+    I(X_U3.XR107_2.ERES)      =   -1.251uA  \  -785.13nA
+    I(X_U3.XR107_3.ERES)      =    1.251uA  \   139.29nA
+    I(X_U3.XU23.E1)           =    17.52uA  \    17.66uA
+    I(X_U3.XU7.E1)            =  -141.37mA  \  -140.07mA
+    I(X_U3.XU6.E1)            =   -1.528uA  \   -1.477uA
+    I(X_U3.XU5.E1)            =    55.70KA  \     43.41A
+    I(X_U3.XU3.E1)            =    66.57KA  \    -2.968A
+    I(X_U3.XVn11.E3)          =   -4.950uA  \   -77.42uA
+    I(X_U3.XU25.E1)           =    6.269uA  \    5.050uA
+    I(X_U3.XU22.E1)           =    133.81A  \   144.59mA
+    I(X_U3.XU21.E1)           =    4.990KA  \     29.03A
+    I(X_U3.XU20.E1)           =    108.85A  \     4.166A
+    I(X_U3.XU19.E1)           =    -61.00A  \     3.169A
+    I(X_U3.XR106a.ERES)       =   558.28uA  \    9.178uA
+    I(X_U3.XR105.ERES)        =   558.94uA  \    9.182uA
+    I(X_U3.XR104.ERES)        =    17.47mA  \   286.92uA
+    I(X_U3.XR103.ERES)        =   -121.89A  \   -20.43uA
+    I(X_U4.XR107.ERES)        =    1.004uA  \   159.72uA
+    I(X_U4.XR107_2.ERES)      =   -1.251uA  \  -785.13nA
+    I(X_U4.XR107_3.ERES)      =    1.251uA  \   139.29nA
+    I(X_U4.XU23.E1)           =    17.52uA  \    17.66uA
+    I(X_U4.XU7.E1)            =  -141.37mA  \  -140.07mA
+    I(X_U4.XU6.E1)            =   -1.528uA  \   -1.477uA
+    I(X_U4.XU5.E1)            =    55.70KA  \     43.41A
+    I(X_U4.XU3.E1)            =    66.57KA  \    -2.970A
+    I(X_U4.XVn11.E3)          =   -4.950uA  \   -77.42uA
+    I(X_U4.XU25.E1)           =    6.269uA  \    5.050uA
+    I(X_U4.XU22.E1)           =    133.81A  \   144.59mA
+    I(X_U4.XU21.E1)           =    4.990KA  \     29.03A
+    I(X_U4.XU20.E1)           =    108.85A  \     4.165A
+    I(X_U4.XU19.E1)           =    -61.00A  \     3.169A
+    I(X_U4.XR106a.ERES)       =   558.28uA  \    9.178uA
+    I(X_U4.XR105.ERES)        =   558.94uA  \    9.182uA
+    I(X_U4.XR104.ERES)        =    17.47mA  \    5.745mA
+    I(X_U4.XR103.ERES)        =   -121.89A  \   -22.16uA
+    I(X_U5.XR107.ERES)        =    1.003uA  \   159.21uA
+    I(X_U5.XR107_2.ERES)      =   -1.250uA  \   -2.635uA
+    I(X_U5.XR107_3.ERES)      =    1.251uA  \    2.636uA
+    I(X_U5.XU23.E1)           =    50.47uA  \    21.77uA
+    I(X_U5.XU7.E1)            =   169.53mA  \  -101.26mA
+    I(X_U5.XU6.E1)            =    1.612uA  \   -1.233uA
+    I(X_U5.XU5.E1)            =   -56.78KA  \  -399.88mA
+    I(X_U5.XU3.E1)            =    10.06KA  \    132.85A
+    I(X_U5.XVn11.E3)          =   -4.950uA  \   326.64uA
+    I(X_U5.XU25.E1)           =    6.269uA  \    5.050uA
+    I(X_U5.XU22.E1)           =   -30.89KA  \   -1.607KA
+    I(X_U5.XU21.E1)           =    4.990KA  \     29.03A
+    I(X_U5.XU20.E1)           =     77.82A  \     18.11A
+    I(X_U5.XU19.E1)           =   -421.30A  \   224.06mA
+    I(X_U5.XR106a.ERES)       =   866.69nA  \    8.829uA
+    I(X_U5.XR105.ERES)        =   967.55nA  \    8.829uA
+    I(X_U5.XR104.ERES)        =    30.24uA  \   275.89uA
+    I(X_U5.XR103.ERES)        =   -121.90A  \    1.876mA
+    I(X_U6.XR107.ERES)        =    1.003uA  \   159.21uA
+    I(X_U6.XR107_2.ERES)      =   -1.250uA  \   -2.635uA
+    I(X_U6.XR107_3.ERES)      =    1.251uA  \    2.636uA
+    I(X_U6.XU23.E1)           =    50.47uA  \    21.77uA
+    I(X_U6.XU7.E1)            =   169.53mA  \  -101.26mA
+    I(X_U6.XU6.E1)            =    1.612uA  \   -1.233uA
+    I(X_U6.XU5.E1)            =   -56.78KA  \  -399.43mA
+    I(X_U6.XU3.E1)            =    10.06KA  \    132.85A
+    I(X_U6.XVn11.E3)          =   -4.950uA  \   326.64uA
+    I(X_U6.XU25.E1)           =    6.269uA  \    5.050uA
+    I(X_U6.XU22.E1)           =   -30.89KA  \   -1.607KA
+    I(X_U6.XU21.E1)           =    4.990KA  \     29.03A
+    I(X_U6.XU20.E1)           =     77.82A  \     18.11A
+    I(X_U6.XU19.E1)           =   -421.30A  \   224.06mA
+    I(X_U6.XR106a.ERES)       =   866.69nA  \    8.829uA
+    I(X_U6.XR105.ERES)        =   967.55nA  \    8.829uA
+    I(X_U6.XR104.ERES)        =    30.24uA  \   275.89uA
+    I(X_U6.XR103.ERES)        =   -121.90A  \    1.924mA
+    I(X_U7.XR107.ERES)        =    1.003uA  \   158.54uA
+    I(X_U7.XR107_2.ERES)      =   -1.250uA  \   -2.588uA
+    I(X_U7.XR107_3.ERES)      =    1.252uA  \    2.590uA
+    I(X_U7.XU23.E1)           =    61.62uA  \    21.44uA
+    I(X_U7.XU7.E1)            =   274.73mA  \  -104.39mA
+    I(X_U7.XU6.E1)            =    2.674uA  \   -1.261uA
+    I(X_U7.XU5.E1)            =   -75.95KA  \     12.02A
+    I(X_U7.XU3.E1)            =    10.06KA  \     67.89A
+    I(X_U7.XVn11.E3)          =   -4.950uA  \    39.68uA
+    I(X_U7.XU25.E1)           =    6.269uA  \    5.050uA
+    I(X_U7.XU22.E1)           =   -41.38KA  \   -873.13A
+    I(X_U7.XU21.E1)           =    4.990KA  \     29.03A
+    I(X_U7.XU20.E1)           =     67.36A  \     10.29A
+    I(X_U7.XU19.E1)           =   -543.13A  \   179.07mA
+    I(X_U7.XR106a.ERES)       =   850.29nA  \    8.371uA
+    I(X_U7.XR105.ERES)        =   951.14nA  \    8.371uA
+    I(X_U7.XR104.ERES)        =    29.72uA  \   261.59uA
+    I(X_U7.XR103.ERES)        =   -121.88A  \   451.92uA
+    I(X_U8.XR107.ERES)        =    1.004uA  \   159.21uA
+    I(X_U8.XR107_2.ERES)      =   -1.250uA  \  -319.47nA
+    I(X_U8.XR107_3.ERES)      =    1.251uA  \     9.89nA
+    I(X_U8.XU23.E1)           =    49.92uA  \    21.79uA
+    I(X_U8.XU7.E1)            =   164.32mA  \  -101.06mA
+    I(X_U8.XU6.E1)            =    1.559uA  \   -1.231uA
+    I(X_U8.XU5.E1)            =   657.13mA  \     2.276A
+    I(X_U8.XU3.E1)            =    65.90KA  \    133.85A
+    I(X_U8.XVn11.E3)          =   -4.950uA  \   -21.15uA
+    I(X_U8.XU25.E1)           =    6.269uA  \    5.050uA
+    I(X_U8.XU22.E1)           =   -30.37KA  \   -1.610KA
+    I(X_U8.XU21.E1)           =    4.990KA  \     29.03A
+    I(X_U8.XU20.E1)           =     78.48A  \     18.14A
+    I(X_U8.XU19.E1)           =   -415.12A  \   224.59mA
+    I(X_U8.XR106a.ERES)       =   559.94uA  \    8.834uA
+    I(X_U8.XR105.ERES)        =   560.60uA  \    8.834uA
+    I(X_U8.XR104.ERES)        =    17.52mA  \   276.04uA
+    I(X_U8.XR103.ERES)        =   -121.89A  \   -54.87uA
+    I(X_U9.XR107.ERES)        =    1.004uA  \   147.82uA
+    I(X_U9.XR107_2.ERES)      =   -1.250uA  \  -320.62nA
+    I(X_U9.XR107_3.ERES)      =    1.251uA  \    10.11nA
+    I(X_U9.XU23.E1)           =    32.42uA  \    31.84uA
+    I(X_U9.XU7.E1)            =  -725.78uA  \   -6.267mA
+    I(X_U9.XU6.E1)            =  -345.56nA  \  -384.55nA
+    I(X_U9.XU5.E1)            =    46.35KA  \    -4.512A
+    I(X_U9.XU3.E1)            =    65.90KA  \     1.294A
+    I(X_U9.XVn11.E3)          =   -4.950uA  \   -21.33uA
+    I(X_U9.XU25.E1)           =    6.269uA  \    5.050uA
+    I(X_U9.XU22.E1)           =   -4.990KA  \    -29.03A
+    I(X_U9.XU21.E1)           =    4.990KA  \     29.03A
+    I(X_U9.XU20.E1)           =    332.69A  \     1.813A
+    I(X_U9.XU19.E1)           =     14.05A  \   143.83mA
+    I(X_U9.XR106a.ERES)       =   559.97uA  \    1.002uA
+    I(X_U9.XR105.ERES)        =   560.63uA  \    1.002uA
+    I(X_U9.XR104.ERES)        =    17.52mA  \    31.32uA
+    I(X_U9.XR103.ERES)        =   -121.89A  \   -66.85uA
+    I(X_U10.XR107.ERES)       =    1.004uA  \   147.82uA
+    I(X_U10.XR107_2.ERES)     =   -1.250uA  \  -320.62nA
+    I(X_U10.XR107_3.ERES)     =    1.251uA  \    10.11nA
+    I(X_U10.XU23.E1)          =    32.42uA  \    31.84uA
+    I(X_U10.XU7.E1)           =  -725.78uA  \   -6.267mA
+    I(X_U10.XU6.E1)           =  -345.56nA  \  -384.55nA
+    I(X_U10.XU5.E1)           =    46.35KA  \    -4.509A
+    I(X_U10.XU3.E1)           =    65.90KA  \     1.296A
+    I(X_U10.XVn11.E3)         =   -4.950uA  \   -21.33uA
+    I(X_U10.XU25.E1)          =    6.269uA  \    5.050uA
+    I(X_U10.XU22.E1)          =   -4.990KA  \    -29.03A
+    I(X_U10.XU21.E1)          =    4.990KA  \     29.03A
+    I(X_U10.XU20.E1)          =    332.69A  \     1.813A
+    I(X_U10.XU19.E1)          =     14.05A  \   143.83mA
+    I(X_U10.XR106a.ERES)      =   559.97uA  \    1.002uA
+    I(X_U10.XR105.ERES)       =   560.63uA  \    1.002uA
+    I(X_U10.XR104.ERES)       =    17.52mA  \    31.32uA
+    I(X_U10.XR103.ERES)       =   -121.89A  \   -55.32uA
+    I(X_U11.XR107.ERES)       =    1.004uA  \   159.21uA
+    I(X_U11.XR107_2.ERES)     =   -1.250uA  \  -319.47nA
+    I(X_U11.XR107_3.ERES)     =    1.251uA  \     9.89nA
+    I(X_U11.XU23.E1)          =    49.92uA  \    21.79uA
+    I(X_U11.XU7.E1)           =   164.32mA  \  -101.06mA
+    I(X_U11.XU6.E1)           =    1.559uA  \   -1.231uA
+    I(X_U11.XU5.E1)           =   657.84mA  \     2.274A
+    I(X_U11.XU3.E1)           =    65.90KA  \    133.85A
+    I(X_U11.XVn11.E3)         =   -4.950uA  \   -21.15uA
+    I(X_U11.XU25.E1)          =    6.269uA  \    5.050uA
+    I(X_U11.XU22.E1)          =   -30.37KA  \   -1.610KA
+    I(X_U11.XU21.E1)          =    4.990KA  \     29.03A
+    I(X_U11.XU20.E1)          =     78.48A  \     18.14A
+    I(X_U11.XU19.E1)          =   -415.12A  \   224.59mA
+    I(X_U11.XR106a.ERES)      =   559.94uA  \    8.834uA
+    I(X_U11.XR105.ERES)       =   560.60uA  \    8.834uA
+    I(X_U11.XR104.ERES)       =    17.52mA  \   276.04uA
+    I(X_U11.XR103.ERES)       =   -121.89A  \   -48.48uA
+    I(L_L1)                   =         0A  \   202.71pA
+    I(X_U1.L1)                =   559.90uA  \    8.021uA
+    I(X_U1.LCM)               =  -199.70uA  \  -414.34uA
+    I(X_U2.L1)                =   559.90uA  \    8.022uA
+    I(X_U2.LCM)               =  -199.70uA  \  -414.32uA
+    I(X_U3.L1)                =   558.28uA  \    9.178uA
+    I(X_U3.LCM)               =  -199.76uA  \   -21.99uA
+    I(X_U4.L1)                =   558.28uA  \    9.178uA
+    I(X_U4.LCM)               =  -199.76uA  \   -21.99uA
+    I(X_U5.L1)                =   866.69nA  \    8.829uA
+    I(X_U5.LCM)               =  -199.67uA  \  -421.41uA
+    I(X_U6.L1)                =   866.67nA  \    8.829uA
+    I(X_U6.LCM)               =  -199.67uA  \  -421.41uA
+    I(X_U7.L1)                =   850.28nA  \    8.371uA
+    I(X_U7.LCM)               =  -199.84uA  \  -414.02uA
+    I(X_U8.L1)                =   559.94uA  \    8.834uA
+    I(X_U8.LCM)               =  -199.74uA  \   -1.282uA
+    I(X_U9.L1)                =   559.97uA  \    1.002uA
+    I(X_U9.LCM)               =  -199.74uA  \   -1.318uA
+    I(X_U10.L1)               =   559.97uA  \    1.002uA
+    I(X_U10.LCM)              =  -199.74uA  \   -1.318uA
+    I(X_U11.L1)               =   559.94uA  \    8.834uA
+    I(X_U11.LCM)              =  -199.74uA  \   -1.282uA
+    I(V_V2)                   =   -1.650KA  \  -108.94mA
+    I(V_V6)                   =         0A  \    75.17mA
+    I(V_V7)                   =   -6.372mA  \   -3.611mA
+    I(V_V8)                   =   -6.372mA  \   -3.612mA
+    I(V_V10)                  =   -1.650KA  \  -108.95mA
+    I(V_V9)                   =         0A  \    68.50mA
+    I(V_V13)                  =   -1.650KA  \  -143.96mA
+    I(V_V12)                  =  -831.98uA  \   -1.667mA
+    I(V_V15)                  =   -1.650KA  \  -143.96mA
+    I(V_V14)                  =  -166.51uA  \   -1.667mA
+    I(V_V16)                  =   -1.650KA  \  -105.16mA
+    I(V_V21)                  =   -1.650KA  \  -105.16mA
+    I(V_V19)                  =   -85.17uA  \  -122.22uA
+    I(V_V20)                  =         0A  \   -3.333mA
+    I(V_V24)                  =   -1.650KA  \  -108.29mA
+    I(V_V23)                  =  -499.41mA  \    35.81mA
+    I(V_V25)                  =   -1.650KA  \  -104.96mA
+    I(V_V17)                  =         0A  \   -3.333mA
+    I(V_V26)                  =   -85.17uA  \  -122.22uA
+    I(V_V27)                  =   -1.650KA  \   -10.20mA
+    I(V_V28)                  =   -1.650KA  \   -10.20mA
+    I(V_V29)                  =   -1.650KA  \  -104.96mA
+    I(V_V30)                  =  -191.63uA  \  -275.00uA
+    I(V_V31)                  =   -85.17uA  \  -122.22uA
+    I(X_U1.V2)                =    1.738pA  \  -177.36mA
+    I(X_U1.V7)                =    64.98uA  \    21.37uA
+    I(X_U1.Vor_4)             =    94.76mA  \  -509.95nA
+    I(X_U1.Vor_1)             =  -815.31mA  \   489.95nA
+    I(X_U1.V11)               =   -5.706uA  \  -180.18nA
+    I(X_U1.V10)               =    6.415uA  \   -23.07nA
+    I(X_U1.Vor_2)             =   815.31mA  \  -489.95nA
+    I(X_U1.Vor_3)             =    94.76mA  \  -509.95nA
+    I(X_U1.VCCVS1_in)         =  -306.43mA  \   105.02mA
+    I(X_U2.V2)                =    1.738pA  \  -177.31mA
+    I(X_U2.V7)                =    65.01uA  \    21.37uA
+    I(X_U2.Vor_4)             =    94.76mA  \  -509.95nA
+    I(X_U2.Vor_1)             =  -815.87mA  \   489.95nA
+    I(X_U2.V11)               =   -5.706uA  \  -180.19nA
+    I(X_U2.V10)               =    6.415uA  \   -23.07nA
+    I(X_U2.Vor_2)             =   815.87mA  \  -489.95nA
+    I(X_U2.Vor_3)             =    94.76mA  \  -509.95nA
+    I(X_U2.VCCVS1_in)         =  -306.73mA  \   105.02mA
+    I(X_U3.V2)                =   -98.30fA  \    4.815nA
+    I(X_U3.V7)                =    17.52uA  \    17.66uA
+    I(X_U3.Vor_4)             =    94.76mA  \  -509.95nA
+    I(X_U3.Vor_1)             =    4.313mA  \    4.895mA
+    I(X_U3.V11)               =   -5.689uA  \  -191.82nA
+    I(X_U3.V10)               =    6.547uA  \    -9.76nA
+    I(X_U3.Vor_2)             =   -4.313mA  \   -4.895mA
+    I(X_U3.Vor_3)             =    94.76mA  \  -509.95nA
+    I(X_U3.VCCVS1_in)         =   141.34mA  \   140.04mA
+    I(X_U4.V2)                =   -98.30fA  \    4.815nA
+    I(X_U4.V7)                =    17.52uA  \    17.66uA
+    I(X_U4.Vor_4)             =    94.76mA  \  -509.95nA
+    I(X_U4.Vor_1)             =    4.313mA  \    4.895mA
+    I(X_U4.V11)               =   -5.689uA  \  -191.82nA
+    I(X_U4.V10)               =    6.547uA  \    -9.76nA
+    I(X_U4.Vor_2)             =   -4.313mA  \   -4.895mA
+    I(X_U4.Vor_3)             =    94.76mA  \  -509.95nA
+    I(X_U4.VCCVS1_in)         =   141.34mA  \   140.04mA
+    I(X_U5.V2)                =    1.612pA  \  -204.70mA
+    I(X_U5.V7)                =    50.47uA  \    21.77uA
+    I(X_U5.Vor_4)             =    94.76mA  \  -509.95nA
+    I(X_U5.Vor_1)             =  -565.15mA  \   489.95nA
+    I(X_U5.V11)               =  -109.68nA  \  -188.29nA
+    I(X_U5.V10)               =  -103.64nA  \   -14.10nA
+    I(X_U5.Vor_2)             =   565.15mA  \  -489.95nA
+    I(X_U5.Vor_3)             =    94.76mA  \  -509.95nA
+    I(X_U5.VCCVS1_in)         =  -169.50mA  \   101.24mA
+    I(X_U6.V2)                =    1.612pA  \  -204.70mA
+    I(X_U6.V7)                =    50.47uA  \    21.77uA
+    I(X_U6.Vor_4)             =    94.76mA  \  -509.95nA
+    I(X_U6.Vor_1)             =  -565.15mA  \   489.95nA
+    I(X_U6.V11)               =  -109.68nA  \  -188.29nA
+    I(X_U6.V10)               =  -103.64nA  \   -14.10nA
+    I(X_U6.Vor_2)             =   565.15mA  \  -489.95nA
+    I(X_U6.Vor_3)             =    94.76mA  \  -509.95nA
+    I(X_U6.VCCVS1_in)         =  -169.50mA  \   101.24mA
+    I(X_U7.V2)                =    1.659pA  \  -180.62mA
+    I(X_U7.V7)                =    61.62uA  \    21.44uA
+    I(X_U7.Vor_4)             =    94.76mA  \  -509.95nA
+    I(X_U7.Vor_1)             =  -757.29mA  \   489.95nA
+    I(X_U7.V11)               =  -109.51nA  \  -183.71nA
+    I(X_U7.V10)               =  -100.65nA  \   -19.26nA
+    I(X_U7.Vor_2)             =   757.29mA  \  -489.95nA
+    I(X_U7.Vor_3)             =    94.76mA  \  -509.95nA
+    I(X_U7.VCCVS1_in)         =  -274.67mA  \   104.37mA
+    I(X_U8.V2)                =   -98.20fA  \    5.170nA
+    I(X_U8.V7)                =    49.92uA  \    21.79uA
+    I(X_U8.Vor_4)             =    94.76mA  \  -509.95nA
+    I(X_U8.Vor_1)             =  -555.63mA  \   489.95nA
+    I(X_U8.V11)               =   -5.706uA  \  -188.34nA
+    I(X_U8.V10)               =    6.634uA  \   -14.04nA
+    I(X_U8.Vor_2)             =   555.63mA  \  -489.95nA
+    I(X_U8.Vor_3)             =    94.76mA  \  -509.95nA
+    I(X_U8.VCCVS1_in)         =  -164.29mA  \   101.03mA
+    I(X_U9.V2)                =   -98.20fA  \    5.205nA
+    I(X_U9.V7)                =    32.42uA  \    31.84uA
+    I(X_U9.Vor_4)             =    94.76mA  \  -509.95nA
+    I(X_U9.Vor_1)             =   -91.04mA  \   489.95nA
+    I(X_U9.V11)               =   -5.706uA  \  -110.02nA
+    I(X_U9.V10)               =    5.520uA  \   -90.20nA
+    I(X_U9.Vor_2)             =    91.04mA  \  -489.95nA
+    I(X_U9.Vor_3)             =    94.76mA  \  -509.95nA
+    I(X_U9.VCCVS1_in)         =   722.25uA  \    6.263mA
+    I(X_U10.V2)               =   -98.20fA  \    5.205nA
+    I(X_U10.V7)               =    32.42uA  \    31.84uA
+    I(X_U10.Vor_4)            =    94.76mA  \  -509.95nA
+    I(X_U10.Vor_1)            =   -91.04mA  \   489.95nA
+    I(X_U10.V11)              =   -5.706uA  \  -110.02nA
+    I(X_U10.V10)              =    5.520uA  \   -90.20nA
+    I(X_U10.Vor_2)            =    91.04mA  \  -489.95nA
+    I(X_U10.Vor_3)            =    94.76mA  \  -509.95nA
+    I(X_U10.VCCVS1_in)        =   722.25uA  \    6.263mA
+    I(X_U11.V2)               =   -98.20fA  \    5.170nA
+    I(X_U11.V7)               =    49.92uA  \    21.79uA
+    I(X_U11.Vor_4)            =    94.76mA  \  -509.95nA
+    I(X_U11.Vor_1)            =  -555.63mA  \   489.95nA
+    I(X_U11.V11)              =   -5.706uA  \  -188.34nA
+    I(X_U11.V10)              =    6.634uA  \   -14.04nA
+    I(X_U11.Vor_2)            =   555.63mA  \  -489.95nA
+    I(X_U11.Vor_3)            =    94.76mA  \  -509.95nA
+    I(X_U11.VCCVS1_in)        =  -164.29mA  \   101.03mA
+    I(X_U1.XR107.VSENSE)      =    1.004uA  \   158.03uA
+    I(X_U1.XR107_2.VSENSE)    =   -1.250uA  \   -2.579uA
+    I(X_U1.XR107_3.VSENSE)    =    1.251uA  \    2.592uA
+    I(X_U1.XR106a.VSENSE)     =   559.90uA  \    8.021uA
+    I(X_U1.XR105.VSENSE)      =   560.56uA  \    8.018uA
+    I(X_U1.XR104.VSENSE)      =    17.52mA  \   250.56uA
+    I(X_U1.XR103.VSENSE)      =   -121.90A  \    58.22uA
+    I(X_U2.XR107.VSENSE)      =    1.004uA  \   158.03uA
+    I(X_U2.XR107_2.VSENSE)    =   -1.250uA  \   -2.579uA
+    I(X_U2.XR107_3.VSENSE)    =    1.251uA  \    2.591uA
+    I(X_U2.XR106a.VSENSE)     =   559.90uA  \    8.022uA
+    I(X_U2.XR105.VSENSE)      =   560.56uA  \    8.019uA
+    I(X_U2.XR104.VSENSE)      =    17.52mA  \   250.58uA
+    I(X_U2.XR103.VSENSE)      =   -121.90A  \    58.29uA
+    I(X_U3.XR107.VSENSE)      =    1.004uA  \   159.72uA
+    I(X_U3.XR107_2.VSENSE)    =   -1.251uA  \  -785.13nA
+    I(X_U3.XR107_3.VSENSE)    =    1.251uA  \   139.29nA
+    I(X_U3.XR106a.VSENSE)     =   558.28uA  \    9.178uA
+    I(X_U3.XR105.VSENSE)      =   558.94uA  \    9.182uA
+    I(X_U3.XR104.VSENSE)      =    17.47mA  \   286.92uA
+    I(X_U3.XR103.VSENSE)      =   -121.89A  \   -20.43uA
+    I(X_U4.XR107.VSENSE)      =    1.004uA  \   159.72uA
+    I(X_U4.XR107_2.VSENSE)    =   -1.251uA  \  -785.13nA
+    I(X_U4.XR107_3.VSENSE)    =    1.251uA  \   139.29nA
+    I(X_U4.XR106a.VSENSE)     =   558.28uA  \    9.178uA
+    I(X_U4.XR105.VSENSE)      =   558.94uA  \    9.182uA
+    I(X_U4.XR104.VSENSE)      =    17.47mA  \   286.92uA
+    I(X_U4.XR103.VSENSE)      =   -121.89A  \   -22.16uA
+    I(X_U5.XR107.VSENSE)      =    1.003uA  \   159.21uA
+    I(X_U5.XR107_2.VSENSE)    =   -1.250uA  \   -2.635uA
+    I(X_U5.XR107_3.VSENSE)    =    1.251uA  \    2.636uA
+    I(X_U5.XR106a.VSENSE)     =   866.69nA  \    8.829uA
+    I(X_U5.XR105.VSENSE)      =   967.55nA  \    8.829uA
+    I(X_U5.XR104.VSENSE)      =    30.24uA  \   275.89uA
+    I(X_U5.XR103.VSENSE)      =   -121.90A  \    1.876mA
+    I(X_U6.XR107.VSENSE)      =    1.003uA  \   159.21uA
+    I(X_U6.XR107_2.VSENSE)    =   -1.250uA  \   -2.635uA
+    I(X_U6.XR107_3.VSENSE)    =    1.251uA  \    2.636uA
+    I(X_U6.XR106a.VSENSE)     =   866.67nA  \    8.829uA
+    I(X_U6.XR105.VSENSE)      =   967.55nA  \    8.829uA
+    I(X_U6.XR104.VSENSE)      =    30.24uA  \   275.89uA
+    I(X_U6.XR103.VSENSE)      =   -121.90A  \    1.924mA
+    I(X_U7.XR107.VSENSE)      =    1.003uA  \   158.54uA
+    I(X_U7.XR107_2.VSENSE)    =   -1.250uA  \   -2.588uA
+    I(X_U7.XR107_3.VSENSE)    =    1.252uA  \    2.590uA
+    I(X_U7.XR106a.VSENSE)     =   850.28nA  \    8.371uA
+    I(X_U7.XR105.VSENSE)      =   951.14nA  \    8.371uA
+    I(X_U7.XR104.VSENSE)      =    29.72uA  \   261.59uA
+    I(X_U7.XR103.VSENSE)      =   -121.88A  \   451.92uA
+    I(X_U8.XR107.VSENSE)      =    1.004uA  \   159.21uA
+    I(X_U8.XR107_2.VSENSE)    =   -1.250uA  \  -319.47nA
+    I(X_U8.XR107_3.VSENSE)    =    1.251uA  \     9.89nA
+    I(X_U8.XR106a.VSENSE)     =   559.94uA  \    8.834uA
+    I(X_U8.XR105.VSENSE)      =   560.60uA  \    8.834uA
+    I(X_U8.XR104.VSENSE)      =    17.52mA  \   276.04uA
+    I(X_U8.XR103.VSENSE)      =   -121.89A  \   -54.87uA
+    I(X_U9.XR107.VSENSE)      =    1.004uA  \   147.82uA
+    I(X_U9.XR107_2.VSENSE)    =   -1.250uA  \  -320.62nA
+    I(X_U9.XR107_3.VSENSE)    =    1.251uA  \    10.11nA
+    I(X_U9.XR106a.VSENSE)     =   559.97uA  \    1.002uA
+    I(X_U9.XR105.VSENSE)      =   560.63uA  \    1.002uA
+    I(X_U9.XR104.VSENSE)      =    17.52mA  \    31.32uA
+    I(X_U9.XR103.VSENSE)      =   -121.89A  \   -66.85uA
+    I(X_U10.XR107.VSENSE)     =    1.004uA  \   147.82uA
+    I(X_U10.XR107_2.VSENSE)   =   -1.250uA  \  -320.62nA
+    I(X_U10.XR107_3.VSENSE)   =    1.251uA  \    10.11nA
+    I(X_U10.XR106a.VSENSE)    =   559.97uA  \    1.002uA
+    I(X_U10.XR105.VSENSE)     =   560.63uA  \    1.002uA
+    I(X_U10.XR104.VSENSE)     =    17.52mA  \    31.32uA
+    I(X_U10.XR103.VSENSE)     =   -121.89A  \   -55.32uA
+    I(X_U11.XR107.VSENSE)     =    1.004uA  \   159.21uA
+    I(X_U11.XR107_2.VSENSE)   =   -1.250uA  \  -319.47nA
+    I(X_U11.XR107_3.VSENSE)   =    1.251uA  \     9.89nA
+    I(X_U11.XR106a.VSENSE)    =   559.94uA  \    8.834uA
+    I(X_U11.XR105.VSENSE)     =   560.60uA  \    8.834uA
+    I(X_U11.XR104.VSENSE)     =    17.52mA  \   276.04uA
+    I(X_U11.XR103.VSENSE)     =   -121.89A  \   -48.48uA
+    I(X_U1.HCCVS1)            =     30.67A  \     -9.90A
+    I(X_U2.HCCVS1)            =     30.70A  \     -9.90A
+    I(X_U3.HCCVS1)            =    -14.15A  \    -13.32A
+    I(X_U4.HCCVS1)            =    -14.15A  \    -13.32A
+    I(X_U5.HCCVS1)            =     16.96A  \    -9.477A
+    I(X_U6.HCCVS1)            =     16.96A  \    -9.477A
+    I(X_U7.HCCVS1)            =     27.49A  \     -9.81A
+    I(X_U8.HCCVS1)            =     16.44A  \    -9.457A
+    I(X_U9.HCCVS1)            =   -72.28mA  \  -595.99mA
+    I(X_U10.HCCVS1)           =   -72.28mA  \  -595.99mA
+    I(X_U11.HCCVS1)           =     16.44A  \    -9.457A
+
+  These devices failed to converge:
+    X_U1.XU9.D1 X_U2.XU9.D1 X_U5.XU9.D1 X_U6.XU9.D1 X_U7.XU9.D1 X_U1.XU24.E1 
+    X_U1.XU23.E1 X_U1.XU5.E1 X_U1.XU3.E1 X_U1.XU25.E1 X_U1.XU22.E1 X_U1.XU21.E1 
+    X_U2.XU24.E1 X_U2.XU23.E1 X_U2.XU5.E1 X_U2.XU3.E1 X_U2.XU25.E1 X_U2.XU22.E1 
+    X_U2.XU21.E1 X_U3.XU5.E1 X_U3.XU3.E1 X_U3.XU25.E1 X_U4.XU5.E1 X_U4.XU3.E1 
+    X_U4.XU25.E1 X_U5.XU24.E1 X_U5.XU23.E1 X_U5.XU5.E1 X_U5.XU3.E1 X_U5.XU25.E1 
+    X_U5.XU22.E1 X_U5.XU21.E1 X_U6.XU24.E1 X_U6.XU23.E1 X_U6.XU5.E1 X_U6.XU3.E1 
+    X_U6.XU25.E1 X_U6.XU22.E1 X_U6.XU21.E1 X_U7.XU24.E1 X_U7.XU23.E1 
+    X_U7.XU5.E1 X_U7.XU3.E1 X_U7.XU25.E1 X_U7.XU22.E1 X_U7.XU21.E1 X_U8.XU24.E1 
+    X_U8.XU23.E1 X_U8.XU3.E1 X_U8.XU25.E1 X_U8.XU22.E1 X_U8.XU21.E1 X_U9.XU5.E1 
+    X_U9.XU3.E1 X_U9.XU25.E1 X_U10.XU5.E1 X_U10.XU3.E1 X_U10.XU25.E1 
+    X_U11.XU24.E1 X_U11.XU23.E1 X_U11.XU3.E1 X_U11.XU25.E1 X_U11.XU22.E1 
+    X_U11.XU21.E1 X_U1.XU26.G1 X_U1.XU4.G1 X_U2.XU26.G1 X_U2.XU4.G1 
+    X_U3.XU26.G1 X_U3.XU4.G1 X_U4.XU26.G1 X_U4.XU4.G1 X_U5.XU26.G1 X_U5.XU4.G1 
+    X_U6.XU26.G1 X_U6.XU4.G1 X_U7.XU26.G1 X_U7.XU4.G1 X_U8.XU26.G1 X_U8.XU4.G1 
+    X_U9.XU26.G1 X_U9.XU4.G1 X_U10.XU26.G1 X_U10.XU4.G1 X_U11.XU26.G1 
+    X_U11.XU4.G1 
+
+**** Interrupt ****

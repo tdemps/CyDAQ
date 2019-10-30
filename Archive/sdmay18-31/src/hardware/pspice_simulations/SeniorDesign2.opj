@@ -1,0 +1,168 @@
+(ExpressProject "SeniorDesign2"
+  (ProjectVersion "19981106")
+  (ProjectType "Analog or A/D Mixed Mode")
+  (Folder "Design Resources"
+    (Folder "Library")
+    (NoModify)
+    (File ".\seniordesign2.dsn"
+      (Type "Schematic Design"))
+    (BuildFileAddedOrDeleted "x")
+    (CompileFileAddedOrDeleted "x")
+    (PSPICE_Regenerate_Netlist_Flag "FALSE"))
+  (Folder "Outputs"
+    (File ".\seniordesign2-pspicefiles\schematic1\schematic1.net"
+      (Type "Report")))
+  (Folder "PSpice Resources"
+    (Folder "Simulation Profiles"
+      (File.PSpice.{09528990-3187-11D2-BC7B-00A0C90CBF91}
+         ".\seniordesign2-pspicefiles\schematic1\seniordesign.sim"
+        (DisplayName "SCHEMATIC1-SeniorDesign")
+        (Type "PSpice Profile"))
+      (ActiveProfile ".\seniordesign2-pspicefiles\schematic1\seniordesign2.sim")
+      (File.PSpice.{09528990-3187-11D2-BC7B-00A0C90CBF91}
+         ".\seniordesign2-pspicefiles\schematic1\seniordesign2.sim"
+        (DisplayName "SCHEMATIC1-SeniorDesign2")
+        (Type "PSpice Profile")))
+    (Folder "Model Libraries"
+      (Sort User))
+    (Folder "Stimulus Files"
+      (Sort User))
+    (Folder "Include Files"
+      (Sort User)))
+  (DefaultLibraryBrowseDirectory "library\PSpice")
+  (PartMRUSelector
+    (R
+      (FullPartName "R.Normal")
+      (LibraryName
+         "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\PSPICE\ANALOG.OLB")
+      (DeviceIndex "0"))
+    (L
+      (FullPartName "L.Normal")
+      (LibraryName
+         "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\PSPICE\ANALOG.OLB")
+      (DeviceIndex "0"))
+    (VAC
+      (FullPartName "VAC.Normal")
+      (LibraryName
+         "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\PSPICE\SOURCE.OLB")
+      (DeviceIndex "0"))
+    (0
+      (LibraryName "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\CAPSYM.OLB")
+      (DeviceIndex "0"))
+    (VDC
+      (FullPartName "VDC.Normal")
+      (LibraryName
+         "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\PSPICE\SOURCE.OLB")
+      (DeviceIndex "0"))
+    (VSIN
+      (FullPartName "VSIN.Normal")
+      (LibraryName
+         "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\PSPICE\SOURCE.OLB")
+      (DeviceIndex "0"))
+    (PARAM
+      (FullPartName "PARAM.Normal")
+      (LibraryName
+         "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\PSPICE\SPECIAL.OLB")
+      (DeviceIndex "0"))
+    (OFFPAGELEFT-L
+      (LibraryName "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\CAPSYM.OLB")
+      (DeviceIndex "0"))
+    (OPA4830
+      (FullPartName "OPA4830.Normal")
+      (LibraryName "U:\SENIORDESIGN\ORCAD\SBOMA53\OPA4830.OLB")
+      (DeviceIndex "0"))
+    (C
+      (FullPartName "C.Normal")
+      (LibraryName
+         "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\PSPICE\ANALOG.OLB")
+      (DeviceIndex "0")))
+  (LastUsedLibraryBrowseDirectory
+     "C:\Cadence\SPB_17.2\tools\capture\library\pspice")
+  (MPSSessionName "lhb")
+  (GlobalState
+    (FileView
+      (Path "Design Resources")
+      (Path "Design Resources" "U:\SeniorDesign\Orcad\seniordesign2.dsn")
+      (Path "Design Resources" "U:\SeniorDesign\Orcad\seniordesign2.dsn"
+         "SCHEMATIC1")
+      (Path "Outputs")
+      (Path "PSpice Resources")
+      (Path "PSpice Resources" "Simulation Profiles")
+      (Select "Design Resources" "U:\SeniorDesign\Orcad\seniordesign2.dsn"
+         "SCHEMATIC1" "PAGE7"))
+    (HierarchyView)
+    (Doc
+      (Type "COrCapturePMDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 0 200 0 505"))
+      (Tab 0))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 156 1708 156 615")
+        (Scroll "0 609")
+        (Zoom "174")
+        (Occurrence "/"))
+      (Path "U:\SENIORDESIGN\ORCAD\SENIORDESIGN2.DSN")
+      (Schematic "SCHEMATIC1")
+      (Page "PAGE5"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 182 1734 182 641")
+        (Scroll "-267 0")
+        (Zoom "100")
+        (Occurrence "/"))
+      (Path "U:\SENIORDESIGN\ORCAD\SENIORDESIGN2.DSN")
+      (Schematic "SCHEMATIC1")
+      (Page "PAGE1"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 208 1760 208 667")
+        (Scroll "-267 0")
+        (Zoom "100")
+        (Occurrence "/"))
+      (Path "U:\SENIORDESIGN\ORCAD\SENIORDESIGN2.DSN")
+      (Schematic "SCHEMATIC1")
+      (Page "PAGE2"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 0 1552 0 459")
+        (Scroll "-267 0")
+        (Zoom "100")
+        (Occurrence "/"))
+      (Path "U:\SENIORDESIGN\ORCAD\SENIORDESIGN2.DSN")
+      (Schematic "SCHEMATIC1")
+      (Page "PAGE3"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 26 1578 26 485")
+        (Scroll "-267 0")
+        (Zoom "100")
+        (Occurrence "/"))
+      (Path "U:\SENIORDESIGN\ORCAD\SENIORDESIGN2.DSN")
+      (Schematic "SCHEMATIC1")
+      (Page "PAGE4"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 2 3 -1 -1 -8 -31 52 1604 52 511")
+        (Scroll "-421 0")
+        (Zoom "100")
+        (Occurrence "/"))
+      (Path "U:\SENIORDESIGN\ORCAD\SENIORDESIGN2.DSN")
+      (Schematic "SCHEMATIC1")
+      (Page "PAGE6"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 78 1630 78 537")
+        (Scroll "-267 0")
+        (Zoom "100")
+        (Occurrence "/"))
+      (Path "U:\SENIORDESIGN\ORCAD\SENIORDESIGN2.DSN")
+      (Schematic "SCHEMATIC1")
+      (Page "PAGE7"))))
