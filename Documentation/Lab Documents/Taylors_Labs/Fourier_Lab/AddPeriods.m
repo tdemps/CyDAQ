@@ -1,7 +1,8 @@
 % This Function Extends the Signal so that it can be played back
+% and heard by the human ear
 
 % yy is the vector that you would like to extend
-% periods is the amount of time you would like to repeat that vector
+% periods is the number of periods to be added
 
 function f = AddPeriods(yy, periods)
 
@@ -9,7 +10,7 @@ function f = AddPeriods(yy, periods)
 f = zeros(length(yy)*periods, 1);
 
 % Copy in the vector for the amount of periods desired 
-for i = 1:periods
+for i = 0:periods
     for j = 1:length(yy)
         f(j+i*length(yy)) = yy(j);
     end
