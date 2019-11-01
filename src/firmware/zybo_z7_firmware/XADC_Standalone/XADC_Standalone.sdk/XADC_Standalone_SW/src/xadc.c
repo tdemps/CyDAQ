@@ -45,6 +45,7 @@ u8 xadcInit(){
     address = XADCConfigPtr->BaseAddress;
     u8 mode = XSysMon_GetSequencerMode(SysMonInstPtr);
     status =  XSysMon_GetSeqInputMode(SysMonInstPtr);
+    u32 avgEnables = XAdcPs_GetSeqAvgEnables(XADCInstPtr);
 	/* Set the Calibration enables.
 	*/
 	XSysMon_SetCalibEnables(SysMonInstPtr, XSM_CFR1_CAL_PS_GAIN_OFFSET_MASK | XSM_CFR1_CAL_ADC_GAIN_OFFSET_MASK);

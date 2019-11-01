@@ -2,11 +2,11 @@
 # Webtalk v2019.1 (64-bit)
 # SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
 # 
-# Start of session at: Tue Oct 29 13:49:36 2019
-# Process ID: 7084
-# Current directory: C:/ETG-Git-Repos/x9258-potentiometer/src/zybo_z7_firmware/XADC_Standalone/XADC_Standalone.sdk/webtalk
+# Start of session at: Wed Oct 30 13:01:03 2019
+# Process ID: 12988
+# Current directory: C:/ETG-Git-Repos/master_ee_224/src/firmware/zybo_z7_firmware/XADC_Standalone/XADC_Standalone.sdk/webtalk
 # Command line: wbtcv.exe -mode batch -source sdk_webtalk.tcl
-# Log file: C:/ETG-Git-Repos/x9258-potentiometer/src/zybo_z7_firmware/XADC_Standalone/XADC_Standalone.sdk/webtalk/webtalk.log
-# Journal file: C:/ETG-Git-Repos/x9258-potentiometer/src/zybo_z7_firmware/XADC_Standalone/XADC_Standalone.sdk/webtalk\webtalk.jou
+# Log file: C:/ETG-Git-Repos/master_ee_224/src/firmware/zybo_z7_firmware/XADC_Standalone/XADC_Standalone.sdk/webtalk/webtalk.log
+# Journal file: C:/ETG-Git-Repos/master_ee_224/src/firmware/zybo_z7_firmware/XADC_Standalone/XADC_Standalone.sdk/webtalk\webtalk.jou
 #-----------------------------------------------------------
 source sdk_webtalk.tcl
