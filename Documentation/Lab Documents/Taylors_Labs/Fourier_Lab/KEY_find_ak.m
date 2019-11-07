@@ -1,6 +1,11 @@
 % THIS IS THE KEY, FOR TAs AND INSTUCTORS ONLY %
 
-function f = KEY_find_ak(x, k, fs)
+function a_k = KEY_find_ak(x, k, fs)
+
+% x is a column vector
+% rotate it to become a row vector
+
+x = rot90(x);
 
 % The sample time Ts is 1/sampleRate
 Ts = 1/fs;
@@ -16,14 +21,11 @@ t = t * Ts;
 % The complex part
 complex = exp(j*k*w0*t);
 
-% Rotate it so it is a nx1 matrix
-complex = rot90(complex);
-
 % the complex part mulitiplied 
 % by the function 
-vectr = x.*complex;
+func = x.*complex;
 
 % the Reimen sum * (1/period)
-f = (Ts/T)*(sum(vectr));
+a_k = (Ts/T)*(sum(func));
 
 end

@@ -1,7 +1,7 @@
 % THIS IS THE KEY, FOR TAs AND INSTUCTORS ONLY %
 
 
-function synth = KEY_fsynt(C, f, fs, ss, ff)
+function synth = KEY_fsynt(C, K, f, fs)
 
 % Find Omega wich is (2*pi)/Period
 % Frequency is the inverse of the Period
@@ -15,7 +15,7 @@ temp = zeros(1, length(t));
 
 for i = 1:length(C)
     
-    temp = temp + C(i) * exp(j*w0*t*(ss+i-1));
+    temp = temp + C(i) * exp(j*w0*t*K(i));
     
 end
 
