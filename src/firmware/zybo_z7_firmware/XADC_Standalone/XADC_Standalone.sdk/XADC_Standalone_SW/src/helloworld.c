@@ -61,21 +61,13 @@ int main()
     u32 status = 0;
     float voltage = 0.0;
     xadcInit();
-    xil_printf("Hello World\n\r");
+   // xil_printf("Hello World\n\r");
     u16 i = 0, reading = 0;
-    XSysMon* sysPtr = xadcGetSysMonPtr();
-    XAdcPs* adcPtr = xadcGetXADCPtr();
-    while(1){
-    	reading = XAdcPs_GetAdcData(adcPtr, XADCPS_CH_AUX_MIN + 14);
-    	status = XAdcPs_GetMiscStatus(adcPtr);
-    	voltage = RawToExtVoltage(reading);
-        xil_printf("Voltage: %d.%03d, Status: %X\n", (int)(voltage), xadcFractionToInt(voltage), status);
-        i++;
+    xadcEnableSampling();
+	sleep(5);
 
-    	while ( XSM_SR_EOS_MASK != (XSysMon_GetStatus(sysPtr) & XSM_SR_EOS_MASK) );
+	xadcProcessSamples();
 
-        sleep(1);
-    }
     cleanup_platform();
     return 0;
 }

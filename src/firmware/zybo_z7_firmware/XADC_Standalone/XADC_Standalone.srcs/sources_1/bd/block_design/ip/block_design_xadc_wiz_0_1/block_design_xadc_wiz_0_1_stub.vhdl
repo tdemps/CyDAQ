@@ -1,10 +1,10 @@
 -- Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2019.1 (win64) Build 2552052 Fri May 24 14:49:42 MDT 2019
--- Date        : Tue Oct 29 13:51:38 2019
--- Host        : etglabtest-02 running 64-bit major release  (build 9200)
+-- Date        : Mon Nov  4 16:46:50 2019
+-- Host        : etgtech-03 running 64-bit major release  (build 9200)
 -- Command     : write_vhdl -force -mode synth_stub
---               C:/ETG-Git-Repos/x9258-potentiometer/src/zybo_z7_firmware/XADC_Standalone/XADC_Standalone.srcs/sources_1/bd/block_design/ip/block_design_xadc_wiz_0_1/block_design_xadc_wiz_0_1_stub.vhdl
+--               U:/master_ee_224/src/firmware/zybo_z7_firmware/XADC_Standalone/XADC_Standalone.srcs/sources_1/bd/block_design/ip/block_design_xadc_wiz_0_1/block_design_xadc_wiz_0_1_stub.vhdl
 -- Design      : block_design_xadc_wiz_0_1
 -- Purpose     : Stub declaration of top-level module interface
 -- Device      : xc7z010clg400-1

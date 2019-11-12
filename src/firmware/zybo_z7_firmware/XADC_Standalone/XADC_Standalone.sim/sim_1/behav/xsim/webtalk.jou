@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Webtalk v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Tue Nov  5 14:00:44 2019
+# Process ID: 18832
+# Current directory: U:/master_ee_224/src/firmware/zybo_z7_firmware/XADC_Standalone/XADC_Standalone.sim/sim_1/behav/xsim
+# Command line: wbtcv.exe -mode batch -source U:/master_ee_224/src/firmware/zybo_z7_firmware/XADC_Standalone/XADC_Standalone.sim/sim_1/behav/xsim/xsim.dir/block_design_wrapper_behav/webtalk/xsim_webtalk.tcl -notrace
+# Log file: U:/master_ee_224/src/firmware/zybo_z7_firmware/XADC_Standalone/XADC_Standalone.sim/sim_1/behav/xsim/webtalk.log
+# Journal file: U:/master_ee_224/src/firmware/zybo_z7_firmware/XADC_Standalone/XADC_Standalone.sim/sim_1/behav/xsim\webtalk.jou
+#-----------------------------------------------------------
+source U:/master_ee_224/src/firmware/zybo_z7_firmware/XADC_Standalone/XADC_Standalone.sim/sim_1/behav/xsim/xsim.dir/block_design_wrapper_behav/webtalk/xsim_webtalk.tcl -notrace

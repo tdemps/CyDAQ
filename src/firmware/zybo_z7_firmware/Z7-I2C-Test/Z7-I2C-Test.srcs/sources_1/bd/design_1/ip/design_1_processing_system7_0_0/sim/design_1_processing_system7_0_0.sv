@@ -56,9 +56,9 @@
       bit  ENET1_MDIO_I;
       bit  ENET1_EXT_INTIN;
       bit  [7 : 0] ENET1_GMII_RXD;
-      bit  [63 : 0] GPIO_I;
-      bit  [63 : 0] GPIO_O;
-      bit  [63 : 0] GPIO_T;
+      bit  [0 : 0] GPIO_I;
+      bit  [0 : 0] GPIO_O;
+      bit  [0 : 0] GPIO_T;
       bit  I2C0_SDA_I;
       bit  I2C0_SDA_O;
       bit  I2C0_SDA_T;
@@ -677,6 +677,9 @@
 
 //MODULE DECLARATION
  module design_1_processing_system7_0_0 (
+  GPIO_I,
+  GPIO_O,
+  GPIO_T,
   USB0_PORT_INDCTL,
   USB0_VBUS_PWRSELECT,
   USB0_VBUS_PWRFAULT,
@@ -719,6 +722,8 @@
   M_AXI_GP0_BRESP,
   M_AXI_GP0_RRESP,
   M_AXI_GP0_RDATA,
+  Core1_nFIQ,
+  Core1_nIRQ,
   FCLK_CLK0,
   FCLK_RESET0_N,
   MIO,
@@ -755,7 +760,7 @@
       parameter USE_TRACE_DATA_EDGE_DETECTOR = 0;
       parameter C_TRACE_PIPELINE_WIDTH = 8;
       parameter C_TRACE_BUFFER_CLOCK_DELAY = 12;
-      parameter C_EMIO_GPIO_WIDTH = 64;
+      parameter C_EMIO_GPIO_WIDTH = 1;
       parameter C_INCLUDE_ACP_TRANS_CHECK = 0;
       parameter C_USE_DEFAULT_ACP_USER_VAL = 0;
       parameter C_S_AXI_ACP_ARUSER_VAL = 31;
@@ -805,6 +810,9 @@
 
 //INPUT AND OUTPUT PORTS
 
+      input  [0 : 0] GPIO_I;
+      output  [0 : 0] GPIO_O;
+      output  [0 : 0] GPIO_T;
       output  [1 : 0] USB0_PORT_INDCTL;
       output  USB0_VBUS_PWRSELECT;
       input  USB0_VBUS_PWRFAULT;
@@ -847,6 +855,8 @@
       input  [1 : 0] M_AXI_GP0_BRESP;
       input  [1 : 0] M_AXI_GP0_RRESP;
       input  [31 : 0] M_AXI_GP0_RDATA;
+      input  Core1_nFIQ;
+      input  Core1_nIRQ;
       output  FCLK_CLK0;
       output  FCLK_RESET0_N;
       inout  [53 : 0] MIO;
@@ -873,6 +883,8 @@
 
 //REG DECLARATIONS
 
+      reg [0 : 0] GPIO_O;
+      reg [0 : 0] GPIO_T;
       reg [1 : 0] USB0_PORT_INDCTL;
       reg USB0_VBUS_PWRSELECT;
       reg M_AXI_GP0_ARVALID;
@@ -1060,7 +1072,7 @@ output bit M_AXI_GP0_RREADY
      FCLK_CLK0 = 1'b0;
   end
 
-  always #(10.0) FCLK_CLK0 <= ~FCLK_CLK0;
+  always #(5.0) FCLK_CLK0 <= ~FCLK_CLK0;
 
   always@(posedge FCLK_CLK0)
   begin
