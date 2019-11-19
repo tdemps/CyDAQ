@@ -1,7 +1,7 @@
 //Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2019.1 (win64) Build 2552052 Fri May 24 14:49:42 MDT 2019
-//Date        : Tue Nov 12 12:48:09 2019
+//Date        : Mon Nov 18 18:15:52 2019
 //Host        : etgtech-03 running 64-bit major release  (build 9200)
 //Command     : generate_target design_1_wrapper.bd
 //Design      : design_1_wrapper
@@ -34,7 +34,8 @@ module design_1_wrapper
     Vaux14_0_v_n,
     Vaux14_0_v_p,
     Vp_Vn_0_v_n,
-    Vp_Vn_0_v_p);
+    Vp_Vn_0_v_p,
+    btns_4bits_tri_i);
   inout [14:0]DDR_addr;
   inout [2:0]DDR_ba;
   inout DDR_cas_n;
@@ -60,6 +61,7 @@ module design_1_wrapper
   input Vaux14_0_v_p;
   input Vp_Vn_0_v_n;
   input Vp_Vn_0_v_p;
+  input [3:0]btns_4bits_tri_i;
 
   wire [14:0]DDR_addr;
   wire [2:0]DDR_ba;
@@ -86,6 +88,7 @@ module design_1_wrapper
   wire Vaux14_0_v_p;
   wire Vp_Vn_0_v_n;
   wire Vp_Vn_0_v_p;
+  wire [3:0]btns_4bits_tri_i;
 
   design_1 design_1_i
        (.DDR_addr(DDR_addr),
@@ -112,5 +115,6 @@ module design_1_wrapper
         .Vaux14_0_v_n(Vaux14_0_v_n),
         .Vaux14_0_v_p(Vaux14_0_v_p),
         .Vp_Vn_0_v_n(Vp_Vn_0_v_n),
-        .Vp_Vn_0_v_p(Vp_Vn_0_v_p));
+        .Vp_Vn_0_v_p(Vp_Vn_0_v_p),
+        .btns_4bits_tri_i(btns_4bits_tri_i));
 endmodule

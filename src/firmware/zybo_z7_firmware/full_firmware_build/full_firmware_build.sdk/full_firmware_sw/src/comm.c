@@ -11,7 +11,6 @@
 static XUartPs UART1;
 static INTC INTERRUPTCONTROLLER;
 
-static u8 SendBuffer[TEST_BUFFER_SIZE];	/* Buffer for Transmitting Data */
 static u8 RecvBuffer[TEST_BUFFER_SIZE];	/* Buffer for Receiving Data */
 
 /*
@@ -22,7 +21,7 @@ volatile int TotalReceivedCount;
 volatile int TotalSentCount;
 int TotalErrorCount;
 
-int initUartComm(){
+int commInit(){
 
 	int status, Index, BadByteCount = 0;
 	XUartPs_Config *Config;
@@ -43,7 +42,7 @@ int initUartComm(){
 	 * Connect the UART to the interrupt subsystem such that interrupts
 	 * can occur. This function is application specific.
 	 */
-	status = setupInterruptSystem(&INTERRUPTCONTROLLER, &UART1, UART_INT_IRQ_ID);
+	//status = commSetupInterruptSystem(&INTERRUPTCONTROLLER, &UART1, UART_INT_IRQ_ID);
 	if (status != XST_SUCCESS) {
 		return XST_FAILURE;
 	}
@@ -53,24 +52,22 @@ int initUartComm(){
 	 * a pointer to the UART driver instance as the callback reference
 	 * so the handlers are able to access the instance data
 	 */
-	XUartPs_SetHandler(&UART1, (XUartPs_Handler)Handler, &UART1);
+	//XUartPs_SetHandler(&UART1, (XUartPs_Handler)Handler, &UART1);
 
 	/*
 	 * Enable the interrupt of the UART so interrupts will occur, setup
 	 * a local loopback so data that is sent will be received.
 	 */
-	IntrMask =
-		XUARTPS_IXR_TOUT | XUARTPS_IXR_PARITY | XUARTPS_IXR_FRAMING |
-		XUARTPS_IXR_OVER | XUARTPS_IXR_TXEMPTY | XUARTPS_IXR_RXFULL |
-		XUARTPS_IXR_RXOVR;
-
-	if (UART1.Platform == XPLAT_ZYNQ_ULTRA_MP) {
-		IntrMask |= XUARTPS_IXR_RBRK;
-	}
-
-	XUartPs_SetInterruptMask(&UART1, IntrMask);
-
-	//XUartPs_SetOperMode(&UART1, XUARTPS_OPER_MODE_LOCAL_LOOP);
+//	IntrMask =
+//		XUARTPS_IXR_TOUT | XUARTPS_IXR_PARITY | XUARTPS_IXR_FRAMING |
+//		XUARTPS_IXR_OVER | XUARTPS_IXR_RXFULL |
+//		XUARTPS_IXR_RXOVR;
+//
+//	if (UART1.Platform == XPLAT_ZYNQ_ULTRA_MP) {
+//		IntrMask |= XUARTPS_IXR_RBRK;
+//	}
+//
+//	XUartPs_SetInterruptMask(&UART1, IntrMask);
 
 	/*
 	 * Set the receiver timeout. If it is not set, and the last few bytes
@@ -81,65 +78,20 @@ int initUartComm(){
 	 * Increase the time out value if baud rate is high, decrease it if
 	 * baud rate is low.
 	 */
-	XUartPs_SetRecvTimeout(&UART1, 8);
-
-
-	/*
-	 * Initialize the send buffer bytes with a pattern and the
-	 * the receive buffer bytes to zero to allow the receive data to be
-	 * verified
-	 */
-	for (Index = 0; Index < TEST_BUFFER_SIZE; Index++) {
-
-		SendBuffer[Index] = (Index % 26) + 'A';
-		RecvBuffer[Index] = 0;
-	}
-
-	/*
-	 * Start receiving data before sending it since there is a loopback,
-	 * ignoring the number of bytes received as the return value since we
-	 * know it will be zero
-	 */
-	XUartPs_Recv(&UART1, RecvBuffer, TEST_BUFFER_SIZE);
-
-	/*
-	 * Send the buffer using the UART and ignore the number of bytes sent
-	 * as the return value since we are using it in interrupt mode.
-	 */
-	XUartPs_Send(&UART1, SendBuffer, TEST_BUFFER_SIZE);
-
-	/*
-	 * Wait for the entire buffer to be received, letting the interrupt
-	 * processing work in the background, this function may get locked
-	 * up in this loop if the interrupts are not working correctly.
-	 */
-//	while (1) {
-//		if ((TotalSentCount == TEST_BUFFER_SIZE) &&
-//		    (TotalReceivedCount == TEST_BUFFER_SIZE)) {
-//			break;
-//		}
-//	}
-
-	/* Verify the entire receive buffer was successfully received */
-//	for (Index = 0; Index < TEST_BUFFER_SIZE; Index++) {
-//		if (RecvBuffer[Index] != SendBuffer[Index]) {
-//			BadByteCount++;
-//		}
-//	}
+	XUartPs_SetRecvTimeout(&UART1, 50);
 
 
 	/* Set the UART in Normal Mode */
 	XUartPs_SetOperMode(&UART1, XUARTPS_OPER_MODE_NORMAL);
-
-
-	/* If any bytes were not correct, return an error */
-	if (BadByteCount != 0) {
-		return XST_FAILURE;
-	}
+	XUartPs_SetBaudRate(&UART1, COMM_BAUD_RATE);
 
 	return XST_SUCCESS;
 }
 
+
+XUartPs* commGetUartPtr(){
+	return &UART1;
+}
 /**************************************************************************/
 /**
 *
@@ -230,7 +182,7 @@ void Handler(void *CallBackRef, u32 Event, unsigned int EventData)
 * @note		None.
 *
 ****************************************************************************/
-static int setupInterruptSystem(INTC *IntcInstancePtr, XUartPs *UartInstancePtr, u16 UartIntrId)
+static int commSetupInterruptSystem(INTC *IntcInstancePtr, XUartPs *UartInstancePtr, u16 UartIntrId)
 {
 	int Status;
 

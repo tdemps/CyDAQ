@@ -33,8 +33,9 @@
 #endif
 
 #define UART_DEVICE_ID XPAR_XUARTPS_0_DEVICE_ID
-
-int initUartComm();
-static int setupInterruptSystem(INTC *IntcInstancePtr, XUartPs *UartInstancePtr, u16 UartIntrId);
+#define COMM_BAUD_RATE 921600U
+int commInit();
+static int commSetupInterruptSystem(INTC *IntcInstancePtr, XUartPs *UartInstancePtr, u16 UartIntrId);
 void Handler(void *CallBackRef, u32 Event, unsigned int EventData);
+XUartPs* commGetUartPtr();
 #endif /* SRC_COMM_H_ */

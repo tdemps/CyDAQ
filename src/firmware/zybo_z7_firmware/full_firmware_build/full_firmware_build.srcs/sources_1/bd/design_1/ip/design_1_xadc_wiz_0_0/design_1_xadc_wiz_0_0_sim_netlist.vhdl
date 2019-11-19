@@ -1,7 +1,7 @@
 -- Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2019.1 (win64) Build 2552052 Fri May 24 14:49:42 MDT 2019
--- Date        : Tue Nov 12 12:49:38 2019
+-- Date        : Mon Nov 18 18:17:37 2019
 -- Host        : etgtech-03 running 64-bit major release  (build 9200)
 -- Command     : write_vhdl -force -mode funcsim
 --               U:/master_ee_224/src/firmware/zybo_z7_firmware/full_firmware_build/full_firmware_build.srcs/sources_1/bd/design_1/ip/design_1_xadc_wiz_0_0/design_1_xadc_wiz_0_0_sim_netlist.vhdl
@@ -3470,7 +3470,7 @@ begin
     );
 XADC_INST: unisim.vcomponents.XADC
     generic map(
-      INIT_40 => X"0000",
+      INIT_40 => X"8000",
       INIT_41 => X"21A4",
       INIT_42 => X"0400",
       INIT_43 => X"0000",
@@ -3478,12 +3478,12 @@ XADC_INST: unisim.vcomponents.XADC
       INIT_45 => X"0000",
       INIT_46 => X"0000",
       INIT_47 => X"0000",
-      INIT_48 => X"0701",
+      INIT_48 => X"0000",
       INIT_49 => X"4000",
       INIT_4A => X"0000",
       INIT_4B => X"0000",
       INIT_4C => X"0000",
-      INIT_4D => X"4000",
+      INIT_4D => X"0000",
       INIT_4E => X"0000",
       INIT_4F => X"0000",
       INIT_50 => X"B5ED",

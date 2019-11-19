@@ -1,7 +1,7 @@
 // Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2019.1 (win64) Build 2552052 Fri May 24 14:49:42 MDT 2019
-// Date        : Tue Nov 12 12:49:38 2019
+// Date        : Mon Nov 18 18:17:37 2019
 // Host        : etgtech-03 running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode funcsim
 //               U:/master_ee_224/src/firmware/zybo_z7_firmware/full_firmware_build/full_firmware_build.srcs/sources_1/bd/design_1/ip/design_1_xadc_wiz_0_0/design_1_xadc_wiz_0_0_sim_netlist.v
@@ -5178,7 +5178,7 @@ module design_1_xadc_wiz_0_0_design_1_xadc_wiz_0_0_xadc_core_drp
         .O(local_reg_wrack_reg_0));
   (* box_type = "PRIMITIVE" *) 
   XADC #(
-    .INIT_40(16'h0000),
+    .INIT_40(16'h8000),
     .INIT_41(16'h21A4),
     .INIT_42(16'h0400),
     .INIT_43(16'h0000),
@@ -5186,12 +5186,12 @@ module design_1_xadc_wiz_0_0_design_1_xadc_wiz_0_0_xadc_core_drp
     .INIT_45(16'h0000),
     .INIT_46(16'h0000),
     .INIT_47(16'h0000),
-    .INIT_48(16'h0701),
+    .INIT_48(16'h0000),
     .INIT_49(16'h4000),
     .INIT_4A(16'h0000),
     .INIT_4B(16'h0000),
     .INIT_4C(16'h0000),
-    .INIT_4D(16'h4000),
+    .INIT_4D(16'h0000),
     .INIT_4E(16'h0000),
     .INIT_4F(16'h0000),
     .INIT_50(16'hB5ED),

@@ -141,9 +141,19 @@ void xadcDisableSampling(){
 	XSysMon_IntrGlobalDisable(&SysMonInst);
 }
 
-void xadcEnableSampling(){
+void xadcEnableSampling(u8 streamSetting){
 	xil_printf("Starting sampling\n");
 	XSysMon_IntrGlobalEnable(SysMonInstPtr);
+	if(streamSetting == 1){
+		u32 cursor = 0;
+		while(XSM_IPIXR_EOS_MASK == XSysMon_IntrGetEnabled(SysMonInstPtr)){
+			if(cursor+10 <= xadcSampleCount){
+				xil_printf("%x\n", xadcBuffer[xadcSampleCount]);
+				cursor = xadcSampleCount;
+			}
+		}
+	}
+
 }
 /****************************************************************************/
 /**
@@ -223,8 +233,6 @@ void XAdcInterruptHandler(void *CallBackRef){
 	u32 intrStatusValue;
 	if (xadcSampleCount < RX_BUFFER_SIZE ){
 		xadcBuffer[xadcSampleCount] = (u16) XSysMon_GetAdcData(&SysMonInst, AUX_14_INPUT) >> 4;
-//		intrStatusValue = XSysMon_IntrGetStatus(&SysMonInst);
-//		xil_printf("Global Int Status %x \n",(unsigned int)intrStatusValue);
 		xadcSampleCount++;
 	}else{
 		printf("Done\n");
@@ -245,7 +253,7 @@ void xadcProcessSamples(){
 	while(i < xadcSampleCount){
 
 		voltage = RawToExtVoltage(xadcBuffer[i]);
-		if(xadcBuffer[i] > 0x800) { voltage -= 1.0; }
+	//	if(xadcBuffer[i] > 0x800) { voltage -= 1.0; }
 		 printf("%f %x\n", voltage, xadcBuffer[i] );
 		i++;
 	}

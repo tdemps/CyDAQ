@@ -46,7 +46,7 @@ void XAdcInterruptHandler(void *CallBackRef);
 void checkForSamples();
 u32 xadcGetSampleCount();
 u32* getBuffer();
-void xadcEnableSampling();
+void xadcEnableSampling(u8 streamSetting);
 void xadcDisableSampling();
 void xadcSetPolarity(u8 setting);
 void xadcProcessSamples();
