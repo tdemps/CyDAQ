@@ -41,3 +41,5 @@ class fr_welcome(Frame):
                            command=lambda: top_wndw.show_frame(fr_a_ch_sel),
                            font=cnst.font_small)
         btn_start.pack()
+
+

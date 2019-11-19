@@ -1,13 +1,27 @@
 import serial
+import threading
 import serial.tools.list_ports
 import struct
 import ctrl_crc
 
-from enum import IntEnum
+from enum import IntEnum, Enum
 
 from mdl_firmware import mdl_fw_vals
 from mdl_firmware import f_sensors
 
+
+class sig_serial(Enum):
+    """
+    This class defines a table of commands that are sent between the firmware
+    and the front-end.
+
+    @author: sdmay18-31
+
+
+
+    """
+    END_BYTE = "!"       # decimal for '!'
+    START_BYTE = "@"    # decimal for '@'
 
 class sig_cmds(IntEnum):
     """
@@ -15,6 +29,9 @@ class sig_cmds(IntEnum):
     and the front-end.
 
     @author: sdmay18-31
+
+
+
     """
     START_COLLECTION = 0
     STOP_COLLECTION = 1
@@ -29,7 +46,8 @@ class sig_cmds(IntEnum):
     RESET_ALL = 10  # Deprecated
     REPORT_DEVICES = 11  # Deprecated
     TUNE_FILTER = 12
-    START_BYTE = 252
+    END_BYTE = 33       # decimal for '!'
+    START_BYTE = 64     # decimal for '@'
     ACK = 253
     NAK = 254
     INVALID_CMD = 255
@@ -45,24 +63,110 @@ class sig_adc_cmds(IntEnum):
     SET_SAMPLING_RATE = 0
     SET_FILTER_ROUTE = 1
 
+class parameter:
+    """
+        This class defines a table of commands that are sent to the ZYBO specifying the settings for
+        the Zybo
+
+        """
+    """
+          4 bytes
+    cmd = command (srst = sample rate set, srgt = sample rate get, fbst =  set active filter, fbgt = get active filter,
+                    inst = input set, ingt = input get, strt = start sampling, stop = stop sampling, fbtn = filter board tune)
+
+    inst is the input select (audio, analog input)
+    end of command is an an "!"
+    if the command has multiple values in command, seperate them with with commas
+    if zybo doesnt need to send anything, it will send 'ack!'
+
+    srst = '8 digits in samples per second'!, expected value will be 'ack!'
+    srgt = srgt!, expected value to receive will be srgt='8 bit number'!
+    fbst = enum, 2 character! expected value will be 'ack!'
+    fbgt = fbgt!, expected value to receive will be fbgt='2 characters'!
+    inst = enum, 2 character! expected value will be 'ack!'
+    ingt = fbgt!, expected value to receive will be ingt='2 characters'!
+    strt = strt!, expected value will be 'ack!'
+    stop = stop!, expected value will be 'ack!'
+    fbtn = '2 digit filter','8 digits (for frequency)','8 digits (for second frequency)(if only one frequency is needed set to 0)'
+            expected value will be 'ack!'
+            
+            
+    raw data will come in 2 bytes in hexidecimal
+    """
+    def __init__(self):
+        self.srst = ""
+        self.srgt = ""
+        self.fbst = ""
+        self.fbgt = ""
+        self.inst = ""
+        self.ingt = ""
+        self.strt = ""
+        self.stop = ""
+        self.fbtn = ""
+
+    def send (self)
+        """
+        Sends the parameter settings to the Zybo
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
+        self.open(port_select)
+
+
+    def get(self):
+        """
+                Gets the parameter settings from the Zybo
+
+                Args:
+                    None
+
+                Returns:
+                    None
+                """
+        self.open(port_select)
+
+
+
+class parameter_options(IntEnum):
+    """
+           This class defines a table of commands that are sent to the ZYBO specifying the settings for
+           the Zybo
+
+          """
+    NO_FILTER = 10
+    NOTCH = 11
+    HP1 = 12
+    LP2 = 13
+    BP2 = 14
+    HP6 = 15
+    LP6 = 16
+    BP6 = 17
+
+    AUDIO = 20
 
 class ctrl_comm:
     """
-    This class creates an abstraction for a connection to a device over
-    a Serial connection.
+       This class creates an abstraction for a connection to a device over
+       a Serial connection.
 
-    @author: sdmay18-31
-    """
+       @author: sdmay18-31
+       """
+
     def __init__(self):
         self.__s_comm = serial.Serial()
-        self.__s_comm.baudrate = 460800
+        self.__s_comm.port = self.serial_info()
+        self.__s_comm.baudrate = 115200
         self.__s_comm.bytesize = serial.EIGHTBITS
         self.__s_comm.stopbits = serial.STOPBITS_ONE
         self.__s_comm.xonxoff = True
         self.__s_comm.rtscts = False
         self.__s_comm.dsrdtr = False
         self.__s_comm.parity = serial.PARITY_NONE
-        self.__s_comm.timeout = 1
+        self.__s_comm.timeout = 2
         self.__order = "little"
 
     def close(self):
@@ -114,9 +218,10 @@ class ctrl_comm:
         for element in all_ports:
             if ("USB Serial Port" in element.description):
                 open_ports.append(element.device)
-            #print(element.description)
-        return open_ports
 
+
+
+        return open_ports
 
     def open(self, port):
         """
@@ -140,99 +245,7 @@ class ctrl_comm:
 
             config = mdl_fw_vals()
 
-            s = struct.Struct('>HH')
-            s2 = struct.Struct('>I')
 
-            # Disabled tuning filters, causes freezes if the PCB is not
-            # attached
-            if config.adc0_enabled is True:
-                filt, freq, offset = config.get_ach_data(f_sensors.ADC0)
-                p2 = s2.unpack(s.pack(offset, freq))[0]
-
-                self.__send_pkt(sig_cmds.CONFIG_ADC0,
-                                sig_adc_cmds.SET_SAMPLING_RATE,
-                                config.adc0_s_rate
-                                )
-
-                self.__send_pkt(sig_cmds.CONFIG_ADC0,
-                                sig_adc_cmds.SET_FILTER_ROUTE,
-                                filt,
-                                )
-
-                self.__send_pkt(sig_cmds.TUNE_FILTER,
-                                filt,
-                                p2
-                                )
-
-                self.__send_pkt(sig_cmds.ENABLE_DEV,
-                                f_sensors.ADC0,
-                                0
-                                )
-
-            if config.adc1_enabled is True:
-                filt, freq, offset = config.get_ach_data(f_sensors.ADC1)
-                p2 = s2.unpack(s.pack(offset, freq))[0]
-
-                self.__send_pkt(sig_cmds.CONFIG_ADC1,
-                                sig_adc_cmds.SET_SAMPLING_RATE,
-                                config.adc1_s_rate
-                                )
-
-                self.__send_pkt(sig_cmds.CONFIG_ADC1,
-                                sig_adc_cmds.SET_FILTER_ROUTE,
-                                filt,
-                                )
-
-                self.__send_pkt(sig_cmds.TUNE_FILTER,
-                                filt,
-                                p2
-                                )
-
-                self.__send_pkt(sig_cmds.ENABLE_DEV,
-                                f_sensors.ADC1,
-                                0
-                                )
-
-            if config.adc2_enabled is True:
-                filt, freq, offset = config.get_ach_data(f_sensors.ADC2)
-                p2 = s2.unpack(s.pack(offset, freq))[0]
-
-                self.__send_pkt(sig_cmds.CONFIG_ADC2,
-                                sig_adc_cmds.SET_SAMPLING_RATE,
-                                config.adc2_s_rate
-                                )
-
-                self.__send_pkt(sig_cmds.CONFIG_ADC2,
-                                sig_adc_cmds.SET_FILTER_ROUTE,
-                                filt,
-                                )
-
-                self.__send_pkt(sig_cmds.TUNE_FILTER,
-                                filt,
-                                p2
-                                )
-
-                self.__send_pkt(sig_cmds.ENABLE_DEV,
-                                f_sensors.ADC2,
-                                0
-                                )
-
-            if config.spi_enabled is True:
-                self.__send_pkt(sig_cmds.CONFIG_SPI,
-                                int(config.spi_sensor),
-                                int(config.spi_sensor.get_srate())
-                                )
-
-            if config.i2c_enabled is True:
-                self.__send_pkt(sig_cmds.CONFIG_I2C,
-                                int(config.i2c_sensor),
-                                int(config.i2c_sensor.get_srate())
-                                )
-
-            self.__send_pkt(sig_cmds.START_COLLECTION,
-                            0,
-                            0
-                            )
 
     def get_samples(self):
         """
@@ -262,7 +275,7 @@ class ctrl_comm:
         else:
             return False
 
-    def __write(self, data):
+    def write(self,data):
         """
         Write data to the serial device.
 
@@ -278,6 +291,59 @@ class ctrl_comm:
             return True
         else:
             return False
+
+
+    def send_parameters(self, port_select):
+        """
+                       receives ACK! from the ZYBO
+
+                       Args:
+                           port_select = port that is selected i.e. the zybo port
+                           command = commands being sent
+
+                       Returns:
+                           None
+                       """
+        self.open(port_select)
+        self.write("@" + parameter.srst + parameter.fbst + parameter.inst + parameter.srst + "!")
+
+
+
+    def recieve_acknowlege_zybo(self, port_select):
+        """
+               receives ACK! from the ZYBO
+
+               Args:
+                   port_select = port that is selected i.e. the zybo port
+
+               Returns:
+                   None
+               """
+
+        self.open(port_select)
+        if self.__s_comm.isOpen() is True:
+            while True:
+                if self.read_byte() == sig_serial.START_BYTE.value:
+                    buffer = ""
+                    byte_value = ""
+                    while byte_value != sig_serial.END_BYTE.value:
+                        byte_value = self.read_byte()
+                        if byte_value != sig_serial.END_BYTE.value:
+                            buffer += byte_value
+
+                    if len(buffer) != 3:
+                        self.__throw_exception('SerialReadTimeout')
+                        return False
+                    # buffer = buffer.decode('ascii')
+                    if buffer == "ack":
+                        print("Data Received")
+                        return True
+                    else:
+                        self.__throw_exception('SerailReadTimeout')
+                        print("'ack' was not recieved")
+                        return False
+        else:
+           return False
 
     def __send_pkt(self, cmd, param1, param2):
         # Stuff transfer packet
@@ -304,7 +370,7 @@ class ctrl_comm:
             if(retry_cntr >= 3):
                 self.__throw_exception('WriteRetryTimeout')
 
-    def __read_byte(self):
+    def read_byte(self):
         """
         Read a byte of data.
 
@@ -321,6 +387,7 @@ class ctrl_comm:
             if 1 != len(buffer):
                 self.__throw_exception('SerialReadTimeout')
 
+            buffer = buffer.decode('ascii')
             return buffer
         else:
             return False
@@ -361,6 +428,29 @@ class ctrl_comm:
                 self.__throw_exception('SerialReadTimeout')
 
             return int.from_bytes(buffer, byteorder=self.__order, signed=False)
+        else:
+            return False
+
+    def __read_acknowledge(self):
+        """
+        Read a 3 bytes from the serial device
+
+        Args:
+            None
+
+        Returns:
+            a 1 if true and false if device is not open or string doesnt match "ack".
+        """
+
+        if self.__s_comm.isOpen() is True:
+            buffer = self.__s_comm.read(4)
+            print(buffer)
+            if 4 != len(buffer):
+                self.__throw_exception('SerialReadTimeout')
+            if buffer:
+                buffer = "ack!"
+                return True
+            return False
         else:
             return False
 
@@ -425,6 +515,9 @@ class ctrl_comm:
         else:
             return False
 
+
+
+
     def __throw_exception(self, text):
         """
         Throws an exception for a read timeout
@@ -450,3 +543,36 @@ class ctrl_comm:
 
         if len(output_list) != 0:
             return output_list
+
+    def serial_info(self):
+        """
+            Prints all data from the Zybo serial port
+
+        Args:
+            None
+
+        Returns:
+             None
+        """
+        all_ports = serial.tools.list_ports.comports()
+        open_ports = []
+        for element in all_ports:
+            if ("USB Serial Port" in element.description):
+                open_ports.append(element.device)
+        zybo_port = open_ports[0]
+        port = str(zybo_port)
+
+        return port
+
+    def serial_test(self):
+
+        serial_port = serial.Serial(self.serial_info(), 115200, timeout=2)
+
+        def read_from_port(self):
+            while True:
+                 reading = serial_port.readline().decode('ASCII')
+                 data = reading
+                 print(str(data))
+
+        zybo_info = threading.Thread(target=self.read(self), args=(serial_port,))
+        zybo_info.start()

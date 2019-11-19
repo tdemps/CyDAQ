@@ -118,18 +118,18 @@ class fr_a_ch_sel(Frame):
         toks_used = cfg.adc0_s_rate + cfg.adc1_s_rate + cfg.adc2_s_rate
 
         self.sfreq_slider_0.config(to=cnst.adc_max -
-                                   toks_used +
-                                   cfg.adc0_s_rate)
+                                      toks_used +
+                                      cfg.adc0_s_rate)
         self.sfreq_slider_0.set(cfg.adc0_s_rate)
 
         self.sfreq_slider_1.config(to=cnst.adc_max -
-                                   toks_used +
-                                   cfg.adc1_s_rate)
+                                      toks_used +
+                                      cfg.adc1_s_rate)
         self.sfreq_slider_1.set(cfg.adc1_s_rate)
 
         self.sfreq_slider_2.config(to=cnst.adc_max -
-                                   toks_used +
-                                   cfg.adc2_s_rate)
+                                      toks_used +
+                                      cfg.adc2_s_rate)
         self.sfreq_slider_2.set(cfg.adc2_s_rate)
 
     def set_adc0(self):
@@ -148,9 +148,9 @@ class fr_a_ch_sel(Frame):
 
         fr_a_ch_sel.curr_cfg_ADC = f_sensors.ADC0
 
-        if((utils.val_str_as_int(self.sfreq_slider_0.get(),
-                                 cnst.adc_min,
-                                 cnst.adc_max)) is True):
+        if ((utils.val_str_as_int(self.sfreq_slider_0.get(),
+                                  cnst.adc_min,
+                                  cnst.adc_max)) is True):
             cfg.adc0_enabled = True
             cfg.adc0_s_rate = int(self.sfreq_slider_0.get())
             cnst.top_wndw.show_frame(fr_a_f_sel)
@@ -174,9 +174,9 @@ class fr_a_ch_sel(Frame):
 
         fr_a_ch_sel.curr_cfg_ADC = f_sensors.ADC1
 
-        if((utils.val_str_as_int(self.sfreq_slider_1.get(),
-                                 cnst.adc_min,
-                                 cnst.adc_max)) is True):
+        if ((utils.val_str_as_int(self.sfreq_slider_1.get(),
+                                  cnst.adc_min,
+                                  cnst.adc_max)) is True):
             cfg.adc1_enabled = True
             cfg.adc1_s_rate = int(self.sfreq_slider_1.get())
             cnst.top_wndw.show_frame(fr_a_f_sel)
@@ -200,9 +200,9 @@ class fr_a_ch_sel(Frame):
 
         fr_a_ch_sel.curr_cfg_ADC = f_sensors.ADC2
 
-        if((utils.val_str_as_int(self.sfreq_slider_2.get(),
-                                 cnst.adc_min,
-                                 cnst.adc_max)) is True):
+        if ((utils.val_str_as_int(self.sfreq_slider_2.get(),
+                                  cnst.adc_min,
+                                  cnst.adc_max)) is True):
             cfg.adc2_enabled = True
             cfg.adc2_s_rate = int(self.sfreq_slider_2.get())
             cnst.top_wndw.show_frame(fr_a_f_sel)
@@ -235,9 +235,9 @@ class fr_a_f_sel(Frame):
 
         index = int(event.widget.curselection()[0])
         value = event.widget.get(index)
-        
-        if(value == str(f_filts.NOTCH) or
-           value == str(f_filts.PASS)):
+
+        if (value == str(f_filts.NOTCH) or
+                value == str(f_filts.PASS)):
             self.label_freq.pack_forget()
             self.freq_slider.pack_forget()
         else:
@@ -261,8 +261,7 @@ class fr_a_f_sel(Frame):
             elif value == str(f_filts.BP6):
                 new_min = 800;
                 new_max = 8000;
-            
-            
+
             self.freq_slider.configure(from_=new_min,
                                        to=new_max)
             self.btn_set_filter.pack_forget()
@@ -351,21 +350,21 @@ class fr_a_f_sel(Frame):
         filt2, freq, offset = cfg.get_ach_data(f_sensors.ADC2)
 
         # Reset filt value to None to allow associated filter to be set
-        if(fr_a_ch_sel.curr_cfg_ADC == f_sensors.ADC0):
+        if (fr_a_ch_sel.curr_cfg_ADC == f_sensors.ADC0):
             filt0 = None
 
-        if(fr_a_ch_sel.curr_cfg_ADC == f_sensors.ADC1):
+        if (fr_a_ch_sel.curr_cfg_ADC == f_sensors.ADC1):
             filt1 = None
 
-        if(fr_a_ch_sel.curr_cfg_ADC == f_sensors.ADC2):
+        if (fr_a_ch_sel.curr_cfg_ADC == f_sensors.ADC2):
             filt2 = None
 
         self.analog_filterTypeList.delete(0, END)
 
         for i in range(len(self.analogFilterNames)):
-            if(filt0 != self.analogFilterNames[i] and
-               filt1 != self.analogFilterNames[i] and
-               filt2 != self.analogFilterNames[i]):
+            if (filt0 != self.analogFilterNames[i] and
+                    filt1 != self.analogFilterNames[i] and
+                    filt2 != self.analogFilterNames[i]):
                 self.analog_filterTypeList.insert(i, self.analogFilterNames[i])
 
         self.analog_filterTypeList.select_set(0)

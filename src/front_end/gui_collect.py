@@ -1,11 +1,12 @@
 from tkinter import (Frame, Label, Button, StringVar, END, Listbox, messagebox)
 from threading import (Thread, Event, Timer)
+import serial
 
 from ctrl_fileio import ctrl_fileio
 from mdl_global import mdl_const
 from mdl_firmware import mdl_fw_vals
 from mdl_firmware import f_sensors
-from ctrl_comm import ctrl_comm
+from ctrl_comm import ctrl_comm, sig_cmds
 
 
 class fr_collect(Frame):
@@ -70,6 +71,86 @@ class fr_collect(Frame):
 
         self.__comm.close()
 
+    def __send_cmd_zybo(self, port_select,command):
+        """
+               Sends data to the ZYBO
+
+               Args:
+                   port_select = port that is selected i.e. the zybo port
+                   command = message to send
+
+               Returns:
+                   None
+               """
+
+        self.__comm.open(port_select)
+        self.__comm.write(command.encode())
+        acknowledge = self.__comm.recieve_acknowlege_zybo(port_select)
+        while acknowledge == False:
+            print("Acknowlegde command was not received, Message is being sent again")
+            self.__comm.write(command.encode())
+            acknowledge = self.__comm.recieve_acknowlege_zybo(port_select)
+
+        print("Acknowlegde command was recieved, Message was sent")
+
+        self.__comm.close()
+
+    # def __recieve_acknowlege_zybo(self, port_select):
+    #     """
+    #            receives ACK! from the ZYBO
+    #
+    #            Args:
+    #                port_select = port that is selected i.e. the zybo port
+    #
+    #            Returns:
+    #                None
+    #            """
+    #
+    #     self.__comm.open(port_select)
+    #     try:
+    #         ack = self.__comm.read_byte()
+    #         while (ack != sig_cmds.START_BYTE)
+    #             ack = self.__comm.read_byte()
+    #         while (self.__comm.read_byte() != sig_cmds.END_BYTE)
+    #                 ack_attempt = self.__comm.read()
+    #         if ack_attempt == "ack":
+    #             self.__comm.close()
+    #             return 1
+    #         else:
+    #             self.__comm.close()
+    #             print("Error receiving START_BYTE")
+    #             return 0
+    #
+    #     except Exception as e:
+    #         print("Error receiving START_BYTE")
+    #         self.__comm.close()
+    #         return 0
+
+    # def __recieve_data_zybo(self, port_select):
+    #     """
+    #            receives data to the ZYBO
+    #
+    #            Args:
+    #                port_select = port that is selected i.e. the zybo port
+    #
+    #            Returns:
+    #                None
+    #            """
+    #
+    #     self.__comm.open(port_select)
+    #     try:
+    #         ack = self.__comm.read_byte()
+    #         while (ack != sig_cmds.START_BYTE)
+    #             ack = self.__comm.read_byte()
+    #         self.__comm.close()
+    #         return 1
+    #
+    #     except Exception as e:
+    #         print("Error receiving START_BYTE")
+    #         self.__comm.close()
+    #         return 0
+
+
     def collect_data(self):
         """
         Handles data collection. Spawns a child thread to pull data from the
@@ -101,14 +182,22 @@ class fr_collect(Frame):
                     try:
                         self.__data.clear()
                         self.__comm.open(self.__port_selection)
+                        print("Opening COM channel")
+
+                        cmd = "hello"
+                        self.__send_cmd_zybo(self.__port_selection,cmd)
 
                         # Setup worker thread
-                        self.worker = self.data_thread(self.__comm,
-                                                       self.__data,
-                                                       self.__btn_start_text)
-                        self.worker.start()
+                       # self.worker = self.data_thread(self.__comm,
+                                                        #self.__data,
+                                                        #self.__btn_start_text)
+                        #self.worker.start()
+                        print("Starting worker thread.")
+
                     except Exception as e:
                         self.__comm.close()
+                        print("Closing COM Port")
+                        print(e.with_traceback())
                         self.__btn_start_text.set("START")
                         messagebox.showerror("Communication Error",
                                              "Timeout occurred on setup!")
@@ -171,7 +260,7 @@ class fr_collect(Frame):
                                                     str(cfg.i2c_sensor))
 
                 # Display number of collected samples
-                # print("Num Samples: " + str(len(self.__data)))
+                print("Num Samples: " + str(len(self.__data)))
 
                 self.__data.clear()
                 cnst.port_timer = Timer(1.0, self.__update_com_list)
@@ -264,3 +353,31 @@ class fr_collect(Frame):
         # Setup timer to refresh list of devices every 1 second
         cnst.port_timer = Timer(1.0, self.__update_com_list)
         cnst.port_timer.start()
+
+        #  Get serial data in the background
+        #get_data = self.__comm.serial_test()
+
+
+
+"""
+      4 bytes
+cmd = command (srst = sample rate set, srgt = sample rate get, fbst =  set active filter, fbgt = get active filter,
+                inst = input set, ingt = input get, strt = start sampling, stop = stop sampling, fbtn = filter board tune)
+
+end of command is an an "!"
+if the command has multiple values in command, seperate them with with commas
+if zybo doesnt need to send anything, it will send 'ack!'
+
+srst = '8 digits in samples per second'!, expected value will be 'ack!'
+srgt = srgt!, expected value to receive will be srgt='8 bit number'!
+fbst = enum, 2 character! expected value will be 'ack!'
+fbgt = fbgt!, expected value to receive will be fbgt='2 characters'!
+inst = enum, 2 character! expected value will be 'ack!'
+ingt = fbgt!, expected value to receive will be ingt='2 characters'!
+strt = strt!, expected value will be 'ack!'
+stop = stop!, expected value will be 'ack!'
+fbtn = '2 digit filter','8 digits (for frequency)','8 digits (for second frequency)(if only one frequency is needed set to 0)'
+        expected value will be 'ack!'
+"""
+
+
