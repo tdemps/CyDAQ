@@ -19274,11 +19274,11 @@ input demux</text>
 <attribute name="NAME" x="116.078" y="123.19" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="113.03" y="111.76" size="1.778" layer="95"/>
 </instance>
-<instance part="U8" gate="_VR2" x="116.84" y="170.18" smashed="yes" rot="R90">
+<instance part="U8" gate="_VR3" x="116.84" y="170.18" smashed="yes" rot="R90">
 <attribute name="NAME" x="116.078" y="176.276" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="113.03" y="165.354" size="1.778" layer="95"/>
 </instance>
-<instance part="U8" gate="_VR3" x="167.64" y="170.18" smashed="yes" rot="R90">
+<instance part="U8" gate="_VR2" x="167.64" y="170.18" smashed="yes" rot="R90">
 <attribute name="NAME" x="166.878" y="176.53" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="163.83" y="165.354" size="1.778" layer="95"/>
 </instance>
@@ -19829,11 +19829,11 @@ input demux</text>
 <wire x1="101.6" y1="154.94" x2="101.6" y2="170.18" width="0.1524" layer="91"/>
 <pinref part="R49" gate="G$1" pin="2"/>
 <pinref part="U15" gate="_B" pin="OUT"/>
-<pinref part="U8" gate="_VR2" pin="H"/>
+<pinref part="U8" gate="_VR3" pin="H"/>
 <wire x1="101.6" y1="154.94" x2="106.68" y2="154.94" width="0.1524" layer="91"/>
 <junction x="101.6" y="154.94"/>
 <label x="122.174" y="154.94" size="1.27" layer="95" rot="R180" xref="yes"/>
-<pinref part="U8" gate="_VR2" pin="W"/>
+<pinref part="U8" gate="_VR3" pin="W"/>
 <wire x1="116.84" y1="175.26" x2="116.84" y2="177.8" width="0.1524" layer="91"/>
 <wire x1="116.84" y1="177.8" x2="104.14" y2="177.8" width="0.1524" layer="91"/>
 <wire x1="104.14" y1="177.8" x2="104.14" y2="170.18" width="0.1524" layer="91"/>
@@ -19848,7 +19848,7 @@ input demux</text>
 <wire x1="127" y1="170.18" x2="134.62" y2="170.18" width="0.1524" layer="91"/>
 <pinref part="C36" gate="G$1" pin="1"/>
 <pinref part="U15" gate="_C" pin="-IN"/>
-<pinref part="U8" gate="_VR2" pin="L"/>
+<pinref part="U8" gate="_VR3" pin="L"/>
 <junction x="127" y="170.18"/>
 </segment>
 </net>
@@ -19867,8 +19867,8 @@ input demux</text>
 <pinref part="R51" gate="G$1" pin="2"/>
 <pinref part="C36" gate="G$1" pin="2"/>
 <pinref part="U15" gate="_C" pin="OUT"/>
-<pinref part="U8" gate="_VR3" pin="H"/>
-<pinref part="U8" gate="_VR3" pin="W"/>
+<pinref part="U8" gate="_VR2" pin="H"/>
+<pinref part="U8" gate="_VR2" pin="W"/>
 <junction x="152.4" y="170.18"/>
 <junction x="154.94" y="170.18"/>
 <junction x="152.4" y="154.94"/>
@@ -19882,7 +19882,7 @@ input demux</text>
 <wire x1="177.8" y1="157.48" x2="177.8" y2="170.18" width="0.1524" layer="91"/>
 <pinref part="C37" gate="G$1" pin="1"/>
 <pinref part="U15" gate="_D" pin="-IN"/>
-<pinref part="U8" gate="_VR3" pin="L"/>
+<pinref part="U8" gate="_VR2" pin="L"/>
 <junction x="177.8" y="170.18"/>
 </segment>
 </net>

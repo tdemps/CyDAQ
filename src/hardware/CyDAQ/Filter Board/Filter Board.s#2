@@ -17382,8 +17382,6 @@ Select Mux</text>
 input demux</text>
 <text x="200.66" y="238.76" size="2.54" layer="97">Filter select 
 output mux</text>
-<text x="76.2" y="243.84" size="2.54" layer="97">TODO:
-Add voltage protection</text>
 <text x="393.446" y="212.852" size="1.778" layer="97">Pulled down on U11</text>
 <text x="40.132" y="217.932" size="1.27" layer="97">NC</text>
 <text x="40.132" y="215.392" size="1.27" layer="97">NC</text>
