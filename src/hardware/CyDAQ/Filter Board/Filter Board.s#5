@@ -19197,11 +19197,11 @@ input demux</text>
 <attribute name="NAME" x="322.58" y="80.518" size="1.778" layer="95"/>
 <attribute name="VALUE" x="333.375" y="70.104" size="1.778" layer="95"/>
 </instance>
-<instance part="U6" gate="_VR1" x="327.66" y="144.78" smashed="yes" rot="R90">
+<instance part="U6" gate="_VR2" x="327.66" y="144.78" smashed="yes" rot="R90">
 <attribute name="NAME" x="318.135" y="149.225" size="1.778" layer="95"/>
 <attribute name="VALUE" x="323.85" y="139.954" size="1.778" layer="95"/>
 </instance>
-<instance part="U6" gate="_VR2" x="101.6" y="33.02" smashed="yes">
+<instance part="U6" gate="_VR1" x="101.6" y="33.02" smashed="yes">
 <attribute name="NAME" x="91.44" y="37.338" size="1.778" layer="95"/>
 <attribute name="VALUE" x="102.87" y="26.924" size="1.778" layer="95"/>
 </instance>
@@ -19450,7 +19450,7 @@ input demux</text>
 <wire x1="340.36" y1="129.54" x2="340.36" y2="132.08" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="U6" gate="_VR2" pin="L"/>
+<pinref part="U6" gate="_VR1" pin="L"/>
 <pinref part="SUPPLY59" gate="GND" pin="GND"/>
 <wire x1="101.6" y1="22.86" x2="101.6" y2="27.94" width="0.1524" layer="91"/>
 </segment>
@@ -19593,20 +19593,20 @@ input demux</text>
 </net>
 <net name="LP1_IN" class="0">
 <segment>
-<pinref part="U6" gate="_VR1" pin="H"/>
+<pinref part="U6" gate="_VR2" pin="H"/>
 <wire x1="322.58" y1="144.78" x2="314.96" y2="144.78" width="0.1524" layer="91"/>
 <wire x1="314.96" y1="144.78" x2="314.96" y2="152.4" width="0.1524" layer="91"/>
 <wire x1="314.96" y1="144.78" x2="302.26" y2="144.78" width="0.1524" layer="91"/>
 <junction x="314.96" y="144.78"/>
 <label x="302.26" y="144.78" size="1.778" layer="95" rot="R180" xref="yes"/>
-<pinref part="U6" gate="_VR1" pin="W"/>
+<pinref part="U6" gate="_VR2" pin="W"/>
 <wire x1="327.66" y1="149.86" x2="327.66" y2="152.4" width="0.1524" layer="91"/>
 <wire x1="327.66" y1="152.4" x2="314.96" y2="152.4" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="LP1_OUT" class="0">
 <segment>
-<pinref part="U6" gate="_VR1" pin="L"/>
+<pinref part="U6" gate="_VR2" pin="L"/>
 <wire x1="332.74" y1="144.78" x2="340.36" y2="144.78" width="0.1524" layer="91"/>
 <pinref part="C38" gate="G$1" pin="2"/>
 <wire x1="340.36" y1="144.78" x2="340.36" y2="142.24" width="0.1524" layer="91"/>
@@ -19618,11 +19618,11 @@ input demux</text>
 </net>
 <net name="N$22" class="0">
 <segment>
-<pinref part="U6" gate="_VR2" pin="W"/>
+<pinref part="U6" gate="_VR1" pin="W"/>
 <wire x1="106.68" y1="33.02" x2="109.22" y2="33.02" width="0.1524" layer="91"/>
 <wire x1="109.22" y1="33.02" x2="109.22" y2="40.64" width="0.1524" layer="91"/>
 <wire x1="109.22" y1="40.64" x2="101.6" y2="40.64" width="0.1524" layer="91"/>
-<pinref part="U6" gate="_VR2" pin="H"/>
+<pinref part="U6" gate="_VR1" pin="H"/>
 <wire x1="101.6" y1="40.64" x2="101.6" y2="38.1" width="0.1524" layer="91"/>
 <pinref part="C42" gate="G$1" pin="2"/>
 <wire x1="93.98" y1="48.26" x2="101.6" y2="48.26" width="0.1524" layer="91"/>
