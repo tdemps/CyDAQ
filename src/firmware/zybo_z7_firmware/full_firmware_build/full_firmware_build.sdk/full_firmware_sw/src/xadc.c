@@ -8,7 +8,7 @@
 
 static XAdcPs  XADCMonInst;
 static XSysMon SysMonInst;
-
+static u32 sampleRate = 0;
 XAdcPs *XADCInstPtr = &XADCMonInst;
 XSysMon* SysMonInstPtr = &SysMonInst;
 u8 clockDivider = 2;
@@ -17,11 +17,11 @@ XScuGic InterruptController;
 volatile u16 xadcBuffer[RX_BUFFER_SIZE];
 volatile u32 xadcSampleCount = 0;
 volatile float voltage;
+volatile u8 samplingEnabled = 0;
 
 u8 xadcInit(){
 	u32 address, status, intrStatusValue;
 	XSysMon_Config *SYSConfigPtr;
-	XAdcPs_Config *XADCConfigPtr;
 
 	SYSConfigPtr = XSysMon_LookupConfig(SYSMON_DEVICE_ID);
 	if (SYSConfigPtr == NULL) {
@@ -52,7 +52,6 @@ u8 xadcInit(){
 //	}else{
 //		printf("ADC self test pass");
 //	}
-    //address = XADCConfigPtr->BaseAddress;
     XSysMon_SetSequencerMode(SysMonInstPtr, XSM_SEQ_MODE_SAFE);
     status =  XSysMon_GetSeqInputMode(SysMonInstPtr);
     XSysMon_SetSeqAvgEnables(SysMonInstPtr, 0);
@@ -61,18 +60,18 @@ u8 xadcInit(){
 
     XSysMon_SetCalibEnables(SysMonInstPtr,XSM_CFR1_CAL_VALID_MASK );
     intrStatusValue = Xil_In16(SYSConfigPtr->BaseAddress+XSM_CFR0_OFFSET);
-	printf("CFG0 %x \n",(unsigned int) intrStatusValue);
+	printf("CFG0 %x, ",(unsigned int) intrStatusValue);
 	intrStatusValue = Xil_In16(SYSConfigPtr->BaseAddress+XSM_CFR1_OFFSET);
-	printf("CFG1 %x \n",(unsigned int)intrStatusValue);
+	printf("CFG1 %x, ",(unsigned int)intrStatusValue);
 	intrStatusValue = Xil_In16(SYSConfigPtr->BaseAddress+XSM_CFR2_OFFSET);
-	printf("CFG2 %x \n",(unsigned int)intrStatusValue);
+	printf("CFG2 %x\n",(unsigned int)intrStatusValue);
 	intrStatusValue = XSysMon_IntrGetEnabled(SysMonInstPtr);
 	printf("Interrupt Enable register %x \n",(unsigned int)intrStatusValue);
 	intrStatusValue = Xil_In32(SYSConfigPtr->BaseAddress+XSM_GIER_OFFSET);
 	printf("Global Int Enable %x \n",(unsigned int)intrStatusValue);
 	xadcSampleCount = 0;
 
-	xadcSetSampleRate(80000);
+	xadcSetSampleRate(55000);
 	//clockDivider = XSysMon_GetAdcClkDivisor(SysMonInstPtr);
 	XSysMon_SetSequencerMode(SysMonInstPtr, XSM_SEQ_MODE_CONTINPASS);
 	xadcCheckAuxSettings();
@@ -139,16 +138,21 @@ return xadcBuffer;
 
 void xadcDisableSampling(){
 	XSysMon_IntrGlobalDisable(&SysMonInst);
+	samplingEnabled = 0;
+
 }
 
 void xadcEnableSampling(u8 streamSetting){
 	xil_printf("Starting sampling\n");
 	XSysMon_IntrGlobalEnable(SysMonInstPtr);
+	samplingEnabled = 1;
 	if(streamSetting == 1){
 		u32 cursor = 0;
-		while(XSM_IPIXR_EOS_MASK == XSysMon_IntrGetEnabled(SysMonInstPtr)){
+		while( (cursor < xadcSampleCount - 1) || samplingEnabled){
 			if(cursor+10 <= xadcSampleCount){
-				xil_printf("%x\n", xadcBuffer[xadcSampleCount]);
+				voltage = RawToExtVoltage(xadcBuffer[cursor]);
+				//xil_printf("@%x, %d!\n", xadcBuffer[cursor], xadcSampleCount);
+				xil_printf("%d.%d\n", (int)voltage, xadcFractionToInt(voltage));
 				cursor = xadcSampleCount;
 			}
 		}
@@ -196,6 +200,12 @@ int xadcSetSampleRate(u32 rate){
 	return 0;
 }
 
+int xadcGetSampleRate(){
+	return -1;
+}
+
+
+
 static int xadcSetupInterruptSystem(XScuGic *IntcInstancePtr,XSysMon *XAdcPtr, u16 IntrId ){
 
 	XScuGic_Config *IntcConfig; /* Instance of the interrupt controller */
@@ -230,12 +240,12 @@ static int xadcSetupInterruptSystem(XScuGic *IntcInstancePtr,XSysMon *XAdcPtr, u
 }
 void XAdcInterruptHandler(void *CallBackRef){
 
-	u32 intrStatusValue;
 	if (xadcSampleCount < RX_BUFFER_SIZE ){
-		xadcBuffer[xadcSampleCount] = (u16) XSysMon_GetAdcData(&SysMonInst, AUX_14_INPUT) >> 4;
+		xadcBuffer[xadcSampleCount] = (SAMPLE_TYPE) XSysMon_GetAdcData(&SysMonInst, AUX_14_INPUT) >> 4;
 		xadcSampleCount++;
 	}else{
-		printf("Done\n");
+		xil_printf("Done\n");
+		samplingEnabled = 0;
 		XSysMon_IntrGlobalDisable(SysMonInstPtr);
 	}
 
@@ -247,17 +257,16 @@ void xadcProcessSamples(){
 		xil_printf("No new samples\n");
 		return;
 	}
-	printf("Beginning sample playback..\n\n");
+	xil_printf("Beginning sample playback..\n\n");
 	sleep(2);
 
 	while(i < xadcSampleCount){
 
 		voltage = RawToExtVoltage(xadcBuffer[i]);
-	//	if(xadcBuffer[i] > 0x800) { voltage -= 1.0; }
-		 printf("%f %x\n", voltage, xadcBuffer[i] );
+		 xil_printf("%d: %d.%d\n", i,(int)voltage, xadcFractionToInt(voltage));
 		i++;
 	}
 	xadcSampleCount = 0;
 
-	printf("Finished processing samples\n\n");
+	xil_printf("Finished processing samples\n\n");
 }

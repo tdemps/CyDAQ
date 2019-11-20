@@ -32,7 +32,7 @@
 #define IIC_INT_VEC_ID		XPAR_XIICPS_0_INTR
 #define BUTTON_BASE_ADDR	XPAR_GPIO_0_BASEADDR
 void xadcTest();
-void commTest();
+void commTest(u8 echo);
 void initButtons();
 u8 getButtons();
 
@@ -41,12 +41,11 @@ int main()
     init_platform();
     commInit();
     muxInit();
-
-    xil_printf("\n\n\n");
-	xil_printf("Beginning CyDAQ Test Program\n");
+    xadcInit();
+	xil_printf("\n\n\n**********CyDAQ Test Program***********\n");
 
     xadcTest();
-    //commTest();
+    //commTest(1);
 
 
     xil_printf("Exiting..");
@@ -55,32 +54,34 @@ int main()
 }
 void xadcTest(){
 
-    u32 status = 0;
-    xadcInit();
-    xadcEnableSampling(1);
-//    while(getButtons() != 12){
-//    	xadcProcessSamples();
-//    }
-//	sleep(5);
+    xadcEnableSampling(0);
 
-	//xadcProcessSamples();
+	sleep(3);
+
+	xadcProcessSamples();
 	return;
 }
 
-void commTest(){
+void commTest(u8 echo){
 
-
-	xil_printf("Comm Test Ready\n");
+	xil_printf("Comm Test Ready, Echo Enable: %s\n", (echo) ? "On" : "Off");
 	XUartPs* ptr = commGetUartPtr();
 	u8 buffer[100];
+	u8 buttons = 0;
 	u32 numBytes = 0, i = 0;
-	while(getButtons() != 0x3){
+	while( (buttons = getButtons()) != 0x3){
 		numBytes += XUartPs_Recv(ptr, &buffer[numBytes], 8);
-		if(numBytes > 0){
+		if(numBytes > 0 && echo){
 			for(i = 0; i < numBytes; i++){
 				xil_printf("%c", buffer[i]);
-			}
+		}
 			numBytes = 0;
+		}else if(buttons != 0){
+			switch(buttons){
+				case 1: xil_printf("@TEST123!\n"); break;
+				case 2: xil_printf("@FA53!\n"); break;
+			}
+			usleep(500000);
 		}
 	}
 
@@ -89,10 +90,8 @@ void commTest(){
 
 void filterTest(){
 	u32 i = 0;
-    //CHANGE CORNERS FOR FILTER HERE//////////////////////////////////////////////////////////
     FREQ_TYPE lower = 1550;	  //1550hz -> 10k
 	FREQ_TYPE upper = 15000;  //15000hz -> 1K
-	///////////////////////////////////////////////////////////////////////////////////////////
     int status = init_x9258_i2c(IIC_DEVICE_ID);
 
     filter_t sixthBP = (filter_t) {
@@ -104,7 +103,7 @@ void filterTest(){
     };
 	 while(1){
 			//inputs are: HP/LP toggle, S3S2S1S0, Enable for muxSetPins
-	    	muxSetPins( 1, 0b0101, 0);
+	    	muxSetOutputPins( 1, 0b0101, 0);
 	    	//muxSetPins( 1, 0b0000, 0); //Passthrough
 	    	status = tuneFilter(&sixthBP, lower, upper);
 
