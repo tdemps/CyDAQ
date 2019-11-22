@@ -513,8 +513,8 @@ by exp-lbrs.ulp</description>
 <wire x1="-1.3208" y1="0" x2="-1.1684" y2="0" width="0" layer="51" curve="-180"/>
 <wire x1="-0.254" y1="0" x2="0.254" y2="0" width="0.1524" layer="23"/>
 <wire x1="0" y1="-0.254" x2="0" y2="0.254" width="0.1524" layer="23"/>
-<smd name="1" x="-1.8589" y="0" dx="3.0066" dy="4.0132" layer="1"/>
-<smd name="2" x="1.8589" y="0" dx="3.0066" dy="4.0132" layer="1"/>
+<smd name="1" x="-1.3589" y="0" dx="2.0066" dy="4.0132" layer="1"/>
+<smd name="2" x="1.3589" y="0" dx="2.0066" dy="4.0132" layer="1"/>
 <text x="-3.2766" y="-0.635" size="1.27" layer="25" ratio="6" rot="SR0">&gt;Name</text>
 <polygon width="0.1524" layer="39">
 <vertex x="-2.6162" y="-2.2606"/>
