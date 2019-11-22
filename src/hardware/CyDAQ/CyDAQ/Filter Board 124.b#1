@@ -534,7 +534,7 @@
 <wire x1="30.559" y1="86.7542" x2="31.3718" y2="87.567" width="0.1" layer="20" curve="-90"/>
 <text x="37.338" y="88.9" size="1.778" layer="21" font="vector" ratio="15">GND</text>
 <text x="33.782" y="88.9" size="1.778" layer="21" font="vector" ratio="15" align="bottom-right">+5.0V</text>
-<text x="26.797" y="102.743" size="1.778" layer="25" font="vector" ratio="15" rot="R180" align="bottom-right">1.2V</text>
+<text x="26.797" y="102.743" size="1.778" layer="25" font="vector" ratio="15" rot="R180" align="bottom-right">1.8V</text>
 <text x="35.687" y="102.743" size="1.778" layer="25" font="vector" ratio="15" rot="R180" align="bottom-right">3.3V</text>
 <text x="44.704" y="102.743" size="1.778" layer="25" font="vector" ratio="15" rot="R180" align="bottom-right">5.0V</text>
 <text x="19.177" y="7.366" size="0.889" layer="25" font="vector" ratio="15" rot="R180" align="bottom-right">5.0V Sensor</text>
