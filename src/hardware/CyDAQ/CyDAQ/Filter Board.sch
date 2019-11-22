@@ -16499,6 +16499,8 @@ LED</description>
 <part name="FRAME5" library="frames" library_urn="urn:adsk.eagle:library:15356290" deviceset="FRAME_B_L" device="">
 <attribute name="ENGINEER_NAME" value="Samuel Burnett"/>
 </part>
+<part name="R43" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="10k"/>
+<part name="SUPPLY93" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -17230,12 +17232,6 @@ LED</description>
 <text x="70.612" y="108.712" size="1.27" layer="97">NC</text>
 <text x="195.072" y="108.712" size="1.27" layer="97">NC</text>
 <text x="324.612" y="108.712" size="1.27" layer="97">NC</text>
-<text x="10.16" y="40.132" size="1.778" layer="97">Pull-up/down 
-resistors on U1</text>
-<text x="294.64" y="114.3" size="1.778" layer="97">Pull-up/down 
-resistors on U1</text>
-<text x="170.18" y="114.3" size="1.778" layer="97">Pull-up/down 
-resistors on U1</text>
 <text x="93.726" y="128.524" size="1.778" layer="97">Address: 0x0</text>
 <text x="218.186" y="128.524" size="1.778" layer="97">Address: 0x6</text>
 <text x="347.726" y="128.524" size="1.778" layer="97">Address: 0x2</text>
@@ -20398,9 +20394,9 @@ input demux</text>
 <text x="213.36" y="70.612" size="1.27" layer="97">0.1%</text>
 <text x="229.108" y="73.152" size="1.27" layer="97">0.1%</text>
 <text x="244.094" y="73.152" size="1.27" layer="97">0.1%</text>
-<wire x1="152.4" y1="88.9" x2="271.78" y2="88.9" width="0.1524" layer="97" style="longdash"/>
-<wire x1="271.78" y1="88.9" x2="271.78" y2="10.16" width="0.1524" layer="97" style="longdash"/>
-<wire x1="271.78" y1="10.16" x2="152.4" y2="10.16" width="0.1524" layer="97" style="longdash"/>
+<wire x1="152.4" y1="88.9" x2="276.86" y2="88.9" width="0.1524" layer="97" style="longdash"/>
+<wire x1="276.86" y1="88.9" x2="276.86" y2="10.16" width="0.1524" layer="97" style="longdash"/>
+<wire x1="276.86" y1="10.16" x2="152.4" y2="10.16" width="0.1524" layer="97" style="longdash"/>
 <wire x1="152.4" y1="10.16" x2="152.4" y2="88.9" width="0.1524" layer="97" style="longdash"/>
 <text x="154.94" y="71.12" size="5.08" layer="97">Level shifter</text>
 <text x="157.48" y="142.24" size="5.08" layer="97">Level Shifter
@@ -20473,7 +20469,7 @@ Signals</text>
 <attribute name="NAME" x="25.3911" y="143.51665" size="1.778" layer="95"/>
 <attribute name="VALUE" x="25.3947" y="128.7727" size="1.778" layer="96"/>
 </instance>
-<instance part="SUPPLY74" gate="GND" x="48.26" y="129.54" smashed="yes"/>
+<instance part="SUPPLY74" gate="GND" x="68.58" y="134.62" smashed="yes"/>
 <instance part="J9" gate="G$1" x="27.94" y="33.02" smashed="yes">
 <attribute name="VALUE" x="25.4" y="28.194" size="1.778" layer="96" font="vector"/>
 <attribute name="NAME" x="25.4" y="38.608" size="1.778" layer="95" font="vector"/>
@@ -20680,6 +20676,11 @@ Signals</text>
 <attribute name="DOC#" x="361.95" y="11.43" size="2.54" layer="94"/>
 <attribute name="ENGINEER_NAME" x="346.71" y="19.05" size="2.54" layer="94"/>
 </instance>
+<instance part="R43" gate="G$1" x="271.78" y="55.88" smashed="yes" rot="R90">
+<attribute name="NAME" x="270.8656" y="60.579" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="270.891" y="52.197" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="SUPPLY93" gate="GND" x="271.78" y="45.72" smashed="yes"/>
 </instances>
 <busses>
 </busses>
@@ -20822,12 +20823,6 @@ Signals</text>
 <junction x="307.34" y="236.22"/>
 <pinref part="J5" gate="G$1" pin="3"/>
 <pinref part="J5" gate="G$1" pin="4"/>
-</segment>
-<segment>
-<pinref part="J8" gate="G$1" pin="2"/>
-<wire x1="43.18" y1="134.62" x2="48.26" y2="134.62" width="0.1524" layer="91"/>
-<wire x1="48.26" y1="134.62" x2="48.26" y2="132.08" width="0.1524" layer="91"/>
-<pinref part="SUPPLY74" gate="GND" pin="GND"/>
 </segment>
 <segment>
 <pinref part="J9" gate="G$1" pin="1"/>
@@ -21022,12 +21017,23 @@ Signals</text>
 <wire x1="147.32" y1="241.3" x2="147.32" y2="236.22" width="0.1524" layer="91"/>
 <pinref part="SUPPLY9" gate="GND" pin="GND"/>
 </segment>
+<segment>
+<pinref part="J8" gate="G$1" pin="1"/>
+<pinref part="SUPPLY74" gate="GND" pin="GND"/>
+<wire x1="43.18" y1="139.7" x2="68.58" y2="139.7" width="0.1524" layer="91"/>
+<wire x1="68.58" y1="139.7" x2="68.58" y2="137.16" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="R43" gate="G$1" pin="1"/>
+<pinref part="SUPPLY93" gate="GND" pin="GND"/>
+<wire x1="271.78" y1="50.8" x2="271.78" y2="48.26" width="0.1524" layer="91"/>
+</segment>
 </net>
 <net name="3.5MM_IN" class="0">
 <segment>
-<pinref part="J8" gate="G$1" pin="1"/>
-<wire x1="43.18" y1="139.7" x2="48.26" y2="139.7" width="0.1524" layer="91"/>
-<label x="62.738" y="139.7" size="1.27" layer="95" rot="R180" xref="yes"/>
+<pinref part="J8" gate="G$1" pin="2"/>
+<wire x1="43.18" y1="134.62" x2="48.26" y2="134.62" width="0.1524" layer="91"/>
+<label x="62.738" y="134.62" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="ANALOGUE_IN" class="0">
@@ -21521,8 +21527,12 @@ Signals</text>
 <pinref part="J7" gate="G$1" pin="12"/>
 <wire x1="299.72" y1="73.66" x2="302.26" y2="73.66" width="0.1524" layer="91"/>
 <wire x1="302.26" y1="73.66" x2="302.26" y2="66.04" width="0.1524" layer="91"/>
-<wire x1="302.26" y1="66.04" x2="264.16" y2="66.04" width="0.1524" layer="91"/>
+<wire x1="302.26" y1="66.04" x2="271.78" y2="66.04" width="0.1524" layer="91"/>
 <junction x="264.16" y="66.04"/>
+<pinref part="R43" gate="G$1" pin="2"/>
+<wire x1="271.78" y1="66.04" x2="264.16" y2="66.04" width="0.1524" layer="91"/>
+<wire x1="271.78" y1="60.96" x2="271.78" y2="66.04" width="0.1524" layer="91"/>
+<junction x="271.78" y="66.04"/>
 </segment>
 </net>
 <net name="N$74" class="0">
