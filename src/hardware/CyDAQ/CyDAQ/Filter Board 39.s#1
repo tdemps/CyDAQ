@@ -16157,12 +16157,12 @@ LED</description>
 <part name="U8" library="Potentiometer" library_urn="urn:adsk.eagle:library:4010556" deviceset="X9258" device="_SOIC" package3d_urn="urn:adsk.eagle:package:14966981/2" value="X9258_C"/>
 <part name="U10" library="Digital ICs" library_urn="urn:adsk.eagle:library:14993291" deviceset="CD74HCT4051" device="" package3d_urn="urn:adsk.eagle:package:14993294/2" value="CD74HCT4051"/>
 <part name="U11" library="Digital ICs" library_urn="urn:adsk.eagle:library:14993291" deviceset="CD74HCT4051" device="" package3d_urn="urn:adsk.eagle:package:14993294/2" value="CD74HCT4051"/>
-<part name="R39" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="39k"/>
-<part name="R40" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="39k"/>
-<part name="R46" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="9.1k"/>
-<part name="C35" library="Capacitors" library_urn="urn:adsk.eagle:library:4010381" deviceset="NON_POL" device="_0805/2012" package3d_urn="urn:adsk.eagle:package:4010399/3" value="0.1uF"/>
-<part name="C34" library="Capacitors" library_urn="urn:adsk.eagle:library:4010381" deviceset="NON_POL" device="_0805/2012" package3d_urn="urn:adsk.eagle:package:4010399/3" value="0.1uF"/>
-<part name="C31" library="Capacitors" library_urn="urn:adsk.eagle:library:4010381" deviceset="NON_POL" device="_0805/2012" package3d_urn="urn:adsk.eagle:package:4010399/3" value="0.1uF"/>
+<part name="R39" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="470"/>
+<part name="R40" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="470"/>
+<part name="R46" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="220"/>
+<part name="C35" library="Capacitors" library_urn="urn:adsk.eagle:library:4010381" deviceset="NON_POL" device="_0805/2012" package3d_urn="urn:adsk.eagle:package:4010399/3" value="5.6uF"/>
+<part name="C34" library="Capacitors" library_urn="urn:adsk.eagle:library:4010381" deviceset="NON_POL" device="_0805/2012" package3d_urn="urn:adsk.eagle:package:4010399/3" value="5.6uF"/>
+<part name="C31" library="Capacitors" library_urn="urn:adsk.eagle:library:4010381" deviceset="NON_POL" device="_0805/2012" package3d_urn="urn:adsk.eagle:package:4010399/3" value="10uF"/>
 <part name="SUPPLY44" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="SUPPLY49" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="U12" library="Amplifiers" library_urn="urn:adsk.eagle:library:4010042" deviceset="OPA4197" device="_SOIC14" package3d_urn="urn:adsk.eagle:package:14993015/2" value="OPA4197"/>
@@ -16178,7 +16178,7 @@ LED</description>
 <part name="SUPPLY58" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="R58" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="100k"/>
 <part name="R59" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="100k"/>
-<part name="R60" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="51k"/>
+<part name="R60" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="50k"/>
 <part name="SUPPLY63" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="R61" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="100k"/>
 <part name="SUPPLY60" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
@@ -16190,7 +16190,7 @@ LED</description>
 <part name="SUPPLY62" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="R63" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="100k"/>
 <part name="R64" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="100k"/>
-<part name="R65" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="51k"/>
+<part name="R65" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="50k"/>
 <part name="R66" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="100k"/>
 <part name="SUPPLY66" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="C47" library="Capacitors" library_urn="urn:adsk.eagle:library:4010381" deviceset="NON_POL" device="_0805/2012" package3d_urn="urn:adsk.eagle:package:4010399/3" value="10nF"/>
@@ -16499,8 +16499,6 @@ LED</description>
 <part name="FRAME5" library="frames" library_urn="urn:adsk.eagle:library:15356290" deviceset="FRAME_B_L" device="">
 <attribute name="ENGINEER_NAME" value="Samuel Burnett"/>
 </part>
-<part name="R43" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="10k"/>
-<part name="SUPPLY93" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -20394,9 +20392,9 @@ input demux</text>
 <text x="213.36" y="70.612" size="1.27" layer="97">0.1%</text>
 <text x="229.108" y="73.152" size="1.27" layer="97">0.1%</text>
 <text x="244.094" y="73.152" size="1.27" layer="97">0.1%</text>
-<wire x1="152.4" y1="88.9" x2="276.86" y2="88.9" width="0.1524" layer="97" style="longdash"/>
-<wire x1="276.86" y1="88.9" x2="276.86" y2="10.16" width="0.1524" layer="97" style="longdash"/>
-<wire x1="276.86" y1="10.16" x2="152.4" y2="10.16" width="0.1524" layer="97" style="longdash"/>
+<wire x1="152.4" y1="88.9" x2="271.78" y2="88.9" width="0.1524" layer="97" style="longdash"/>
+<wire x1="271.78" y1="88.9" x2="271.78" y2="10.16" width="0.1524" layer="97" style="longdash"/>
+<wire x1="271.78" y1="10.16" x2="152.4" y2="10.16" width="0.1524" layer="97" style="longdash"/>
 <wire x1="152.4" y1="10.16" x2="152.4" y2="88.9" width="0.1524" layer="97" style="longdash"/>
 <text x="154.94" y="71.12" size="5.08" layer="97">Level shifter</text>
 <text x="157.48" y="142.24" size="5.08" layer="97">Level Shifter
@@ -20676,11 +20674,6 @@ Signals</text>
 <attribute name="DOC#" x="361.95" y="11.43" size="2.54" layer="94"/>
 <attribute name="ENGINEER_NAME" x="346.71" y="19.05" size="2.54" layer="94"/>
 </instance>
-<instance part="R43" gate="G$1" x="271.78" y="55.88" smashed="yes" rot="R90">
-<attribute name="NAME" x="270.8656" y="60.579" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="270.891" y="52.197" size="1.778" layer="96" rot="R180"/>
-</instance>
-<instance part="SUPPLY93" gate="GND" x="271.78" y="45.72" smashed="yes"/>
 </instances>
 <busses>
 </busses>
@@ -21022,11 +21015,6 @@ Signals</text>
 <pinref part="SUPPLY74" gate="GND" pin="GND"/>
 <wire x1="43.18" y1="139.7" x2="68.58" y2="139.7" width="0.1524" layer="91"/>
 <wire x1="68.58" y1="139.7" x2="68.58" y2="137.16" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="R43" gate="G$1" pin="1"/>
-<pinref part="SUPPLY93" gate="GND" pin="GND"/>
-<wire x1="271.78" y1="50.8" x2="271.78" y2="48.26" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="3.5MM_IN" class="0">
@@ -21527,12 +21515,8 @@ Signals</text>
 <pinref part="J7" gate="G$1" pin="12"/>
 <wire x1="299.72" y1="73.66" x2="302.26" y2="73.66" width="0.1524" layer="91"/>
 <wire x1="302.26" y1="73.66" x2="302.26" y2="66.04" width="0.1524" layer="91"/>
-<wire x1="302.26" y1="66.04" x2="271.78" y2="66.04" width="0.1524" layer="91"/>
+<wire x1="302.26" y1="66.04" x2="264.16" y2="66.04" width="0.1524" layer="91"/>
 <junction x="264.16" y="66.04"/>
-<pinref part="R43" gate="G$1" pin="2"/>
-<wire x1="271.78" y1="66.04" x2="264.16" y2="66.04" width="0.1524" layer="91"/>
-<wire x1="271.78" y1="60.96" x2="271.78" y2="66.04" width="0.1524" layer="91"/>
-<junction x="271.78" y="66.04"/>
 </segment>
 </net>
 <net name="N$74" class="0">

@@ -20018,10 +20018,10 @@ Power</text>
 <wire x1="124.46" y1="228.6" x2="124.46" y2="269.24" width="0.1524" layer="97" style="longdash"/>
 <wire x1="124.46" y1="269.24" x2="17.78" y2="269.24" width="0.1524" layer="97" style="longdash"/>
 <text x="20.32" y="261.62" size="5.08" layer="97">Power Connectors</text>
-<wire x1="281.94" y1="261.62" x2="281.94" y2="106.68" width="0.1524" layer="97" style="longdash"/>
-<wire x1="365.76" y1="106.68" x2="365.76" y2="261.62" width="0.1524" layer="97" style="longdash"/>
+<wire x1="281.94" y1="261.62" x2="281.94" y2="58.42" width="0.1524" layer="97" style="longdash"/>
+<wire x1="365.76" y1="58.42" x2="365.76" y2="261.62" width="0.1524" layer="97" style="longdash"/>
 <wire x1="365.76" y1="261.62" x2="281.94" y2="261.62" width="0.1524" layer="97" style="longdash"/>
-<text x="284.48" y="254" size="5.08" layer="97">GPIO Breakout</text>
+<text x="284.48" y="254" size="5.08" layer="97">PMOD Breakouts</text>
 <wire x1="81.28" y1="226.06" x2="81.28" y2="162.56" width="0.1524" layer="97" style="longdash"/>
 <wire x1="81.28" y1="162.56" x2="165.1" y2="162.56" width="0.1524" layer="97" style="longdash"/>
 <wire x1="165.1" y1="162.56" x2="165.1" y2="226.06" width="0.1524" layer="97" style="longdash"/>
@@ -20041,6 +20041,7 @@ Signals</text>
 <text x="110.236" y="212.09" size="1.778" layer="97">I2C Pullups</text>
 <text x="344.678" y="77.216" size="1.778" layer="97" rot="R180">NC</text>
 <text x="344.678" y="74.676" size="1.778" layer="97" rot="R180">NC</text>
+<wire x1="365.76" y1="58.42" x2="281.94" y2="58.42" width="0.1524" layer="97" style="longdash"/>
 </plain>
 <instances>
 <instance part="FRAME4" gate="G$1" x="0" y="0" smashed="yes"/>

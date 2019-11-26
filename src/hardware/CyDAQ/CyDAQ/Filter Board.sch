@@ -16157,12 +16157,12 @@ LED</description>
 <part name="U8" library="Potentiometer" library_urn="urn:adsk.eagle:library:4010556" deviceset="X9258" device="_SOIC" package3d_urn="urn:adsk.eagle:package:14966981/2" value="X9258_C"/>
 <part name="U10" library="Digital ICs" library_urn="urn:adsk.eagle:library:14993291" deviceset="CD74HCT4051" device="" package3d_urn="urn:adsk.eagle:package:14993294/2" value="CD74HCT4051"/>
 <part name="U11" library="Digital ICs" library_urn="urn:adsk.eagle:library:14993291" deviceset="CD74HCT4051" device="" package3d_urn="urn:adsk.eagle:package:14993294/2" value="CD74HCT4051"/>
-<part name="R39" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="470"/>
-<part name="R40" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="470"/>
-<part name="R46" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="220"/>
-<part name="C35" library="Capacitors" library_urn="urn:adsk.eagle:library:4010381" deviceset="NON_POL" device="_0805/2012" package3d_urn="urn:adsk.eagle:package:4010399/3" value="5.6uF"/>
-<part name="C34" library="Capacitors" library_urn="urn:adsk.eagle:library:4010381" deviceset="NON_POL" device="_0805/2012" package3d_urn="urn:adsk.eagle:package:4010399/3" value="5.6uF"/>
-<part name="C31" library="Capacitors" library_urn="urn:adsk.eagle:library:4010381" deviceset="NON_POL" device="_0805/2012" package3d_urn="urn:adsk.eagle:package:4010399/3" value="10uF"/>
+<part name="R39" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="39k"/>
+<part name="R40" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="39k"/>
+<part name="R46" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="9.1k"/>
+<part name="C35" library="Capacitors" library_urn="urn:adsk.eagle:library:4010381" deviceset="NON_POL" device="_0805/2012" package3d_urn="urn:adsk.eagle:package:4010399/3" value="0.1uF"/>
+<part name="C34" library="Capacitors" library_urn="urn:adsk.eagle:library:4010381" deviceset="NON_POL" device="_0805/2012" package3d_urn="urn:adsk.eagle:package:4010399/3" value="0.1uF"/>
+<part name="C31" library="Capacitors" library_urn="urn:adsk.eagle:library:4010381" deviceset="NON_POL" device="_0805/2012" package3d_urn="urn:adsk.eagle:package:4010399/3" value="0.1uF"/>
 <part name="SUPPLY44" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="SUPPLY49" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="U12" library="Amplifiers" library_urn="urn:adsk.eagle:library:4010042" deviceset="OPA4197" device="_SOIC14" package3d_urn="urn:adsk.eagle:package:14993015/2" value="OPA4197"/>
@@ -16178,7 +16178,7 @@ LED</description>
 <part name="SUPPLY58" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="R58" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="100k"/>
 <part name="R59" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="100k"/>
-<part name="R60" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="50k"/>
+<part name="R60" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="51k"/>
 <part name="SUPPLY63" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="R61" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="100k"/>
 <part name="SUPPLY60" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
@@ -16190,7 +16190,7 @@ LED</description>
 <part name="SUPPLY62" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="R63" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="100k"/>
 <part name="R64" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="100k"/>
-<part name="R65" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="50k"/>
+<part name="R65" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="51k"/>
 <part name="R66" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="100k"/>
 <part name="SUPPLY66" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="C47" library="Capacitors" library_urn="urn:adsk.eagle:library:4010381" deviceset="NON_POL" device="_0805/2012" package3d_urn="urn:adsk.eagle:package:4010399/3" value="10nF"/>
@@ -19004,7 +19004,7 @@ input demux</text>
   &lt;li&gt;2nd Order Bandpass&lt;/li&gt;
 &lt;/ul&gt;</description>
 <plain>
-<text x="332.74" y="234.95" size="1.778" layer="97">Center Frequency = 64Hz</text>
+<text x="332.74" y="234.95" size="1.778" layer="97">Center Frequency = 59Hz</text>
 <text x="287.02" y="243.84" size="5.08" layer="97">Notch Filter</text>
 <text x="294.64" y="104.14" size="5.08" layer="97">1st Order High Pass</text>
 <text x="287.02" y="160.02" size="5.08" layer="97">1st Order Low Pass</text>
