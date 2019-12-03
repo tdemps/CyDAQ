@@ -17,7 +17,7 @@ XScuGic InterruptController;
 volatile u16 xadcBuffer[RX_BUFFER_SIZE];
 volatile u32 xadcSampleCount = 0;
 volatile float voltage;
-volatile u8 samplingEnabled = 0;
+extern volatile bool samplingEnabled;
 
 u8 xadcInit(){
 	u32 address, status, intrStatusValue;
@@ -138,14 +138,14 @@ return xadcBuffer;
 
 void xadcDisableSampling(){
 	XSysMon_IntrGlobalDisable(&SysMonInst);
-	samplingEnabled = 0;
+	samplingEnabled = false;
 
 }
 
 void xadcEnableSampling(u8 streamSetting){
-	xil_printf("Starting sampling\n");
+	xil_printf("Starting sampling, Streaming: %s\n", (streamSetting) ? "On" : "Off");
 	XSysMon_IntrGlobalEnable(SysMonInstPtr);
-	samplingEnabled = 1;
+	samplingEnabled = true;
 	if(streamSetting == 1){
 		u32 cursor = 0;
 		while( (cursor < xadcSampleCount - 1) || samplingEnabled){
@@ -245,7 +245,7 @@ void XAdcInterruptHandler(void *CallBackRef){
 		xadcSampleCount++;
 	}else{
 		xil_printf("Done\n");
-		samplingEnabled = 0;
+		samplingEnabled = false;
 		XSysMon_IntrGlobalDisable(SysMonInstPtr);
 	}
 

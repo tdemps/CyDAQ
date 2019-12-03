@@ -8,12 +8,15 @@
 #ifndef SRC_COMM_H_
 #define SRC_COMM_H_
 
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdlib.h>
 #include "xparameters.h"
 #include "xplatform_info.h"
 #include "xuartps.h"
 #include "xil_exception.h"
 #include "xil_printf.h"
-
+#include "xadc.h"
 #ifdef XPAR_INTC_0_DEVICE_ID
 #include "xintc.h"
 #else
@@ -34,8 +37,14 @@
 
 #define UART_DEVICE_ID XPAR_XUARTPS_0_DEVICE_ID
 #define COMM_BAUD_RATE 921600U
+#define COMM_CMD_SIZE 4		//in bytes
+#define COMM_SAMPLE_RATE_SIZE 8 //in bytes
+#define COMM_START_CHAR '@'
+#define COMM_STOP_CHAR '!'
 int commInit();
 static int commSetupInterruptSystem(INTC *IntcInstancePtr, XUartPs *UartInstancePtr, u16 UartIntrId);
 void Handler(void *CallBackRef, u32 Event, unsigned int EventData);
 XUartPs* commGetUartPtr();
+void commRXTask();
+bool commProcessPacket(u8* buffer, u16 bufSize);
 #endif /* SRC_COMM_H_ */

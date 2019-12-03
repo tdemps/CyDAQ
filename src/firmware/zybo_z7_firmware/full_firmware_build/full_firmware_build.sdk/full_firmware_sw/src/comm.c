@@ -11,7 +11,7 @@
 static XUartPs UART1;
 static INTC INTERRUPTCONTROLLER;
 
-static u8 RecvBuffer[TEST_BUFFER_SIZE];	/* Buffer for Receiving Data */
+static u8 receiveBuffer[TEST_BUFFER_SIZE];	/* Buffer for Receiving Data */
 
 /*
  * The following counters are used to determine when the entire buffer has
@@ -19,6 +19,8 @@ static u8 RecvBuffer[TEST_BUFFER_SIZE];	/* Buffer for Receiving Data */
  */
 volatile int TotalReceivedCount;
 volatile int TotalSentCount;
+volatile bool fifoFlag;
+extern bool samplingEnabled;
 int TotalErrorCount;
 
 int commInit(){
@@ -26,7 +28,7 @@ int commInit(){
 	int status, Index, BadByteCount = 0;
 	XUartPs_Config *Config;
 	u32 IntrMask;
-
+	fifoFlag = false;
 	Config = XUartPs_LookupConfig(UART_DEVICE_ID);
 
 	if (NULL == Config) {
@@ -79,7 +81,7 @@ int commInit(){
 	 * baud rate is low.
 	 */
 	XUartPs_SetRecvTimeout(&UART1, 50);
-
+	//void XUartPs_SetFifoThreshold(XUartPs *InstancePtr, u8 TriggerLevel)
 
 	/* Set the UART in Normal Mode */
 	XUartPs_SetOperMode(&UART1, XUARTPS_OPER_MODE_NORMAL);
@@ -283,5 +285,84 @@ static int commSetupInterruptSystem(INTC *IntcInstancePtr, XUartPs *UartInstance
 #endif
 
 	return XST_SUCCESS;
+}
+
+void commRXTask(){
+
+	u16 bytesReceived = 0;
+	bool err = true;
+	while(1){
+
+		while(bytesReceived <= 10){
+			bytesReceived += XUartPs_Recv(&UART1, &receiveBuffer[bytesReceived], 20);
+		}
+
+		if(samplingEnabled == true){
+			xadcDisableSampling();
+			//stop sampling to config device
+		}
+
+		err = commProcessPacket(receiveBuffer, bytesReceived);
+
+		if(err = false){
+			xil_printf("@ACK!");
+		}else{
+			xil_printf("@NACK!");
+		}
+
+
+
+	}
+}
+
+bool commProcessPacket(u8 *buffer, u16 bufSize){
+
+	bool err = false;
+	char cmd[COMM_CMD_SIZE+1];
+
+	if((char) buffer[0] != COMM_START_CHAR || (char) buffer[bufSize-1] != COMM_STOP_CHAR){
+		err = true;
+	}else{
+		memcpy(cmd, &buffer[1], COMM_CMD_SIZE);
+		cmd[COMM_CMD_SIZE] = '\0';
+		u8 payloadLength = bufSize - 2 - COMM_CMD_SIZE;
+		printf("CMD: %s, payloadLen: %d\n", cmd, payloadLength);
+		if(strcmp(cmd, "SRST") == 0){
+			//set sample rate
+			if(payloadLength < COMM_SAMPLE_RATE_SIZE){
+				xil_printf("Error, not enough bytes to represent sample rate\n");
+				err = true;
+			}else{
+				char rateStr[COMM_SAMPLE_RATE_SIZE+1];
+				memcpy(rateStr, &buffer[COMM_CMD_SIZE+1], COMM_SAMPLE_RATE_SIZE);
+				rateStr[COMM_SAMPLE_RATE_SIZE] = '\0';
+				u32 sampleRate = strtol(rateStr, NULL, 10);
+				xadcSetSampleRate(sampleRate);
+			}
+
+		}else if(strcmp(cmd, "INST") == 0){
+			//input set
+		}else if(strcmp(cmd, "FBST") == 0){
+			if(payloadLength < 1){
+				err = true;
+				xil_printf("No filter param given to set\n");
+			}else{
+
+			}
+			//set active filter
+		}else if(strcmp(cmd, "FBTN") == 0){
+			//tune filter
+		}else if(strcmp(cmd, "STRT") == 0 && samplingEnabled == false){
+			xadcEnableSampling(buffer[COMM_CMD_SIZE+1]);
+		}else if(strcmp(cmd, "STOP") == 0 && samplingEnabled == true){
+			xadcDisableSampling();
+			//stop sampling
+		}else{
+			err = true;
+		}
+	}
+
+	return err;
+
 }
 

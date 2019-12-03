@@ -8,6 +8,8 @@
 #ifndef SRC_XADC_H_
 #define SRC_XADC_H_
 
+#include <stdbool.h>
+#include <stdint.h>
 #include <xadcps_hw.h>
 #include <xparameters.h>
 #include <sleep.h>

@@ -27,26 +27,35 @@
 #include "stdlib.h"
 #include "xadc.h"
 #include "xuartps.h"
+#include "shared_definitions.h"
+
 #define IIC_DEVICE_ID		XPAR_XIICPS_0_DEVICE_ID
 #define INTC_DEVICE_ID		XPAR_SCUGIC_SINGLE_DEVICE_ID
 #define IIC_INT_VEC_ID		XPAR_XIICPS_0_INTR
 #define BUTTON_BASE_ADDR	XPAR_GPIO_0_BASEADDR
 void xadcTest();
 void commTest(u8 echo);
+void filterTest();
 void initButtons();
 u8 getButtons();
 
+bool samplingEnabled;
 int main()
 {
     init_platform();
     commInit();
     muxInit();
     xadcInit();
+    init_x9258_i2c(IIC_DEVICE_ID);
+
+    samplingEnabled = false;
 	xil_printf("\n\n\n**********CyDAQ Test Program***********\n");
 
-    xadcTest();
+    //xadcTest();
     //commTest(1);
-
+	filterTest();
+    char* test = "@STRT1!";
+    commProcessPacket(test, 7);
 
     xil_printf("Exiting..");
     cleanup_platform();
@@ -90,22 +99,14 @@ void commTest(u8 echo){
 
 void filterTest(){
 	u32 i = 0;
-    FREQ_TYPE lower = 1550;	  //1550hz -> 10k
-	FREQ_TYPE upper = 15000;  //15000hz -> 1K
-    int status = init_x9258_i2c(IIC_DEVICE_ID);
+    FILTER_FREQ_TYPE lower = 1550;	  //1550hz -> 10k
+	FILTER_FREQ_TYPE upper = 15000;  //15000hz -> 1K
+	int status;
 
-    filter_t sixthBP = (filter_t) {
-    	.filterEnum = FILTER_6TH_ORDER_BP,
-		.currentFreq = {0,0},
-		.filterOrder = 6,
-		.wipers = getWiperArray(FILTER_6TH_ORDER_BP),
-		.muxSetting = 0b00001010
-    };
 	 while(1){
-			//inputs are: HP/LP toggle, S3S2S1S0, Enable for muxSetPins
-	    	muxSetOutputPins( 1, 0b0101, 0);
-	    	//muxSetPins( 1, 0b0000, 0); //Passthrough
-	    	status = tuneFilter(&sixthBP, lower, upper);
+	    	muxSetActiveFilter(FILTER_6TH_ORDER_BP);
+	    	//muxSetPins(FILTER_PASSTHROUGH); //Passthrough
+	    	status = tuneFilter(FILTER_6TH_ORDER_BP, lower, upper);
 
 			//status = x9258_volatile_write(wiper, i);
 			//status = x9258_volatile_write(wiper2, i);
