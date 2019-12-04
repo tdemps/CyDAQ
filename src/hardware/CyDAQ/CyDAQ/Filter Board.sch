@@ -18571,27 +18571,6 @@ input demux</text>
 <label x="213.36" y="228.6" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
-<net name="HP1_OUT" class="0">
-<segment>
-<pinref part="U11" gate="G$1" pin="A2"/>
-<wire x1="218.44" y1="226.06" x2="213.36" y2="226.06" width="0.1524" layer="91"/>
-<label x="213.36" y="226.06" size="1.27" layer="95" rot="R180" xref="yes"/>
-</segment>
-</net>
-<net name="BP2_OUT" class="0">
-<segment>
-<pinref part="U11" gate="G$1" pin="A4"/>
-<wire x1="218.44" y1="220.98" x2="213.36" y2="220.98" width="0.1524" layer="91"/>
-<label x="213.36" y="220.98" size="1.27" layer="95" rot="R180" xref="yes"/>
-</segment>
-</net>
-<net name="BP6_OUT" class="0">
-<segment>
-<pinref part="U11" gate="G$1" pin="A3"/>
-<wire x1="218.44" y1="223.52" x2="213.36" y2="223.52" width="0.1524" layer="91"/>
-<label x="213.36" y="223.52" size="1.27" layer="95" rot="R180" xref="yes"/>
-</segment>
-</net>
 <net name="HP/LP_OUT" class="0">
 <segment>
 <pinref part="U11" gate="G$1" pin="A6"/>
@@ -18980,9 +18959,9 @@ input demux</text>
 </net>
 <net name="LP1_OUT" class="0">
 <segment>
-<pinref part="U11" gate="G$1" pin="A5"/>
-<wire x1="218.44" y1="218.44" x2="213.36" y2="218.44" width="0.1524" layer="91"/>
-<label x="213.36" y="218.44" size="1.27" layer="95" rot="R180" xref="yes"/>
+<pinref part="U11" gate="G$1" pin="A2"/>
+<wire x1="218.44" y1="226.06" x2="213.36" y2="226.06" width="0.1524" layer="91"/>
+<label x="213.36" y="226.06" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="LP1_IN" class="0">
@@ -18990,6 +18969,27 @@ input demux</text>
 <pinref part="U10" gate="G$1" pin="A2"/>
 <wire x1="157.48" y1="226.06" x2="162.56" y2="226.06" width="0.1524" layer="91"/>
 <label x="175.006" y="226.06" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+</net>
+<net name="HP1_OUT" class="0">
+<segment>
+<pinref part="U11" gate="G$1" pin="A3"/>
+<wire x1="218.44" y1="223.52" x2="213.36" y2="223.52" width="0.1524" layer="91"/>
+<label x="213.36" y="223.52" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+</net>
+<net name="BP6_OUT" class="0">
+<segment>
+<pinref part="U11" gate="G$1" pin="A4"/>
+<wire x1="218.44" y1="220.98" x2="213.36" y2="220.98" width="0.1524" layer="91"/>
+<label x="213.36" y="220.98" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+</net>
+<net name="BP2_OUT" class="0">
+<segment>
+<pinref part="U11" gate="G$1" pin="A5"/>
+<wire x1="218.44" y1="218.44" x2="213.36" y2="218.44" width="0.1524" layer="91"/>
+<label x="213.36" y="218.44" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 </nets>

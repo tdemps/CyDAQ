@@ -19004,7 +19004,7 @@ input demux</text>
   &lt;li&gt;2nd Order Bandpass&lt;/li&gt;
 &lt;/ul&gt;</description>
 <plain>
-<text x="332.74" y="234.95" size="1.778" layer="97">Center Frequency = 64Hz</text>
+<text x="332.74" y="234.95" size="1.778" layer="97">Center Frequency = 59Hz</text>
 <text x="287.02" y="243.84" size="5.08" layer="97">Notch Filter</text>
 <text x="294.64" y="104.14" size="5.08" layer="97">1st Order High Pass</text>
 <text x="287.02" y="160.02" size="5.08" layer="97">1st Order Low Pass</text>
