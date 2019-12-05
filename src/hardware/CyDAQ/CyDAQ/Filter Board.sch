@@ -3,7 +3,7 @@
 <eagle version="9.5.1">
 <drawing>
 <settings>
-<setting alwaysvectorfont="no"/>
+<setting alwaysvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
 <grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
@@ -10886,7 +10886,7 @@ Source: http://www.analog.com/UploadedFiles/Data_Sheets/39677768AD7714_c.pdf</de
 </package3d>
 </packages3d>
 <symbols>
-<symbol name="CD74HCT4051" urn="urn:adsk.eagle:symbol:14993292/3" library_version="12">
+<symbol name="CD74HCT4051" urn="urn:adsk.eagle:symbol:14993292/4" library_version="14">
 <wire x1="-10.16" y1="12.7" x2="-10.16" y2="-15.24" width="0.254" layer="94"/>
 <wire x1="-10.16" y1="-15.24" x2="10.16" y2="-15.24" width="0.254" layer="94"/>
 <wire x1="10.16" y1="-15.24" x2="10.16" y2="12.7" width="0.254" layer="94"/>
@@ -10900,8 +10900,8 @@ Source: http://www.analog.com/UploadedFiles/Data_Sheets/39677768AD7714_c.pdf</de
 <pin name="A4" x="12.7" y="-2.54" visible="off" length="short" swaplevel="1" rot="R180"/>
 <pin name="A5" x="12.7" y="-5.08" visible="off" length="short" swaplevel="1" rot="R180"/>
 <pin name="A7" x="12.7" y="-10.16" visible="off" length="short" swaplevel="1" rot="R180"/>
-<pin name="VEE" x="2.54" y="-17.78" visible="off" length="short" swaplevel="1" rot="R90"/>
-<pin name="GND" x="-2.54" y="-17.78" visible="off" length="short" swaplevel="1" rot="R90"/>
+<pin name="GND" x="2.54" y="-17.78" visible="off" length="short" swaplevel="1" rot="R90"/>
+<pin name="VEE" x="-2.54" y="-17.78" visible="off" length="short" swaplevel="1" rot="R90"/>
 <pin name="!E" x="-12.7" y="-10.16" visible="off" length="short" swaplevel="1"/>
 <pin name="S2" x="-12.7" y="-5.08" visible="off" length="short" swaplevel="1"/>
 <pin name="S1" x="-12.7" y="-2.54" visible="off" length="short" swaplevel="1"/>
@@ -10926,7 +10926,7 @@ Source: http://www.analog.com/UploadedFiles/Data_Sheets/39677768AD7714_c.pdf</de
 <text x="-10.16" y="13.716" size="1.778" layer="95">&gt;NAME</text>
 <text x="-4.318" y="-0.508" size="1.778" layer="96">&gt;VALUE</text>
 </symbol>
-<symbol name="CD74HCT4053" urn="urn:adsk.eagle:symbol:15028183/3" library_version="13">
+<symbol name="CD74HCT4053" urn="urn:adsk.eagle:symbol:15028183/4" library_version="16">
 <wire x1="-10.16" y1="12.7" x2="-10.16" y2="-15.24" width="0.254" layer="94"/>
 <wire x1="-10.16" y1="-15.24" x2="10.16" y2="-15.24" width="0.254" layer="94"/>
 <wire x1="10.16" y1="-15.24" x2="10.16" y2="12.7" width="0.254" layer="94"/>
@@ -10940,8 +10940,8 @@ Source: http://www.analog.com/UploadedFiles/Data_Sheets/39677768AD7714_c.pdf</de
 <pin name="C0" x="12.7" y="-7.62" visible="off" length="short" swaplevel="1" rot="R180"/>
 <pin name="C1" x="12.7" y="-10.16" visible="off" length="short" swaplevel="1" rot="R180"/>
 <pin name="C_COM" x="-12.7" y="2.54" visible="off" length="short" swaplevel="1"/>
-<pin name="VEE" x="2.54" y="-17.78" visible="off" length="short" swaplevel="1" rot="R90"/>
-<pin name="GND" x="-2.54" y="-17.78" visible="off" length="short" swaplevel="1" rot="R90"/>
+<pin name="GND" x="2.54" y="-17.78" visible="off" length="short" swaplevel="1" rot="R90"/>
+<pin name="VEE" x="-2.54" y="-17.78" visible="off" length="short" swaplevel="1" rot="R90"/>
 <pin name="!E" x="-12.7" y="-12.7" visible="off" length="short" swaplevel="1"/>
 <pin name="S2" x="-12.7" y="-7.62" visible="off" length="short" swaplevel="1"/>
 <pin name="S1" x="-12.7" y="-5.08" visible="off" length="short" swaplevel="1"/>
@@ -10968,7 +10968,7 @@ Source: http://www.analog.com/UploadedFiles/Data_Sheets/39677768AD7714_c.pdf</de
 </symbol>
 </symbols>
 <devicesets>
-<deviceset name="CD74HCT4051" urn="urn:adsk.eagle:component:14993295/6" prefix="U" library_version="12">
+<deviceset name="CD74HCT4051" urn="urn:adsk.eagle:component:14993295/8" prefix="U" library_version="15">
 <description>TI 8x1 analog multiplexer/demultiplexer.
 
 &lt;p&gt;Datasheet: &lt;a href="http://www.ti.com/lit/ds/symlink/cd74hct4053.pdf"&gt;http://www.ti.com/lit/ds/symlink/cd74hct4053.pdf&lt;/a&gt;&lt;/p&gt;</description>
@@ -11009,7 +11009,7 @@ Source: http://www.analog.com/UploadedFiles/Data_Sheets/39677768AD7714_c.pdf</de
 </device>
 </devices>
 </deviceset>
-<deviceset name="CD74HCT4053" urn="urn:adsk.eagle:component:15028184/5" prefix="U" library_version="13">
+<deviceset name="CD74HCT4053" urn="urn:adsk.eagle:component:15028184/6" prefix="U" library_version="16">
 <description>TI 3 2x1 analog multiplexer/demultiplexer.
 
 &lt;p&gt;Datasheet: &lt;a href="http://www.ti.com/lit/ds/symlink/cd74hct4053.pdf"&gt;http://www.ti.com/lit/ds/symlink/cd74hct4053.pdf&lt;/a&gt;&lt;/p&gt;</description>
@@ -17742,7 +17742,7 @@ input demux</text>
 <nets>
 <net name="GND" class="2">
 <segment>
-<pinref part="U10" gate="G$1" pin="VEE"/>
+<pinref part="U10" gate="G$1" pin="GND"/>
 <wire x1="147.32" y1="205.74" x2="147.32" y2="203.2" width="0.1524" layer="91"/>
 <wire x1="147.32" y1="203.2" x2="152.4" y2="203.2" width="0.1524" layer="91"/>
 <pinref part="SUPPLY6" gate="GND" pin="GND"/>
@@ -17757,14 +17757,14 @@ input demux</text>
 <wire x1="378.46" y1="203.2" x2="373.38" y2="203.2" width="0.1524" layer="91"/>
 <pinref part="SUPPLY8" gate="GND" pin="GND"/>
 <wire x1="373.38" y1="203.2" x2="373.38" y2="200.66" width="0.1524" layer="91"/>
-<pinref part="U17" gate="G$1" pin="VEE"/>
+<pinref part="U17" gate="G$1" pin="GND"/>
 <pinref part="C29" gate="G$1" pin="1"/>
 <wire x1="381" y1="198.12" x2="381" y2="203.2" width="0.1524" layer="91"/>
 <wire x1="381" y1="203.2" x2="378.46" y2="203.2" width="0.1524" layer="91"/>
 <junction x="378.46" y="203.2"/>
 </segment>
 <segment>
-<pinref part="U11" gate="G$1" pin="VEE"/>
+<pinref part="U11" gate="G$1" pin="GND"/>
 <wire x1="228.6" y1="205.74" x2="228.6" y2="203.2" width="0.1524" layer="91"/>
 <wire x1="228.6" y1="203.2" x2="223.52" y2="203.2" width="0.1524" layer="91"/>
 <pinref part="SUPPLY7" gate="GND" pin="GND"/>
@@ -17904,7 +17904,7 @@ input demux</text>
 <wire x1="53.34" y1="203.2" x2="48.26" y2="203.2" width="0.1524" layer="91"/>
 <pinref part="SUPPLY5" gate="GND" pin="GND"/>
 <wire x1="48.26" y1="203.2" x2="48.26" y2="200.66" width="0.1524" layer="91"/>
-<pinref part="U18" gate="G$1" pin="VEE"/>
+<pinref part="U18" gate="G$1" pin="GND"/>
 <wire x1="55.88" y1="203.2" x2="53.34" y2="203.2" width="0.1524" layer="91"/>
 <junction x="53.34" y="203.2"/>
 <pinref part="C26" gate="G$1" pin="1"/>
@@ -18344,7 +18344,7 @@ input demux</text>
 <wire x1="139.7" y1="185.42" x2="139.7" y2="187.96" width="0.1524" layer="91"/>
 <wire x1="139.7" y1="187.96" x2="139.7" y2="203.2" width="0.1524" layer="91"/>
 <wire x1="139.7" y1="203.2" x2="142.24" y2="203.2" width="0.1524" layer="91"/>
-<pinref part="U10" gate="G$1" pin="GND"/>
+<pinref part="U10" gate="G$1" pin="VEE"/>
 <wire x1="142.24" y1="203.2" x2="142.24" y2="205.74" width="0.1524" layer="91"/>
 <pinref part="C27" gate="G$1" pin="1"/>
 <wire x1="144.78" y1="190.5" x2="144.78" y2="187.96" width="0.1524" layer="91"/>
@@ -18357,7 +18357,7 @@ input demux</text>
 <wire x1="386.08" y1="187.96" x2="386.08" y2="203.2" width="0.1524" layer="91"/>
 <wire x1="386.08" y1="203.2" x2="383.54" y2="203.2" width="0.1524" layer="91"/>
 <wire x1="383.54" y1="203.2" x2="383.54" y2="205.74" width="0.1524" layer="91"/>
-<pinref part="U17" gate="G$1" pin="GND"/>
+<pinref part="U17" gate="G$1" pin="VEE"/>
 <pinref part="C29" gate="G$1" pin="2"/>
 <wire x1="381" y1="190.5" x2="381" y2="187.96" width="0.1524" layer="91"/>
 <wire x1="381" y1="187.96" x2="386.08" y2="187.96" width="0.1524" layer="91"/>
@@ -18369,7 +18369,7 @@ input demux</text>
 <wire x1="238.76" y1="187.96" x2="238.76" y2="203.2" width="0.1524" layer="91"/>
 <wire x1="238.76" y1="203.2" x2="233.68" y2="203.2" width="0.1524" layer="91"/>
 <wire x1="233.68" y1="203.2" x2="233.68" y2="205.74" width="0.1524" layer="91"/>
-<pinref part="U11" gate="G$1" pin="GND"/>
+<pinref part="U11" gate="G$1" pin="VEE"/>
 <pinref part="C28" gate="G$1" pin="2"/>
 <wire x1="231.14" y1="190.5" x2="231.14" y2="187.96" width="0.1524" layer="91"/>
 <wire x1="231.14" y1="187.96" x2="238.76" y2="187.96" width="0.1524" layer="91"/>
@@ -18425,7 +18425,7 @@ input demux</text>
 <wire x1="60.96" y1="187.96" x2="60.96" y2="203.2" width="0.1524" layer="91"/>
 <wire x1="60.96" y1="203.2" x2="58.42" y2="203.2" width="0.1524" layer="91"/>
 <wire x1="58.42" y1="203.2" x2="58.42" y2="205.74" width="0.1524" layer="91"/>
-<pinref part="U18" gate="G$1" pin="GND"/>
+<pinref part="U18" gate="G$1" pin="VEE"/>
 <wire x1="60.96" y1="187.96" x2="55.88" y2="187.96" width="0.1524" layer="91"/>
 <junction x="60.96" y="187.96"/>
 <pinref part="C26" gate="G$1" pin="2"/>
@@ -18571,18 +18571,16 @@ input demux</text>
 <label x="213.36" y="228.6" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
-<net name="HP/LP_OUT" class="0">
-<segment>
-<pinref part="U11" gate="G$1" pin="A6"/>
-<wire x1="218.44" y1="215.9" x2="213.36" y2="215.9" width="0.1524" layer="91"/>
-<label x="213.36" y="215.9" size="1.27" layer="95" rot="R180" xref="yes"/>
-</segment>
-</net>
 <net name="HP/LP6_OUT" class="0">
 <segment>
 <pinref part="U17" gate="G$1" pin="C_COM"/>
 <wire x1="393.7" y1="226.06" x2="398.78" y2="226.06" width="0.1524" layer="91"/>
 <label x="411.734" y="226.06" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+<segment>
+<pinref part="U11" gate="G$1" pin="A6"/>
+<wire x1="218.44" y1="215.9" x2="213.36" y2="215.9" width="0.1524" layer="91"/>
+<label x="213.36" y="215.9" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="!HP!/LP_TOGGLE" class="0">
