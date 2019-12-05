@@ -17311,9 +17311,9 @@ input demux</text>
 <attribute name="NAME" x="282.194" y="33.274" size="1.524" layer="95"/>
 <attribute name="VALUE" x="282.194" y="30.988" size="1.524" layer="96"/>
 </instance>
-<instance part="U16" gate="_B" x="99.06" y="233.68" smashed="yes">
-<attribute name="VALUE" x="103.124" y="231.14" size="1.778" layer="96"/>
-<attribute name="NAME" x="102.87" y="235.458" size="1.778" layer="95"/>
+<instance part="U16" gate="_B" x="99.06" y="231.14" smashed="yes">
+<attribute name="VALUE" x="103.124" y="228.6" size="1.778" layer="96"/>
+<attribute name="NAME" x="102.87" y="232.918" size="1.778" layer="95"/>
 </instance>
 <instance part="SUPPLY6" gate="GND" x="152.4" y="198.12" smashed="yes"/>
 <instance part="SUPPLY7" gate="GND" x="223.52" y="198.12" smashed="yes" rot="MR0"/>
@@ -18039,7 +18039,7 @@ input demux</text>
 <segment>
 <pinref part="U10" gate="G$1" pin="A6"/>
 <wire x1="157.48" y1="215.9" x2="162.56" y2="215.9" width="0.1524" layer="91"/>
-<label x="178.816" y="215.9" size="1.27" layer="95" rot="R180" xref="yes"/>
+<label x="179.324" y="215.9" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="HP2_OUT2" class="0">
@@ -18293,27 +18293,25 @@ input demux</text>
 <segment>
 <pinref part="U10" gate="G$1" pin="A_COM"/>
 <wire x1="132.08" y1="228.6" x2="116.84" y2="228.6" width="0.1524" layer="91"/>
-<wire x1="116.84" y1="228.6" x2="116.84" y2="233.68" width="0.1524" layer="91"/>
+<wire x1="116.84" y1="228.6" x2="116.84" y2="231.14" width="0.1524" layer="91"/>
 <pinref part="U16" gate="_B" pin="OUT"/>
 <label x="119.126" y="229.108" size="1.27" layer="95"/>
-<wire x1="116.84" y1="233.68" x2="111.76" y2="233.68" width="0.1524" layer="91"/>
-<wire x1="111.76" y1="233.68" x2="106.68" y2="233.68" width="0.1524" layer="91"/>
-<wire x1="86.36" y1="241.3" x2="111.76" y2="241.3" width="0.1524" layer="91"/>
+<wire x1="116.84" y1="231.14" x2="111.76" y2="231.14" width="0.1524" layer="91"/>
+<wire x1="111.76" y1="231.14" x2="106.68" y2="231.14" width="0.1524" layer="91"/>
+<wire x1="86.36" y1="238.76" x2="111.76" y2="238.76" width="0.1524" layer="91"/>
 <pinref part="U16" gate="_B" pin="-IN"/>
-<wire x1="91.44" y1="236.22" x2="86.36" y2="236.22" width="0.1524" layer="91"/>
-<wire x1="86.36" y1="236.22" x2="86.36" y2="241.3" width="0.1524" layer="91"/>
-<wire x1="111.76" y1="241.3" x2="111.76" y2="233.68" width="0.1524" layer="91"/>
-<junction x="111.76" y="233.68"/>
+<wire x1="91.44" y1="233.68" x2="86.36" y2="233.68" width="0.1524" layer="91"/>
+<wire x1="86.36" y1="233.68" x2="86.36" y2="238.76" width="0.1524" layer="91"/>
+<wire x1="111.76" y1="238.76" x2="111.76" y2="231.14" width="0.1524" layer="91"/>
+<junction x="111.76" y="231.14"/>
 </segment>
 </net>
 <net name="FILTER_IN" class="0">
 <segment>
 <pinref part="U16" gate="_B" pin="+IN"/>
-<label x="83.312" y="231.902" size="1.27" layer="95"/>
+<label x="83.312" y="229.362" size="1.27" layer="95"/>
 <pinref part="U18" gate="G$1" pin="A_COM"/>
-<wire x1="68.58" y1="228.6" x2="86.36" y2="228.6" width="0.1524" layer="91"/>
-<wire x1="86.36" y1="228.6" x2="86.36" y2="231.14" width="0.1524" layer="91"/>
-<wire x1="86.36" y1="231.14" x2="91.44" y2="231.14" width="0.1524" layer="91"/>
+<wire x1="68.58" y1="228.6" x2="91.44" y2="228.6" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="!SYSTEM_EN" class="0">
@@ -18514,7 +18512,7 @@ input demux</text>
 <segment>
 <pinref part="U10" gate="G$1" pin="A0"/>
 <wire x1="157.48" y1="231.14" x2="162.56" y2="231.14" width="0.1524" layer="91"/>
-<label x="178.308" y="231.14" size="1.27" layer="95" rot="R180" xref="yes"/>
+<label x="176.53" y="231.14" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 <segment>
 <pinref part="U11" gate="G$1" pin="A0"/>
@@ -18526,7 +18524,7 @@ input demux</text>
 <segment>
 <pinref part="U10" gate="G$1" pin="A1"/>
 <wire x1="157.48" y1="228.6" x2="162.56" y2="228.6" width="0.1524" layer="91"/>
-<label x="178.054" y="228.6" size="1.27" layer="95" rot="R180" xref="yes"/>
+<label x="177.292" y="228.6" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="HP1_IN" class="0">
