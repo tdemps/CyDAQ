@@ -112,9 +112,12 @@ void filterTest(){
 	 while((buttons = getButtons()) != 0xC){	//hit buttons 3 and 4 together to end test
 			//numBytes += XUartPs_Recv(ptr, &buf[numBytes], 2);
 			if(buttons > 0 && buttons < NUM_FILTERS){
-				selectedFilter = buttons;
+				selectedFilter = buttons-1;
 				xil_printf("Changing filter to %d\n", selectedFilter);
 				muxSetActiveFilter(selectedFilter);
+				highpass = 10000;
+				lowpass = 20000;
+				tuneFilter(selectedFilter, highpass, lowpass);
 			}else if(buttons == 0x8){
 				highpass += 1000;
 				lowpass += 1000;

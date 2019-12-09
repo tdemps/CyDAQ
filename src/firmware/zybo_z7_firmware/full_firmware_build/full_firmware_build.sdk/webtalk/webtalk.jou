@@ -2,11 +2,11 @@
 # Webtalk v2019.1 (64-bit)
 # SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
 # 
-# Start of session at: Thu Dec  5 16:56:00 2019
-# Process ID: 7232
-# Current directory: U:/master_ee_224/src/firmware/zybo_z7_firmware/full_firmware_build/full_firmware_build.sdk/webtalk
+# Start of session at: Mon Dec  9 10:16:46 2019
+# Process ID: 7436
+# Current directory: C:/ETG-Git-Repos/ee224_software/master_ee_224/src/firmware/zybo_z7_firmware/full_firmware_build/full_firmware_build.sdk/webtalk
 # Command line: wbtcv.exe -mode batch -source sdk_webtalk.tcl
-# Log file: U:/master_ee_224/src/firmware/zybo_z7_firmware/full_firmware_build/full_firmware_build.sdk/webtalk/webtalk.log
-# Journal file: U:/master_ee_224/src/firmware/zybo_z7_firmware/full_firmware_build/full_firmware_build.sdk/webtalk\webtalk.jou
+# Log file: C:/ETG-Git-Repos/ee224_software/master_ee_224/src/firmware/zybo_z7_firmware/full_firmware_build/full_firmware_build.sdk/webtalk/webtalk.log
+# Journal file: C:/ETG-Git-Repos/ee224_software/master_ee_224/src/firmware/zybo_z7_firmware/full_firmware_build/full_firmware_build.sdk/webtalk\webtalk.jou
 #-----------------------------------------------------------
 source sdk_webtalk.tcl

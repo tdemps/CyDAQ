@@ -49,13 +49,13 @@ int init_x9258_i2c(u16 DeviceId){
 }
 
 POT_R_TYPE pot_value_conversion(int ohmValue){
-  static const POT_R_TYPE calFactor = -1;
+  static const POT_R_TYPE calFactor = 0;
 
   if(ohmValue < 0 || ohmValue > 100000){
     xil_printf("Invalid resistance given, choose val between 0-100,000 ohm\n");
     return 0;
   }
-  return 255 - map(ohmValue,0,100000,0,255) + calFactor;
+  return map(ohmValue,0,100000,0,255) + calFactor;
 }
 
 uint8_t x9258_volatile_write(wiper_t wiper_location, POT_R_TYPE r_value){
