@@ -17,6 +17,7 @@
 #include "xil_exception.h"
 #include "xil_printf.h"
 #include "xadc.h"
+#include "filter.h"
 #ifdef XPAR_INTC_0_DEVICE_ID
 #include "xintc.h"
 #else
@@ -41,10 +42,21 @@
 #define COMM_SAMPLE_RATE_SIZE 8 //in bytes
 #define COMM_START_CHAR '@'
 #define COMM_STOP_CHAR '!'
+
+typedef enum cmds
+{
+    START,
+    STOP,
+    FBTUNE,
+    INPUTSELECT,
+    FILTERSELECT,
+    NUMCOMMANDS
+} commands;
+
 int commInit();
 static int commSetupInterruptSystem(INTC *IntcInstancePtr, XUartPs *UartInstancePtr, u16 UartIntrId);
 void Handler(void *CallBackRef, u32 Event, unsigned int EventData);
 XUartPs* commGetUartPtr();
 void commRXTask();
-bool commProcessPacket(u8* buffer, u16 bufSize);
+bool commProcessPacket(u8 *buffer, u16 bufSize);
 #endif /* SRC_COMM_H_ */

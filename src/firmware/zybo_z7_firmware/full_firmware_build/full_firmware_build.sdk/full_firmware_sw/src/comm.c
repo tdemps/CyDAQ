@@ -80,7 +80,7 @@ int commInit(){
 	 * Increase the time out value if baud rate is high, decrease it if
 	 * baud rate is low.
 	 */
-	XUartPs_SetRecvTimeout(&UART1, 50);
+	//XUartPs_SetRecvTimeout(&UART1, 16);
 	//void XUartPs_SetFifoThreshold(XUartPs *InstancePtr, u8 TriggerLevel)
 
 	/* Set the UART in Normal Mode */
@@ -303,18 +303,20 @@ void commRXTask(){
 		}
 
 		err = commProcessPacket(receiveBuffer, bytesReceived);
+		bytesReceived = 0;
 
-		if(err = false){
-			xil_printf("@ACK!");
+		if(err == true){
+			xil_printf("%cERR%c", COMM_START_CHAR, COMM_STOP_CHAR);
 		}else{
-			xil_printf("@NACK!");
+			xil_printf("%cACK%c", COMM_START_CHAR, COMM_STOP_CHAR);
 		}
-
-
 
 	}
 }
 
+/**
+ * Processes the packet received from the UART.
+ */
 bool commProcessPacket(u8 *buffer, u16 bufSize){
 
 	bool err = false;
@@ -343,15 +345,23 @@ bool commProcessPacket(u8 *buffer, u16 bufSize){
 		}else if(strcmp(cmd, "INST") == 0){
 			//input set
 		}else if(strcmp(cmd, "FBST") == 0){
+			//checks that payload contains filter number and that it is a
 			if(payloadLength < 1){
 				err = true;
 				xil_printf("No filter param given to set\n");
 			}else{
-
+				err = muxSetActiveFilter((u8) buffer[COMM_CMD_SIZE+1]);
 			}
 			//set active filter
 		}else if(strcmp(cmd, "FBTN") == 0){
+			u8 filter = ((buffer[COMM_CMD_SIZE+1] << 8) & 0xFF00 ) + buffer[COMM_CMD_SIZE+2];
+			if(buffer[COMM_CMD_SIZE+2] != ',' || buffer[COMM_CMD_SIZE+6] != ','){
+				xil_printf("err in filter tune function");
+			}
+			FILTER_FREQ_TYPE lower = ((buffer[COMM_CMD_SIZE+4] << 8) & 0xFF00 ) + buffer[COMM_CMD_SIZE+5];
+			FILTER_FREQ_TYPE upper = ((buffer[COMM_CMD_SIZE+7] << 8) & 0xFF00 ) + buffer[COMM_CMD_SIZE+8];
 			//tune filter
+			err = tuneFilter(filter, lower, upper);
 		}else if(strcmp(cmd, "STRT") == 0 && samplingEnabled == false){
 			xadcEnableSampling(buffer[COMM_CMD_SIZE+1]);
 		}else if(strcmp(cmd, "STOP") == 0 && samplingEnabled == true){
@@ -361,6 +371,9 @@ bool commProcessPacket(u8 *buffer, u16 bufSize){
 			err = true;
 		}
 	}
+
+
+
 
 	return err;
 

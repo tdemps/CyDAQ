@@ -59,7 +59,6 @@ POT_R_TYPE pot_value_conversion(int ohmValue){
 }
 
 uint8_t x9258_volatile_write(wiper_t wiper_location, POT_R_TYPE r_value){
-	xil_printf("Writing to IC_Addr: %x, Pot#: %d, Reg Val: %d \n", wiper_location.ic_addr, wiper_location.wiper, r_value);
 
   	u8 SendBuffer[POT_I2C_BUFFER_SIZE];
   	SendBuffer[0] = (u8) (0b10100000 | wiper_location.wiper);
@@ -74,6 +73,8 @@ uint8_t x9258_volatile_write(wiper_t wiper_location, POT_R_TYPE r_value){
 	if (status != XST_SUCCESS) {
 		return XST_FAILURE;
 	}
+	xil_printf("Wrote to IC_Addr: %x,Pot#: %d,Reg Val: %d \n", wiper_location.ic_addr, wiper_location.wiper, r_value);
+
 	/*
 	 * Wait until bus is idle to start another transfer.
 	 */

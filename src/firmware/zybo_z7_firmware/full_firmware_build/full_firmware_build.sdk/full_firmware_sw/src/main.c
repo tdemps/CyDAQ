@@ -44,13 +44,15 @@ int main()
 {
     init_platform();
     commInit();
+    xil_printf("\n\n\n**********CyDAQ Test Program***********\n");
     muxInit();
     xadcInit();
     init_x9258_i2c(IIC_DEVICE_ID);
 
     samplingEnabled = false;
-	xil_printf("\n\n\n**********CyDAQ Test Program***********\n");
 
+//	xil_printf("Select Test:\n 1)ADC\n2)Comm3)Filter\n");
+//	while()
     //xadcTest();
     //commTest(1);
 	filterTest();
@@ -98,23 +100,35 @@ void commTest(u8 echo){
 }
 
 void filterTest(){
-	u32 i = 0;
-    FILTER_FREQ_TYPE lower = 1550;	  //1550hz -> 10k
-	FILTER_FREQ_TYPE upper = 15000;  //15000hz -> 1K
-	int status;
+    FILTER_FREQ_TYPE highpass = 10000, lowpass = 20000;	  //1550hz -> 10k ohm, 15000hz -> 1k ohm
+	XUartPs* ptr = commGetUartPtr();
+	u8 selectedFilter = FILTER_1ST_ORDER_LP, buttons = 0, numBytes = 0, status = 0;
+	u8 buf[50];
 
-	 while(1){
-	    	muxSetActiveFilter(FILTER_6TH_ORDER_BP);
-	    	//muxSetPins(FILTER_PASSTHROUGH); //Passthrough
-	    	status = tuneFilter(FILTER_6TH_ORDER_BP, lower, upper);
+	muxSetActiveFilter(selectedFilter);	//enums defined in shared_definitions.h for filters and inputs
+	muxSetInputPins(ANALOG);
+	status = tuneFilter(selectedFilter, highpass, lowpass);
 
-			//status = x9258_volatile_write(wiper, i);
-			//status = x9258_volatile_write(wiper2, i);
+	 while((buttons = getButtons()) != 0xC){	//hit buttons 3 and 4 together to end test
+			//numBytes += XUartPs_Recv(ptr, &buf[numBytes], 2);
+			if(buttons > 0 && buttons < NUM_FILTERS){
+				selectedFilter = buttons;
+				xil_printf("Changing filter to %d\n", selectedFilter);
+				muxSetActiveFilter(selectedFilter);
+			}else if(buttons == 0x8){
+				highpass += 1000;
+				lowpass += 1000;
+				status = tuneFilter(selectedFilter, highpass, lowpass);
+				if(status == 1){
+					highpass = 10000;
+					lowpass = 20000;
+				}
+				xil_printf("Increasing corners: %d, %d\n", highpass, lowpass);
+			}
 
-			i = (i <= 255) ? i+10 : 0;
-			//xil_printf("Status: %d, i: %d\n", status, i);
-			sleep(3);
-		}
+			usleep(500000);
+	}
+	 xil_printf("Exiting Filter Test\n");
 }
 
 u8 getButtons(){

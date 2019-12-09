@@ -218,11 +218,6 @@
 #define XPAR_PS7_SLCR_0_S_AXI_HIGHADDR 0xF8000FFF
 
 
-/* Definitions for peripheral AXI_DYNCLK_0 */
-#define XPAR_AXI_DYNCLK_0_BASEADDR 0x43C10000
-#define XPAR_AXI_DYNCLK_0_HIGHADDR 0x43C1FFFF
-
-
 /******************************************************************/
 
 /* Definitions for driver GPIO */
@@ -233,7 +228,7 @@
 #define XPAR_AXI_GPIO_0_HIGHADDR 0x4120FFFF
 #define XPAR_AXI_GPIO_0_DEVICE_ID 0
 #define XPAR_AXI_GPIO_0_INTERRUPT_PRESENT 0
-#define XPAR_AXI_GPIO_0_IS_DUAL 0
+#define XPAR_AXI_GPIO_0_IS_DUAL 1
 
 
 /******************************************************************/
@@ -243,7 +238,7 @@
 #define XPAR_GPIO_0_HIGHADDR 0x4120FFFF
 #define XPAR_GPIO_0_DEVICE_ID XPAR_AXI_GPIO_0_DEVICE_ID
 #define XPAR_GPIO_0_INTERRUPT_PRESENT 0
-#define XPAR_GPIO_0_IS_DUAL 0
+#define XPAR_GPIO_0_IS_DUAL 1
 
 
 /******************************************************************/

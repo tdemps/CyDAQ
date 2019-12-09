@@ -1,59 +1,47 @@
 #include "filter.h"
 
-/*
- * Addresses of each x9258 IC (set by Ax pins)
- */
-const uint8_t dev_address_a = 0b0000; //IC A
-const uint8_t dev_address_b = 0b0110; //IC B
-const uint8_t dev_address_c = 0b0010; //IC C
-const uint8_t dev_address_d = 0b1010; //IC D
+static wiper_t sixthOrderLP[6] = { //also 6order HP
+  //ic    wiper
+  {DEV_ADDRESS_B,  1},
+  {DEV_ADDRESS_B,  2},
+  {DEV_ADDRESS_C,  3},
+  {DEV_ADDRESS_C,  2},
+  {DEV_ADDRESS_C,  1},
+  {DEV_ADDRESS_C,  0}
+};
 
-static wiper_t sixthOrderLP[6] = {
-  //ic    wiper
-  {dev_address_c,  1},
-  {dev_address_c,  2}, ///////////////NOT RIGHT
-  {dev_address_d,  0},
-  {dev_address_d,  1},
-  {dev_address_d,  2},
-  {dev_address_d,  3}
-};
-static wiper_t sixthOrderHP[6] = {
-  //ic    wiper
-  {dev_address_c,  1},
-  {dev_address_c,  2},
-  {dev_address_d,  0},
-  {dev_address_d,  1},
-  {dev_address_d,  2},
-  {dev_address_d,  3}
-};
 static wiper_t secondOrderBP[2] = {
   //ic    wiper
-  {dev_address_a,  1},
-  {dev_address_a,  2} //upper corner pot
+  {DEV_ADDRESS_A,  1},
+  {DEV_ADDRESS_A,  3} //upper corner pot
 };
+
 static wiper_t sixthOrderBP[6] = {
   //filter tuning wipers
   //ic    wiper
-  {dev_address_b,  1},
-  {dev_address_c,  0},
-  {dev_address_c,  3},
+  {DEV_ADDRESS_D,  3},
+  {DEV_ADDRESS_B,  0},
+  {DEV_ADDRESS_B,  3},
   //lp pots (upper corner)
-  {dev_address_b,  0},
-  {dev_address_b,  2},
-  {dev_address_b,  3}
+  {DEV_ADDRESS_D,  2},
+  {DEV_ADDRESS_D,  1},
+  {DEV_ADDRESS_D,  0}
 };
+
 static wiper_t firstOrderLP[1] = {
-  {dev_address_a,0}
+  {DEV_ADDRESS_A,2}
 };
+
 static wiper_t firstOrderHP[1] = {
-  {dev_address_a, 3}
+  {DEV_ADDRESS_A, 0}
 };
 
 
 /*
  * Array of pointers to wiper_t arrays for each filter (defined above).
+ * Order matches that of filter enum in shared_definitions.h
  */
-static wiper_t *filterPotConfigs[6] = {firstOrderLP, firstOrderHP, secondOrderBP, sixthOrderBP, sixthOrderHP, sixthOrderLP};
+static wiper_t *filterPotConfigs[6] = {firstOrderLP, firstOrderHP, secondOrderBP, sixthOrderBP, sixthOrderLP, sixthOrderLP};
 
 static filter_t sixthBP = {
 	.filterEnum = FILTER_6TH_ORDER_BP,
@@ -73,7 +61,7 @@ static filter_t sixthHP = {
 	.filterEnum = FILTER_6TH_ORDER_HP,
 	.currentFreq = {0,0},
 	.filterOrder = 6,
-	.wipers = sixthOrderHP
+	.wipers = sixthOrderLP
 };
 
 static filter_t firstLP = {
@@ -99,26 +87,30 @@ static filter_t secondBP = {
 static filter_t *filterConfigs[NUM_FILTERS-1] = {&firstLP, &firstHP, &secondBP, &sixthBP, &sixthHP, &sixthLP};
 /*
  * Writes pots to get the desired frequency(ies).
- * For BP, freq1 is lower corner and freq2 is upper corner.
+ * For BP, freq1 is lower corner(HP) and freq2 is upper corner(LP).
  * If the filter only has one corner, pass in NULL or 0 as freq2
  */
 u8 tuneFilter(filters_e filterSelect, FILTER_FREQ_TYPE freq1, FILTER_FREQ_TYPE freq2){
 
-	if(freq1 > FILTER_FREQ_MAX || freq1 < FILTER_FREQ_MIN ||
-			  freq2 > FILTER_FREQ_MAX || freq2 < FILTER_FREQ_MIN || filterSelect <= NUM_FILTERS){
+	if(freq1 > FILTER_FREQ_MAX || freq2 > FILTER_FREQ_MAX){
 		  xil_printf("Invalid frequency values given\n");
 		  return 1;
+	}else if(filterSelect == FILTER_60_HZ_NOTCH || filterSelect == FILTER_PASSTHROUGH){ //cant be notch or pass
+		xil_printf("Can't tune passthrough or notch\n");
+		return 2;
 	}
 
 	POT_I2C_ERR_TYPE err = 0;
 	POT_R_TYPE potVal1 = freqToPotVal(freq1);
-	POT_R_TYPE potVal2 = freqToPotVal(freq2);
 	filter_t *currentFilter = filterConfigs[filterSelect];
 	u8 wipersToWrite = currentFilter->filterOrder;
 	u8 retries = 0;
 
 	//if filter is a bandpass, write upper corner to lp pots (upper half of wiper array)
-	if(freq2 > 0){
+	if(filterSelect == FILTER_2ND_ORDER_BP || filterSelect == FILTER_6TH_ORDER_BP){
+		xil_printf("Upper ");
+		POT_R_TYPE potVal2 = freqToPotVal(freq2);
+
 		for(int i = wipersToWrite / 2; i < wipersToWrite; i++){
 			//will try to rewrite pot if i2c returned error status
 			do{
@@ -146,7 +138,7 @@ POT_R_TYPE freqToPotVal(FILTER_FREQ_TYPE freq){
   const float capacitance = 10.0 * pow(10.0, -9.0);
 
   int resistance = 1.0 / (2.0 * 3.14159 * capacitance * freq);
-  xil_printf("Freq: %d, Calculated R: %d\n", freq, resistance);
+  xil_printf("Freq (hz): %d, R (ohm): %d\n", freq, resistance);
   return pot_value_conversion(resistance);
 }
 
