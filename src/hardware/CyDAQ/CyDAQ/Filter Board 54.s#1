@@ -21156,12 +21156,6 @@ Signals</text>
 <wire x1="22.86" y1="246.38" x2="22.86" y2="251.46" width="0.1524" layer="91"/>
 <junction x="22.86" y="246.38"/>
 </segment>
-<segment>
-<pinref part="J22" gate="G$1" pin="2"/>
-<wire x1="139.7" y1="243.84" x2="144.78" y2="243.84" width="0.1524" layer="91"/>
-<wire x1="144.78" y1="243.84" x2="144.78" y2="251.46" width="0.1524" layer="91"/>
-<pinref part="P+19" gate="1" pin="+5V"/>
-</segment>
 </net>
 <net name="5V0SENSOR_IN" class="0">
 <segment>
@@ -21651,6 +21645,14 @@ Signals</text>
 <wire x1="33.02" y1="190.5" x2="38.1" y2="190.5" width="0.1524" layer="91"/>
 <pinref part="J3" gate="G$1" pin="6"/>
 <label x="58.928" y="190.5" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+</net>
+<net name="+5V" class="0">
+<segment>
+<pinref part="J22" gate="G$1" pin="2"/>
+<wire x1="139.7" y1="243.84" x2="144.78" y2="243.84" width="0.1524" layer="91"/>
+<wire x1="144.78" y1="243.84" x2="144.78" y2="251.46" width="0.1524" layer="91"/>
+<pinref part="P+19" gate="1" pin="+5V"/>
 </segment>
 </net>
 <net name="+12V" class="0">

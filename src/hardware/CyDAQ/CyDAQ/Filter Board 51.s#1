@@ -10690,23 +10690,23 @@ Source: http://www.analog.com/UploadedFiles/Data_Sheets/39677768AD7714_c.pdf</de
 </package3d>
 </packages3d>
 <symbols>
-<symbol name="X9258_BASE" urn="urn:adsk.eagle:symbol:14966977/3" library_version="10">
+<symbol name="X9258_BASE" urn="urn:adsk.eagle:symbol:14966977/2" library_version="9">
 <wire x1="-7.62" y1="12.7" x2="7.62" y2="12.7" width="0.254" layer="94"/>
 <wire x1="7.62" y1="12.7" x2="7.62" y2="-10.16" width="0.254" layer="94"/>
 <wire x1="7.62" y1="-10.16" x2="-7.62" y2="-10.16" width="0.254" layer="94"/>
 <wire x1="-7.62" y1="-10.16" x2="-7.62" y2="12.7" width="0.254" layer="94"/>
-<pin name="VCC" x="-10.16" y="10.16" visible="pad" length="short"/>
-<pin name="V+" x="-10.16" y="7.62" visible="pad" length="short"/>
-<pin name="NC" x="-10.16" y="-7.62" visible="pad" length="short"/>
-<pin name="V-" x="10.16" y="-7.62" visible="pad" length="short" rot="R180"/>
-<pin name="VSS" x="10.16" y="-5.08" visible="pad" length="short" rot="R180"/>
-<pin name="SCL" x="-10.16" y="2.54" visible="pad" length="short"/>
-<pin name="SDA" x="-10.16" y="0" visible="pad" length="short"/>
-<pin name="A0" x="10.16" y="2.54" visible="pad" length="short" rot="R180"/>
-<pin name="A1" x="10.16" y="5.08" visible="pad" length="short" rot="R180"/>
-<pin name="A2" x="10.16" y="7.62" visible="pad" length="short" rot="R180"/>
-<pin name="A3" x="10.16" y="10.16" visible="pad" length="short" rot="R180"/>
-<pin name="!WP" x="-10.16" y="-2.54" visible="pad" length="short"/>
+<pin name="VCC" x="-10.16" y="10.16" visible="off" length="short"/>
+<pin name="V+" x="-10.16" y="7.62" visible="off" length="short"/>
+<pin name="NC" x="-10.16" y="-7.62" visible="off" length="short"/>
+<pin name="V-" x="10.16" y="-7.62" visible="off" length="short" rot="R180"/>
+<pin name="VSS" x="10.16" y="-5.08" visible="off" length="short" rot="R180"/>
+<pin name="SCL" x="-10.16" y="2.54" visible="off" length="short"/>
+<pin name="SDA" x="-10.16" y="0" visible="off" length="short"/>
+<pin name="A0" x="10.16" y="2.54" visible="off" length="short" rot="R180"/>
+<pin name="A1" x="10.16" y="5.08" visible="off" length="short" rot="R180"/>
+<pin name="A2" x="10.16" y="7.62" visible="off" length="short" rot="R180"/>
+<pin name="A3" x="10.16" y="10.16" visible="off" length="short" rot="R180"/>
+<pin name="!WP" x="-10.16" y="-2.54" visible="off" length="short"/>
 <text x="-7.62" y="13.716" size="1.778" layer="95">&gt;NAME</text>
 <text x="-7.62" y="-12.954" size="1.778" layer="96">&gt;VALUE</text>
 <text x="-6.096" y="-8.382" size="1.524" layer="94">NC</text>
@@ -10754,7 +10754,7 @@ Source: http://www.analog.com/UploadedFiles/Data_Sheets/39677768AD7714_c.pdf</de
 </symbol>
 </symbols>
 <devicesets>
-<deviceset name="X9258" urn="urn:adsk.eagle:component:14966983/7" prefix="U" library_version="10">
+<deviceset name="X9258" urn="urn:adsk.eagle:component:14966983/6" prefix="U" library_version="9">
 <gates>
 <gate name="_MAIN" symbol="X9258_BASE" x="-22.86" y="0"/>
 <gate name="_VR0" symbol="POTENTIOMETER_DIGITAL" x="10.16" y="12.7" swaplevel="1"/>
@@ -10886,27 +10886,27 @@ Source: http://www.analog.com/UploadedFiles/Data_Sheets/39677768AD7714_c.pdf</de
 </package3d>
 </packages3d>
 <symbols>
-<symbol name="CD74HCT4051" urn="urn:adsk.eagle:symbol:14993292/5" library_version="18">
+<symbol name="CD74HCT4051" urn="urn:adsk.eagle:symbol:14993292/4" library_version="14">
 <wire x1="-10.16" y1="12.7" x2="-10.16" y2="-15.24" width="0.254" layer="94"/>
 <wire x1="-10.16" y1="-15.24" x2="10.16" y2="-15.24" width="0.254" layer="94"/>
 <wire x1="10.16" y1="-15.24" x2="10.16" y2="12.7" width="0.254" layer="94"/>
 <wire x1="10.16" y1="12.7" x2="-10.16" y2="12.7" width="0.254" layer="94"/>
-<pin name="VCC" x="0" y="15.24" visible="pad" length="short" swaplevel="1" rot="R270"/>
-<pin name="A6" x="12.7" y="-7.62" visible="pad" length="short" swaplevel="1" rot="R180"/>
-<pin name="A0" x="12.7" y="7.62" visible="pad" length="short" swaplevel="1" rot="R180"/>
-<pin name="A1" x="12.7" y="5.08" visible="pad" length="short" swaplevel="1" rot="R180"/>
-<pin name="A2" x="12.7" y="2.54" visible="pad" length="short" swaplevel="1" rot="R180"/>
-<pin name="A3" x="12.7" y="0" visible="pad" length="short" swaplevel="1" rot="R180"/>
-<pin name="A4" x="12.7" y="-2.54" visible="pad" length="short" swaplevel="1" rot="R180"/>
-<pin name="A5" x="12.7" y="-5.08" visible="pad" length="short" swaplevel="1" rot="R180"/>
-<pin name="A7" x="12.7" y="-10.16" visible="pad" length="short" swaplevel="1" rot="R180"/>
-<pin name="GND" x="2.54" y="-17.78" visible="pad" length="short" swaplevel="1" rot="R90"/>
-<pin name="VEE" x="-2.54" y="-17.78" visible="pad" length="short" swaplevel="1" rot="R90"/>
-<pin name="!E" x="-12.7" y="-10.16" visible="pad" length="short" swaplevel="1"/>
-<pin name="S2" x="-12.7" y="-5.08" visible="pad" length="short" swaplevel="1"/>
-<pin name="S1" x="-12.7" y="-2.54" visible="pad" length="short" swaplevel="1"/>
-<pin name="S0" x="-12.7" y="0" visible="pad" length="short" swaplevel="1"/>
-<pin name="A_COM" x="-12.7" y="5.08" visible="pad" length="short" swaplevel="1"/>
+<pin name="VCC" x="0" y="15.24" visible="off" length="short" swaplevel="1" rot="R270"/>
+<pin name="A6" x="12.7" y="-7.62" visible="off" length="short" swaplevel="1" rot="R180"/>
+<pin name="A0" x="12.7" y="7.62" visible="off" length="short" swaplevel="1" rot="R180"/>
+<pin name="A1" x="12.7" y="5.08" visible="off" length="short" swaplevel="1" rot="R180"/>
+<pin name="A2" x="12.7" y="2.54" visible="off" length="short" swaplevel="1" rot="R180"/>
+<pin name="A3" x="12.7" y="0" visible="off" length="short" swaplevel="1" rot="R180"/>
+<pin name="A4" x="12.7" y="-2.54" visible="off" length="short" swaplevel="1" rot="R180"/>
+<pin name="A5" x="12.7" y="-5.08" visible="off" length="short" swaplevel="1" rot="R180"/>
+<pin name="A7" x="12.7" y="-10.16" visible="off" length="short" swaplevel="1" rot="R180"/>
+<pin name="GND" x="2.54" y="-17.78" visible="off" length="short" swaplevel="1" rot="R90"/>
+<pin name="VEE" x="-2.54" y="-17.78" visible="off" length="short" swaplevel="1" rot="R90"/>
+<pin name="!E" x="-12.7" y="-10.16" visible="off" length="short" swaplevel="1"/>
+<pin name="S2" x="-12.7" y="-5.08" visible="off" length="short" swaplevel="1"/>
+<pin name="S1" x="-12.7" y="-2.54" visible="off" length="short" swaplevel="1"/>
+<pin name="S0" x="-12.7" y="0" visible="off" length="short" swaplevel="1"/>
+<pin name="A_COM" x="-12.7" y="5.08" visible="off" length="short" swaplevel="1"/>
 <text x="-9.144" y="4.318" size="1.524" layer="94">A_COM</text>
 <text x="-9.144" y="-0.762" size="1.524" layer="94">S0</text>
 <text x="-9.144" y="-3.302" size="1.524" layer="94">S1</text>
@@ -10926,27 +10926,27 @@ Source: http://www.analog.com/UploadedFiles/Data_Sheets/39677768AD7714_c.pdf</de
 <text x="-10.16" y="13.716" size="1.778" layer="95">&gt;NAME</text>
 <text x="-4.318" y="-0.508" size="1.778" layer="96">&gt;VALUE</text>
 </symbol>
-<symbol name="CD74HCT4053" urn="urn:adsk.eagle:symbol:15028183/5" library_version="18">
+<symbol name="CD74HCT4053" urn="urn:adsk.eagle:symbol:15028183/4" library_version="16">
 <wire x1="-10.16" y1="12.7" x2="-10.16" y2="-15.24" width="0.254" layer="94"/>
 <wire x1="-10.16" y1="-15.24" x2="10.16" y2="-15.24" width="0.254" layer="94"/>
 <wire x1="10.16" y1="-15.24" x2="10.16" y2="12.7" width="0.254" layer="94"/>
 <wire x1="10.16" y1="12.7" x2="-10.16" y2="12.7" width="0.254" layer="94"/>
-<pin name="VCC" x="0" y="15.24" visible="pad" length="short" swaplevel="1" rot="R270"/>
-<pin name="B_COM" x="-12.7" y="5.08" visible="pad" length="short" swaplevel="1"/>
-<pin name="A0" x="12.7" y="7.62" visible="pad" length="short" swaplevel="1" rot="R180"/>
-<pin name="A1" x="12.7" y="5.08" visible="pad" length="short" swaplevel="1" rot="R180"/>
-<pin name="B0" x="12.7" y="0" visible="pad" length="short" swaplevel="1" rot="R180"/>
-<pin name="B1" x="12.7" y="-2.54" visible="pad" length="short" swaplevel="1" rot="R180"/>
-<pin name="C0" x="12.7" y="-7.62" visible="pad" length="short" swaplevel="1" rot="R180"/>
-<pin name="C1" x="12.7" y="-10.16" visible="pad" length="short" swaplevel="1" rot="R180"/>
-<pin name="C_COM" x="-12.7" y="2.54" visible="pad" length="short" swaplevel="1"/>
-<pin name="GND" x="2.54" y="-17.78" visible="pad" length="short" swaplevel="1" rot="R90"/>
-<pin name="VEE" x="-2.54" y="-17.78" visible="pad" length="short" swaplevel="1" rot="R90"/>
-<pin name="!E" x="-12.7" y="-12.7" visible="pad" length="short" swaplevel="1"/>
-<pin name="S2" x="-12.7" y="-7.62" visible="pad" length="short" swaplevel="1"/>
-<pin name="S1" x="-12.7" y="-5.08" visible="pad" length="short" swaplevel="1"/>
-<pin name="S0" x="-12.7" y="-2.54" visible="pad" length="short" swaplevel="1"/>
-<pin name="A_COM" x="-12.7" y="7.62" visible="pad" length="short" swaplevel="1"/>
+<pin name="VCC" x="0" y="15.24" visible="off" length="short" swaplevel="1" rot="R270"/>
+<pin name="B_COM" x="-12.7" y="5.08" visible="off" length="short" swaplevel="1"/>
+<pin name="A0" x="12.7" y="7.62" visible="off" length="short" swaplevel="1" rot="R180"/>
+<pin name="A1" x="12.7" y="5.08" visible="off" length="short" swaplevel="1" rot="R180"/>
+<pin name="B0" x="12.7" y="0" visible="off" length="short" swaplevel="1" rot="R180"/>
+<pin name="B1" x="12.7" y="-2.54" visible="off" length="short" swaplevel="1" rot="R180"/>
+<pin name="C0" x="12.7" y="-7.62" visible="off" length="short" swaplevel="1" rot="R180"/>
+<pin name="C1" x="12.7" y="-10.16" visible="off" length="short" swaplevel="1" rot="R180"/>
+<pin name="C_COM" x="-12.7" y="2.54" visible="off" length="short" swaplevel="1"/>
+<pin name="GND" x="2.54" y="-17.78" visible="off" length="short" swaplevel="1" rot="R90"/>
+<pin name="VEE" x="-2.54" y="-17.78" visible="off" length="short" swaplevel="1" rot="R90"/>
+<pin name="!E" x="-12.7" y="-12.7" visible="off" length="short" swaplevel="1"/>
+<pin name="S2" x="-12.7" y="-7.62" visible="off" length="short" swaplevel="1"/>
+<pin name="S1" x="-12.7" y="-5.08" visible="off" length="short" swaplevel="1"/>
+<pin name="S0" x="-12.7" y="-2.54" visible="off" length="short" swaplevel="1"/>
+<pin name="A_COM" x="-12.7" y="7.62" visible="off" length="short" swaplevel="1"/>
 <text x="-9.144" y="6.858" size="1.524" layer="94">A_COM</text>
 <text x="-9.144" y="-3.302" size="1.524" layer="94">S0</text>
 <text x="-9.144" y="-5.842" size="1.524" layer="94">S1</text>
@@ -10968,7 +10968,7 @@ Source: http://www.analog.com/UploadedFiles/Data_Sheets/39677768AD7714_c.pdf</de
 </symbol>
 </symbols>
 <devicesets>
-<deviceset name="CD74HCT4051" urn="urn:adsk.eagle:component:14993295/9" prefix="U" library_version="18">
+<deviceset name="CD74HCT4051" urn="urn:adsk.eagle:component:14993295/8" prefix="U" library_version="15">
 <description>TI 8x1 analog multiplexer/demultiplexer.
 
 &lt;p&gt;Datasheet: &lt;a href="http://www.ti.com/lit/ds/symlink/cd74hct4053.pdf"&gt;http://www.ti.com/lit/ds/symlink/cd74hct4053.pdf&lt;/a&gt;&lt;/p&gt;</description>
@@ -11009,7 +11009,7 @@ Source: http://www.analog.com/UploadedFiles/Data_Sheets/39677768AD7714_c.pdf</de
 </device>
 </devices>
 </deviceset>
-<deviceset name="CD74HCT4053" urn="urn:adsk.eagle:component:15028184/7" prefix="U" library_version="18">
+<deviceset name="CD74HCT4053" urn="urn:adsk.eagle:component:15028184/6" prefix="U" library_version="16">
 <description>TI 3 2x1 analog multiplexer/demultiplexer.
 
 &lt;p&gt;Datasheet: &lt;a href="http://www.ti.com/lit/ds/symlink/cd74hct4053.pdf"&gt;http://www.ti.com/lit/ds/symlink/cd74hct4053.pdf&lt;/a&gt;&lt;/p&gt;</description>
@@ -16100,7 +16100,7 @@ LED</description>
 </libraries>
 <attributes>
 <attribute name="DOC#" value=""/>
-<attribute name="REV#" value="1"/>
+<attribute name="REV#" value="0"/>
 </attributes>
 <variantdefs>
 </variantdefs>
@@ -16168,10 +16168,10 @@ LED</description>
 <part name="G2" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="TP" device="PAD1-13" package3d_urn="urn:adsk.eagle:package:27946/1"/>
 <part name="G3" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="TP" device="PAD1-13" package3d_urn="urn:adsk.eagle:package:27946/1"/>
 <part name="G4" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="TP" device="PAD1-13" package3d_urn="urn:adsk.eagle:package:27946/1"/>
-<part name="U6" library="Potentiometer" library_urn="urn:adsk.eagle:library:4010556" deviceset="X9258" device="_SOIC" package3d_urn="urn:adsk.eagle:package:14966981/2" value="X9258"/>
-<part name="U7" library="Potentiometer" library_urn="urn:adsk.eagle:library:4010556" deviceset="X9258" device="_SOIC" package3d_urn="urn:adsk.eagle:package:14966981/2" value="X9258"/>
-<part name="U9" library="Potentiometer" library_urn="urn:adsk.eagle:library:4010556" deviceset="X9258" device="_SOIC" package3d_urn="urn:adsk.eagle:package:14966981/2" value="X9258"/>
-<part name="U8" library="Potentiometer" library_urn="urn:adsk.eagle:library:4010556" deviceset="X9258" device="_SOIC" package3d_urn="urn:adsk.eagle:package:14966981/2" value="X9258"/>
+<part name="U6" library="Potentiometer" library_urn="urn:adsk.eagle:library:4010556" deviceset="X9258" device="_SOIC" package3d_urn="urn:adsk.eagle:package:14966981/2" value="X9258_A"/>
+<part name="U7" library="Potentiometer" library_urn="urn:adsk.eagle:library:4010556" deviceset="X9258" device="_SOIC" package3d_urn="urn:adsk.eagle:package:14966981/2" value="X925_B"/>
+<part name="U9" library="Potentiometer" library_urn="urn:adsk.eagle:library:4010556" deviceset="X9258" device="_SOIC" package3d_urn="urn:adsk.eagle:package:14966981/2" value="X9258_D"/>
+<part name="U8" library="Potentiometer" library_urn="urn:adsk.eagle:library:4010556" deviceset="X9258" device="_SOIC" package3d_urn="urn:adsk.eagle:package:14966981/2" value="X9258_C"/>
 <part name="U10" library="Digital ICs" library_urn="urn:adsk.eagle:library:14993291" deviceset="CD74HCT4051" device="" package3d_urn="urn:adsk.eagle:package:14993294/2" value="CD74HCT4051"/>
 <part name="U11" library="Digital ICs" library_urn="urn:adsk.eagle:library:14993291" deviceset="CD74HCT4051" device="" package3d_urn="urn:adsk.eagle:package:14993294/2" value="CD74HCT4051"/>
 <part name="R39" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="39k"/>
@@ -16460,7 +16460,7 @@ LED</description>
 <part name="R83" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="1.8k"/>
 <part name="R84" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="18k"/>
 <part name="SUPPLY80" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
-<part name="C71" library="Capacitors" library_urn="urn:adsk.eagle:library:4010381" deviceset="NON_POL" device="_0805/2012" package3d_urn="urn:adsk.eagle:package:4010399/3" value="0.01uF"/>
+<part name="C71" library="Capacitors" library_urn="urn:adsk.eagle:library:4010381" deviceset="NON_POL" device="_0805/2012" package3d_urn="urn:adsk.eagle:package:4010399/3" value="0.1uF"/>
 <part name="C72" library="Capacitors" library_urn="urn:adsk.eagle:library:4010381" deviceset="NON_POL" device="_0805/2012" package3d_urn="urn:adsk.eagle:package:4010399/3" value="0.1uF"/>
 <part name="C73" library="Capacitors" library_urn="urn:adsk.eagle:library:4010381" deviceset="NON_POL" device="_0805/2012" package3d_urn="urn:adsk.eagle:package:4010399/3" value="0.1uF"/>
 <part name="SUPPLY83" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
@@ -16516,9 +16516,7 @@ LED</description>
 <part name="FRAME5" library="frames" library_urn="urn:adsk.eagle:library:15356290" deviceset="FRAME_B_L" device="">
 <attribute name="ENGINEER_NAME" value="Samuel Burnett"/>
 </part>
-<part name="R43" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="10k">
-<attribute name="BOM" value="DNU"/>
-</part>
+<part name="R43" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="10k"/>
 <part name="SUPPLY93" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="SUPPLY94" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="SUPPLY95" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
@@ -20696,13 +20694,13 @@ Signals</text>
 <instance part="+3V10" gate="G$1" x="124.46" y="215.9" smashed="yes">
 <attribute name="VALUE" x="121.666" y="216.916" size="1.778" layer="96"/>
 </instance>
-<instance part="J22" gate="G$1" x="132.08" y="241.3" smashed="yes">
-<attribute name="VALUE" x="129.54" y="236.474" size="1.778" layer="96" font="vector"/>
-<attribute name="NAME" x="129.54" y="246.888" size="1.778" layer="95" font="vector"/>
+<instance part="J22" gate="G$1" x="134.62" y="241.3" smashed="yes">
+<attribute name="VALUE" x="132.08" y="236.474" size="1.778" layer="96" font="vector"/>
+<attribute name="NAME" x="132.08" y="246.888" size="1.778" layer="95" font="vector"/>
 </instance>
-<instance part="SUPPLY9" gate="GND" x="144.78" y="233.68" smashed="yes"/>
-<instance part="P+19" gate="1" x="144.78" y="254" smashed="yes" rot="MR0">
-<attribute name="VALUE" x="147.828" y="254.508" size="1.778" layer="96" rot="MR0"/>
+<instance part="SUPPLY9" gate="GND" x="147.32" y="233.68" smashed="yes"/>
+<instance part="P+19" gate="1" x="147.32" y="254" smashed="yes" rot="MR0">
+<attribute name="VALUE" x="150.368" y="254.508" size="1.778" layer="96" rot="MR0"/>
 </instance>
 <instance part="FRAME4" gate="G$1" x="0" y="0" smashed="yes"/>
 <instance part="FRAME4" gate="G$2" x="326.39" y="0" smashed="yes">
@@ -21058,8 +21056,8 @@ Signals</text>
 </segment>
 <segment>
 <pinref part="J22" gate="G$1" pin="1"/>
-<wire x1="139.7" y1="241.3" x2="144.78" y2="241.3" width="0.1524" layer="91"/>
-<wire x1="144.78" y1="241.3" x2="144.78" y2="236.22" width="0.1524" layer="91"/>
+<wire x1="142.24" y1="241.3" x2="147.32" y2="241.3" width="0.1524" layer="91"/>
+<wire x1="147.32" y1="241.3" x2="147.32" y2="236.22" width="0.1524" layer="91"/>
 <pinref part="SUPPLY9" gate="GND" pin="GND"/>
 </segment>
 <segment>
@@ -21155,12 +21153,6 @@ Signals</text>
 <pinref part="P+18" gate="1" pin="+5V"/>
 <wire x1="22.86" y1="246.38" x2="22.86" y2="251.46" width="0.1524" layer="91"/>
 <junction x="22.86" y="246.38"/>
-</segment>
-<segment>
-<pinref part="J22" gate="G$1" pin="2"/>
-<wire x1="139.7" y1="243.84" x2="144.78" y2="243.84" width="0.1524" layer="91"/>
-<wire x1="144.78" y1="243.84" x2="144.78" y2="251.46" width="0.1524" layer="91"/>
-<pinref part="P+19" gate="1" pin="+5V"/>
 </segment>
 </net>
 <net name="5V0SENSOR_IN" class="0">
@@ -21651,6 +21643,14 @@ Signals</text>
 <wire x1="33.02" y1="190.5" x2="38.1" y2="190.5" width="0.1524" layer="91"/>
 <pinref part="J3" gate="G$1" pin="6"/>
 <label x="58.928" y="190.5" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+</net>
+<net name="+5V" class="0">
+<segment>
+<pinref part="J22" gate="G$1" pin="2"/>
+<wire x1="142.24" y1="243.84" x2="147.32" y2="243.84" width="0.1524" layer="91"/>
+<wire x1="147.32" y1="243.84" x2="147.32" y2="251.46" width="0.1524" layer="91"/>
+<pinref part="P+19" gate="1" pin="+5V"/>
 </segment>
 </net>
 <net name="+12V" class="0">

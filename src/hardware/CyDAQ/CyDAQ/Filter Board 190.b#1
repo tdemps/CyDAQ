@@ -4670,21 +4670,21 @@ design rules under a new name.</description>
 <element name="J14" library="Connectors" library_urn="urn:adsk.eagle:library:4010410" package="FEMALE_HEADER-2X6" package3d_urn="urn:adsk.eagle:package:14931688/2" value="BRKOUT_JD" x="62.626240625" y="2.54" smashed="yes">
 <attribute name="BOM" value="" x="33.924240625" y="-86.36" size="1.778" layer="27" display="off"/>
 <attribute name="MPN" value="" x="33.924240625" y="-86.36" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="75.072240625" y="6.985" size="0.8128" layer="25" ratio="15"/>
+<attribute name="NAME" x="61.356240625" y="6.985" size="0.8128" layer="25" ratio="15"/>
 <attribute name="URL" value="" x="33.924240625" y="-86.36" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="61.356240625" y="-0.235" size="0.82" layer="27" font="vector" ratio="15"/>
 </element>
 <element name="J15" library="Connectors" library_urn="urn:adsk.eagle:library:4010410" package="FEMALE_HEADER-2X6" package3d_urn="urn:adsk.eagle:package:14931688/2" value="BRKOUT_JC" x="85.633559375" y="2.54" smashed="yes">
 <attribute name="BOM" value="" x="40.421559375" y="-95.504" size="1.778" layer="27" display="off"/>
 <attribute name="MPN" value="" x="40.421559375" y="-95.504" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="98.079559375" y="6.985" size="0.8128" layer="25" ratio="15"/>
+<attribute name="NAME" x="84.363559375" y="6.985" size="0.8128" layer="25" ratio="15"/>
 <attribute name="URL" value="" x="40.421559375" y="-95.504" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="84.363559375" y="-0.235" size="0.82" layer="27" font="vector" ratio="15"/>
 </element>
 <element name="J16" library="Connectors" library_urn="urn:adsk.eagle:library:4010410" package="FEMALE_HEADER-2X6" package3d_urn="urn:adsk.eagle:package:14931688/2" value="BRKOUT_JB" x="108.6281875" y="2.54508125" smashed="yes">
 <attribute name="BOM" value="" x="46.9061875" y="-104.64291875" size="1.778" layer="27" display="off"/>
 <attribute name="MPN" value="" x="46.9061875" y="-104.64291875" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="121.0741875" y="6.99008125" size="0.8128" layer="25" ratio="15"/>
+<attribute name="NAME" x="107.3581875" y="6.99008125" size="0.8128" layer="25" ratio="15"/>
 <attribute name="URL" value="" x="46.9061875" y="-104.64291875" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="107.3581875" y="-0.22991875" size="0.82" layer="27" font="vector" ratio="15"/>
 </element>
@@ -7938,7 +7938,7 @@ design rules under a new name.</description>
 </signal>
 </signals>
 <mfgpreviewcolors>
-<mfgpreviewcolor name="soldermaskcolor" color="0xC8AA0000"/>
+<mfgpreviewcolor name="soldermaskcolor" color="0xC8008000"/>
 <mfgpreviewcolor name="silkscreencolor" color="0xFFFEFEFE"/>
 <mfgpreviewcolor name="backgroundcolor" color="0xFF282828"/>
 <mfgpreviewcolor name="coppercolor" color="0xFFFFBF00"/>
