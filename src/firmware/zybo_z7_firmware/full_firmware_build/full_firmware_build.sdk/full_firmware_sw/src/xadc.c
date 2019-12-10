@@ -6,18 +6,24 @@
  */
 #include "xadc.h"
 
-static XAdcPs  XADCMonInst;
 static XSysMon SysMonInst;
 static u32 sampleRate = 0;
-XAdcPs *XADCInstPtr = &XADCMonInst;
+static XTmrCtr TimerCounterInst;
 XSysMon* SysMonInstPtr = &SysMonInst;
 u8 clockDivider = 2;
-XScuGic InterruptController;
-
-volatile u16 xadcBuffer[RX_BUFFER_SIZE];
+static XScuGic InterruptController;
+volatile SAMPLE_TYPE xadcBuffer[RX_BUFFER_SIZE];
 volatile u32 xadcSampleCount = 0;
 volatile float voltage;
-extern volatile bool samplingEnabled;
+extern volatile bool samplingEnabled, streamingEnabled = false;
+
+//#define INTC_DEVICE_ID		 	XPAR_INTC_0_DEVICE_ID
+#define INTC_DEVICE_INT_ID	 	XPAR_INTC_0_TMRCTR_0_VEC_ID
+#define TMRCTR_DEVICE_ID		XPAR_TMRCTR_0_DEVICE_ID
+#define TIMER_CNTR_0	 		0
+#define RESET_VALUE	 			0xF0000000
+
+
 
 u8 xadcInit(){
 	u32 address, status, intrStatusValue;
@@ -31,20 +37,12 @@ u8 xadcInit(){
 	XSysMon_CfgInitialize(SysMonInstPtr, SYSConfigPtr, SYSConfigPtr->BaseAddress);
 
 	address = SYSConfigPtr->BaseAddress;
-	printf("XADC using Sysmon -> base address %lx \n\r", address);
+	xil_printf("XADC using Sysmon -> base address %lx \n\r", address);
 
-
-//	XADCConfigPtr = XAdcPs_LookupConfig(XPAR_XADC_WIZ_0_DEVICE_ID);
-//	if (XADCConfigPtr == NULL) {
-//			return XST_FAILURE;
-//	}
-//
-//	XAdcPs_CfgInitialize(XADCInstPtr,XADCConfigPtr,XADCConfigPtr->BaseAddress);
-
-	status = xadcSetupInterruptSystem(&InterruptController, &SysMonInst, INTR_ID);
-		if (status != XST_SUCCESS) {
-			return XST_FAILURE;
-		}
+	status = xadcSetupInterruptSystem(&InterruptController, &SysMonInst, XADC_INTR_ID);
+	if (status != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
 	XSysMon_SetAlarmEnables(SysMonInstPtr, 0x0);
 //	status = XSysMon_SelfTest(SysMonInstPtr);
 //	if ( XST_SUCCESS != status ) {
@@ -65,27 +63,38 @@ u8 xadcInit(){
 	printf("CFG1 %x, ",(unsigned int)intrStatusValue);
 	intrStatusValue = Xil_In16(SYSConfigPtr->BaseAddress+XSM_CFR2_OFFSET);
 	printf("CFG2 %x\n",(unsigned int)intrStatusValue);
-	intrStatusValue = XSysMon_IntrGetEnabled(SysMonInstPtr);
-	printf("Interrupt Enable register %x \n",(unsigned int)intrStatusValue);
-	intrStatusValue = Xil_In32(SYSConfigPtr->BaseAddress+XSM_GIER_OFFSET);
-	printf("Global Int Enable %x \n",(unsigned int)intrStatusValue);
+//	intrStatusValue = XSysMon_IntrGetEnabled(SysMonInstPtr);
+//	printf("Interrupt Enable register %x \n",(unsigned int)intrStatusValue);
+//	intrStatusValue = Xil_In32(SYSConfigPtr->BaseAddress+XSM_GIER_OFFSET);
+//	printf("Global Int Enable %x \n",(unsigned int)intrStatusValue);
 	xadcSampleCount = 0;
 
-	xadcSetSampleRate(55000);
+	xadcSetSampleRate(45000);
 	//clockDivider = XSysMon_GetAdcClkDivisor(SysMonInstPtr);
 	XSysMon_SetSequencerMode(SysMonInstPtr, XSM_SEQ_MODE_CONTINPASS);
 	xadcCheckAuxSettings();
-
 	XSysMon_IntrEnable(SysMonInstPtr, XSM_IPIXR_EOS_MASK);
+
+	status = XTmrCtr_Initialize(&TimerCounterInst, TMRCTR_DEVICE_ID);
+	if (status != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
+
+	status = XTmrCtr_SelfTest(&TimerCounterInst,TIMER_CNTR_0);
+		if (status != XST_SUCCESS) {
+			return XST_FAILURE;
+		}
+
+	XTmrCtr_SetHandler(&TimerCounterInst,DeviceDriverHandler,&TimerCounterInst);
+	XTmrCtr_SetOptions(&TimerCounterInst, TIMER_CNTR_0, XTC_INT_MODE_OPTION);
+	XTmrCtr_SetResetValue(&TimerCounterInst, TIMER_CNTR_0, RESET_VALUE);
+	XTmrCtr_Start(&TimerCounterInst, TIMER_CNTR_0);
+
 	return 0;
 }
 
 XSysMon* xadcGetSysMonPtr(){
 	return SysMonInstPtr;
-}
-
-XAdcPs* xadcGetXADCPtr(){
-	return XADCInstPtr;
 }
 
 u8 xadcCheckAuxSettings(){
@@ -102,7 +111,7 @@ u8 xadcCheckAuxSettings(){
 	 xil_printf("AUX7, ");
 	}
 	if(XSM_SEQ_CH_AUX06 & channelConfig){
-	 xil_printf("AUX6, ");
+	 xil_printf("AUX6");
 	}
 	xil_printf("\n\r");
 
@@ -119,9 +128,9 @@ void xadcSetPolarity(u8 setting){
 	int status;
 	//1 for bipolar, 0 for unipolar
 	if(setting){
-		status =  XSysMon_SetSeqInputMode(SysMonInstPtr, XSM_SEQ_CH_AUX14);
+		status = XSysMon_SetSeqInputMode(SysMonInstPtr, XSM_SEQ_CH_AUX14);
 	}else{
-		status =  XSysMon_SetSeqInputMode(SysMonInstPtr, 0);
+		status = XSysMon_SetSeqInputMode(SysMonInstPtr, 0);
 	}
 	if(status != XST_SUCCESS){
 		xil_printf("Error changing polarity");
@@ -132,8 +141,8 @@ void xadcSetPolarity(u8 setting){
 u32 xadcGetSampleCount(){
 	return xadcSampleCount;
 }
-u32* getBuffer(){
-return xadcBuffer;
+SAMPLE_TYPE* xadcGetBuffer(){
+	return xadcBuffer;
 }
 
 void xadcDisableSampling(){
@@ -144,17 +153,32 @@ void xadcDisableSampling(){
 
 void xadcEnableSampling(u8 streamSetting){
 	xil_printf("Starting sampling, Streaming: %s\n", (streamSetting) ? "On" : "Off");
-	XSysMon_IntrGlobalEnable(SysMonInstPtr);
 	samplingEnabled = true;
+	u32 numBytes = 0;
+	u8 buf[50];
+	//XSysMon_IntrGlobalEnable(SysMonInstPtr);
 	if(streamSetting == 1){
 		u32 cursor = 0;
-		while( (cursor < xadcSampleCount - 1) || samplingEnabled){
-			if(cursor+10 <= xadcSampleCount){
-				voltage = RawToExtVoltage(xadcBuffer[cursor]);
-				//xil_printf("@%x, %d!\n", xadcBuffer[cursor], xadcSampleCount);
-				xil_printf("%d.%d\n", (int)voltage, xadcFractionToInt(voltage));
-				cursor = xadcSampleCount;
+		while(samplingEnabled){
+			streamingEnabled = true;
+			numBytes += comUartRecv(&buf[numBytes], 5);
+			while ((XSysMon_GetStatus(&SysMonInst) & XSM_SR_EOS_MASK) != XSM_SR_EOS_MASK);
+			xadcBuffer[xadcSampleCount] = (SAMPLE_TYPE) XSysMon_GetAdcData(&SysMonInst, AUX_14_INPUT) >> 4;
+			if(xadcSampleCount == RX_BUFFER_SIZE) { xadcSampleCount = 0; }
+			voltage = RawToExtVoltage(xadcBuffer[xadcSampleCount]);
+			xadcSampleCount++;
+			//xil_printf("@%x, %d!\n", xadcBuffer[cursor], xadcSampleCount);
+			xil_printf("%d.%d\n", (int)voltage, xadcFractionToInt(voltage));
+			if(buf[numBytes-1] == '!'){
+				xil_printf("Stopping\n");
+				samplingEnabled = false;
 			}
+//			if(cursor+10 <= xadcSampleCount){
+//				voltage = RawToExtVoltage(xadcBuffer[cursor]);
+//				//xil_printf("@%x, %d!\n", xadcBuffer[cursor], xadcSampleCount);
+//				xil_printf("%d.%d\n", (int)voltage, xadcFractionToInt(voltage));
+//				cursor = xadcSampleCount;
+//			}
 		}
 	}
 
@@ -190,7 +214,7 @@ int xadcFractionToInt(float FloatNum){
  */
 int xadcSetSampleRate(u32 rate){
 
-	if(rate > 1000000){
+	if(rate > XADC_MAX_SAMPLE_RATE){
 		xil_printf("Invalid sample rate given");
 		return -1;
 	}
@@ -209,22 +233,28 @@ int xadcGetSampleRate(){
 static int xadcSetupInterruptSystem(XScuGic *IntcInstancePtr,XSysMon *XAdcPtr, u16 IntrId ){
 
 	XScuGic_Config *IntcConfig; /* Instance of the interrupt controller */
-	int Status;
+	int status;
 
 	IntcConfig = XScuGic_LookupConfig(INTC_DEVICE_ID);
 	if (NULL == IntcConfig) {
 		return XST_FAILURE;
 	}
-	Status = XScuGic_CfgInitialize(IntcInstancePtr, IntcConfig, IntcConfig->CpuBaseAddress);
-	if (Status != XST_SUCCESS) {
+	status = XScuGic_CfgInitialize(IntcInstancePtr, IntcConfig, IntcConfig->CpuBaseAddress);
+	if (status != XST_SUCCESS) {
 		return XST_FAILURE;
 	}
-	Status = XScuGic_Connect(IntcInstancePtr, IntrId,(Xil_InterruptHandler)XAdcInterruptHandler,(void *)XAdcPtr);
-	if (Status != XST_SUCCESS) {
+	status = XScuGic_Connect(IntcInstancePtr, IntrId,(Xil_InterruptHandler)xadcInterruptHandler,(void *)XAdcPtr);
+	if (status != XST_SUCCESS) {
 		return XST_FAILURE;
+	}
+	status = XScuGic_Connect(IntcInstancePtr, XPS_FIQ_INT_ID,
+					   (Xil_InterruptHandler)DeviceDriverHandler,
+					   (void *)&TimerCounterInst);
+	if (status != XST_SUCCESS) {
+			return XST_FAILURE;
 	}
 	XScuGic_Enable(IntcInstancePtr, IntrId);
-
+	XScuGic_Enable(IntcInstancePtr, XPS_FIQ_INT_ID); //timer
 	Xil_ExceptionInit();
 
 	Xil_ExceptionRegisterHandler(XIL_EXCEPTION_ID_FIQ_INT,
@@ -238,11 +268,13 @@ static int xadcSetupInterruptSystem(XScuGic *IntcInstancePtr,XSysMon *XAdcPtr, u
 
 	return XST_SUCCESS;
 }
-void XAdcInterruptHandler(void *CallBackRef){
+void xadcInterruptHandler(void *CallBackRef){
 
 	if (xadcSampleCount < RX_BUFFER_SIZE ){
 		xadcBuffer[xadcSampleCount] = (SAMPLE_TYPE) XSysMon_GetAdcData(&SysMonInst, AUX_14_INPUT) >> 4;
 		xadcSampleCount++;
+	}else if(streamingEnabled == true){
+		xadcSampleCount = 0;
 	}else{
 		xil_printf("Done\n");
 		samplingEnabled = false;
@@ -269,4 +301,11 @@ void xadcProcessSamples(){
 	xadcSampleCount = 0;
 
 	xil_printf("Finished processing samples\n\n");
+}
+
+void DeviceDriverHandler(void *CallbackRef){
+	print("Timer Event\n\r");
+	XTmrCtr_SetResetValue(&TimerCounterInst, TIMER_CNTR_0, RESET_VALUE);
+	XTmrCtr_Start(&TimerCounterInst, TIMER_CNTR_0);
+
 }

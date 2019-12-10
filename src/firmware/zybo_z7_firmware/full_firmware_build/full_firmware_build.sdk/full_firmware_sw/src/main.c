@@ -38,7 +38,7 @@ void commTest(u8 echo);
 void filterTest();
 void initButtons();
 u8 getButtons();
-
+u8 getButtonChangeBlocking();
 bool samplingEnabled;
 int main()
 {
@@ -52,7 +52,7 @@ int main()
     samplingEnabled = false;
 
 //	xil_printf("Select Test:\n 1)ADC\n2)Comm3)Filter\n");
-//	while()
+
     //xadcTest();
     //commTest(1);
 	filterTest();
@@ -65,11 +65,13 @@ int main()
 }
 void xadcTest(){
 
-    xadcEnableSampling(0);
+	xil_printf("Press BTN1 for real-time viewing, 0 else\n");
+	u8 btns = getButtonChangeBlocking();
+    xadcEnableSampling(btns-1);
 
 	sleep(3);
 
-	xadcProcessSamples();
+	//xadcProcessSamples();
 	return;
 }
 
@@ -103,14 +105,18 @@ void filterTest(){
     FILTER_FREQ_TYPE highpass = 10000, lowpass = 20000;	  //1550hz -> 10k ohm, 15000hz -> 1k ohm
 	XUartPs* ptr = commGetUartPtr();
 	u8 selectedFilter = FILTER_1ST_ORDER_LP, buttons = 0, numBytes = 0, status = 0;
-	u8 buf[50];
-
+	u8 buf[20];
 	muxSetActiveFilter(selectedFilter);	//enums defined in shared_definitions.h for filters and inputs
 	muxSetInputPins(ANALOG);
 	status = tuneFilter(selectedFilter, highpass, lowpass);
 
 	 while((buttons = getButtons()) != 0xC){	//hit buttons 3 and 4 together to end test
-			//numBytes += XUartPs_Recv(ptr, &buf[numBytes], 2);
+			numBytes += XUartPs_Recv(ptr, &buf[numBytes], 2);
+			if(buf[numBytes-1] == '\r'){
+				buf[numBytes-1] = '\0';
+				printf("%s\n", buf);
+				numBytes = 0;
+			}
 			if(buttons > 0 && buttons < NUM_FILTERS){
 				selectedFilter = buttons-1;
 				xil_printf("Changing filter to %d\n", selectedFilter);
@@ -128,7 +134,6 @@ void filterTest(){
 				}
 				xil_printf("Increasing corners: %d, %d\n", highpass, lowpass);
 			}
-
 			usleep(500000);
 	}
 	 xil_printf("Exiting Filter Test\n");
@@ -136,4 +141,10 @@ void filterTest(){
 
 u8 getButtons(){
 	return (u8) Xil_In32(BUTTON_BASE_ADDR);
+}
+
+u8 getButtonChangeBlocking(){
+	u8 buttons = 0;
+	while( (buttons = (u8) Xil_In32(BUTTON_BASE_ADDR)) == 0x0);
+	return buttons;
 }

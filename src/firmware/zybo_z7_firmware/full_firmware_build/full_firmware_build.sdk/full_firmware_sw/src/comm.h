@@ -59,4 +59,5 @@ void Handler(void *CallBackRef, u32 Event, unsigned int EventData);
 XUartPs* commGetUartPtr();
 void commRXTask();
 bool commProcessPacket(u8 *buffer, u16 bufSize);
+u32 comUartRecv(u8 *bufferPtr, u32 numBytes);
 #endif /* SRC_COMM_H_ */

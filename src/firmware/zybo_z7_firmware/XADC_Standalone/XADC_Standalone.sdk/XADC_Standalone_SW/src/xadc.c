@@ -41,7 +41,7 @@ u8 xadcInit(){
 //
 //	XAdcPs_CfgInitialize(XADCInstPtr,XADCConfigPtr,XADCConfigPtr->BaseAddress);
 
-	status = xadcSetupInterruptSystem(&InterruptController, &SysMonInst, INTR_ID);
+	status = xadcSetupInterruptSystem(&InterruptController, &SysMonInst, XADC_INTR_ID);
 		if (status != XST_SUCCESS) {
 			return XST_FAILURE;
 		}
@@ -133,7 +133,7 @@ void xadcSetPolarity(u8 setting){
 u32 xadcGetSampleCount(){
 	return xadcSampleCount;
 }
-u32* getBuffer(){
+u32* xadcGetBuffer(){
 return xadcBuffer;
 }
 
@@ -199,7 +199,7 @@ static int xadcSetupInterruptSystem(XScuGic *IntcInstancePtr,XSysMon *XAdcPtr, u
 	if (Status != XST_SUCCESS) {
 		return XST_FAILURE;
 	}
-	Status = XScuGic_Connect(IntcInstancePtr, IntrId,(Xil_InterruptHandler)XAdcInterruptHandler,(void *)XAdcPtr);
+	Status = XScuGic_Connect(IntcInstancePtr, IntrId,(Xil_InterruptHandler)xadcInterruptHandler,(void *)XAdcPtr);
 	if (Status != XST_SUCCESS) {
 		return XST_FAILURE;
 	}
@@ -218,7 +218,7 @@ static int xadcSetupInterruptSystem(XScuGic *IntcInstancePtr,XSysMon *XAdcPtr, u
 
 	return XST_SUCCESS;
 }
-void XAdcInterruptHandler(void *CallBackRef){
+void xadcInterruptHandler(void *CallBackRef){
 
 
 	if (xadcSampleCount < RX_BUFFER_SIZE ){

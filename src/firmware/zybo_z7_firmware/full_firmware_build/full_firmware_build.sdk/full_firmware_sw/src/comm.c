@@ -301,7 +301,6 @@ void commRXTask(){
 			xadcDisableSampling();
 			//stop sampling to config device
 		}
-
 		err = commProcessPacket(receiveBuffer, bytesReceived);
 		bytesReceived = 0;
 
@@ -379,3 +378,10 @@ bool commProcessPacket(u8 *buffer, u16 bufSize){
 
 }
 
+/**
+ * Exposes Uart Receive to libraries without them needing UART ptr.
+ */
+u32 comUartRecv(u8 *bufferPtr, u32 numBytes)
+{
+	return XUartPs_Recv(&UART1, bufferPtr, numBytes);
+}

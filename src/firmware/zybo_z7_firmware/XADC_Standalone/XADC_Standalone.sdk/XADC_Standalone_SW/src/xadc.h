@@ -27,7 +27,7 @@
 #define SYSMON_DEVICE_ID	XPAR_SYSMON_0_DEVICE_ID
 #define CLOCK_FREQ 100000000 //input clock to xadc wiz block (Mhz). Must change in Vivado
 #define RX_BUFFER_SIZE  10000
-#define INTR_ID				XPS_IRQ_INT_ID
+#define XADC_INTR_ID				XPS_IRQ_INT_ID
 #define INTC_DEVICE_ID		XPAR_SCUGIC_SINGLE_DEVICE_ID
 #define AUX_14_INPUT (XADCPS_CH_AUX_MIN + 14)
 
@@ -44,10 +44,10 @@ XAdcPs* xadcGetXADCPtr();
 u8 xadcCheckAuxSettings();
 int xadcSetSampleRate(u32 rate);
 static int xadcSetupInterruptSystem(XScuGic *IntcInstancePtr,XSysMon *XAdcPtr,u16 IntrId );
-void XAdcInterruptHandler(void *CallBackRef);
+void xadcInterruptHandler(void *CallBackRef);
 void checkForSamples();
 u32 xadcGetSampleCount();
-u32* getBuffer();
+u32* xadcGetBuffer();
 void xadcEnableSampling();
 void xadcDisableSampling();
 void xadcSetPolarity(u8 setting);
