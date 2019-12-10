@@ -1,18 +1,2 @@
-# IDE Directories
-.metadata/
-.vscode/
+venv
 __pycache__
-.project
-.pydevproject
-
-# Toolchain Files
-dist
-
-# Temp Files
-*.csv
-*.mat
-*.pyc
-
-# Documentation
-html/
-latex/

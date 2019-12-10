@@ -1,3 +1,4 @@
+import binascii
 import serial
 import threading
 import serial.tools.list_ports
@@ -62,73 +63,6 @@ class sig_adc_cmds(IntEnum):
     """
     SET_SAMPLING_RATE = 0
     SET_FILTER_ROUTE = 1
-
-class parameter:
-    """
-        This class defines a table of commands that are sent to the ZYBO specifying the settings for
-        the Zybo
-
-        """
-    """
-          4 bytes
-    cmd = command (srst = sample rate set, srgt = sample rate get, fbst =  set active filter, fbgt = get active filter,
-                    inst = input set, ingt = input get, strt = start sampling, stop = stop sampling, fbtn = filter board tune)
-
-    inst is the input select (audio, analog input)
-    end of command is an an "!"
-    if the command has multiple values in command, seperate them with with commas
-    if zybo doesnt need to send anything, it will send 'ack!'
-
-    srst = '8 digits in samples per second'!, expected value will be 'ack!'
-    srgt = srgt!, expected value to receive will be srgt='8 bit number'!
-    fbst = enum, 2 character! expected value will be 'ack!'
-    fbgt = fbgt!, expected value to receive will be fbgt='2 characters'!
-    inst = enum, 2 character! expected value will be 'ack!'
-    ingt = fbgt!, expected value to receive will be ingt='2 characters'!
-    strt = strt!, expected value will be 'ack!'
-    stop = stop!, expected value will be 'ack!'
-    fbtn = '2 digit filter','8 digits (for frequency)','8 digits (for second frequency)(if only one frequency is needed set to 0)'
-            expected value will be 'ack!'
-            
-            
-    raw data will come in 2 bytes in hexidecimal
-    """
-    def __init__(self):
-        self.srst = ""
-        self.srgt = ""
-        self.fbst = ""
-        self.fbgt = ""
-        self.inst = ""
-        self.ingt = ""
-        self.strt = ""
-        self.stop = ""
-        self.fbtn = ""
-
-    def send (self)
-        """
-        Sends the parameter settings to the Zybo
-
-        Args:
-            None
-
-        Returns:
-            None
-        """
-        self.open(port_select)
-
-
-    def get(self):
-        """
-                Gets the parameter settings from the Zybo
-
-                Args:
-                    None
-
-                Returns:
-                    None
-                """
-        self.open(port_select)
-
 
 
 class parameter_options(IntEnum):
@@ -213,7 +147,7 @@ class ctrl_comm:
         all_ports = serial.tools.list_ports.comports()
         open_ports = []
 
-       # zybo_port = list(serial.tools.list_ports.grep("USB Serial Port"))
+        # zybo_port = list(serial.tools.list_ports.grep("USB Serial Port"))
         #print(zybo_port)
         for element in all_ports:
             if ("USB Serial Port" in element.description):
@@ -292,23 +226,6 @@ class ctrl_comm:
         else:
             return False
 
-
-    def send_parameters(self, port_select):
-        """
-                       receives ACK! from the ZYBO
-
-                       Args:
-                           port_select = port that is selected i.e. the zybo port
-                           command = commands being sent
-
-                       Returns:
-                           None
-                       """
-        self.open(port_select)
-        self.write("@" + parameter.srst + parameter.fbst + parameter.inst + parameter.srst + "!")
-
-
-
     def recieve_acknowlege_zybo(self, port_select):
         """
                receives ACK! from the ZYBO
@@ -343,7 +260,7 @@ class ctrl_comm:
                         print("'ack' was not recieved")
                         return False
         else:
-           return False
+            return False
 
     def __send_pkt(self, cmd, param1, param2):
         # Stuff transfer packet
@@ -570,9 +487,122 @@ class ctrl_comm:
 
         def read_from_port(self):
             while True:
-                 reading = serial_port.readline().decode('ASCII')
-                 data = reading
-                 print(str(data))
+                reading = serial_port.readline().decode('ASCII')
+                data = reading
+                print(str(data))
 
         zybo_info = threading.Thread(target=self.read(self), args=(serial_port,))
         zybo_info.start()
+
+
+    """
+        This class defines a table of commands that are sent to the ZYBO specifying the settings for
+        the Zybo
+
+        """
+    """
+          4 bytes
+    cmd = command (srst = sample rate set, srgt = sample rate get, fbst =  set active filter, fbgt = get active filter,
+                    inst = input set, ingt = input get, strt = start sampling, stop = stop sampling, fbtn = filter board tune)
+
+    inst is the input select (audio, analog input)
+    end of command is an an "!"
+    if the command has multiple values in command, seperate them with with commas
+    if zybo doesnt need to send anything, it will send 'ack!'
+
+    srst = '8 digits in samples per second'!, expected value will be 'ack!'
+    srgt = srgt!, expected value to receive will be srgt='8 bit number'!
+    fbst = enum, 2 character! expected value will be 'ack!'
+    fbgt = fbgt!, expected value to receive will be fbgt='2 characters'!
+    inst = enum, 2 character! expected value will be 'ack!'
+    ingt = fbgt!, expected value to receive will be ingt='2 characters'!
+    strt = strt!, expected value will be 'ack!'
+    stop = stop!, expected value will be 'ack!'
+    fbtn = '2 digit filter','8 digits (for frequency)','8 digits (for second frequency)(if only one frequency is needed set to 0)'
+            expected value will be 'ack!'
+
+
+    raw data will come in 2 bytes in hexidecimal
+    """
+
+    def parameters(self):
+        self.sample_rate_set = ""
+        self.sample_rate_get = ""
+        self.filter_set = ""
+        self.filter_get = ""
+        self.input_set = ""
+        self.input_get = ""
+        self.start = "START"
+        self.stop = "STOP"
+        self.lower_corner_freq_set = "0"
+        self.lower_corner_freq_get = ""
+        self.upper_corner_freq_set = "0"
+        self.upper_corner_freq_get = ""
+
+    def send_parameters(self, port_select):
+        """
+        sends all parameters to the Zybo
+
+        Args:
+        port_select = port that is selected i.e. the zybo port
+         command = commands being sent
+
+        Returns: None
+
+        """
+
+        self.open(port_select)
+        self.write("@" + self.input_set + "," + self.filter_set + "," + self.sample_rate_set + "," + self.lower_corner_freq_set +
+                   self.upper_corner_freq_set + "!")
+        while not self.recieve_acknowlege_zybo(port_select):
+            self.write("@" + self.input_set + self.filter_set + binascii.a2b_hex(self.sample_rate_set) + self.lower_corner_freq_set +
+                 self.upper_corner_freq_set + "!")
+        self.close()
+
+    def compare_parameters(self, port_select):
+        """
+                Compares parameter settings from the Zybo with what is supposed to be set
+
+                Args:
+                    None
+
+                Returns:
+                    None
+                """
+        def __get_parameters(self):
+            self.open(port_select)
+            while True:
+                if self.read_byte() == sig_serial.START_BYTE.value:
+                    buffer = ""
+                    byte_value = ""
+                    while byte_value != sig_serial.END_BYTE.value:
+                        byte_value = self.read_byte()
+                        if byte_value != sig_serial.END_BYTE.value:
+                            buffer += byte_value
+
+                    if len(buffer) != 13:
+                        self.__throw_exception('SerialReadTimeout')
+                        print("parameters received in incorrect format")
+                        return False
+
+                    self.input_get = buffer[0] + buffer[1]
+                    self.filter_get = buffer[2] + buffer[3]
+                    sample_rate_hex = buffer[4] + buffer[5] + buffer[6] + buffer[7] + buffer [8]
+
+                    self.lower_corner_freq_set = buffer[9] + buffer[10]
+                    self.upper_corner_freq_get = buffer[11] + buffer[12]
+
+        __get_parameters(port_select)
+        compare = False
+        while not compare:
+            if ((self.input_get == self.input_set) & (self.filter_get == self.filter_set) &
+                   (self.sample_rate_get == self.sample_rate_set) & (self.lower_corner_freq_get ==
+                   self.lower_corner_freq_set) & (self.upper_corner_freq_get == self.upper_corner_freq_set)):
+                self.close()
+                compare = True
+            else:
+                self.send_parameters(port_select)
+                __get_parameters(port_select)
+                compare = False
+
+

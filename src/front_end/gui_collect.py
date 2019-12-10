@@ -1,6 +1,6 @@
 from tkinter import (Frame, Label, Button, StringVar, END, Listbox, messagebox)
 from threading import (Thread, Event, Timer)
-import serial
+# import serial
 
 from ctrl_fileio import ctrl_fileio
 from mdl_global import mdl_const
@@ -86,7 +86,7 @@ class fr_collect(Frame):
         self.__comm.open(port_select)
         self.__comm.write(command.encode())
         acknowledge = self.__comm.recieve_acknowlege_zybo(port_select)
-        while acknowledge == False:
+        while not acknowledge:
             print("Acknowlegde command was not received, Message is being sent again")
             self.__comm.write(command.encode())
             acknowledge = self.__comm.recieve_acknowlege_zybo(port_select)
@@ -186,6 +186,7 @@ class fr_collect(Frame):
 
                         cmd = "hello"
                         self.__send_cmd_zybo(self.__port_selection,cmd)
+
 
                         # Setup worker thread
                        # self.worker = self.data_thread(self.__comm,
@@ -359,25 +360,5 @@ class fr_collect(Frame):
 
 
 
-"""
-      4 bytes
-cmd = command (srst = sample rate set, srgt = sample rate get, fbst =  set active filter, fbgt = get active filter,
-                inst = input set, ingt = input get, strt = start sampling, stop = stop sampling, fbtn = filter board tune)
-
-end of command is an an "!"
-if the command has multiple values in command, seperate them with with commas
-if zybo doesnt need to send anything, it will send 'ack!'
-
-srst = '8 digits in samples per second'!, expected value will be 'ack!'
-srgt = srgt!, expected value to receive will be srgt='8 bit number'!
-fbst = enum, 2 character! expected value will be 'ack!'
-fbgt = fbgt!, expected value to receive will be fbgt='2 characters'!
-inst = enum, 2 character! expected value will be 'ack!'
-ingt = fbgt!, expected value to receive will be ingt='2 characters'!
-strt = strt!, expected value will be 'ack!'
-stop = stop!, expected value will be 'ack!'
-fbtn = '2 digit filter','8 digits (for frequency)','8 digits (for second frequency)(if only one frequency is needed set to 0)'
-        expected value will be 'ack!'
-"""
 
 

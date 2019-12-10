@@ -8,7 +8,6 @@ from gui_top import main_wndw
 app = main_wndw()
 app.mainloop()
 
-
 """
       4 bytes
 cmd = command (srst = sample rate set, srgt = sample rate get, fbst =  set active filter, fbgt = get active filter,

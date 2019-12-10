@@ -1,0 +1,465 @@
+import tkinter as tk
+from tkinter import *
+from tkinter.ttk import Combobox
+from serial_comm import ctrl_comm, parameter_options, parameter_options_filter, parameter_options_input, parameter_options_output
+
+
+##------- Global Variables to Write to the CyDAQ ---------##
+
+# global upperCorner (int)
+# global lowerCorner (int)
+# global corner (int)
+# global input (string)
+# global filter (string)
+# global sampleRate (int)
+
+############## Class to Move Between Frames #############
+
+upperCorner = 000
+lowerCorner = 000
+corner = 000
+input = ""
+filter = ""
+sampleRate = ""
+comm_port = ""
+serial_obj = ctrl_comm()
+
+class CyDAQ_GUI(tk.Tk):
+    def __init__(self):
+        tk.Tk.__init__(self)
+        self._frame = None
+        self.switch_frame(CyDAQ_Config)
+        global comm_port
+        global upperCorner
+        global lowerCorner
+        global corner
+        global input
+        global filter
+        global sampleRate
+        global output
+
+        comm_port = serial_obj.get_port()
+        print("The Zybo is on " + comm_port)
+
+    def switch_frame(self, frame_class):
+        new_frame = frame_class(self)
+        try:
+            self._frame.destroy()
+        except:
+            print("didn't work")
+        finally:
+            self._frame = new_frame
+            self._frame.place(rely=0, relx=0)
+
+
+############## The Frame containing CyDAQ Configuration ################
+title = "CyDAQ 2.0 by ETG"
+
+filterlabelName = "Select Filter"
+
+filterNames = [
+    "All Pass",
+    "60 hz Notch",
+    "1st Order High Pass",
+    "1st Order Low Pass",
+    "2nd Order Band Pass",
+    "6th Order Band Pass",
+    "6th Order High Pass",
+    "6th Order Low Pass",
+    "NA"
+]
+
+inputLabelName = "Select Input"
+
+inputNames = [
+    "5 volt",
+    "3.3 volt",
+    "1.8 volt",
+    "Analog In",
+    "Audio In",
+    "Digital I2C Bus",
+    "Digital SPI Bus",
+    "Digital UART"
+]
+
+outLabelName = "Select Output"
+
+outputNames = [
+    "XADC",
+    "Digital"
+]
+
+
+class CyDAQ_Config(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master)
+        root = self.master
+        self.master.title(title)
+        # Initialize the menu
+        menu = Menu(self)
+        self.master.config(menu=menu)
+
+        # Initialize the file menu
+        file = Menu(menu, tearoff=0)
+        menu.add_cascade(label="File", menu=file)
+
+        # Add drop down commands to file menu
+        # file.add_command(label="Save Settings")
+        file.add_command(label="Save")
+        # file.add_cascade(label="Save As")
+        file.add_command(label="Exit", command=self.client_exit)
+
+        # Initialize CyDAQ Configurtion Menu
+        ConfigureCydaq = Menu(menu, tearoff=0)
+        menu.add_cascade(label="Configure CyDAQ", menu=ConfigureCydaq)
+
+        # Set up Cascade for CyDAQ Configuration Menu
+        ConfigureCydaq.add_command(label="Setup Instructions")
+        ConfigureCydaq.add_command(label="CyDAQ Setup")
+
+        # Setup Sampling Menu
+        SampleData = Menu(menu, tearoff=0)
+        menu.add_cascade(label="Sample Data", menu=SampleData)
+
+        # Configure Sampling Menu
+        # Might have to reinitialize this everytime COM port is plugged in
+        COMport = Menu(SampleData, tearoff=0)
+        SampleData.add_cascade(label="Test Connection", menu=COMport)
+        COMport.add_command(label="Ping", command=PingCyDAQ)
+        SampleData.add_command(label="Start Sampling", command=self.killAndSwitchToSample)
+
+        global inputLabel
+        inputLabel = Label(root, text=inputLabelName, height=1, width=len(inputLabelName), relief=RAISED)
+        inputLabel.place(relx=.25, rely=.17, anchor=CENTER)
+
+        global inputSelectComboBox
+        inputSelectComboBox = Combobox(root, values=inputNames)
+        inputSelectComboBox.place(relx=0.25, rely=.25, anchor=CENTER)
+        inputSelectComboBox.current(0)
+        inputSelectComboBox.bind("<<ComboboxSelected>>", self.changeInput)
+
+        global filterLabel
+        filterLabel = Label(root, text=filterlabelName, height=1, width=len(filterlabelName), relief=RAISED)
+        filterLabel.place(relx=.5, rely=.17, anchor=CENTER)
+
+        global filterSelectComboBox
+        filterSelectComboBox = Combobox(root, values=filterNames)
+        filterSelectComboBox.place(relx=0.5, rely=0.25, anchor=CENTER)
+        filterSelectComboBox.current(5)
+        filterSelectComboBox.bind("<<ComboboxSelected>>", self.changeFilter)
+
+        # Make the Label for the Combobox
+        global outSelecLabel
+        outSelecLabel = Label(root, text=outLabelName, height=1, width=len(outLabelName), relief=RAISED)
+        outSelecLabel.place(relx=.75, rely=.17, anchor=CENTER)
+
+        # Make the Combobox
+        global outSelectComboBox
+        outSelectComboBox = Combobox(root, values=outputNames)
+        outSelectComboBox.place(relx=.75, rely=.25, anchor=CENTER)
+        outSelectComboBox.current(0)
+        outSelectComboBox.bind("<<ComboboxSelected>>", self.outChange)
+
+        global sampleRateLabel
+        sampleRateLabelName = "Select Sample Rate (Hz)"
+        sampleRateLabel = Label(root, text=sampleRateLabelName, height=1, width=len(sampleRateLabelName), relief=RAISED)
+        sampleRateLabel.place(relx=.5, rely=.75, anchor=CENTER)
+
+        sampleRate = StringVar()
+        global sampleRateEntry
+        sampleRateEntry = Entry(root, textvariable=sampleRate)
+        sampleRateEntry.place(relx=.5, rely=.85, anchor=CENTER)
+        sampleRateEntry.insert(END, "44100")
+        sampleRateEntry.bind("<Leave>", self.check_sample)
+        sampleRateEntry.bind("<Return>", self.check_sample)
+
+        # These constantly change depending on the selected filter
+        global lowerCornerLabel
+        global lowerCornerSelect
+        lowerCornerLabel = Label(root, text="Lower Corner", height=1, width=len("Lower Corner"), relief=RAISED)
+        lowerCornerSelect = Scale(root, from_=0, to=255, orient=HORIZONTAL, length=225)
+        lowerCornerSelect.place(relx=.25, rely=.55, anchor=CENTER)
+        lowerCornerLabel.place(relx=.25, rely=.44, anchor=CENTER)
+
+        global upperCornerLabel
+        global upperCornerSelect
+        upperCornerLabel = Label(root, text="Upper Corner", height=1, width=len("Upper Corner"), relief=RAISED)
+        upperCornerSelect = Scale(root, from_=0, to=255, orient=HORIZONTAL, length=225)
+        upperCornerSelect.place(relx=.75, rely=.55, anchor=CENTER)
+        upperCornerLabel.place(relx=.75, rely=.44, anchor=CENTER)
+
+        global cornerLabel
+        global cornerSelect
+        cornerLabel = Label(root, text="Corner", height=1, width=len("Corner"), relief=RAISED)
+        cornerSelect = Scale(root, from_=0, to=255, orient=HORIZONTAL, length=225)
+
+        self.updateConfig()
+
+    def check_sample(self, event):
+        checkWidget = event.widget
+        checkString = checkWidget.get()
+        if checkString.isnumeric():
+            if (int(checkString) < 100) or (int(checkString) > 50000):
+                event.widget.delete(0, END)
+                event.widget.insert(END, "44100")
+        else:
+            event.widget.delete(0, END)
+            event.widget.insert(END, "44100")
+        self.updateConfig()
+
+    def changeFilter(self, event):
+        widget = event.widget
+        self.forgetCorners()
+        outSelectComboBox.current(0)
+        if (widget.get() == filterNames[2]
+                or widget.get() == filterNames[3]
+                or widget.get() == filterNames[6]
+                or widget.get() == filterNames[7]):
+            cornerLabel.place(relx=.5, rely=.44, anchor=CENTER)
+            cornerSelect.place(relx=.5, rely=.55, anchor=CENTER)
+        elif (widget.get() == filterNames[4]
+              or widget.get() == filterNames[5]):
+            upperCornerSelect.place(relx=.75, rely=.55, anchor=CENTER)
+            upperCornerLabel.place(relx=.75, rely=.44, anchor=CENTER)
+            lowerCornerSelect.place(relx=.25, rely=.55, anchor=CENTER)
+            lowerCornerLabel.place(relx=.25, rely=.44, anchor=CENTER)
+        elif widget.get() == filterNames[8]:
+            outSelectComboBox.current(1)
+            if (not (
+                    inputSelectComboBox.get() == inputNames[7] or
+                    inputSelectComboBox.get() == inputNames[6] or
+                    inputSelectComboBox.get() == inputNames[5]
+            )):
+                inputSelectComboBox.current(5)
+        if not widget.get() == filterNames[8]:
+            if (inputSelectComboBox.get() == inputNames[7] or
+                    inputSelectComboBox.get() == inputNames[6] or
+                    inputSelectComboBox.get() == inputNames[5]):
+                inputSelectComboBox.current(0)
+        self.updateConfig()
+
+    def changeInput(self, event):
+        widget = event.widget
+        if (widget.get() == inputNames[6] or
+                widget.get() == inputNames[7] or
+                widget.get() == inputNames[5]):
+            filterSelectComboBox.current(8)
+            outSelectComboBox.current(1)
+            cornerSelect.place_forget()
+            cornerLabel.place_forget()
+            upperCornerSelect.place_forget()
+            upperCornerLabel.place_forget()
+            lowerCornerSelect.place_forget()
+            lowerCornerLabel.place_forget()
+
+        else:
+            if filterSelectComboBox.get() == filterNames[8]:
+                filterSelectComboBox.current(0)
+                self.forgetCorners()
+        if (filterSelectComboBox.get() == filterNames[2]
+                or filterSelectComboBox.get() == filterNames[3]
+                or filterSelectComboBox.get() == filterNames[6]
+                or filterSelectComboBox.get() == filterNames[7]):
+            cornerLabel.place(relx=.5, rely=.44, anchor=CENTER)
+            cornerSelect.place(relx=.5, rely=.55, anchor=CENTER)
+        elif (filterSelectComboBox.get() == filterNames[4]
+              or filterSelectComboBox.get() == filterNames[5]):
+            upperCornerSelect.place(relx=.75, rely=.55, anchor=CENTER)
+            upperCornerLabel.place(relx=.75, rely=.44, anchor=CENTER)
+            lowerCornerSelect.place(relx=.25, rely=.55, anchor=CENTER)
+            lowerCornerLabel.place(relx=.25, rely=.44, anchor=CENTER)
+        self.updateConfig()
+
+    def outChange(self, event):
+        widget = event.widget
+        if widget.get() == outputNames[0]:
+            if filterSelectComboBox.get() == filterNames[8]:
+                filterSelectComboBox.current(0)
+                inputSelectComboBox.current(0)
+                self.forgetCorners()
+
+        elif widget.get() == outputNames[1]:
+            if not (filterSelectComboBox.get() == filterNames[8]):
+                filterSelectComboBox.current(8)
+                inputSelectComboBox.current(5)
+                self.forgetCorners()
+
+        self.updateConfig()
+
+    def forgetCorners(self):
+        upperCornerLabel.place_forget()
+        upperCornerSelect.place_forget()
+        lowerCornerSelect.place_forget()
+        lowerCornerLabel.place_forget()
+        cornerLabel.place_forget()
+        cornerSelect.place_forget()
+
+    def killAndSwitchToSample(self):
+        upperCornerLabel.destroy()
+        upperCornerSelect.destroy()
+        lowerCornerSelect.destroy()
+        lowerCornerLabel.destroy()
+        cornerLabel.destroy()
+        cornerSelect.destroy()
+        inputLabel.destroy()
+        inputSelectComboBox.destroy()
+        filterLabel.destroy()
+        filterSelectComboBox.destroy()
+        filterLabel.destroy()
+        outSelecLabel.destroy()
+        outSelectComboBox.destroy()
+        sampleRateEntry.destroy()
+        sampleRateLabel.destroy()
+        self.master.switch_frame(SamplePage)
+
+    def client_exit(self):
+        exit()
+
+    def updateConfig(self):
+        self.master.upperCorner = upperCornerSelect.get()
+        self.master.lowerCorner = lowerCornerSelect.get()
+        self.master.corner = cornerSelect.get()
+        self.master.input = inputSelectComboBox.get()
+        if self.master.input == "5 volt":
+            self.master.input = parameter_options_input.volt_5.value
+        elif self.master.input == "3.3 volt":
+            self.master.input = parameter_options_input.volt_3.value
+        elif self.master.input == "1.8 volt":
+            self.master.input = parameter_options_input.volt_1.value
+        elif self.master.input == "Analog In":
+            self.master.input = parameter_options_input.analog_in.value
+        elif self.master.input == "Audio In":
+            self.master.input = parameter_options_input.audio_in.value
+        elif self.master.input == "Digital I2C Bus":
+            self.master.input = parameter_options_input.digital_i2c.value
+        elif self.master.input == "Digital SPI Bus":
+            self.master.input = parameter_options_input.digital_spi_bus.value
+        elif self.master.input == "Digital UART":
+            self.master.input = parameter_options_input.digital_uart.value
+        self.master.filter = filterSelectComboBox.get()
+        if self.master.filter == "All Pass":
+            self.master.filter = parameter_options_filter.NO_FILTER.value
+        elif self.master.filter == "60 hz Notch":
+            self.master.filter = parameter_options_filter.NOTCH.value
+        elif self.master.filter == "1st Order High Pass":
+            self.master.filter = parameter_options_filter.HP1.value
+        elif self.master.filter == "1st Order Low Pass":
+            self.master.filter = parameter_options_filter.LP1.value
+        elif self.master.filter == "2nd Order Band Pass":
+            self.master.filter = parameter_options_filter.BP2.value
+        elif self.master.filter == "6th Order High Pass":
+            self.master.filter = parameter_options_filter.HP6.value
+        elif self.master.filter == "6th Order Low Pass":
+            self.master.filter = parameter_options_filter.LP6.value
+        elif self.master.filter == "6th Order Band Pass":
+            self.master.filter = parameter_options_filter.BP6.value
+        self.master.output = outSelectComboBox.get()
+        if self.master.output == "XADC":
+            self.master.output = parameter_options_output.xadc.value
+        elif self.master.output == "Digital":
+            self.master.output = parameter_options_output.digital.value
+        self.master.sampleRate = sampleRateEntry.get()
+
+
+############## a page to be created later so ignore for now ####################
+class SamplePage(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master)
+
+        root = self.master
+        global startButton
+        global stopButton
+
+        stopButton = Button(root, text="Stop Sampling", font=('Helvetica', 24, "bold"), bg="red",
+                             command=self.createStartButton)
+
+        startButton = Button(root, text="Start Sampling", font=('Helvetica', 24, "bold"), bg="green",
+                             command=self.createStopButton)
+        startButton.place(relx=.5, rely=.5, anchor=CENTER)
+
+        menu = Menu(self)
+        self.master.config(menu=menu)
+        # Initialize the file menu
+        file = Menu(menu, tearoff=0)
+        menu.add_cascade(label="File", menu=file)
+
+        # Add drop down commands to file menu
+        # file.add_command(label="Save Settings")
+        file.add_command(label="Save")
+        # file.add_cascade(label="Save As")
+        file.add_command(label="Exit", command=self.client_exit)
+
+        # Initialize CyDAQ Configurtion Menu
+        ConfigureCydaq = Menu(menu, tearoff=0)
+        menu.add_cascade(label="Configure CyDAQ", menu=ConfigureCydaq)
+
+        # Set up Cascade for CyDAQ Configuration Menu
+        ConfigureCydaq.add_command(label="Setup Instructions")
+        ConfigureCydaq.add_command(label="CyDAQ Setup", command=self.killSwitchConfig)
+
+        # Setup Sampling Menu
+        SampleData = Menu(menu, tearoff=0)
+        menu.add_cascade(label="Sample Data", menu=SampleData)
+
+        # Configure Sampling Menu
+        # Might have to reinitialize this everytime COM port is plugged in
+        COMport = Menu(SampleData, tearoff=0)
+        SampleData.add_cascade(label="Test Connection", menu=COMport)
+        COMport.add_command(label="Ping", command=PingCyDAQ)
+        SampleData.add_command(label="Start Sampling")
+
+    def createStartButton(self):
+        stopButton.place_forget()
+        startButton.place(relx=.5, rely=.5, anchor=CENTER)
+        print("Stopping")
+        serial_obj.send_parameters(comm_port, self.master.input, self.master.sampleRate, self.master.filter, corner)    #todo
+
+    def createStopButton(self):
+        startButton.place_forget()
+        stopButton.place(relx=.5, rely=.5, anchor=CENTER)
+        print("Starting")
+        #serial_obj.send_stop_cmd(comm_port)
+
+    def client_exit(self):
+        exit()
+
+    def killSwitchConfig(self):
+        stopButton.destroy()
+        startButton.destroy()
+        self.master.switch_frame(CyDAQ_Config)
+
+################# a page to be created later so ignore for now #######################
+class PageTwo(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master)
+        tk.Frame.configure(self, bg='red')
+        tk.Label(self, text="Page two", font=('Helvetica', 18, "bold")).pack(side="top", fill="x", pady=5)
+        tk.Button(self, text="Go back to start page",
+                  command=lambda: master.switch_frame(CyDAQ_Config)).place(rely=.5, relx=.5)
+
+class PingCyDAQ():
+    def __init__(self):
+        root = Tk()
+        root.geometry("200x100")
+        root.title("ETG")
+        rootTitle = Label(root, text="Connection Test", height=1, width=len("Connection Test"))
+        rootTitle.pack()
+        # if serial_obj.ping_zybo(comm_port):
+        #     print("Test Passed")
+        #     global ping_success_label
+        #     ping_success_labelName = "Ping Successful"
+        #     ping_success_label = Label(root, text=ping_success_labelName, height=1, width=len(ping_success_labelName),
+        #                             relief=RAISED)
+        #     ping_success_label.place(relx=.5, rely=.5, anchor=CENTER)
+        # else:
+        #     global ping_fail_label
+        #     ping_fail_labelName = "Ping Failed"
+        #     ping_fail_label = Label(root, text=ping_fail_labelName, height=1, width=len(ping_fail_labelName),
+        #                                relief=RAISED)
+        #     ping_success_label.place(relx=.5, rely=.5, anchor=CENTER)
+        root.mainloop()
+
+################### initialize and run ####################
+app = CyDAQ_GUI()
+app.geometry("700x300")
+app.mainloop()
