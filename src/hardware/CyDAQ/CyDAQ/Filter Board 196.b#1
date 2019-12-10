@@ -162,7 +162,7 @@
 <layer number="255" name="routoute" color="7" fill="1" visible="no" active="yes"/>
 </layers>
 <board>
-<fusionsync huburn="a.cGVyc29uYWw6dWUyZGVhNzMz" projecturn="a.cGVyc29uYWw6dWUyZGVhNzMzIzIwMTkxMTAyMjMzODQwMTI2" f3durn="urn:adsk.wipprod:dm.lineage:zbJ6wBk-RJOF5j4RYDEoYg" pcbguid="4f68e89e-d072-4590-908d-8220ccbcb71c" lastpulledtime="" lastsyncedchangeguid="cd329fd6-73a5-938d-d1c6-05a5df1f3c98"/>
+<fusionsync huburn="a.cGVyc29uYWw6dWUyZGVhNzMz" projecturn="a.cGVyc29uYWw6dWUyZGVhNzMzIzIwMTkxMTAyMjMzODQwMTI2" f3durn="urn:adsk.wipprod:dm.lineage:zbJ6wBk-RJOF5j4RYDEoYg" pcbguid="4f68e89e-d072-4590-908d-8220ccbcb71c" lastpulledtime="" lastsyncedchangeguid="9bfee7ca-6c7f-8be7-7939-73daf4700ed7"/>
 <plain>
 <wire x1="95.489209375" y1="9.88383125" x2="96.089209375" y2="9.88385" width="0.1" layer="51"/>
 <wire x1="96.089209375" y1="9.88385" x2="96.0892" y2="10.28385" width="0.1" layer="51"/>
@@ -242,9 +242,9 @@
 <wire x1="68.009140625" y1="12.38296875" x2="68.00911875" y2="12.78296875" width="0.1" layer="51"/>
 <wire x1="68.00911875" y1="12.78296875" x2="67.40911875" y2="12.78295" width="0.1" layer="51"/>
 <wire x1="67.40911875" y1="12.78295" x2="67.409140625" y2="12.38295" width="0.1" layer="51"/>
-<circle x="23.19335" y="99.267146875" radius="3.683" width="0.1" layer="51"/>
+<circle x="23.24135" y="99.55914375" radius="3.683" width="0.1" layer="51"/>
 <circle x="145.885959375" y="100.935784375" radius="3.683" width="0.1" layer="51"/>
-<circle x="137.49335" y="99.267146875" radius="3.683" width="0.1" layer="51"/>
+<circle x="137.54135" y="99.55914375" radius="3.683" width="0.1" layer="51"/>
 <wire x1="64.869140625" y1="12.38286875" x2="65.469140625" y2="12.382890625" width="0.1" layer="51"/>
 <wire x1="65.469140625" y1="12.382890625" x2="65.46911875" y2="12.782890625" width="0.1" layer="51"/>
 <wire x1="65.46911875" y1="12.782890625" x2="64.86911875" y2="12.78286875" width="0.1" layer="51"/>
@@ -257,7 +257,7 @@
 <wire x1="70.549209375" y1="9.88305" x2="70.5492" y2="10.28305" width="0.1" layer="51"/>
 <wire x1="70.5492" y1="10.28305" x2="69.9492" y2="10.28303125" width="0.1" layer="51"/>
 <wire x1="69.9492" y1="10.28303125" x2="69.949209375" y2="9.88303125" width="0.1" layer="51"/>
-<circle x="137.49335" y="23.067146875" radius="3.683" width="0.1" layer="51"/>
+<circle x="137.54135" y="23.35914375" radius="3.683" width="0.1" layer="51"/>
 <circle x="11.59358125" y="55.2575" radius="0.15" width="0.1" layer="51"/>
 <wire x1="69.949140625" y1="12.38303125" x2="70.549140625" y2="12.38305" width="0.1" layer="51"/>
 <wire x1="70.549140625" y1="12.38305" x2="70.54911875" y2="12.78305" width="0.1" layer="51"/>
@@ -289,7 +289,7 @@
 <wire x1="10.14358125" y1="56.2275" x2="10.54358125" y2="56.2275" width="0.1" layer="51"/>
 <wire x1="10.54358125" y1="56.2275" x2="10.54358125" y2="56.8275" width="0.1" layer="51"/>
 <wire x1="10.54358125" y1="56.8275" x2="10.14358125" y2="56.8275" width="0.1" layer="51"/>
-<circle x="23.19335" y="23.067146875" radius="3.683" width="0.1" layer="51"/>
+<circle x="23.24135" y="23.35914375" radius="3.683" width="0.1" layer="51"/>
 <wire x1="12.64358125" y1="61.9075" x2="12.64358125" y2="61.3075" width="0.1" layer="51"/>
 <wire x1="12.64358125" y1="61.3075" x2="13.04358125" y2="61.3075" width="0.1" layer="51"/>
 <wire x1="13.04358125" y1="61.3075" x2="13.04358125" y2="61.9075" width="0.1" layer="51"/>
@@ -369,13 +369,13 @@
 <wire x1="85.92911875" y1="12.78353125" x2="85.32911875" y2="12.783509375" width="0.1" layer="51"/>
 <wire x1="85.32911875" y1="12.783509375" x2="85.329140625" y2="12.383509375" width="0.1" layer="51"/>
 <hole x="14.110759375" y="100.935784375" drill="3.5052"/>
-<hole x="23.19335" y="99.267146875" drill="3.81"/>
-<hole x="23.19335" y="23.067146875" drill="3.81"/>
+<hole x="23.24135" y="99.55914375" drill="3.81"/>
+<hole x="23.24135" y="23.35914375" drill="3.81"/>
 <hole x="14.110759375" y="9.267184375" drill="3.5052"/>
-<hole x="137.49335" y="23.067146875" drill="3.81"/>
+<hole x="137.54135" y="23.35914375" drill="3.81"/>
 <hole x="145.885959375" y="9.267184375" drill="3.5052"/>
 <hole x="145.885959375" y="100.935784375" drill="3.5052"/>
-<hole x="137.49335" y="99.267146875" drill="3.81"/>
+<hole x="137.54135" y="99.55914375" drill="3.81"/>
 <wire x1="148.30378125" y1="34.286959375" x2="148.3038" y2="34.886959375" width="0.1" layer="51"/>
 <wire x1="148.3038" y1="34.886959375" x2="147.9038" y2="34.88698125" width="0.1" layer="51"/>
 <wire x1="147.9038" y1="34.88698125" x2="147.90378125" y2="34.28698125" width="0.1" layer="51"/>
