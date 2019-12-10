@@ -412,13 +412,13 @@ class SamplePage(tk.Frame):
         stopButton.place_forget()
         startButton.place(relx=.5, rely=.5, anchor=CENTER)
         print("Stopping")
-        serial_obj.send_parameters(comm_port, self.master.input, self.master.sampleRate, self.master.filter, corner)    #todo
+        #serial_obj.send_parameters(comm_port, self.master.input, self.master.sampleRate, self.master.filter, self.master.upperCorner, self.master.lowerCorner)  todo
 
     def createStopButton(self):
         startButton.place_forget()
         stopButton.place(relx=.5, rely=.5, anchor=CENTER)
         print("Starting")
-        #serial_obj.send_stop_cmd(comm_port)
+        #serial_obj.send_stop_cmd(comm_port)        todo
 
     def client_exit(self):
         exit()

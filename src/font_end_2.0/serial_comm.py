@@ -1,4 +1,4 @@
-import binascii
+import time
 from enum import IntEnum, Enum
 import threading
 import serial
@@ -115,7 +115,7 @@ class ctrl_comm:
 
     def __init__(self):
         self.__s_comm = serial.Serial()
-        self.__s_comm.port = self.get_port()
+        self.__s_comm.port = self.get_port()            #todo 
         self.__s_comm.baudrate = 921600
         self.__s_comm.bytesize = serial.EIGHTBITS
         self.__s_comm.stopbits = serial.STOPBITS_ONE
@@ -170,7 +170,6 @@ class ctrl_comm:
             return port
         except:
             print("Zybo not connected")
-            self.__throw_exception("Zybo not connected")
             return False
 
     def open(self, port):
@@ -284,7 +283,7 @@ class ctrl_comm:
 
 
 
-    def send_parameters(self, port_select, input_set, upper_sample_rate, lower_sample_rate, filter_select, corner_freq):
+    def send_parameters(self, port_select, input_set, sample_rate, filter_select, corner_freq_upper, corner_freq_lower):
         """
         sends all parameters to the Zybo
 
@@ -302,7 +301,7 @@ class ctrl_comm:
             if self.recieve_acknowlege_zybo(port_select):
                 break
         while True:
-            self.send_sample_rate(port_select, upper_sample_rate, lower_sample_rate)
+            self.send_sample_rate(port_select, sample_rate)
             if self.recieve_acknowlege_zybo(port_select):
                 break
         while True:
@@ -310,7 +309,7 @@ class ctrl_comm:
             if self.recieve_acknowlege_zybo(port_select):
                 break
         while True:
-            self.send_corner_freq(port_select, corner_freq)
+            self.send_corner_freq(port_select, corner_freq_upper, corner_freq_lower)
             if self.recieve_acknowlege_zybo(port_select):
                 break
         while True:
@@ -326,6 +325,9 @@ class ctrl_comm:
             self.send_stop(port_select)
             if self.recieve_acknowlege_zybo(port_select):
                 break
+        self.close()
+
+
 
 
     def send_input(self, port_select , input_set):
@@ -351,7 +353,7 @@ class ctrl_comm:
             return False
 
 
-    def send_sample_rate(self, port_select, upper_sample_rate, lower_sample_rate):
+    def send_sample_rate(self, port_select, sample_rate):
         """
                 Sends the Input.
 
@@ -361,17 +363,15 @@ class ctrl_comm:
                 Returns:
                     True
                 """
-        upper_sample_rate_bin = self.decimal_to_binary(upper_sample_rate)
-        upper_sample_rate_hex = self.binary_to_hex(upper_sample_rate_bin)
-        lower_sample_rate_bin = self.decimal_to_binary(lower_sample_rate)
-        lower_sample_rate_hex = self.binary_to_hex(lower_sample_rate_bin)
+        sample_rate_bin = self.decimal_to_binary(sample_rate)
+        sample_rate_hex = self.binary_to_hex(sample_rate_bin)
 
         self.open(port_select)
         if self.__s_comm.isOpen() is True:
             self.__s_comm.write(sig_serial.START_BYTE.value.encode())
             self.write(parameter_options.sample_rate.value)
-            self.write(upper_sample_rate_hex + lower_sample_rate_hex)
-            print("Sample Rate = " + upper_sample_rate + " / " + lower_sample_rate)
+            self.write(sample_rate_hex)
+            print("Sample Rate = " + sample_rate)
             self.__s_comm.write(sig_serial.END_BYTE.value.encode())
 
         else:
@@ -400,7 +400,7 @@ class ctrl_comm:
             self.__throw_exception('Sending filter failed')
             return False
 
-    def send_corner_freq(self, port_select , corner_freq):                  #todo
+    def send_corner_freq(self, port_select , u_corner_freq, l_corner_freq):
         """
                 Sends the Input.
 
@@ -410,12 +410,17 @@ class ctrl_comm:
                 Returns:
                     True
                 """
+        u_bin = self.decimal_to_binary(u_corner_freq)
+        u_hex = self.binary_to_hex(u_bin)
+        l_bin = self.decimal_to_binary(l_corner_freq)
+        l_hex = self.binary_to_hex(l_bin)
+
         self.open(port_select)
         if self.__s_comm.isOpen() is True:
             self.__s_comm.write(sig_serial.START_BYTE.value.encode())
             self.write(parameter_options.corner_freq.value)
-            self.write(corner_freq)
-            print("Corner Frequency = " + corner_freq)
+            self.write(u_hex + l_hex)
+            print("Corner Frequency = " + u_corner_freq + " / " + l_corner_freq)
             self.__s_comm.write(sig_serial.END_BYTE.value.encode())
 
         else:
@@ -509,30 +514,5 @@ class ctrl_comm:
         hex_num = hex(int(number, 2))
         return hex_num
 
-
-
-    # def __send_cmd_zybo(self, port_select,command):
-    #     """
-    #            Sends data to the ZYBO
-    #
-    #            Args:
-    #                port_select = port that is selected i.e. the zybo port
-    #                command = message to send
-    #
-    #            Returns:
-    #                None
-    #            """
-    #
-    #     self.__comm.open(port_select)
-    #     self.__comm.write(command.encode())
-    #     acknowledge = self.__comm.recieve_acknowlege_zybo(port_select)
-    #     while not acknowledge:
-    #         print("Acknowlegde command was not received, Message is being sent again")
-    #         self.__comm.write(command.encode())
-    #         acknowledge = self.__comm.recieve_acknowlege_zybo(port_select)
-    #
-    #     print("Acknowlegde command was recieved, Message was sent")
-    #
-    #     self.__comm.close()
 
 
