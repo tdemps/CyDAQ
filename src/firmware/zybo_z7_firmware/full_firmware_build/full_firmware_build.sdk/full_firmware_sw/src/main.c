@@ -1,18 +1,8 @@
 
 
 /*
- * helloworld.c: simple test application
+ * Main function for program! Also contains multiple tests for various functionalities of program.
  *
- * This application configures UART 16550 to baud rate 9600.
- * PS7 UART (Zynq) is not initialized by this application, since
- * bootrom/bsp configures it to baud rate 115200
- *
- * ------------------------------------------------
- * | UART TYPE   BAUD RATE                        |
- * ------------------------------------------------
- *   uartns550   9600
- *   uartlite    Configurable only in HW design
- *   ps7_uart    115200 (configured by bootrom/bsp)
  */
 
 #include <stdio.h>
@@ -26,12 +16,8 @@
 #include "comm.h"
 #include "stdlib.h"
 #include "xadc.h"
-#include "xuartps.h"
 #include "shared_definitions.h"
 
-#define IIC_DEVICE_ID		XPAR_XIICPS_0_DEVICE_ID
-#define INTC_DEVICE_ID		XPAR_SCUGIC_SINGLE_DEVICE_ID
-#define IIC_INT_VEC_ID		XPAR_XIICPS_0_INTR
 #define BUTTON_BASE_ADDR	XPAR_GPIO_0_BASEADDR
 void xadcTest();
 void commTest(u8 echo);
@@ -42,42 +28,47 @@ u8 getButtonChangeBlocking();
 bool samplingEnabled;
 int main()
 {
-    init_platform();
+	//initialization functions for all libraries
+	init_platform();
     commInit();
-    xil_printf("\n\n\n**********CyDAQ Test Program***********\n");
+    if(DEBUG)
+    	xil_printf("\n\n\n**********CyDAQ Test Program***********\n");
     muxInit();
     xadcInit();
-    init_x9258_i2c(IIC_DEVICE_ID);
-
-    samplingEnabled = false;
+    init_x9258_i2c();
 
 //	xil_printf("Select Test:\n 1)ADC\n2)Comm3)Filter\n");
-
+    //commRXTask();
     //xadcTest();
-    //commTest(1);
+    //commTest(0);
 	filterTest();
-    char* test = "@STRT1!";
-    commProcessPacket(test, 7);
-
-    xil_printf("Exiting..");
+	if(DEBUG)
+		xil_printf("Exiting..");
     cleanup_platform();
     return 0;
 }
+/**
+ * Test for XADC
+ */
 void xadcTest(){
 
-	xil_printf("Press BTN1 for real-time viewing, 0 else\n");
+	xadcSetSampleRate(10);
+	xil_printf("Press BTN1 for real-time data streaming, BTN0 else\n");
 	u8 btns = getButtonChangeBlocking();
     xadcEnableSampling(btns-1);
-
-	sleep(3);
-
-	//xadcProcessSamples();
+    if(btns < 2){
+    	xadcProcessSamples();
+    }
+    sleep(1);
+	xil_printf("Exiting XADC Test\n");
 	return;
 }
-
+/**
+ * Test for receiving/transmitting over UART
+ */
 void commTest(u8 echo){
-
-	xil_printf("Comm Test Ready, Echo Enable: %s\n", (echo) ? "On" : "Off");
+	if(DEBUG)
+		xil_printf("Comm Test Ready, Echo Enable: %s\n", (echo) ? "On" : "Off");
 	XUartPs* ptr = commGetUartPtr();
 	u8 buffer[100];
 	u8 buttons = 0;
@@ -95,6 +86,13 @@ void commTest(u8 echo){
 				case 2: xil_printf("@FA53!\n"); break;
 			}
 			usleep(500000);
+		}else if(buffer[0] == '@' && buffer[numBytes-1] == '!'){
+			xil_printf("@ACK!");
+			for(i = 0; i < numBytes; i++){
+				buffer[i] = 0;
+			}
+			//commProcessPacket(buffer, numBytes);
+			numBytes = 0;
 		}
 	}
 

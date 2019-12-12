@@ -1,3 +1,4 @@
+ 
 
 // file: design_1_xadc_wiz_0_0.v
 // (c) Copyright 2009 - 2013 Xilinx, Inc. All rights reserved.
@@ -47,7 +48,7 @@
 // PART OF THIS FILE AT ALL TIMES.
 `timescale 1ns / 1 ps
 
-(* CORE_GENERATION_INFO = "design_1_xadc_wiz_0_0,xadc_wiz_v3_3_6,{component_name=design_1_xadc_wiz_0_0,enable_axi=true,enable_axi4stream=false,dclk_frequency=100,enable_busy=true,enable_convst=false,enable_convstclk=false,enable_dclk=true,enable_drp=false,enable_eoc=true,enable_eos=true,enable_vbram_alaram=false,enable_vccddro_alaram=false,enable_Vccint_Alaram=false,enable_Vccaux_alaram=true,enable_vccpaux_alaram=true,enable_vccpint_alaram=true,ot_alaram=true,user_temp_alaram=true,timing_mode=continuous,channel_averaging=None,sequencer_mode=on,startup_channel_selection=contineous_sequence}" *)
+(* CORE_GENERATION_INFO = "design_1_xadc_wiz_0_0,xadc_wiz_v3_3_6,{component_name=design_1_xadc_wiz_0_0,enable_axi=true,enable_axi4stream=false,dclk_frequency=100,enable_busy=true,enable_convst=true,enable_convstclk=false,enable_dclk=true,enable_drp=false,enable_eoc=true,enable_eos=true,enable_vbram_alaram=false,enable_vccddro_alaram=false,enable_Vccint_Alaram=false,enable_Vccaux_alaram=true,enable_vccpaux_alaram=true,enable_vccpint_alaram=true,ot_alaram=true,user_temp_alaram=true,timing_mode=event_driven,channel_averaging=None,sequencer_mode=on,startup_channel_selection=contineous_sequence}" *)
 
 
 module design_1_xadc_wiz_0_0
@@ -72,6 +73,7 @@ module design_1_xadc_wiz_0_0
     output s_axi_rvalid,
     input s_axi_rready,
     output ip2intc_irpt,
+    input convst_in,                                           
     input vauxp14,                                             
     input vauxn14,                                             
     output [4:0] channel_out,
@@ -119,6 +121,7 @@ module design_1_xadc_wiz_0_0
     .s_axi_rvalid    (s_axi_rvalid),                    
     .s_axi_rready    (s_axi_rready),                    
     .ip2intc_irpt    (ip2intc_irpt),  
+    .convst_in (convst_in), 
     .vauxp14 (vauxp14),
     .vauxn14 (vauxn14),
     .channel_out(channel_out),

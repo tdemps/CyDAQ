@@ -1,3 +1,4 @@
+ 
 
 -------------------------------------------------------------------------------
 -- design_1_xadc_wiz_0_0_axi_xadc.vhd - entity/architecture pair
@@ -190,6 +191,7 @@ entity design_1_xadc_wiz_0_0_axi_xadc is
    -- XADC External interface signals
 
     -- Conversion start control signal for Event driven mode
+    convst_in       : in  STD_LOGIC;                         -- Convert Start Input
     vauxp14         : in  STD_LOGIC;                         -- Auxiliary Channel 14
     vauxn14         : in  STD_LOGIC;
     busy_out        : out  STD_LOGIC;                        -- ADC Busy signal
@@ -267,6 +269,7 @@ component design_1_xadc_wiz_0_0_xadc_core_drp
      ---------------- interrupt interface with the system  -----------
      Interrupt_status       : out std_logic_vector(0 to IP_INTR_NUM-1);
      ----------------  sysmon macro interface  -------------------
+     convst_in              : in  STD_LOGIC;                         -- Convert Start Input
      vauxp14                : in  STD_LOGIC;                         -- Auxiliary Channel 14
      vauxn14                : in  STD_LOGIC;
      busy_out               : out  STD_LOGIC;                        -- ADC Busy signal
@@ -719,6 +722,7 @@ AXI_XADC_CORE_I : design_1_xadc_wiz_0_0_xadc_core_drp
     Sysmon_IP2Bus_RdAck          => xadc_ip2bus_rdack,
     Interrupt_status             => interrupt_status_i,
     --- external interface signals ------------------
+    convst_in                    => convst_in,
     vauxp14                      => vauxp14,
     vauxn14                      => vauxn14,
     busy_out                     => busy_out,

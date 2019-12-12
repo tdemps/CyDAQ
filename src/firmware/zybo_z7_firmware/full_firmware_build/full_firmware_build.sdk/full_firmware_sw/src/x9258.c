@@ -12,7 +12,7 @@
 
 static XIicPs I2C0_IIC;
 
-int init_x9258_i2c(u16 DeviceId){
+int init_x9258_i2c(){
 
 	xil_printf("INITIALISING I2C0\n");
 	int Status;
@@ -22,7 +22,7 @@ int init_x9258_i2c(u16 DeviceId){
 	 * Initialize the IIC driver so that it's ready to use
 	 * Look up the configuration in the config table, then initialize it.
 	 */
-	Config = XIicPs_LookupConfig(DeviceId);
+	Config = XIicPs_LookupConfig(IIC_DEVICE_ID);
 	if (NULL == Config) {
 		return XST_FAILURE;
 	}

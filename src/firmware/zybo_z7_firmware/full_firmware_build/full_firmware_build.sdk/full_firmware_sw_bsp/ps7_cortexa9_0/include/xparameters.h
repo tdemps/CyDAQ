@@ -309,13 +309,11 @@
 /******************************************************************/
 
 /* Definitions for Fabric interrupts connected to ps7_scugic_0 */
-#define XPAR_FABRIC_AXI_TIMER_0_INTERRUPT_INTR 28U
 #define XPAR_FABRIC_XADC_WIZ_0_IP2INTC_IRPT_INTR 31U
 
 /******************************************************************/
 
 /* Canonical definitions for Fabric interrupts connected to ps7_scugic_0 */
-#define XPAR_FABRIC_TMRCTR_0_VEC_ID XPAR_FABRIC_AXI_TIMER_0_INTERRUPT_INTR
 #define XPAR_FABRIC_SYSMON_0_VEC_ID XPAR_FABRIC_XADC_WIZ_0_IP2INTC_IRPT_INTR
 
 /******************************************************************/

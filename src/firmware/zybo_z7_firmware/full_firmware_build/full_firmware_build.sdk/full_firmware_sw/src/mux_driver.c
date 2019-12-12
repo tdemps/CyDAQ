@@ -1,6 +1,8 @@
 #include "mux_driver.h"
 
+//holds GPIO object used in XGPIO library
 static XGpio GPIO_MUX;
+//saves state of mux class (if init has been called)
 static u8 initialized = 0;
 
 //static const MUX_SELECT_TYPE inputMuxPins[] = {0x8, 0x4, 0x2}; //Input select lines S0-S3 on JE header.
@@ -19,32 +21,35 @@ static u8 initialized = 0;
 //
 //Select Line bits are 0bS2S1S0
 static mux_config_data_t outputConfigs[NUM_FILTERS] = {
-		{1, 0b010, 1}, //1ST ORDER LP
-		{0, 0b011, 1}, //1ST ORDER HP
-		{1, 0b101, 1}, //2ND ORDER BP
-		{1, 0b100, 1}, //6TH ORDER BP
-		{0, 0b110, 1}, //6TH ORDER HP
-		{1, 0b110, 1}, //6TH ORDER LP
-		{1, 0b001, 1}, //60HZ NOTCH
-		{0, 0b000, 1}, //PASSTHROUGH
+		{1, 0b010, 0}, //1ST ORDER LP
+		{0, 0b011, 0}, //1ST ORDER HP
+		{1, 0b101, 0}, //2ND ORDER BP
+		{1, 0b100, 0}, //6TH ORDER BP
+		{0, 0b110, 0}, //6TH ORDER HP
+		{1, 0b110, 0}, //6TH ORDER LP
+		{1, 0b001, 0}, //60HZ NOTCH
+		{0, 0b000, 0}, //PASSTHROUGH
 };
 //holds input mux configuration settings for each input. Indexed by inputs_e in shared_definitions.h
 //Select Line bits are 0bS2S1S0
 static mux_config_data_t inputConfigs[NUM_INPUTS] = {
-		{0, 0b100, 1}, //AUXILARY35MM
-		{0, 0b011, 1}, //ANALOG
-		{0, 0b000, 1}, //SENSOR1V8
-		{0, 0b001, 1}, //SENSOR3V3
-		{0, 0b010, 1}, //SENSOR5V0
+		{0, 0b100, 0}, //AUXILARY35MM
+		{0, 0b011, 0}, //ANALOG
+		{0, 0b000, 0}, //SENSOR1V8
+		{0, 0b001, 0}, //SENSOR3V3
+		{0, 0b010, 0}, //SENSOR5V0
 };
 
+/**
+ * Initializes GPIO module for controlling the input and output muxes/demuxes.
+ */
 int muxInit(){
 	int status = 0;
 	XGpio_Config *Config;
-
+	//initializes XGPIO pointer
 	Config = XGpio_LookupConfig(GPIO_DEV_ID);
 	status = XGpio_CfgInitialize(&GPIO_MUX, Config, Config->BaseAddress);
-	if(status != XST_SUCCESS){
+	if(status != XST_SUCCESS && DEBUG){
 		xil_printf("Error setting up GPIO for Mux Pins\n");
 	}
 	//mask used to get output direction of gpio bus
@@ -71,18 +76,22 @@ int muxInit(){
  */
 u8 muxSetActiveFilter( filters_e filterSelect){
 
+	//checks if gpio module has been initialized
 	if(initialized == 0){
 		muxInit();
 	}
+	//checks if input is valid
 	if(filterSelect >= NUM_FILTERS){
-		xil_printf("Error, %d is not a valid filter enum #\n", filterSelect);
+		if(DEBUG)
+			xil_printf("Error, %d is not a valid filter enum #\n", filterSelect);
 		return MUX_SET_FAILED;
 	}
-
+	//gets mux configuration from input array using input number
 	mux_config_data_t *config = &outputConfigs[filterSelect];
+	//creates mask based on config values. Preserves input pins.
 	u8 mask =  ((u8) XGpio_DiscreteRead(&GPIO_MUX, MUX_GPIO_CHANNEL) & (0x0E)) | ((config->muxSelectPins << FLTR_PIN_OFFSET)
 				| (config->enablePin << EN_PIN_OFFSET) | (config->hlToggle << HL_TGLE_PIN_OFFSET));
-
+	//writes mask to GPIO channel
 	XGpio_DiscreteWrite(&GPIO_MUX, MUX_GPIO_CHANNEL, mask);
 
 	return 0;
@@ -90,19 +99,22 @@ u8 muxSetActiveFilter( filters_e filterSelect){
 
 u8 muxSetInputPins( inputs_e inputSelect){
 
-
+	//checks if gpio module has been initialized
 	if(initialized == 0){
 		muxInit();
 	}
+	//checks if input is valid
 	if(inputSelect >= NUM_INPUTS){
-		xil_printf("input requested %d not in valid range\n", inputSelect);
+		if(DEBUG)
+			xil_printf("input requested %d not in valid range\n", inputSelect);
 		return MUX_SET_FAILED;
 	}
-
+	//gets mux configuration from input array using input number
 	mux_config_data_t *config = &inputConfigs[inputSelect];
+	//creates mask based on config values. Preserves filter and H/L toggle pins.
 	u8 mask =  ((u8) XGpio_DiscreteRead(&GPIO_MUX, MUX_GPIO_CHANNEL) & (0xF0)) | ((config->muxSelectPins << INPUT_PIN_OFFSET)
 				| (config->enablePin << EN_PIN_OFFSET));
-
+	//writes mask to GPIO channel
 	XGpio_DiscreteWrite(&GPIO_MUX, MUX_GPIO_CHANNEL, mask);
 
 	return 0;

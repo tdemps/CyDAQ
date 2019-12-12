@@ -38,10 +38,11 @@
 
 #define UART_DEVICE_ID XPAR_XUARTPS_0_DEVICE_ID
 #define COMM_BAUD_RATE 921600U
-#define COMM_CMD_SIZE 4		//in bytes
+#define COMM_CMD_SIZE 1		//in bytes
 #define COMM_SAMPLE_RATE_SIZE 8 //in bytes
 #define COMM_START_CHAR '@'
 #define COMM_STOP_CHAR '!'
+#define TEST_BUFFER_SIZE	50
 
 typedef enum cmds
 {

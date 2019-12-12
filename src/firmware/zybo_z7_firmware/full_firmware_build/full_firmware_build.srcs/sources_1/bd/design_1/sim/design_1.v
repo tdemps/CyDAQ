@@ -1,7 +1,7 @@
 //Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2019.1 (win64) Build 2552052 Fri May 24 14:49:42 MDT 2019
-//Date        : Wed Dec  4 11:14:23 2019
+//Date        : Tue Dec 10 11:14:37 2019
 //Host        : etgtech-03 running 64-bit major release  (build 9200)
 //Command     : generate_target design_1.bd
 //Design      : design_1
@@ -242,7 +242,7 @@ module design_1
         .s_axi_wstrb(ps7_0_axi_periph_M01_AXI_WSTRB),
         .s_axi_wvalid(ps7_0_axi_periph_M01_AXI_WVALID));
   design_1_processing_system7_0_0 processing_system7_0
-       (.Core0_nFIQ(axi_timer_0_interrupt),
+       (.Core0_nFIQ(1'b0),
         .Core0_nIRQ(xadc_wiz_0_ip2intc_irpt),
         .DDR_Addr(DDR_addr[14:0]),
         .DDR_BankAddr(DDR_ba[2:0]),
@@ -427,7 +427,8 @@ module design_1
         .peripheral_aresetn(rst_ps7_0_50M_peripheral_aresetn),
         .slowest_sync_clk(processing_system7_0_FCLK_CLK0));
   design_1_xadc_wiz_0_0 xadc_wiz_0
-       (.ip2intc_irpt(xadc_wiz_0_ip2intc_irpt),
+       (.convst_in(axi_timer_0_interrupt),
+        .ip2intc_irpt(xadc_wiz_0_ip2intc_irpt),
         .s_axi_aclk(processing_system7_0_FCLK_CLK0),
         .s_axi_araddr(ps7_0_axi_periph_M00_AXI_ARADDR[10:0]),
         .s_axi_aresetn(rst_ps7_0_50M_peripheral_aresetn),

@@ -6,7 +6,7 @@
  */
 
 #include "comm.h"
-#define TEST_BUFFER_SIZE	50
+
 
 static XUartPs UART1;
 static INTC INTERRUPTCONTROLLER;
@@ -25,10 +25,11 @@ int TotalErrorCount;
 
 int commInit(){
 
-	int status, Index, BadByteCount = 0;
+	int status = 0;
 	XUartPs_Config *Config;
 	u32 IntrMask;
 	fifoFlag = false;
+
 	Config = XUartPs_LookupConfig(UART_DEVICE_ID);
 
 	if (NULL == Config) {
@@ -286,24 +287,27 @@ static int commSetupInterruptSystem(INTC *IntcInstancePtr, XUartPs *UartInstance
 
 	return XST_SUCCESS;
 }
-
+/**
+ * Main task for processing commands received over UART
+ */
 void commRXTask(){
-
+	//number of bytes received over UART
 	u16 bytesReceived = 0;
-	bool err = true;
+	//for error handling
+	bool err = false;
 	while(1){
 
-		while(bytesReceived <= 10){
+		while(receiveBuffer[bytesReceived-1] != COMM_STOP_CHAR){
 			bytesReceived += XUartPs_Recv(&UART1, &receiveBuffer[bytesReceived], 20);
 		}
-
+		xil_printf("Processing packet\n");
 		if(samplingEnabled == true){
 			xadcDisableSampling();
 			//stop sampling to config device
 		}
 		err = commProcessPacket(receiveBuffer, bytesReceived);
 		bytesReceived = 0;
-
+		receiveBuffer[0] = 0;
 		if(err == true){
 			xil_printf("%cERR%c", COMM_START_CHAR, COMM_STOP_CHAR);
 		}else{
@@ -319,31 +323,37 @@ void commRXTask(){
 bool commProcessPacket(u8 *buffer, u16 bufSize){
 
 	bool err = false;
-	char cmd[COMM_CMD_SIZE+1];
+	u8 cmd, status = 0;
 
-	if((char) buffer[0] != COMM_START_CHAR || (char) buffer[bufSize-1] != COMM_STOP_CHAR){
+	if((char) buffer[0] != COMM_START_CHAR || (char) buffer[bufSize-1] != COMM_STOP_CHAR || bufSize <= 2){
 		err = true;
 	}else{
-		memcpy(cmd, &buffer[1], COMM_CMD_SIZE);
-		cmd[COMM_CMD_SIZE] = '\0';
+		cmd = buffer[1] - '0'; ///needed for testing ======================
+		//payload length is buffer size - start/stop chars - cmd_length
 		u8 payloadLength = bufSize - 2 - COMM_CMD_SIZE;
-		printf("CMD: %s, payloadLen: %d\n", cmd, payloadLength);
-		if(strcmp(cmd, "SRST") == 0){
+		xil_printf("CMD: %u, payloadLen: %d\n", cmd, payloadLength);
+		if(cmd == SAMPLE_RATE_SET){
 			//set sample rate
 			if(payloadLength < COMM_SAMPLE_RATE_SIZE){
 				xil_printf("Error, not enough bytes to represent sample rate\n");
 				err = true;
 			}else{
-				char rateStr[COMM_SAMPLE_RATE_SIZE+1];
-				memcpy(rateStr, &buffer[COMM_CMD_SIZE+1], COMM_SAMPLE_RATE_SIZE);
-				rateStr[COMM_SAMPLE_RATE_SIZE] = '\0';
-				u32 sampleRate = strtol(rateStr, NULL, 10);
-				xadcSetSampleRate(sampleRate);
+				u32 rate = buffer[2] << 24 | buffer[3] << 16 | buffer[4] << 8 | buffer[5];
+				xadcSetSampleRate(rate);
 			}
 
-		}else if(strcmp(cmd, "INST") == 0){
+		}else if(cmd == INPUT_SELECT){
+			if(payloadLength == 0){
+				xil_printf("Error, payload length too small\n");
+				err = true;
+			}else{
+				status = muxSetActiveFilter(buffer[2]-'0');
+				if(status > 0){
+					err = true;
+				}
+			}
 			//input set
-		}else if(strcmp(cmd, "FBST") == 0){
+		}else if(cmd == FILTER_SELECT){
 			//checks that payload contains filter number and that it is a
 			if(payloadLength < 1){
 				err = true;
@@ -352,7 +362,7 @@ bool commProcessPacket(u8 *buffer, u16 bufSize){
 				err = muxSetActiveFilter((u8) buffer[COMM_CMD_SIZE+1]);
 			}
 			//set active filter
-		}else if(strcmp(cmd, "FBTN") == 0){
+		}else if(cmd == CORNER_FREQ_SET){
 			u8 filter = ((buffer[COMM_CMD_SIZE+1] << 8) & 0xFF00 ) + buffer[COMM_CMD_SIZE+2];
 			if(buffer[COMM_CMD_SIZE+2] != ',' || buffer[COMM_CMD_SIZE+6] != ','){
 				xil_printf("err in filter tune function");
@@ -361,17 +371,18 @@ bool commProcessPacket(u8 *buffer, u16 bufSize){
 			FILTER_FREQ_TYPE upper = ((buffer[COMM_CMD_SIZE+7] << 8) & 0xFF00 ) + buffer[COMM_CMD_SIZE+8];
 			//tune filter
 			err = tuneFilter(filter, lower, upper);
-		}else if(strcmp(cmd, "STRT") == 0 && samplingEnabled == false){
-			xadcEnableSampling(buffer[COMM_CMD_SIZE+1]);
-		}else if(strcmp(cmd, "STOP") == 0 && samplingEnabled == true){
+		}else if(cmd == START_SAMPLING){
+			if(buffer[2] == 1)
+				xadcEnableSampling(1);
+			else
+				xadcEnableSampling(0);
+		}else if(cmd == STOP_SAMPLING){
 			xadcDisableSampling();
 			//stop sampling
 		}else{
 			err = true;
 		}
 	}
-
-
 
 
 	return err;
@@ -385,3 +396,5 @@ u32 comUartRecv(u8 *bufferPtr, u32 numBytes)
 {
 	return XUartPs_Recv(&UART1, bufferPtr, numBytes);
 }
+
+
