@@ -8,12 +8,13 @@
 #ifndef X9258_H_
 #define X9258_H_
 
-
-#include "xil_types.h"
-#include "xparameters.h"
-#include "xstatus.h"
-#include "xiicps.h"
 #include <xil_printf.h>
+#include <xil_types.h>
+#include <xparameters.h>
+#include <xstatus.h>
+#include <xiicps.h>
+#include "shared_definitions.h"
+
 
 #define POT_I2C_SDA_PIN 11 //JF PIN 3
 #define POT_I2C_SCL_PIN 10 //JF PIN 2

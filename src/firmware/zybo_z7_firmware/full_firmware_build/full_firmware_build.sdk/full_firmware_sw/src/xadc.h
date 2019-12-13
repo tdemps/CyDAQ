@@ -28,7 +28,7 @@
 #define XPAR_XADC_WIZ_0_INCLUDE_INTR 1U
 #define SYSMON_DEVICE_ID	XPAR_SYSMON_0_DEVICE_ID
 #define CLOCK_FREQ 100000000 //input clock to xadc wiz block (Mhz). Must be set in Vivado
-#define RX_BUFFER_SIZE  2000000
+#define RX_BUFFER_SIZE  3000000
 #define XADC_MAX_SAMPLE_RATE 50000
 #define XADC_DEFAULT_RATE 20000
 #define XADC_INTR_ID				XPS_IRQ_INT_ID

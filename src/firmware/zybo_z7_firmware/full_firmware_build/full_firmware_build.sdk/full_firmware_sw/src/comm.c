@@ -1,6 +1,8 @@
 /*
  * comm.c
  *
+ *Library for configuring and using the UART to communicate
+ *with the frontend.
  *  Created on: Oct 16, 2019
  *      Author: tdempsay
  */
@@ -46,9 +48,9 @@ int commInit(){
 	 * can occur. This function is application specific.
 	 */
 	//status = commSetupInterruptSystem(&INTERRUPTCONTROLLER, &UART1, UART_INT_IRQ_ID);
-	if (status != XST_SUCCESS) {
-		return XST_FAILURE;
-	}
+//	if (status != XST_SUCCESS) {
+//		return XST_FAILURE;
+//	}
 	/*
 	 * Setup the handlers for the UART that will be called from the
 	 * interrupt context when data has been sent and received, specify
@@ -298,9 +300,10 @@ void commRXTask(){
 	while(1){
 
 		while(receiveBuffer[bytesReceived-1] != COMM_STOP_CHAR){
-			bytesReceived += XUartPs_Recv(&UART1, &receiveBuffer[bytesReceived], 20);
+			bytesReceived += XUartPs_Recv(&UART1, &receiveBuffer[bytesReceived], 1);
 		}
-		xil_printf("Processing packet\n");
+		if(DEBUG)
+			xil_printf("Processing packet\n");
 		if(samplingEnabled == true){
 			xadcDisableSampling();
 			//stop sampling to config device
@@ -313,6 +316,8 @@ void commRXTask(){
 		}else{
 			xil_printf("%cACK%c", COMM_START_CHAR, COMM_STOP_CHAR);
 		}
+		err = false;
+
 
 	}
 }
@@ -331,11 +336,13 @@ bool commProcessPacket(u8 *buffer, u16 bufSize){
 		cmd = buffer[1] - '0'; ///needed for testing ======================
 		//payload length is buffer size - start/stop chars - cmd_length
 		u8 payloadLength = bufSize - 2 - COMM_CMD_SIZE;
-		xil_printf("CMD: %u, payloadLen: %d\n", cmd, payloadLength);
+		if(DEBUG)
+			xil_printf("CMD: %u, payloadLen: %d\n", cmd, payloadLength);
 		if(cmd == SAMPLE_RATE_SET){
 			//set sample rate
 			if(payloadLength < COMM_SAMPLE_RATE_SIZE){
-				xil_printf("Error, not enough bytes to represent sample rate\n");
+				if(DEBUG)
+					xil_printf("Error, not enough bytes to represent sample rate\n");
 				err = true;
 			}else{
 				u32 rate = buffer[2] << 24 | buffer[3] << 16 | buffer[4] << 8 | buffer[5];
@@ -344,7 +351,8 @@ bool commProcessPacket(u8 *buffer, u16 bufSize){
 
 		}else if(cmd == INPUT_SELECT){
 			if(payloadLength == 0){
-				xil_printf("Error, payload length too small\n");
+				if(DEBUG)
+					xil_printf("Error, payload length too small\n");
 				err = true;
 			}else{
 				status = muxSetActiveFilter(buffer[2]-'0');
@@ -357,22 +365,32 @@ bool commProcessPacket(u8 *buffer, u16 bufSize){
 			//checks that payload contains filter number and that it is a
 			if(payloadLength < 1){
 				err = true;
-				xil_printf("No filter param given to set\n");
+				if(DEBUG)
+					xil_printf("No filter param given to set\n");
 			}else{
 				err = muxSetActiveFilter((u8) buffer[COMM_CMD_SIZE+1]);
 			}
 			//set active filter
 		}else if(cmd == CORNER_FREQ_SET){
 			u8 filter = ((buffer[COMM_CMD_SIZE+1] << 8) & 0xFF00 ) + buffer[COMM_CMD_SIZE+2];
-			if(buffer[COMM_CMD_SIZE+2] != ',' || buffer[COMM_CMD_SIZE+6] != ','){
-				xil_printf("err in filter tune function");
+			if(payloadLength < 5 || buffer[COMM_CMD_SIZE+2] != ',' || buffer[COMM_CMD_SIZE+6] != ','){
+				if(DEBUG)
+					xil_printf("err in filter tune function");
+				err = true;
+			}else{
+				//each frequency should be sent as two bytes each
+				FILTER_FREQ_TYPE lower = ((buffer[COMM_CMD_SIZE+4] << 8) & 0xFF00 ) + buffer[COMM_CMD_SIZE+5];
+				FILTER_FREQ_TYPE upper = ((buffer[COMM_CMD_SIZE+7] << 8) & 0xFF00 ) + buffer[COMM_CMD_SIZE+8];
+				//tune filter
+				err = tuneFilter(filter, lower, upper);
 			}
-			FILTER_FREQ_TYPE lower = ((buffer[COMM_CMD_SIZE+4] << 8) & 0xFF00 ) + buffer[COMM_CMD_SIZE+5];
-			FILTER_FREQ_TYPE upper = ((buffer[COMM_CMD_SIZE+7] << 8) & 0xFF00 ) + buffer[COMM_CMD_SIZE+8];
-			//tune filter
-			err = tuneFilter(filter, lower, upper);
+		}else if(cmd == PING){
+			err = false;
+		}else if(cmd == FETCH_SAMPLES){
+			xadcProcessSamples();
 		}else if(cmd == START_SAMPLING){
-			if(buffer[2] == 1)
+			xil_printf("%cACK%c", COMM_START_CHAR, COMM_STOP_CHAR);
+			if(payloadLength == 1)
 				xadcEnableSampling(1);
 			else
 				xadcEnableSampling(0);

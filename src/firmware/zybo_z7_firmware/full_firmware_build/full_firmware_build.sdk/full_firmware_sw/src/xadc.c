@@ -39,12 +39,13 @@ u8 xadcInit(){
 	XSysMon_CfgInitialize(SysMonInstPtr, SYSConfigPtr, SYSConfigPtr->BaseAddress);
 
 	address = SYSConfigPtr->BaseAddress;
-	xil_printf("XADC using Sysmon -> base address %lx \n\r", address);
+	if(DEBUG)
+		xil_printf("XADC using Sysmon -> base address %lx \n\r", address);
 
-	status = xadcSetupInterruptSystem(&InterruptController, &SysMonInst, XADC_INTR_ID);
-	if (status != XST_SUCCESS) {
-		return XST_FAILURE;
-	}
+	//status = xadcSetupInterruptSystem(&InterruptController, &SysMonInst, XADC_INTR_ID);
+//	if (status != XST_SUCCESS) {
+//		return XST_FAILURE;
+//	}
 
 	XSysMon_SetAlarmEnables(SysMonInstPtr, 0x0);
 	status = XSysMon_SelfTest(SysMonInstPtr);
@@ -60,12 +61,12 @@ u8 xadcInit(){
     XSysMon_SetSeqAvgEnables(SysMonInstPtr, 0);
     //clear the old status
     XSysMon_GetStatus(SysMonInstPtr);
-    intrStatusValue = Xil_In16(SYSConfigPtr->BaseAddress+XSM_CFR0_OFFSET);
-	printf("CFG0 %x, ",(unsigned int) intrStatusValue);
-	intrStatusValue = Xil_In16(SYSConfigPtr->BaseAddress+XSM_CFR1_OFFSET);
-	printf("CFG1 %x, ",(unsigned int)intrStatusValue);
-	intrStatusValue = Xil_In16(SYSConfigPtr->BaseAddress+XSM_CFR2_OFFSET);
-	printf("CFG2 %x\n",(unsigned int)intrStatusValue);
+//    intrStatusValue = Xil_In16(SYSConfigPtr->BaseAddress+XSM_CFR0_OFFSET);
+//	printf("CFG0 %x, ",(unsigned int) intrStatusValue);
+//	intrStatusValue = Xil_In16(SYSConfigPtr->BaseAddress+XSM_CFR1_OFFSET);
+//	printf("CFG1 %x, ",(unsigned int)intrStatusValue);
+//	intrStatusValue = Xil_In16(SYSConfigPtr->BaseAddress+XSM_CFR2_OFFSET);
+//	printf("CFG2 %x\n",(unsigned int)intrStatusValue);
 //	intrStatusValue = XSysMon_IntrGetEnabled(SysMonInstPtr);
 //	printf("Interrupt Enable register %x \n",(unsigned int)intrStatusValue);
 //	intrStatusValue = Xil_In32(SYSConfigPtr->BaseAddress+XSM_GIER_OFFSET);
@@ -82,7 +83,6 @@ u8 xadcInit(){
 	if(DEBUG)
 		xadcCheckAuxSettings();
 
-
 	//these initializes timer which controls sample rate
 	status = XTmrCtr_Initialize(&TimerCounterInst, TMRCTR_DEVICE_ID);
 	if (status != XST_SUCCESS) {
@@ -97,6 +97,7 @@ u8 xadcInit(){
 	XTmrCtr_SetOptions(&TimerCounterInst, TIMER_CNTR_0, XTC_INT_MODE_OPTION);
 	//set to default sample rate
 	xadcSetSampleRate(XADC_DEFAULT_RATE);
+
 	xadcSampleCount = 0;
 	samplingEnabled = false;
 	streamingEnabled = false;
@@ -152,10 +153,12 @@ SAMPLE_TYPE* xadcGetBuffer(){
  * Disables sampling.
  */
 void xadcDisableSampling(){
+	//stops timer that drives xadc
 	XTmrCtr_Stop(&TimerCounterInst, TIMER_CNTR_0);
 	//XSysMon_IntrGlobalDisable(&SysMonInst);
-	samplingEnabled = false;
-	xadcSampleCount = 0;
+	samplingEnabled = streamingEnabled = false;
+	//xadcProcessSamples();
+	//xadcSampleCount = 0;
 }
 /**
  * Enables storing/printing of samples from XADC
@@ -178,34 +181,31 @@ void xadcEnableSampling(u8 streamSetting){
 	if(streamSetting == 1){
 		streamingEnabled = true;
 	}
-		while(samplingEnabled){
-			//checks for bytes received on uart
-			numBytes += comUartRecv(&buf[numBytes], 6);
-			//waits for xadc to finish conversion of sample
-			while ((XSysMon_GetStatus(&SysMonInst) & XSM_SR_EOS_MASK) != XSM_SR_EOS_MASK);
-			//restarts timer for next sample.
-			XTmrCtr_Start(&TimerCounterInst, TIMER_CNTR_0);
-			//stores raw 12bit sample (shifted right 4).
-			xadcBuffer[xadcSampleCount] = (SAMPLE_TYPE) XSysMon_GetAdcData(&SysMonInst, AUX_14_INPUT) >> 4;
-			voltage = RawToExtVoltage(xadcBuffer[xadcSampleCount]);
+	while(samplingEnabled){
+		//checks for bytes received on uart
+		numBytes += comUartRecv(&buf[numBytes], 1);
+		//waits for xadc to finish conversion of sample
+		while ((XSysMon_GetStatus(&SysMonInst) & XSM_SR_EOS_MASK) != XSM_SR_EOS_MASK);
+		//restarts timer for next sample.
+		XTmrCtr_Start(&TimerCounterInst, TIMER_CNTR_0);
+		//stores raw 12bit sample (shifted right 4).
+		xadcBuffer[xadcSampleCount] = (SAMPLE_TYPE) XSysMon_GetAdcData(&SysMonInst, AUX_14_INPUT) >> 4;
 
-			//xil_printf("@%x, %d!", xadcBuffer[cursor], xadcSampleCount);
-			if(streamingEnabled)
-				xil_printf("%d.%d, %u\n", (int)voltage, xadcFractionToInt(voltage), xadcBuffer[xadcSampleCount]);
-			if(numBytes > 2 && buf[numBytes-1] == '!' && buf[0] == '@'){
-				if(DEBUG)
-					xil_printf("Stopping, %d\n", xadcSampleCount);
-				streamingEnabled = samplingEnabled = false;
-				buf[0] = buf[numBytes-1] = '\0';
-			}//else if(numBytes > 2){
-			//	numBytes = 0;
-			//}
-			if(xadcSampleCount == RX_BUFFER_SIZE-1){
-					xadcSampleCount = 0;
-			}else{
-					xadcSampleCount++;
-			}
+		if(streamingEnabled){
+			voltage = RawToExtVoltage(xadcBuffer[xadcSampleCount]);
+			xil_printf("%d.%d, %u\n", (int)voltage, xadcFractionToInt(voltage), xadcBuffer[xadcSampleCount]);
 		}
+		if(buf[numBytes-1] == '!' && buf[0] == '@'){
+			if(DEBUG)
+				xil_printf("Stopping, # Samples: %d\n", xadcSampleCount);
+			xadcDisableSampling();
+			buf[0] = buf[numBytes-1] = '\0';
+		}else if(xadcSampleCount == RX_BUFFER_SIZE-1){
+				xadcSampleCount = 0;
+		}else{
+				xadcSampleCount++;
+		}
+	}
 }
 /****************************************************************************/
 /**
@@ -236,7 +236,6 @@ int xadcFractionToInt(float FloatNum){
  */
 int xadcSetSampleRate(u32 rate){
 
-
 	if(rate > XADC_MAX_SAMPLE_RATE){
 		if(DEBUG)
 			xil_printf("Invalid sample rate given");
@@ -249,8 +248,6 @@ int xadcSetSampleRate(u32 rate){
 	XTmrCtr_Stop(&TimerCounterInst, TIMER_CNTR_0);
 	XTmrCtr_SetResetValue(&TimerCounterInst, TIMER_CNTR_0, (u32) resetValue);
 
-	//u8 val = CLOCK_FREQ / (26.0 * rate);
-	//XSysMon_SetAdcClkDivisor(SysMonInstPtr, val);
 	if(DEBUG)
 		xil_printf("New Sample Rate: %d SPS\n", rate);
 	return 0;
@@ -317,19 +314,22 @@ void xadcProcessSamples(){
 	u32 i = 0;
 
 	if(xadcSampleCount == 0){
-		xil_printf("No new samples\n");
+		if(DEBUG)
+			xil_printf("No new samples\n");
 		return;
 	}
-	xil_printf("Beginning sample playback..\n\n");
-	sleep(2);
+	if(DEBUG)
+		xil_printf("Beginning sample playback..\n\n");
+	sleep(1);
 
 	while(i < xadcSampleCount){
 
 		voltage = RawToExtVoltage(xadcBuffer[i]);
-		 xil_printf("%d: %d.%d\n", i,(int)voltage, xadcFractionToInt(voltage));
+		//xil_printf("%d: %d.%d\n", i,(int)voltage, xadcFractionToInt(voltage));
+		xil_printf("%d", xadcBuffer[i]);
 		i++;
 	}
 	xadcSampleCount = 0;
-
-	xil_printf("Finished processing samples\n\n");
+	if(DEBUG)
+		xil_printf("Finished processing samples\n\n");
 }

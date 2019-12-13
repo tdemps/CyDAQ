@@ -12,4 +12,5 @@ rst -processor
 targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent Zybo Z7 210351AB730EA"} -index 0
 dow U:/master_ee_224/src/firmware/zybo_z7_firmware/full_firmware_build/full_firmware_build.sdk/full_firmware_sw/Debug/full_firmware_sw.elf
 configparams force-mem-access 0
-bpadd -addr &main
+targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent Zybo Z7 210351AB730EA"} -index 0
+con

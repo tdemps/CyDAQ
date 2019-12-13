@@ -1,7 +1,7 @@
 //arch = zynq; split = false; format = BIN
 the_ROM_image:
 {
-	[bootloader]C:\ETG-Git-Repos\ee224_software\master_ee_224\src\firmware\zybo_z7_firmware\full_firmware_build\full_firmware_build.sdk\fsbl\Debug\fsbl.elf
-	C:\ETG-Git-Repos\ee224_software\master_ee_224\src\firmware\zybo_z7_firmware\full_firmware_build\full_firmware_build.sdk\design_1_wrapper_hw_platform_4\design_1_wrapper.bit
-	C:\ETG-Git-Repos\ee224_software\master_ee_224\src\firmware\zybo_z7_firmware\full_firmware_build\full_firmware_build.sdk\full_firmware_sw\Debug\full_firmware_sw.elf
+	[bootloader]U:\master_ee_224\src\firmware\zybo_z7_firmware\full_firmware_build\full_firmware_build.sdk\fsbl\Debug\fsbl.elf
+	U:\master_ee_224\src\firmware\zybo_z7_firmware\full_firmware_build\full_firmware_build.sdk\design_1_wrapper_hw_platform_4\design_1_wrapper.bit
+	U:\master_ee_224\src\firmware\zybo_z7_firmware\full_firmware_build\full_firmware_build.sdk\full_firmware_sw\Debug\full_firmware_sw.elf
 }

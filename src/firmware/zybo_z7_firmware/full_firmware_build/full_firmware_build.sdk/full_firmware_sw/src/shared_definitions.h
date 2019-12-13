@@ -60,9 +60,10 @@ typedef enum commands
 	SAMPLE_RATE_SET = 1,
 	FILTER_SELECT = 2,
 	CORNER_FREQ_SET = 3,
+	FETCH_SAMPLES = 4,
+	PING = 7,
 	START_SAMPLING = 8,
 	STOP_SAMPLING = 9,
-	NUM_COMMANDS = 6
 
 } commands_e;
 #endif /* SRC_SHARED_DEFINITIONS_H_ */

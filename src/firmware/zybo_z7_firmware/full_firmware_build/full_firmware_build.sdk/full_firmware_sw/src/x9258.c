@@ -13,9 +13,9 @@
 static XIicPs I2C0_IIC;
 
 int init_x9258_i2c(){
-
-	xil_printf("INITIALISING I2C0\n");
-	int Status;
+	if(DEBUG)
+		xil_printf("Initializing I2C for X9258\n");
+	int status;
 	XIicPs_Config *Config;
 
 /*
@@ -27,32 +27,33 @@ int init_x9258_i2c(){
 		return XST_FAILURE;
 	}
 
-	Status = XIicPs_CfgInitialize(&I2C0_IIC, Config, Config->BaseAddress);
-	if (Status != XST_SUCCESS) {
+	status = XIicPs_CfgInitialize(&I2C0_IIC, Config, Config->BaseAddress);
+	if (status != XST_SUCCESS) {
 		return XST_FAILURE;
 	}
 
 	/*
 	 * Perform a self-test to ensure that the hardware was built correctly.
 	 */
-	Status = XIicPs_SelfTest(&I2C0_IIC);
-	if (Status != XST_SUCCESS) {
+	status = XIicPs_SelfTest(&I2C0_IIC);
+	if (status != XST_SUCCESS) {
 		return XST_FAILURE;
 	}
 
 	/*
 	 * Set the IIC serial clock rate.
 	 */
-	Status = XIicPs_SetSClk(&I2C0_IIC, POT_I2C_CLK_RATE);
+	status = XIicPs_SetSClk(&I2C0_IIC, POT_I2C_CLK_RATE);
 
-	return Status;
+	return status;
 }
 
 POT_R_TYPE pot_value_conversion(int ohmValue){
   static const POT_R_TYPE calFactor = 0;
 
   if(ohmValue < 0 || ohmValue > 100000){
-    xil_printf("Invalid resistance given, choose val between 0-100,000 ohm\n");
+	if(DEBUG)
+		xil_printf("Invalid resistance given, choose val between 0-100,000 ohm\n");
     return 0;
   }
   return map(ohmValue,0,100000,0,255) + calFactor;
@@ -73,7 +74,8 @@ uint8_t x9258_volatile_write(wiper_t wiper_location, POT_R_TYPE r_value){
 	if (status != XST_SUCCESS) {
 		return XST_FAILURE;
 	}
-	xil_printf("Wrote to IC_Addr: %x,Pot#: %d,Reg Val: %d \n", wiper_location.ic_addr, wiper_location.wiper, r_value);
+	if(DEBUG)
+		xil_printf("Wrote to IC_Addr: %x,Pot#: %d,Reg Val: %d \n", wiper_location.ic_addr, wiper_location.wiper, r_value);
 
 	/*
 	 * Wait until bus is idle to start another transfer.

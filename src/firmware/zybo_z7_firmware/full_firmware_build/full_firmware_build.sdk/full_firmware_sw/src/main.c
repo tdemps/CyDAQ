@@ -37,11 +37,11 @@ int main()
     xadcInit();
     init_x9258_i2c();
 
-//	xil_printf("Select Test:\n 1)ADC\n2)Comm3)Filter\n");
-    //commRXTask();
+	//xil_printf("Select Test:\n 1)ADC\n2)Comm3)Filter\n");
+    commRXTask();
     //xadcTest();
     //commTest(0);
-	filterTest();
+	//filterTest();
 	if(DEBUG)
 		xil_printf("Exiting..");
     cleanup_platform();
