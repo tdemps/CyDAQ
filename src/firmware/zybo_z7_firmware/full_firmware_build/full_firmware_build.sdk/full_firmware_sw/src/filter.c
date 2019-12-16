@@ -92,7 +92,8 @@ static filter_t *filterConfigs[NUM_FILTERS-1] = {&firstLP, &firstHP, &secondBP, 
 /*
  * Writes pots to get the desired frequency(ies).
  * For BP, freq1 is lower corner(HP) and freq2 is upper corner(LP).
- * If the filter only has one corner, pass in NULL or 0 as freq2
+ * If the filter only has one corner, freq1 is used as the corner to set.
+ * pass in NULL or 0 as freq2
  */
 u8 tuneFilter(filters_e filterSelect, FILTER_FREQ_TYPE freq1, FILTER_FREQ_TYPE freq2){
 

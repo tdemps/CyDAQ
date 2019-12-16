@@ -101,6 +101,7 @@ u8 xadcInit(){
 	xadcSampleCount = 0;
 	samplingEnabled = false;
 	streamingEnabled = false;
+	initialized = 1;
 	return 0;
 }
 
@@ -193,9 +194,9 @@ void xadcEnableSampling(u8 streamSetting){
 
 		if(streamingEnabled){
 			voltage = RawToExtVoltage(xadcBuffer[xadcSampleCount]);
-			xil_printf("%d.%d, %u\n", (int)voltage, xadcFractionToInt(voltage), xadcBuffer[xadcSampleCount]);
+			xil_printf("%d.%d, 0x%x\n", (int)voltage, xadcFractionToInt(voltage), xadcBuffer[xadcSampleCount]);
 		}
-		if(buf[numBytes-1] == '!' && buf[0] == '@'){
+		if(buf[numBytes-1] == '!'){
 			if(DEBUG)
 				xil_printf("Stopping, # Samples: %d\n", xadcSampleCount);
 			xadcDisableSampling();
@@ -325,8 +326,11 @@ void xadcProcessSamples(){
 	while(i < xadcSampleCount){
 
 		voltage = RawToExtVoltage(xadcBuffer[i]);
-		//xil_printf("%d: %d.%d\n", i,(int)voltage, xadcFractionToInt(voltage));
+
 		xil_printf("%d", xadcBuffer[i]);
+		if(DEBUG){
+			xil_printf(" => %d.%d\n", i,(int)voltage, xadcFractionToInt(voltage));
+		}
 		i++;
 	}
 	xadcSampleCount = 0;
