@@ -16430,15 +16430,14 @@ LED</description>
 <part name="SUPPLY70" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="SUPPLY72" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="SUPPLY71" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
-<part name="J8" library="SJ1-3523N" deviceset="SJ1-3523N" device=""/>
+<part name="J8" library="SJ1-3523N" deviceset="SJ1-3523N" device="" override_package3d_urn="urn:adsk.eagle:package:16037193/3" override_package_urn="urn:adsk.eagle:footprint:16037194/1"/>
 <part name="SUPPLY74" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
-<part name="J9" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="CONN_02" device="LOCK" package3d_urn="urn:adsk.eagle:package:38045/1" value="Vin_HEADER"/>
-<part name="J10" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="CONN_02" device="LOCK" package3d_urn="urn:adsk.eagle:package:38045/1" value="Vout_HEADER"/>
+<part name="J9" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="CONN_02" device="LOCK" package3d_urn="urn:adsk.eagle:package:38045/1" override_package3d_urn="urn:adsk.eagle:package:16037161/2" override_package_urn="urn:adsk.eagle:footprint:37661/1" value="Vin_HEADER"/>
+<part name="J10" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="CONN_02" device="LOCK" package3d_urn="urn:adsk.eagle:package:38045/1" override_package3d_urn="urn:adsk.eagle:package:16037140/2" override_package_urn="urn:adsk.eagle:footprint:37661/1" value="Vout_HEADER"/>
 <part name="SUPPLY75" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="SUPPLY76" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
-<part name="J11" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="CONN_03" device="LOCK" package3d_urn="urn:adsk.eagle:package:38071/1" value="5V0_SENSOR"/>
-<part name="J12" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="CONN_03" device="LOCK" package3d_urn="urn:adsk.eagle:package:38071/1" value="3V3_SENSOR"/>
-<part name="J13" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="CONN_03" device="LOCK" package3d_urn="urn:adsk.eagle:package:38071/1" value="1V8_SENSOR"/>
+<part name="J11" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="CONN_03" device="LOCK" package3d_urn="urn:adsk.eagle:package:38071/1" override_package3d_urn="urn:adsk.eagle:package:16037106/2" override_package_urn="urn:adsk.eagle:footprint:37681/1" value="5V0_SENSOR"/>
+<part name="J12" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="CONN_03" device="LOCK" package3d_urn="urn:adsk.eagle:package:38071/1" override_package3d_urn="urn:adsk.eagle:package:16037123/2" override_package_urn="urn:adsk.eagle:footprint:37681/1" value="3V3_SENSOR"/>
 <part name="SUPPLY77" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="P+15" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device="" value="+5V0"/>
 <part name="+3V1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
@@ -16452,7 +16451,7 @@ LED</description>
 <part name="R79" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="18k"/>
 <part name="R80" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="1.8k"/>
 <part name="SUPPLY81" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
-<part name="U19" library="Amplifiers" library_urn="urn:adsk.eagle:library:4010042" deviceset="OPA2197" device="" package3d_urn="urn:adsk.eagle:package:4010053/2"/>
+<part name="U19" library="Amplifiers" library_urn="urn:adsk.eagle:library:4010042" deviceset="OPA2197" device="" package3d_urn="urn:adsk.eagle:package:4010053/2" override_package3d_urn="urn:adsk.eagle:package:16038604/2" override_package_urn="urn:adsk.eagle:footprint:4010045/2"/>
 <part name="R81" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="18k"/>
 <part name="R82" library="Resistors" library_urn="urn:adsk.eagle:library:4010572" deviceset="SMD" device="_0805" package3d_urn="urn:adsk.eagle:package:4010580/4" value="2k"/>
 <part name="SUPPLY82" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
@@ -16478,9 +16477,8 @@ LED</description>
 <part name="J17" library="Connectors" library_urn="urn:adsk.eagle:library:4010410" deviceset="FEMALE_HEADER-2X6" device="" package3d_urn="urn:adsk.eagle:package:14931688/2" value="BRKOUT_JF"/>
 <part name="SUPPLY87" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="+3V6" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
-<part name="J18" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="CONN_03X2" device="FEMALE" package3d_urn="urn:adsk.eagle:package:38016/1" value="5V0_CONN"/>
-<part name="J19" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="CONN_03X2" device="FEMALE" package3d_urn="urn:adsk.eagle:package:38016/1" value="3V3_CONN"/>
-<part name="J20" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="CONN_03X2" device="FEMALE" package3d_urn="urn:adsk.eagle:package:38016/1" value="1V8_CONN"/>
+<part name="J19" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="CONN_03X2" device="FEMALE" package3d_urn="urn:adsk.eagle:package:38016/1" override_package3d_urn="urn:adsk.eagle:package:16037407/2" override_package_urn="urn:adsk.eagle:footprint:37608/1" value="3V3_CONN"/>
+<part name="J20" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="CONN_03X2" device="FEMALE" package3d_urn="urn:adsk.eagle:package:38016/1" override_package3d_urn="urn:adsk.eagle:package:16037401/2" override_package_urn="urn:adsk.eagle:footprint:37608/1" value="1V8_CONN"/>
 <part name="SUPPLY88" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="SUPPLY89" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="SUPPLY90" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
@@ -16494,7 +16492,7 @@ LED</description>
 <part name="+3V9" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
 <part name="SUPPLY92" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="+3V10" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
-<part name="J22" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="CONN_02" device="LOCK" package3d_urn="urn:adsk.eagle:package:38045/1" value="ZYBO_Power"/>
+<part name="J22" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="CONN_02" device="LOCK" package3d_urn="urn:adsk.eagle:package:38045/1" override_package3d_urn="urn:adsk.eagle:package:16037172/2" override_package_urn="urn:adsk.eagle:footprint:37661/1" value="ZYBO_Power"/>
 <part name="SUPPLY9" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="P+19" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device="" value="+5V0"/>
 <part name="D4" library="SparkFun-LED" library_urn="urn:adsk.eagle:library:529" deviceset="LED-BLUE" device="1206" package3d_urn="urn:adsk.eagle:package:39352/1" value="GREEN"/>
@@ -16529,6 +16527,8 @@ LED</description>
 <part name="J23" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="CONN_02" device="LOCK" package3d_urn="urn:adsk.eagle:package:38045/1" value="ZYBO_Power"/>
 <part name="SUPPLY100" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="P+20" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+12V" device=""/>
+<part name="J13" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="CONN_03" device="LOCK" package3d_urn="urn:adsk.eagle:package:38071/1" override_package3d_urn="urn:adsk.eagle:package:16037123/2" override_package_urn="urn:adsk.eagle:footprint:37681/1" value="1V8_SENSOR"/>
+<part name="J18" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="CONN_03X2" device="FEMALE" package3d_urn="urn:adsk.eagle:package:38016/1" override_package3d_urn="urn:adsk.eagle:package:16037407/2" override_package_urn="urn:adsk.eagle:footprint:37608/1" value="5V0_CONN"/>
 </parts>
 <sheets>
 <sheet>
@@ -20525,10 +20525,6 @@ Signals</text>
 <attribute name="VALUE" x="25.4" y="86.614" size="1.778" layer="96" font="vector"/>
 <attribute name="NAME" x="25.4" y="99.568" size="1.778" layer="95" font="vector"/>
 </instance>
-<instance part="J13" gate="J$1" x="27.94" y="73.66" smashed="yes">
-<attribute name="VALUE" x="25.4" y="66.294" size="1.778" layer="96" font="vector"/>
-<attribute name="NAME" x="25.4" y="79.248" size="1.778" layer="95" font="vector"/>
-</instance>
 <instance part="SUPPLY77" gate="GND" x="43.18" y="106.68" smashed="yes"/>
 <instance part="P+15" gate="1" x="63.5" y="121.92" smashed="yes">
 <attribute name="VALUE" x="60.452" y="122.428" size="1.778" layer="96"/>
@@ -20647,10 +20643,6 @@ Signals</text>
 <instance part="+3V6" gate="G$1" x="144.78" y="210.82" smashed="yes">
 <attribute name="VALUE" x="141.986" y="211.836" size="1.778" layer="96"/>
 </instance>
-<instance part="J18" gate="G$1" x="35.56" y="243.84" smashed="yes">
-<attribute name="NAME" x="32.004" y="249.428" size="1.778" layer="95" font="vector"/>
-<attribute name="VALUE" x="32.258" y="237.998" size="1.778" layer="96" font="vector" align="top-left"/>
-</instance>
 <instance part="J19" gate="G$1" x="71.12" y="243.84" smashed="yes">
 <attribute name="NAME" x="67.564" y="249.428" size="1.778" layer="95" font="vector"/>
 <attribute name="VALUE" x="67.818" y="237.998" size="1.778" layer="96" font="vector" align="top-left"/>
@@ -20725,6 +20717,14 @@ Signals</text>
 <instance part="SUPPLY100" gate="GND" x="170.18" y="233.68" smashed="yes"/>
 <instance part="P+20" gate="1" x="170.18" y="254" smashed="yes">
 <attribute name="VALUE" x="167.64" y="256.54" size="1.778" layer="96"/>
+</instance>
+<instance part="J13" gate="J$1" x="27.94" y="73.66" smashed="yes">
+<attribute name="VALUE" x="25.4" y="66.294" size="1.778" layer="96" font="vector"/>
+<attribute name="NAME" x="25.4" y="79.248" size="1.778" layer="95" font="vector"/>
+</instance>
+<instance part="J18" gate="G$1" x="35.56" y="243.84" smashed="yes">
+<attribute name="NAME" x="32.004" y="249.428" size="1.778" layer="95" font="vector"/>
+<attribute name="VALUE" x="32.258" y="237.998" size="1.778" layer="96" font="vector" align="top-left"/>
 </instance>
 </instances>
 <busses>
@@ -20894,10 +20894,10 @@ Signals</text>
 <wire x1="43.18" y1="91.44" x2="43.18" y2="88.9" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="J13" gate="J$1" pin="1"/>
 <pinref part="SUPPLY79" gate="GND" pin="GND"/>
 <wire x1="35.56" y1="71.12" x2="43.18" y2="71.12" width="0.1524" layer="91"/>
 <wire x1="43.18" y1="71.12" x2="43.18" y2="68.58" width="0.1524" layer="91"/>
+<pinref part="J13" gate="J$1" pin="1"/>
 </segment>
 <segment>
 <wire x1="299.72" y1="76.2" x2="304.8" y2="76.2" width="0.1524" layer="91"/>
@@ -20983,18 +20983,18 @@ Signals</text>
 <pinref part="J17" gate="G$1" pin="4"/>
 </segment>
 <segment>
-<pinref part="J18" gate="G$1" pin="2"/>
 <wire x1="43.18" y1="246.38" x2="48.26" y2="246.38" width="0.1524" layer="91"/>
 <wire x1="48.26" y1="246.38" x2="48.26" y2="243.84" width="0.1524" layer="91"/>
-<pinref part="J18" gate="G$1" pin="6"/>
 <wire x1="48.26" y1="243.84" x2="48.26" y2="241.3" width="0.1524" layer="91"/>
 <wire x1="48.26" y1="241.3" x2="48.26" y2="236.22" width="0.1524" layer="91"/>
 <wire x1="43.18" y1="241.3" x2="48.26" y2="241.3" width="0.1524" layer="91"/>
 <junction x="48.26" y="241.3"/>
-<pinref part="J18" gate="G$1" pin="4"/>
 <wire x1="43.18" y1="243.84" x2="48.26" y2="243.84" width="0.1524" layer="91"/>
 <junction x="48.26" y="243.84"/>
 <pinref part="SUPPLY88" gate="GND" pin="GND"/>
+<pinref part="J18" gate="G$1" pin="6"/>
+<pinref part="J18" gate="G$1" pin="4"/>
+<pinref part="J18" gate="G$1" pin="2"/>
 </segment>
 <segment>
 <wire x1="78.74" y1="246.38" x2="83.82" y2="246.38" width="0.1524" layer="91"/>
@@ -21143,18 +21143,18 @@ Signals</text>
 <pinref part="P+17" gate="1" pin="+5V"/>
 </segment>
 <segment>
-<pinref part="J18" gate="G$1" pin="5"/>
 <wire x1="27.94" y1="241.3" x2="22.86" y2="241.3" width="0.1524" layer="91"/>
 <wire x1="22.86" y1="241.3" x2="22.86" y2="243.84" width="0.1524" layer="91"/>
-<pinref part="J18" gate="G$1" pin="1"/>
 <wire x1="22.86" y1="243.84" x2="22.86" y2="246.38" width="0.1524" layer="91"/>
 <wire x1="22.86" y1="246.38" x2="27.94" y2="246.38" width="0.1524" layer="91"/>
-<pinref part="J18" gate="G$1" pin="3"/>
 <wire x1="27.94" y1="243.84" x2="22.86" y2="243.84" width="0.1524" layer="91"/>
 <junction x="22.86" y="243.84"/>
 <pinref part="P+18" gate="1" pin="+5V"/>
 <wire x1="22.86" y1="246.38" x2="22.86" y2="251.46" width="0.1524" layer="91"/>
 <junction x="22.86" y="246.38"/>
+<pinref part="J18" gate="G$1" pin="1"/>
+<pinref part="J18" gate="G$1" pin="3"/>
+<pinref part="J18" gate="G$1" pin="5"/>
 </segment>
 <segment>
 <pinref part="J22" gate="G$1" pin="2"/>
@@ -21262,10 +21262,10 @@ Signals</text>
 </net>
 <net name="+1V8" class="1">
 <segment>
-<pinref part="J13" gate="J$1" pin="2"/>
 <pinref part="+3V2" gate="G$1" pin="+3V3"/>
 <wire x1="35.56" y1="73.66" x2="63.5" y2="73.66" width="0.1524" layer="91"/>
 <wire x1="63.5" y1="73.66" x2="63.5" y2="81.28" width="0.1524" layer="91"/>
+<pinref part="J13" gate="J$1" pin="2"/>
 </segment>
 <segment>
 <pinref part="J20" gate="G$1" pin="5"/>
@@ -21284,9 +21284,9 @@ Signals</text>
 </net>
 <net name="1V8SENSOR_IN" class="0">
 <segment>
-<pinref part="J13" gate="J$1" pin="3"/>
 <wire x1="35.56" y1="76.2" x2="40.64" y2="76.2" width="0.1524" layer="91"/>
 <label x="60.452" y="76.2" size="1.27" layer="95" rot="R180" xref="yes"/>
+<pinref part="J13" gate="J$1" pin="3"/>
 </segment>
 </net>
 <net name="-5V0" class="1">

@@ -1,7 +1,4 @@
 TODO:
 
-Add fancy silkscreening
-Redo board outline to better match case
 Choose connectors for analog inputs
 Clean up power supply schematic
-Add silkscreen to Vout header
