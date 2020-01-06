@@ -2,16 +2,8 @@ import tkinter as tk
 from tkinter import *
 from tkinter.ttk import Combobox
 from serial_comm import ctrl_comm, parameter_options, parameter_options_filter, parameter_options_input, parameter_options_output
+from data_handle import raw_data
 
-
-##------- Global Variables to Write to the CyDAQ ---------##
-
-# global upperCorner (int)
-# global lowerCorner (int)
-# global corner (int)
-# global input (string)
-# global filter (string)
-# global sampleRate (int)
 
 ############## Class to Move Between Frames #############
 
@@ -23,6 +15,7 @@ filter = ""
 sampleRate = ""
 comm_port = ""
 serial_obj = ctrl_comm()
+raw_adc_data = raw_data()
 
 class CyDAQ_GUI(tk.Tk):
     def __init__(self):
@@ -377,6 +370,7 @@ class SamplePage(tk.Frame):
                              command=self.createStopButton)
         startButton.place(relx=.5, rely=.5, anchor=CENTER)
 
+
         menu = Menu(self)
         self.master.config(menu=menu)
         # Initialize the file menu
@@ -408,17 +402,23 @@ class SamplePage(tk.Frame):
         COMport.add_command(label="Ping", command=PingCyDAQ)
         SampleData.add_command(label="Start Sampling")
 
+
+
     def createStartButton(self):
         stopButton.place_forget()
         startButton.place(relx=.5, rely=.5, anchor=CENTER)
         print("Stopping")
-        #serial_obj.send_parameters(comm_port, self.master.input, self.master.sampleRate, self.master.filter, self.master.upperCorner, self.master.lowerCorner)  todo
+        serial_obj.send_stop_cmd(comm_port)
 
     def createStopButton(self):
         startButton.place_forget()
         stopButton.place(relx=.5, rely=.5, anchor=CENTER)
         print("Starting")
-        #serial_obj.send_stop_cmd(comm_port)        todo
+        if not raw_adc_data.collect_data(44100, comm_port):
+            print("Error occurred getting data")
+        # serial_obj.send_parameters(comm_port, self.master.input, self.master.sampleRate, self.master.filter, self.master.upperCorner, self.master.lowerCorner)
+
+
 
     def client_exit(self):
         exit()
@@ -437,6 +437,13 @@ class PageTwo(tk.Frame):
         tk.Button(self, text="Go back to start page",
                   command=lambda: master.switch_frame(CyDAQ_Config)).place(rely=.5, relx=.5)
 
+class zyboNotConnected():
+    def __init__(self):
+        root = Tk()
+        root.geometry("300x300")
+        rootTitle = Label(root, text="Zybo Connection", height=1, width=len("Zybo Connection"))
+        rootTitle.pack()
+
 class PingCyDAQ():
     def __init__(self):
         root = Tk()
@@ -444,19 +451,19 @@ class PingCyDAQ():
         root.title("ETG")
         rootTitle = Label(root, text="Connection Test", height=1, width=len("Connection Test"))
         rootTitle.pack()
-        # if serial_obj.ping_zybo(comm_port):
-        #     print("Test Passed")
-        #     global ping_success_label
-        #     ping_success_labelName = "Ping Successful"
-        #     ping_success_label = Label(root, text=ping_success_labelName, height=1, width=len(ping_success_labelName),
-        #                             relief=RAISED)
-        #     ping_success_label.place(relx=.5, rely=.5, anchor=CENTER)
-        # else:
-        #     global ping_fail_label
-        #     ping_fail_labelName = "Ping Failed"
-        #     ping_fail_label = Label(root, text=ping_fail_labelName, height=1, width=len(ping_fail_labelName),
-        #                                relief=RAISED)
-        #     ping_success_label.place(relx=.5, rely=.5, anchor=CENTER)
+        if serial_obj.ping_zybo(comm_port):
+            print("Test Passed")
+            global ping_success_label
+            ping_success_labelName = "Ping Successful"
+            ping_success_label = Label(root, text=ping_success_labelName, height=1, width=len(ping_success_labelName),
+                                    relief=RAISED)
+            ping_success_label.place(relx=.5, rely=.5, anchor=CENTER)
+        else:
+            global ping_fail_label
+            ping_fail_labelName = "Ping Failed"
+            ping_fail_label = Label(root, text=ping_fail_labelName, height=1, width=len(ping_fail_labelName),
+                                       relief=RAISED)
+            ping_fail_label.place(relx=.5, rely=.5, anchor=CENTER)
         root.mainloop()
 
 ################### initialize and run ####################

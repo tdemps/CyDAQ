@@ -3,6 +3,7 @@ from enum import IntEnum, Enum
 import threading
 import serial
 import serial.tools.list_ports
+import codecs
 
 
 # from mdl_firmware import mdl_fw_vals
@@ -37,6 +38,7 @@ fbtn = '2 digit filter','8 digits (for frequency)','8 digits (for second frequen
 raw data will come in 2 bytes in hexidecimal
 """
 
+
 class sig_serial(Enum):
     """
     This class defines a table of commands that are sent between the firmware
@@ -61,8 +63,10 @@ class parameter_options(IntEnum):
     sample_rate = 1
     filter = 2
     corner_freq = 3
+    ping = 7
     START = 8
     STOP = 9
+
 
 class parameter_options_filter(IntEnum):
     """
@@ -78,6 +82,7 @@ class parameter_options_filter(IntEnum):
     LP6 = 5
     NOTCH = 6
     NO_FILTER = 7
+
 
 class parameter_options_input(IntEnum):
     """
@@ -95,6 +100,7 @@ class parameter_options_input(IntEnum):
     digital_spi_bus = 6
     digital_uart = 7
 
+
 class parameter_options_output(IntEnum):
     """
            This class defines a table of commands that are sent to the ZYBO specifying the settings for
@@ -104,6 +110,7 @@ class parameter_options_output(IntEnum):
 
     xadc = 0
     digital = 1
+
 
 class ctrl_comm:
     """
@@ -115,7 +122,12 @@ class ctrl_comm:
 
     def __init__(self):
         self.__s_comm = serial.Serial()
-        self.__s_comm.port = self.get_port()            #todo 
+        self.__s_comm.port = None
+        while self.__s_comm.port is None:
+            try:
+                self.__s_comm.port = self.get_port()
+            except:
+                pass
         self.__s_comm.baudrate = 921600
         self.__s_comm.bytesize = serial.EIGHTBITS
         self.__s_comm.stopbits = serial.STOPBITS_ONE
@@ -162,7 +174,7 @@ class ctrl_comm:
         all_ports = serial.tools.list_ports.comports()
         open_ports = []
         for element in all_ports:
-            if ("USB Serial Port" in element.description):
+            if "USB Serial Port" in element.description:
                 open_ports.append(element.device)
         try:
             zybo_port = open_ports[0]
@@ -191,6 +203,9 @@ class ctrl_comm:
             self.__s_comm.open()
             self.__s_comm.flushInput()
             self.__s_comm.flushOutput()
+            # print(self.__s_comm.read(self.__s_comm.in_waiting()))
+        else:
+            self.__s_comm.flushInput()
 
     def write(self, data):
         """
@@ -223,7 +238,6 @@ class ctrl_comm:
 
         if self.__s_comm.isOpen() is True:
             while True:
-
                 if self.read_byte() == sig_serial.START_BYTE.value:
                     buffer = ""
                     byte_value = ""
@@ -263,25 +277,42 @@ class ctrl_comm:
         if self.__s_comm.isOpen() is True:
             buffer = self.__s_comm.read()
 
-            if 1 != len(buffer):
+            if len(buffer) >= 2:
                 self.__throw_exception('SerialReadTimeout')
-
-            buffer = buffer.decode('ascii')
-            return buffer
+            elif not len(buffer):
+                print("Nothing Received over Comm Port")
+                return False
+            buffer1 = buffer.decode('ascii')
+            return buffer1
         else:
             return False
 
+    def read_uint8(self):
+        """
+        Read a uint16 from the serial device
 
+        Args:
+            None
 
+        Returns:
+            A uint16 from the serial device. False if the device is not open
+        """
+
+        if self.__s_comm.isOpen() is True:
+            buffer = self.__s_comm.read(1)
+
+            if 1 != len(buffer):
+                self.__throw_exception('SerialReadTimeout')
+
+            return int.from_bytes(buffer, byteorder=self.__order, signed=False)
+        else:
+            return False
 
     def __throw_exception(self, text):
         """
         Throws an exception for a read timeout
         """
         raise Exception(text)
-
-
-
 
     def send_parameters(self, port_select, input_set, sample_rate, filter_select, corner_freq_upper, corner_freq_lower):
         """
@@ -295,28 +326,31 @@ class ctrl_comm:
 
         """
 
-        self.open(port_select)
-        while True:
-            self.send_input(port_select, input_set)
-            if self.recieve_acknowlege_zybo(port_select):
-                break
-        while True:
-            self.send_sample_rate(port_select, sample_rate)
-            if self.recieve_acknowlege_zybo(port_select):
-                break
-        while True:
-            self.send_filter(port_select, filter_select)
-            if self.recieve_acknowlege_zybo(port_select):
-                break
-        while True:
-            self.send_corner_freq(port_select, corner_freq_upper, corner_freq_lower)
-            if self.recieve_acknowlege_zybo(port_select):
-                break
-        while True:
-            self.send_start(port_select)
-            if self.recieve_acknowlege_zybo(port_select):
-                break
-        self.close()
+        if self.open(port_select):
+            cnt = 0
+            cursor = 0
+            while cnt < 3 and cursor < 5:
+                if cursor == 0:
+                    self.send_input(port_select, input_set)
+                elif cursor == 1:
+                    self.send_sample_rate(port_select, sample_rate)
+                elif cursor == 2:
+                    self.send_filter(port_select, filter_select)
+                elif cursor == 3:
+                    self.send_corner_freq(port_select, corner_freq_upper, corner_freq_lower)
+                elif cursor == 4:
+                    self.send_start(port_select)
+
+                if self.recieve_acknowlege_zybo(port_select):
+                    cursor += 1
+                    cnt = 0
+                else:
+                    cnt += 1
+            if cnt < 3:
+                print("Commands Sent/Received")
+            else:
+                print("Commands Not Sent/Received")
+            self.close()
 
     def send_stop_cmd(self, port_select):
 
@@ -327,15 +361,13 @@ class ctrl_comm:
                 break
         self.close()
 
-
-
-
-    def send_input(self, port_select , input_set):
+    def send_input(self, port_select, input_set):
         """
                 Sends the Input.
 
                 Args:
-                    None
+                    port selection
+                    input selection
 
                 Returns:
                     True
@@ -345,13 +377,12 @@ class ctrl_comm:
             self.__s_comm.write(sig_serial.START_BYTE.value.encode())
             self.write(parameter_options.input_select.value)
             self.write(input_set)
-            print("Input set Enum= " + input_set)
+            print("Input set Enum= " + str(input_set))
             self.__s_comm.write(sig_serial.END_BYTE.value.encode())
 
         else:
             self.__throw_exception('Sending Input Failed')
             return False
-
 
     def send_sample_rate(self, port_select, sample_rate):
         """
@@ -378,12 +409,13 @@ class ctrl_comm:
             self.__throw_exception('Sending Input Failed')
             return False
 
-    def send_filter(self, port_select , filter_select):
+    def send_filter(self, port_select, filter_select):
         """
                 Sends the Input.
 
                 Args:
-                    None
+                    port selection
+                    filter selection
 
                 Returns:
                     True
@@ -405,7 +437,10 @@ class ctrl_comm:
                 Sends the Input.
 
                 Args:
-                    None
+                    port selection
+                    upper corner freq
+                    lower corner freq
+
 
                 Returns:
                     True
@@ -452,7 +487,8 @@ class ctrl_comm:
                 Sends the Input.
 
                 Args:
-                    None
+                    port selection
+
 
                 Returns:
                     True
@@ -472,14 +508,15 @@ class ctrl_comm:
                 Handshake between zybo and the cydaq
 
                 Args:
-                    None
+                    port selection
+
 
                 Returns:
                     None
                 """
         self.open(port_select)
         if self.__s_comm.isOpen() is True:
-            self.write("Hello Mr.Zybo".encode())
+            self.write(parameter_options.ping.value)
             while True:
                 if self.recieve_acknowlege_zybo(port_select):
                     if self.read_byte() == sig_serial.START_BYTE.value:
@@ -491,13 +528,13 @@ class ctrl_comm:
                                 if byte_value != sig_serial.END_BYTE.value:
                                     buffer += byte_value
                         else:
-                            self.__throw_exception('ack was not received')
+                            print("Acknowledge was incorrect")
                             return False
-                        if buffer == 'Hello Mr.CyDAQ':
+                        if buffer == 'Ack':
                             print(buffer)
                             return True
                         else:
-                            self.__throw_exception('test not received')
+                            print("Acknowledge was incorrect")
                             return False
                     else:
                         pass
@@ -514,5 +551,8 @@ class ctrl_comm:
         hex_num = hex(int(number, 2))
         return hex_num
 
+    def hex_to_dec(self, hex_number):
+        dec_num = str(int(hex_number, 16))
+        return dec_num
 
 
