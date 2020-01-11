@@ -162,7 +162,7 @@
 <layer number="255" name="routoute" color="7" fill="1" visible="no" active="yes"/>
 </layers>
 <board>
-<fusionsync huburn="a.cGVyc29uYWw6dWUyZGVhNzMz" projecturn="a.cGVyc29uYWw6dWUyZGVhNzMzIzIwMTkxMTAyMjMzODQwMTI2" f3durn="urn:adsk.wipprod:dm.lineage:zbJ6wBk-RJOF5j4RYDEoYg" pcbguid="4f68e89e-d072-4590-908d-8220ccbcb71c" lastpulledtime="" lastsyncedchangeguid="7da5a2a0-df9c-b69f-26de-b6d456d4fe31"/>
+<fusionsync huburn="a.cGVyc29uYWw6dWUyZGVhNzMz" projecturn="a.cGVyc29uYWw6dWUyZGVhNzMzIzIwMTkxMTAyMjMzODQwMTI2" f3durn="urn:adsk.wipprod:dm.lineage:zbJ6wBk-RJOF5j4RYDEoYg" pcbguid="4f68e89e-d072-4590-908d-8220ccbcb71c" lastpulledtime="" lastsyncedchangeguid="2570635d-0828-6b8b-de69-e6c8005dbedd"/>
 <plain>
 <wire x1="95.489209375" y1="9.88383125" x2="96.089209375" y2="9.88385" width="0.1" layer="51"/>
 <wire x1="96.089209375" y1="9.88385" x2="96.0892" y2="10.28385" width="0.1" layer="51"/>

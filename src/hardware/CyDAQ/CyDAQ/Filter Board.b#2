@@ -34,7 +34,7 @@
 <layer number="24" name="bOrigins" color="15" fill="1" visible="no" active="yes"/>
 <layer number="25" name="tNames" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="26" name="bNames" color="7" fill="1" visible="no" active="yes"/>
-<layer number="27" name="tValues" color="7" fill="1" visible="no" active="yes"/>
+<layer number="27" name="tValues" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="28" name="bValues" color="7" fill="1" visible="no" active="yes"/>
 <layer number="29" name="tStop" color="7" fill="3" visible="no" active="yes"/>
 <layer number="30" name="bStop" color="7" fill="6" visible="no" active="yes"/>
@@ -641,7 +641,7 @@ I. Rex
 Firmware:
 T. Dempsay
 
-Rev: 1
+Rev: 1.1
 Dec. 2019</text>
 <text x="153.797" y="53.467" size="1.143" layer="21" font="vector" ratio="15" rot="R270" align="bottom-right">Vout</text>
 <wire x1="0" y1="29.083" x2="0.635" y2="29.718" width="0.1" layer="20" curve="-90"/>
@@ -5210,7 +5210,7 @@ design rules under a new name.</description>
 <element name="L2" library="LTF5022T" package="IND_5022" value="4.7uH" x="68.1604" y="88.9884" smashed="yes">
 <attribute name="NAME" x="63.1058" y="90.5124" size="0.8128" layer="25" ratio="15" rot="SR0"/>
 </element>
-<element name="U3" library="TPS56339" package="TSOT23-6_DDC" value="TPS56339" x="72.9864" y="84.5434" smashed="yes" rot="R90">
+<element name="U3" library="TPS56339" package="TSOT23-6_DDC" override_package3d_urn="urn:adsk.eagle:package:16344384/2" override_package_urn="urn:adsk.eagle:footprint:16344385/1" value="TPS56339" x="72.9864" y="84.5434" smashed="yes" rot="R90">
 <attribute name="NAME" x="72.0974" y="86.3986" size="0.8128" layer="25" ratio="15"/>
 <attribute name="VALUE" x="76.1614" y="83.2734" size="1.27" layer="27" rot="R90"/>
 </element>
@@ -5256,12 +5256,12 @@ design rules under a new name.</description>
 <attribute name="SPICEPREFIX" value="R" x="67.9064" y="80.0984" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="VALUE" x="70.4464" y="79.4634" size="1.27" layer="27" rot="R90"/>
 </element>
-<element name="L3" library="NCLV32T" package="IND_NLCV32TR" value="2.2uH" x="56.7304" y="102.2736" smashed="yes" rot="R270">
-<attribute name="MANUFACTURER_PART_NUMBER" value="NLCV32T2R2MPFR" x="56.7304" y="102.2736" size="1.778" layer="27" rot="R270" display="off"/>
+<element name="L3" library="NCLV32T" package="IND_NLCV32TR" override_package3d_urn="urn:adsk.eagle:package:16344361/2" override_package_urn="urn:adsk.eagle:footprint:16344362/1" value="2.2uH" x="56.7304" y="102.2736" smashed="yes" rot="R270">
+<attribute name="MANUFACTURER_PART_NUMBER" value="NLCV32T-2R2M-PFR" x="56.7304" y="102.2736" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="NAME" x="55.9938" y="104.8634" size="0.8128" layer="25" ratio="15" rot="SR0"/>
 <attribute name="VENDOR" value="TDK" x="56.7304" y="102.2736" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
-<element name="U4" library="TPS56339" package="TSOT23-6_DDC" value="TPS56339" x="64.3504" y="99.2256" smashed="yes">
+<element name="U4" library="TPS56339" package="TSOT23-6_DDC" override_package3d_urn="urn:adsk.eagle:package:16344373/3" override_package_urn="urn:adsk.eagle:footprint:16344374/1" value="TPS56339" x="64.3504" y="99.2256" smashed="yes">
 <attribute name="NAME" x="66.1284" y="98.5906" size="0.8128" layer="25" ratio="15"/>
 <attribute name="VALUE" x="63.0804" y="96.0506" size="1.27" layer="27"/>
 </element>
@@ -5376,49 +5376,49 @@ design rules under a new name.</description>
 <attribute name="SPICEPREFIX" value="R" x="117.094" y="87.63" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="VALUE" x="117.729" y="90.17" size="1.27" layer="27" rot="R180"/>
 </element>
-<element name="1V8" library="testpad" library_urn="urn:adsk.eagle:library:385" package="P1-13" package3d_urn="urn:adsk.eagle:package:27946/1" value="TPPAD1-13" x="53.086" y="107.188" smashed="yes">
+<element name="1V8" library="testpad" library_urn="urn:adsk.eagle:library:385" package="P1-13" package3d_urn="urn:adsk.eagle:package:27946/1" override_package3d_urn="urn:adsk.eagle:package:16344267/2" override_package_urn="urn:adsk.eagle:footprint:27902/1" value="TPPAD1-13" x="53.086" y="107.188" smashed="yes">
 <attribute name="NAME" x="54.356" y="107.442" size="0.8128" layer="25" ratio="15"/>
 <attribute name="POPULARITY" value="12" x="53.086" y="107.188" size="1.778" layer="27" display="off"/>
 <attribute name="TP_SIGNAL_NAME" value="" x="53.086" y="107.188" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="53.086" y="107.188" size="0.0254" layer="27"/>
 </element>
-<element name="3V3" library="testpad" library_urn="urn:adsk.eagle:library:385" package="P1-13" package3d_urn="urn:adsk.eagle:package:27946/1" value="TPPAD1-13" x="61.214" y="84.074" smashed="yes">
+<element name="3V3" library="testpad" library_urn="urn:adsk.eagle:library:385" package="P1-13" package3d_urn="urn:adsk.eagle:package:27946/1" override_package3d_urn="urn:adsk.eagle:package:16344263/2" override_package_urn="urn:adsk.eagle:footprint:27902/1" value="TPPAD1-13" x="61.214" y="84.074" smashed="yes">
 <attribute name="NAME" x="56.388" y="83.312" size="0.8128" layer="25" ratio="15"/>
 <attribute name="POPULARITY" value="12" x="61.214" y="84.074" size="1.778" layer="27" display="off"/>
 <attribute name="TP_SIGNAL_NAME" value="" x="61.214" y="84.074" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="61.214" y="84.074" size="0.0254" layer="27"/>
 </element>
-<element name="+5V" library="testpad" library_urn="urn:adsk.eagle:library:385" package="P1-13" package3d_urn="urn:adsk.eagle:package:27946/1" value="TPPAD1-13" x="105.156" y="75.438" smashed="yes">
+<element name="+5V" library="testpad" library_urn="urn:adsk.eagle:library:385" package="P1-13" package3d_urn="urn:adsk.eagle:package:27946/1" override_package3d_urn="urn:adsk.eagle:package:16344245/2" override_package_urn="urn:adsk.eagle:footprint:27902/1" value="TPPAD1-13" x="105.156" y="75.438" smashed="yes">
 <attribute name="NAME" x="104.14" y="72.771" size="0.8128" layer="25" ratio="15"/>
 <attribute name="POPULARITY" value="12" x="105.156" y="75.438" size="1.778" layer="27" display="off"/>
 <attribute name="TP_SIGNAL_NAME" value="" x="105.156" y="75.438" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="105.156" y="75.438" size="0.0254" layer="27"/>
 </element>
-<element name="-5V0" library="testpad" library_urn="urn:adsk.eagle:library:385" package="P1-13" package3d_urn="urn:adsk.eagle:package:27946/1" value="TPPAD1-13" x="108.712" y="75.438" smashed="yes">
+<element name="-5V0" library="testpad" library_urn="urn:adsk.eagle:library:385" package="P1-13" package3d_urn="urn:adsk.eagle:package:27946/1" override_package3d_urn="urn:adsk.eagle:package:16344242/2" override_package_urn="urn:adsk.eagle:footprint:27902/1" value="TPPAD1-13" x="108.712" y="75.438" smashed="yes">
 <attribute name="NAME" x="107.95" y="72.771" size="0.8128" layer="25" ratio="15"/>
 <attribute name="POPULARITY" value="12" x="108.712" y="75.438" size="1.778" layer="27" display="off"/>
 <attribute name="TP_SIGNAL_NAME" value="" x="108.712" y="75.438" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="108.712" y="75.438" size="0.0254" layer="27"/>
 </element>
-<element name="G1" library="testpad" library_urn="urn:adsk.eagle:library:385" package="P1-13" package3d_urn="urn:adsk.eagle:package:27946/1" value="TPPAD1-13" x="53.086" y="103.886" smashed="yes">
+<element name="G1" library="testpad" library_urn="urn:adsk.eagle:library:385" package="P1-13" package3d_urn="urn:adsk.eagle:package:27946/1" override_package3d_urn="urn:adsk.eagle:package:16344265/2" override_package_urn="urn:adsk.eagle:footprint:27902/1" value="TPPAD1-13" x="53.086" y="103.886" smashed="yes">
 <attribute name="NAME" x="52.578" y="101.346" size="0.8128" layer="25" ratio="15"/>
 <attribute name="POPULARITY" value="12" x="53.086" y="103.886" size="1.778" layer="27" display="off"/>
 <attribute name="TP_SIGNAL_NAME" value="" x="53.086" y="103.886" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="53.086" y="103.886" size="0.0254" layer="27"/>
 </element>
-<element name="G2" library="testpad" library_urn="urn:adsk.eagle:library:385" package="P1-13" package3d_urn="urn:adsk.eagle:package:27946/1" value="TPPAD1-13" x="59.69" y="87.63" smashed="yes">
+<element name="G2" library="testpad" library_urn="urn:adsk.eagle:library:385" package="P1-13" package3d_urn="urn:adsk.eagle:package:27946/1" override_package3d_urn="urn:adsk.eagle:package:16344246/2" override_package_urn="urn:adsk.eagle:footprint:27902/1" value="TPPAD1-13" x="59.69" y="87.63" smashed="yes">
 <attribute name="NAME" x="55.88" y="87.122" size="0.8128" layer="25" ratio="15"/>
 <attribute name="POPULARITY" value="12" x="59.69" y="87.63" size="1.778" layer="27" display="off"/>
 <attribute name="TP_SIGNAL_NAME" value="" x="59.69" y="87.63" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="59.69" y="87.63" size="0.0254" layer="27"/>
 </element>
-<element name="G3" library="testpad" library_urn="urn:adsk.eagle:library:385" package="P1-13" package3d_urn="urn:adsk.eagle:package:27946/1" value="TPPAD1-13" x="101.6" y="75.438" smashed="yes">
+<element name="G3" library="testpad" library_urn="urn:adsk.eagle:library:385" package="P1-13" package3d_urn="urn:adsk.eagle:package:27946/1" override_package3d_urn="urn:adsk.eagle:package:16344244/2" override_package_urn="urn:adsk.eagle:footprint:27902/1" value="TPPAD1-13" x="101.6" y="75.438" smashed="yes">
 <attribute name="NAME" x="100.838" y="73.025" size="0.8128" layer="25" ratio="15"/>
 <attribute name="POPULARITY" value="12" x="101.6" y="75.438" size="1.778" layer="27" display="off"/>
 <attribute name="TP_SIGNAL_NAME" value="" x="101.6" y="75.438" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="101.6" y="75.438" size="0.0254" layer="27"/>
 </element>
-<element name="G4" library="testpad" library_urn="urn:adsk.eagle:library:385" package="P1-13" package3d_urn="urn:adsk.eagle:package:27946/1" value="TPPAD1-13" x="112.776" y="75.438" smashed="yes">
+<element name="G4" library="testpad" library_urn="urn:adsk.eagle:library:385" package="P1-13" package3d_urn="urn:adsk.eagle:package:27946/1" override_package3d_urn="urn:adsk.eagle:package:16344240/2" override_package_urn="urn:adsk.eagle:footprint:27902/1" value="TPPAD1-13" x="112.776" y="75.438" smashed="yes">
 <attribute name="NAME" x="112.141" y="72.771" size="0.8128" layer="25" ratio="15"/>
 <attribute name="POPULARITY" value="12" x="112.776" y="75.438" size="1.778" layer="27" display="off"/>
 <attribute name="TP_SIGNAL_NAME" value="" x="112.776" y="75.438" size="1.778" layer="27" display="off"/>
@@ -6375,11 +6375,11 @@ design rules under a new name.</description>
 <attribute name="NAME" x="27.813" y="5.969" size="0.8128" layer="25" ratio="15"/>
 <attribute name="VALUE" x="27.178" y="1.016" size="0.6096" layer="27" font="vector" ratio="20"/>
 </element>
-<element name="D1" library="Diodes" library_urn="urn:adsk.eagle:library:4010432" package="SOD123" package3d_urn="urn:adsk.eagle:package:15156164/1" value="SBR80520LT3G" x="42.418" y="28.448" smashed="yes" rot="R270">
+<element name="D1" library="Diodes" library_urn="urn:adsk.eagle:library:4010432" package="SOD123" package3d_urn="urn:adsk.eagle:package:15156164/1" override_package3d_urn="urn:adsk.eagle:package:16344230/2" override_package_urn="urn:adsk.eagle:footprint:15156163/1" value="SBR80520LT3G" x="42.418" y="28.448" smashed="yes" rot="R270">
 <attribute name="NAME" x="43.577" y="28.256" size="0.8128" layer="25" ratio="15"/>
 <attribute name="VALUE" x="40.443" y="31.353" size="0.82" layer="27" font="vector" ratio="15" rot="R270"/>
 </element>
-<element name="D2" library="Diodes" library_urn="urn:adsk.eagle:library:4010432" package="SOD123" package3d_urn="urn:adsk.eagle:package:15156164/1" value="SBR80520LT3G" x="42.418" y="22.352" smashed="yes" rot="R270">
+<element name="D2" library="Diodes" library_urn="urn:adsk.eagle:library:4010432" package="SOD123" package3d_urn="urn:adsk.eagle:package:15156164/1" override_package3d_urn="urn:adsk.eagle:package:16344221/2" override_package_urn="urn:adsk.eagle:footprint:15156163/1" value="SBR80520LT3G" x="42.418" y="22.352" smashed="yes" rot="R270">
 <attribute name="NAME" x="43.704" y="21.906" size="0.8128" layer="25" ratio="15"/>
 <attribute name="VALUE" x="40.443" y="25.257" size="0.82" layer="27" font="vector" ratio="15" rot="R270"/>
 </element>
@@ -6506,7 +6506,7 @@ design rules under a new name.</description>
 <attribute name="NAME" x="32.893" y="98.298" size="0.8128" layer="25" ratio="15"/>
 <attribute name="VALUE" x="37.592" y="98.044" size="0.6096" layer="27" font="vector" ratio="20" rot="R180"/>
 </element>
-<element name="D4" library="SparkFun-LED" library_urn="urn:adsk.eagle:library:529" package="LED-1206" package3d_urn="urn:adsk.eagle:package:39352/1" value="GREEN" x="129.794" y="73.914" smashed="yes" rot="R90">
+<element name="D4" library="SparkFun-LED" library_urn="urn:adsk.eagle:library:529" package="LED-1206" package3d_urn="urn:adsk.eagle:package:39352/1" override_package3d_urn="urn:adsk.eagle:package:16344235/2" override_package_urn="urn:adsk.eagle:footprint:39304/1" value="GREEN" x="129.794" y="73.914" smashed="yes" rot="R90">
 <attribute name="NAME" x="129.794" y="76.6445" size="0.9398" layer="25" ratio="15" align="bottom-center"/>
 <attribute name="PROD_ID" value="DIO-09911" x="129.794" y="73.914" size="1.6764" layer="27" font="vector" ratio="15" rot="R90" display="off"/>
 <attribute name="VALUE" x="131.6355" y="73.66" size="0.6096" layer="27" font="vector" ratio="20" rot="R270" align="top-center"/>
