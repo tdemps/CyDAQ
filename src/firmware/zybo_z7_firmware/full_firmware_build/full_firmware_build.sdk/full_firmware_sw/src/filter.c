@@ -88,7 +88,7 @@ static filter_t secondBP = {
 };
 //array with pointers to each filter configuration object
 static filter_t *filterConfigs[NUM_FILTERS-1] = {&firstLP, &firstHP, &secondBP, &sixthBP, &sixthHP, &sixthLP};
-
+extern filters_e activeFilter;
 /*
  * Writes pots to get the desired frequency(ies).
  * For BP, freq1 is lower corner(HP) and freq2 is upper corner(LP).
@@ -97,6 +97,9 @@ static filter_t *filterConfigs[NUM_FILTERS-1] = {&firstLP, &firstHP, &secondBP, 
  */
 u8 tuneFilter(filters_e filterSelect, FILTER_FREQ_TYPE freq1, FILTER_FREQ_TYPE freq2){
 
+	if(filterSelect == 50){
+		filterSelect = activeFilter;
+	}
 	if(freq1 > FILTER_FREQ_MAX || freq2 > FILTER_FREQ_MAX){
 		if(DEBUG)
 			xil_printf("Invalid frequency values given\n");

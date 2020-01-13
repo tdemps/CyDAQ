@@ -25,16 +25,18 @@ void filterTest();
 void initButtons();
 u8 getButtons();
 u8 getButtonChangeBlocking();
+
 bool samplingEnabled;
+filters_e activeFilter = FILTER_PASSTHROUGH;
 int main()
 {
 	//initialization functions for all libraries
 	init_platform();
     commInit();
-
     muxInit();
     xadcInit();
     init_x9258_i2c();
+
     if(DEBUG){
     	xil_printf("\n**********CyDAQ Test Program***********\n");
     	u8 btns = 0;
@@ -70,8 +72,8 @@ void xadcTest(){
 	xil_printf("if streaming is enabled, type ! to stop program\n");
 	u8 btns = getButtonChangeBlocking();
 	xil_printf("Enter sample rate in samples/second and hit enter\n");
-	u8 buffer[20];
-	u8 numBytes;
+	u8 buffer[10];
+	u8 numBytes = 0;
 	while(1){
 		numBytes += comUartRecv(&buffer[numBytes], 2);
 		if(buffer[numBytes-1] == '\r' || buffer[numBytes-1] == '\n'){

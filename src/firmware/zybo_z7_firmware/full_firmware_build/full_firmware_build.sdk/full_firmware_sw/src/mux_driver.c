@@ -4,7 +4,8 @@
 static XGpio GPIO_MUX;
 //saves state of mux class (if init has been called)
 static u8 initialized = 0;
-
+//global that contains currently selected filter
+extern filters_e activeFilter;
 //static const MUX_SELECT_TYPE inputMuxPins[] = {0x8, 0x4, 0x2}; //Input select lines S0-S3 on JE header.
 //static const MUX_SELECT_TYPE filterMuxPins[] = {0x80, 0x40, 0x20};
 /*
@@ -93,7 +94,7 @@ u8 muxSetActiveFilter( filters_e filterSelect){
 				| (config->enablePin << EN_PIN_OFFSET) | (config->hlToggle << HL_TGLE_PIN_OFFSET));
 	//writes mask to GPIO channel
 	XGpio_DiscreteWrite(&GPIO_MUX, MUX_GPIO_CHANNEL, mask);
-
+	activeFilter = filterSelect;
 	return 0;
 }
 

@@ -23,6 +23,7 @@ volatile int TotalReceivedCount;
 volatile int TotalSentCount;
 volatile bool fifoFlag;
 extern bool samplingEnabled;
+extern filters_e activeFilter;
 int TotalErrorCount;
 
 int commInit(){
@@ -299,7 +300,7 @@ void commRXTask(){
 	bool err = false;
 	while(1){
 
-		while(receiveBuffer[bytesReceived-1] != COMM_STOP_CHAR){
+		while(receiveBuffer[bytesReceived-1] != COMM_STOP_CHAR && bytesReceived < 7){
 			bytesReceived += XUartPs_Recv(&UART1, &receiveBuffer[bytesReceived], 1);
 		}
 		if(DEBUG)
@@ -309,8 +310,8 @@ void commRXTask(){
 			//stop sampling to config device
 		}
 		err = commProcessPacket(receiveBuffer, bytesReceived);
+		receiveBuffer[0] = receiveBuffer[bytesReceived-1] = 0;
 		bytesReceived = 0;
-		receiveBuffer[0] = 0;
 		if(err == true){
 			xil_printf("%cERR%c", COMM_START_CHAR, COMM_STOP_CHAR);
 		}else{
@@ -333,7 +334,7 @@ bool commProcessPacket(u8 *buffer, u16 bufSize){
 	if((char) buffer[0] != COMM_START_CHAR || (char) buffer[bufSize-1] != COMM_STOP_CHAR || bufSize <= 2){
 		err = true;
 	}else{
-		cmd = buffer[1] - '0'; ///needed for testing ======================
+		cmd = buffer[1]; ///needed for testing ======================
 		//payload length is buffer size - start/stop chars - cmd_length
 		u8 payloadLength = bufSize - 2 - COMM_CMD_SIZE;
 		if(DEBUG)
@@ -355,7 +356,7 @@ bool commProcessPacket(u8 *buffer, u16 bufSize){
 					xil_printf("Error, payload length too small\n");
 				err = true;
 			}else{
-				status = muxSetActiveFilter(buffer[2]-'0');
+				status = muxSetActiveFilter(buffer[2]);
 				if(status > 0){
 					err = true;
 				}
@@ -372,24 +373,26 @@ bool commProcessPacket(u8 *buffer, u16 bufSize){
 			}
 			//set active filter
 		}else if(cmd == CORNER_FREQ_SET){
-			u8 filter = ((buffer[COMM_CMD_SIZE+1] << 8) & 0xFF00 ) + buffer[COMM_CMD_SIZE+2];
-			if(payloadLength < 5 || buffer[COMM_CMD_SIZE+2] != ',' || buffer[COMM_CMD_SIZE+6] != ','){
+			//u8 filter = ((buffer[COMM_CMD_SIZE+1] << 8) & 0xFF00 ) + buffer[COMM_CMD_SIZE+2];
+			if(payloadLength < 4){
 				if(DEBUG)
 					xil_printf("err in filter tune function");
 				err = true;
 			}else{
 				//each frequency should be sent as two bytes each
-				FILTER_FREQ_TYPE lower = ((buffer[COMM_CMD_SIZE+4] << 8) & 0xFF00 ) + buffer[COMM_CMD_SIZE+5];
-				FILTER_FREQ_TYPE upper = ((buffer[COMM_CMD_SIZE+7] << 8) & 0xFF00 ) + buffer[COMM_CMD_SIZE+8];
+				FILTER_FREQ_TYPE lower = ((buffer[COMM_CMD_SIZE+1] << 8) & 0xFF00 ) + buffer[COMM_CMD_SIZE+2];
+				FILTER_FREQ_TYPE upper = ((buffer[COMM_CMD_SIZE+3] << 8) & 0xFF00 ) + buffer[COMM_CMD_SIZE+4];
 				//tune filter
-				err = tuneFilter(filter, lower, upper);
+				err = tuneFilter(50, lower, upper);
 			}
 		}else if(cmd == PING){
+			//sets err to false so zybo sents the ACK back to GUI, confirming operation
 			err = false;
 		}else if(cmd == FETCH_SAMPLES){
 			xadcProcessSamples();
 		}else if(cmd == START_SAMPLING){
 			xil_printf("%cACK%c", COMM_START_CHAR, COMM_STOP_CHAR);
+			err = false;
 			if(payloadLength == 1)
 				xadcEnableSampling(1);
 			else
@@ -415,4 +418,7 @@ u32 comUartRecv(u8 *bufferPtr, u32 numBytes)
 	return XUartPs_Recv(&UART1, bufferPtr, numBytes);
 }
 
-
+u32 commUartSend(u8 *bufferPtr, u32 numBytes)
+{
+	return XUartPs_Send(&UART1, bufferPtr, numBytes);
+}

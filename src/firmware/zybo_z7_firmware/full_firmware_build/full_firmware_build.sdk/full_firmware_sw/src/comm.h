@@ -18,6 +18,7 @@
 #include "xil_printf.h"
 #include "xadc.h"
 #include "filter.h"
+#include "shared_definitions.h"
 #ifdef XPAR_INTC_0_DEVICE_ID
 #include "xintc.h"
 #else
@@ -39,7 +40,7 @@
 #define UART_DEVICE_ID XPAR_XUARTPS_0_DEVICE_ID
 #define COMM_BAUD_RATE 921600U
 #define COMM_CMD_SIZE 1		//in bytes
-#define COMM_SAMPLE_RATE_SIZE 8 //in bytes
+#define COMM_SAMPLE_RATE_SIZE 4 //in bytes
 #define COMM_START_CHAR '@'
 #define COMM_STOP_CHAR '!'
 #define TEST_BUFFER_SIZE	50
@@ -61,4 +62,5 @@ XUartPs* commGetUartPtr();
 void commRXTask();
 bool commProcessPacket(u8 *buffer, u16 bufSize);
 u32 comUartRecv(u8 *bufferPtr, u32 numBytes);
+u32 commUartSend(u8 *bufferPtr, u32 numBytes);
 #endif /* SRC_COMM_H_ */

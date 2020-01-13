@@ -197,9 +197,10 @@ void xadcEnableSampling(u8 streamSetting){
 			xil_printf("%d.%d, 0x%x\n", (int)voltage, xadcFractionToInt(voltage), xadcBuffer[xadcSampleCount]);
 		}
 		if(buf[numBytes-1] == '!'){
+			xadcDisableSampling();
 			if(DEBUG)
 				xil_printf("Stopping, # Samples: %d\n", xadcSampleCount);
-			xadcDisableSampling();
+			//since buffer memory isn't initialized, reset first and last char so they aren't saved
 			buf[0] = buf[numBytes-1] = '\0';
 		}else if(xadcSampleCount == RX_BUFFER_SIZE-1){
 				xadcSampleCount = 0;
@@ -313,7 +314,6 @@ void xadcInterruptHandler(void *CallBackRef){
 }
 void xadcProcessSamples(){
 	u32 i = 0;
-
 	if(xadcSampleCount == 0){
 		if(DEBUG)
 			xil_printf("No new samples\n");
@@ -325,11 +325,12 @@ void xadcProcessSamples(){
 
 	while(i < xadcSampleCount){
 
-		voltage = RawToExtVoltage(xadcBuffer[i]);
+		commUartSend(&xadcBuffer[i], 2);
 
-		xil_printf("%d", xadcBuffer[i]);
 		if(DEBUG){
-			xil_printf(" => %d.%d\n", i,(int)voltage, xadcFractionToInt(voltage));
+			xil_printf(" 0x%x", xadcBuffer[i]);
+			voltage = RawToExtVoltage(xadcBuffer[i]);
+			xil_printf(" => %d.%d V\n", (int)voltage, xadcFractionToInt(voltage));
 		}
 		i++;
 	}
