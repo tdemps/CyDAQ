@@ -1,12 +1,13 @@
 import time
-from enum import IntEnum, Enum
 import threading
+import master_enum
 import serial
+import struct
 import serial.tools.list_ports
-import codecs
+from tkinter import *
 
 
-# from mdl_firmware import mdl_fw_vals
+
 
 """
        This class defines a table of commands that are sent to the ZYBO specifying the settings for
@@ -39,85 +40,11 @@ raw data will come in 2 bytes in hexidecimal
 """
 
 
-class sig_serial(Enum):
-    """
-    This class defines a table of commands that are sent between the firmware
-    and the front-end.
-
-    @author: sdmay18-31
-
-
-
-    """
-    END_BYTE = "!"       # decimal for '!'
-    START_BYTE = "@"    # decimal for '@'
-
-
-class parameter_options(IntEnum):
-    """
-           This class defines a table of commands that are sent to the ZYBO specifying the settings for
-           the Zybo
-
-          """
-    input_select = 0
-    sample_rate = 1
-    filter = 2
-    corner_freq = 3
-    ping = 7
-    START = 8
-    STOP = 9
-
-
-class parameter_options_filter(IntEnum):
-    """
-           This class defines a table of commands that are sent to the ZYBO specifying the settings for
-           the Zybo
-
-          """
-    LP1 = 0
-    HP1 = 1
-    BP2 = 2
-    BP6 = 3
-    HP6 = 4
-    LP6 = 5
-    NOTCH = 6
-    NO_FILTER = 7
-
-
-class parameter_options_input(IntEnum):
-    """
-           This class defines a table of commands that are sent to the ZYBO specifying the settings for
-           the Zybo
-
-          """
-
-    audio_in = 0
-    analog_in = 1
-    volt_1 = 2
-    volt_3 = 3
-    volt_5 = 4
-    digital_i2c = 5
-    digital_spi_bus = 6
-    digital_uart = 7
-
-
-class parameter_options_output(IntEnum):
-    """
-           This class defines a table of commands that are sent to the ZYBO specifying the settings for
-           the Zybo
-
-          """
-
-    xadc = 0
-    digital = 1
-
-
 class ctrl_comm:
     """
        This class creates an abstraction for a connection to a device over
        a Serial connection.
 
-       @author: sdmay18-31
        """
 
     def __init__(self):
@@ -238,24 +165,24 @@ class ctrl_comm:
 
         if self.__s_comm.isOpen() is True:
             while True:
-                if self.read_byte() == sig_serial.START_BYTE.value:
+                if self.read_byte() == master_enum.sig_serial.START_BYTE.value:
                     buffer = ""
                     byte_value = ""
                     if len(buffer) < 6:
-                        while byte_value != sig_serial.END_BYTE.value:
+                        while byte_value != master_enum.sig_serial.END_BYTE.value:
                             byte_value = self.read_byte()
-                            if byte_value != sig_serial.END_BYTE.value:
+                            if byte_value != master_enum.sig_serial.END_BYTE.value:
                                 buffer += byte_value
 
                     if len(buffer) != 3:
                         # self.__throw_exception('SerialReadTimeout')
                         return False
                     # buffer = buffer.decode('ascii')
-                    if buffer == "ack":
+                    if buffer == "ACK":
                         print("Data Received")
                         return True
                     else:
-                        self.__throw_exception('ack was not received')
+                        # self.__throw_exception('ack was not received')
                         print("'ack' was not received")
                         return False
                 else:
@@ -326,31 +253,41 @@ class ctrl_comm:
 
         """
 
-        if self.open(port_select):
-            cnt = 0
-            cursor = 0
-            while cnt < 3 and cursor < 5:
-                if cursor == 0:
-                    self.send_input(port_select, input_set)
-                elif cursor == 1:
-                    self.send_sample_rate(port_select, sample_rate)
-                elif cursor == 2:
-                    self.send_filter(port_select, filter_select)
-                elif cursor == 3:
-                    self.send_corner_freq(port_select, corner_freq_upper, corner_freq_lower)
-                elif cursor == 4:
-                    self.send_start(port_select)
-
+        self.open(port_select)
+        cnt = 0
+        cursor = 0
+        wait = 0
+        while cnt < 3 and cursor < 5:
+            if cursor == 0 & wait == 0:
+                self.send_input(port_select, input_set)
+                wait = 1
+            elif cursor == 1 & wait == 0:
+                self.send_sample_rate(port_select, sample_rate)
+                wait = 1
+            elif cursor == 2 & wait == 0:
+                self.send_filter(port_select, filter_select)
+                wait = 1
+            elif cursor == 3 & wait == 0:
+                self.send_corner_freq(port_select, corner_freq_upper, corner_freq_lower)
+                wait = 1
+            elif cursor == 4 & wait == 0:
+                self.send_start(port_select)
+                wait = 1
+            if wait == 1:
                 if self.recieve_acknowlege_zybo(port_select):
+                    print("Ack received")
                     cursor += 1
                     cnt = 0
+                    wait = 0
                 else:
-                    cnt += 1
-            if cnt < 3:
-                print("Commands Sent/Received")
+                    pass
             else:
-                print("Commands Not Sent/Received")
-            self.close()
+                cnt += 1
+        if cnt < 3:
+            print("Commands Sent/Received")
+        else:
+            print("Commands Not Sent/Received")
+        self.close()
 
     def send_stop_cmd(self, port_select):
 
@@ -374,11 +311,12 @@ class ctrl_comm:
                 """
         self.open(port_select)
         if self.__s_comm.isOpen() is True:
-            self.__s_comm.write(sig_serial.START_BYTE.value.encode())
-            self.write(parameter_options.input_select.value)
-            self.write(input_set)
+            self.__s_comm.write(master_enum.sig_serial.START_BYTE.value.encode())
+            self.write(struct.pack('!B', master_enum.parameter_options.input_select.value))
+            #self.write(str(input_set).encode('ascii'))
+            self.write(struct.pack('!B', input_set))
             print("Input set Enum= " + str(input_set))
-            self.__s_comm.write(sig_serial.END_BYTE.value.encode())
+            self.__s_comm.write(master_enum.sig_serial.END_BYTE.value.encode())
 
         else:
             self.__throw_exception('Sending Input Failed')
@@ -399,11 +337,10 @@ class ctrl_comm:
 
         self.open(port_select)
         if self.__s_comm.isOpen() is True:
-            self.__s_comm.write(sig_serial.START_BYTE.value.encode())
-            self.write(parameter_options.sample_rate.value)
-            self.write(sample_rate_hex)
+            self.__s_comm.write(master_enum.sig_serial.START_BYTE.value.encode())
+            self.write(struct.pack('!BB', master_enum.parameter_options.sample_rate.value, sample_rate_hex))
             print("Sample Rate = " + sample_rate)
-            self.__s_comm.write(sig_serial.END_BYTE.value.encode())
+            self.__s_comm.write(master_enum.sig_serial.END_BYTE.value.encode())
 
         else:
             self.__throw_exception('Sending Input Failed')
@@ -422,17 +359,16 @@ class ctrl_comm:
                 """
         self.open(port_select)
         if self.__s_comm.isOpen() is True:
-            self.__s_comm.write(sig_serial.START_BYTE.value.encode())
-            self.write(parameter_options.filter.value)
-            self.write(filter_select)
+            self.__s_comm.write(master_enum.sig_serial.START_BYTE.value.encode())
+            self.write(struct.pack('!BB', master_enum.parameter_options_filter.value, filter_select))
             print("Filter Enum = " + filter_select)
-            self.__s_comm.write(sig_serial.END_BYTE.value.encode())
+            self.__s_comm.write(master_enum.sig_serial.END_BYTE.value.encode())
 
         else:
             self.__throw_exception('Sending filter failed')
             return False
 
-    def send_corner_freq(self, port_select , u_corner_freq, l_corner_freq):
+    def send_corner_freq(self, port_select, u_corner_freq, l_corner_freq):
         """
                 Sends the Input.
 
@@ -452,11 +388,10 @@ class ctrl_comm:
 
         self.open(port_select)
         if self.__s_comm.isOpen() is True:
-            self.__s_comm.write(sig_serial.START_BYTE.value.encode())
-            self.write(parameter_options.corner_freq.value)
-            self.write(u_hex + l_hex)
+            self.__s_comm.write(master_enum.sig_serial.START_BYTE.value.encode())
+            self.write(struct.pack('!BB', master_enum.parameter_options.corner_freq.value, u_hex + l_hex))
             print("Corner Frequency = " + u_corner_freq + " / " + l_corner_freq)
-            self.__s_comm.write(sig_serial.END_BYTE.value.encode())
+            self.__s_comm.write(master_enum.sig_serial.END_BYTE.value.encode())
 
         else:
             self.__throw_exception('Sending corner freq failed')
@@ -474,9 +409,9 @@ class ctrl_comm:
                 """
         self.open(port_select)
         if self.__s_comm.isOpen() is True:
-            self.__s_comm.write(sig_serial.START_BYTE.value.encode())
-            self.write(parameter_options.START.value)
-            self.__s_comm.write(sig_serial.END_BYTE.value.encode())
+            self.__s_comm.write(master_enum.sig_serial.START_BYTE.value.encode())
+            self.write(struct.pack('!B', master_enum.parameter_options.START.value))
+            self.__s_comm.write(master_enum.sig_serial.END_BYTE.value.encode())
 
         else:
             self.__throw_exception('Sending start failed')
@@ -495,9 +430,9 @@ class ctrl_comm:
                 """
         self.open(port_select)
         if self.__s_comm.isOpen() is True:
-            self.__s_comm.write(sig_serial.START_BYTE.value.encode())
-            self.write(parameter_options.STOP.value)
-            self.__s_comm.write(sig_serial.END_BYTE.value.encode())
+            self.__s_comm.write(master_enum.sig_serial.START_BYTE.value.encode())
+            self.write(struct.pack('!B', master_enum.parameter_options.STOP.value))
+            self.__s_comm.write(master_enum.sig_serial.END_BYTE.value.encode())
 
         else:
             self.__throw_exception('Sending stop failed')
@@ -516,21 +451,23 @@ class ctrl_comm:
                 """
         self.open(port_select)
         if self.__s_comm.isOpen() is True:
-            self.write(parameter_options.ping.value)
+            self.write(master_enum.sig_serial.START_BYTE.value.encode('ascii'))
+            self.write(struct.pack('!B', master_enum.parameter_options.ping.value))
+            self.write(master_enum.sig_serial.END_BYTE.value.encode('ascii'))
             while True:
                 if self.recieve_acknowlege_zybo(port_select):
-                    if self.read_byte() == sig_serial.START_BYTE.value:
+                    if self.read_byte() == master_enum.sig_serial.START_BYTE.value:
                         buffer = ""
                         byte_value = ""
                         if len(buffer) < 20:
-                            while byte_value != sig_serial.END_BYTE.value:
+                            while byte_value != master_enum.sig_serial.END_BYTE.value:
                                 byte_value = self.read_byte()
-                                if byte_value != sig_serial.END_BYTE.value:
+                                if byte_value != master_enum.sig_serial.END_BYTE.value:
                                     buffer += byte_value
                         else:
                             print("Acknowledge was incorrect")
                             return False
-                        if buffer == 'Ack':
+                        if buffer == 'ACK':
                             print(buffer)
                             return True
                         else:
@@ -539,7 +476,7 @@ class ctrl_comm:
                     else:
                         pass
                 else:
-                    return False
+                    pass
         else:
             return False
 
@@ -554,5 +491,23 @@ class ctrl_comm:
     def hex_to_dec(self, hex_number):
         dec_num = str(int(hex_number, 16))
         return dec_num
+
+
+class not_connected:
+    def __init__(self):
+        root = Tk()
+        root.geometry("700x300")
+        rootTitle = Label(root, text="Zybo Connection", height=2, width=len("Zybo Connection"), font=44)
+        rootTitle.pack()
+        global not_connected_label
+        not_connected_labelName = "The Zybo is not connected or turned on."
+        not_connected_label = Label(root, text=not_connected_labelName, height=1, width=len(not_connected_labelName),
+                                    relief=RAISED, font=60)
+        not_connected_label.place(relx=.5, rely=.5, anchor=CENTER)
+        root.mainloop()
+
+    def quit(self):
+        exit()
+
 
 

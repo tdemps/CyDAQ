@@ -1,8 +1,10 @@
-from serial_comm import parameter_options, parameter_options_output, parameter_options_filter, \
-    parameter_options_input, ctrl_comm, sig_serial
+from serial_comm import ctrl_comm
+from master_enum import parameter_options_output, parameter_options_filter, parameter_options_input, parameter_options, sig_serial
 import numpy as np
 from tkinter import filedialog
 import csv
+import subprocess
+
 
 serial_obj = ctrl_comm()
 port = ""
@@ -82,4 +84,9 @@ class raw_data:
             w.writerows(data_array)
         f.close
 
+
 class open_instruction:
+    def open_pdf(self):
+        chrome_address = r'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
+        file_path = r'U:\ETG\EE_224\src\font_end_2.0\This is a test.pdf'
+        subprocess.Popen([chrome_address, file_path], shell=True)
