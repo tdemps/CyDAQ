@@ -1,0 +1,13 @@
+Part	Manufacturer	Part Number	Vendor P/N	Quantity	 Price (USD) 	Footprint (mm²)	Description	NRND
+Css	AVX	12063A822JAT2A	478-1503-1-ND	1	 $0.34 	10.92	Cap: 8.2 nF  Total Derated Cap: 8.2 nF  VDC: 25 V  ESR: 0 ?  Package: 1206  	
+Ccomp2	Samsung Electro-Mechanics	CL21C100JBANNNC	1276-1109-1-ND	1	 $0.02 	6.75	Cap: 10 pF  Total Derated Cap: 10 pF  VDC: 50 V  ESR: 0 ?  Package: 0805  	
+U1	Texas Instruments	TPS54531DDAR	296-40801-1-ND	1	 $1.22 	55.2		
+Rfbb	Vishay-Dale	CRCW08051K96FKEA	541-1.96KCCT-ND	1	 $0.03 	6.75	Resistance: 1.96 k?  Tolerance: 1.0%  Power: 125 mW  	
+Cboot	Yageo	CC0805KRX7R7BB104	311-1142-1-ND	1	 $0.04 	6.75	Cap: 100 nF  Total Derated Cap: 100 nF  VDC: 16 V  ESR: 1 m?  Package: 0805  	
+Cin	TDK	C3225X7R1H106M250AC	445-14933-1-ND	2	 $0.69 	14.7	Cap: 10 µF  Total Derated Cap: 12 µF  VDC: 50 V  ESR: 1 m?  Package: 1210  	
+L1	Vishay-Dale	IHLP3232DZER4R7M11	541-1353-1-ND	1	 $1.30 	111.83	L: 4.7 µH  DCR: 22.6 m?  IDC: 8 A  	
+Rfbt	Vishay-Dale	CRCW080510K2FKEA	541-10.2KCCT-ND	1	 $0.03 	6.75	Resistance: 10.2 k?  Tolerance: 1.0%  Power: 125 mW  	
+Cout	MuRata	GRM32ER61C476KE15L	490-6539-1-ND	3	 $0.71 	14.7	Cap: 47 µF  Total Derated Cap: 95 µF  VDC: 16 V  ESR: 3.04 m?  Package: 1210  	X
+D1	Vishay-Semiconductor	50WQ04FNPBF		1		101.71	Type: Schottky  VRRM: 40 V  Io: 5.5 A  	
+Ccomp	Samsung Electro-Mechanics	CL21C122JBFNNNE	1276-2986-1-ND	1	 $0.04 	6.75	Cap: 1.2 nF  Total Derated Cap: 1.2 nF  VDC: 50 V  ESR: 0 ?  Package: 0805  	
+Rcomp	Vishay-Dale	CRCW080520K0FKEA	541-4133-1-ND	1	 $0.02 	6.75	Resistance: 20 k?  Tolerance: 1.0%  Power: 125 mW  	
