@@ -22,7 +22,8 @@ class cmd:
 
         if ctrl_comm_obj.isOpen() is True:
             while True:
-                if ctrl_comm_obj.get_port() == sig_serial.START_BYTE.value:
+                cnt = 0
+                if ctrl_comm_obj.read_byte() == sig_serial.START_BYTE.value:
                     buffer = ""
                     byte_value = ""
                     if len(buffer) < 6:
@@ -33,6 +34,7 @@ class cmd:
 
                     if len(buffer) != 3:
                         # self.__throw_exception('SerialReadTimeout')
+                        print("read cycle count: " + str(cnt))
                         return False
                     # buffer = buffer.decode('ascii')
                     if buffer == "ACK":
@@ -53,7 +55,7 @@ class cmd:
 
         Args:
         port_select = port that is selected i.e. the zybo port
-         command = commands being sent
+
 
         Returns: None
 
@@ -64,19 +66,19 @@ class cmd:
         cursor = 0
         wait = 0
         while cnt < 3 and cursor < 5:
-            if cursor == 0 & wait == 0:
+            if cursor == 0 and wait == 0:
                 self.send_input(port_select, input_set)
                 wait = 1
-            elif cursor == 1 & wait == 0:
+            elif cursor == 1 and wait == 0:
                 self.send_sample_rate(port_select, sample_rate)
                 wait = 1
-            elif cursor == 2 & wait == 0:
+            elif cursor == 2 and wait == 0:
                 self.send_filter(port_select, filter_select)
                 wait = 1
-            elif cursor == 3 & wait == 0:
+            elif cursor == 3 and wait == 0:
                 self.send_corner_freq(port_select, corner_freq_upper, corner_freq_lower)
                 wait = 1
-            elif cursor == 4 & wait == 0:
+            elif cursor == 4 and wait == 0:
                 self.send_start(port_select)
                 wait = 1
             if wait == 1:
@@ -119,9 +121,8 @@ class cmd:
         if ctrl_comm_obj.isOpen() is True:
             ctrl_comm_obj.write(sig_serial.START_BYTE.value.encode())
             ctrl_comm_obj.write(struct.pack('!B', parameter_options.input_select.value))
-            #self.write(str(input_set).encode('ascii'))
-            ctrl_comm.write(struct.pack('!B', input_set))
-            print("Input set Enum= " + str(input_set))
+            ctrl_comm_obj.write(struct.pack('!B', input_set))
+            print("Input set Enum = " + str(input_set))
             ctrl_comm_obj.write(sig_serial.END_BYTE.value.encode())
 
         else:
@@ -138,13 +139,13 @@ class cmd:
                 Returns:
                     True
                 """
-        sample_rate_bin = self.decimal_to_binary(sample_rate)
+        # sample_rate_bin = self.decimal_to_binary(sample_rate)
         # sample_rate_hex = self.binary_to_hex(sample_rate_bin)
 
         ctrl_comm_obj.open(port_select)
         if ctrl_comm_obj.isOpen() is True:
             ctrl_comm_obj.write(sig_serial.START_BYTE.value.encode())
-            ctrl_comm_obj.write(struct.pack('!Bi', parameter_options.sample_rate.value, sample_rate_bin))
+            ctrl_comm_obj.write(struct.pack('!Bi', parameter_options.sample_rate.value, int(sample_rate)))
             print("Sample Rate = " + sample_rate)
             ctrl_comm_obj.write(sig_serial.END_BYTE.value.encode())
 
@@ -166,8 +167,8 @@ class cmd:
         ctrl_comm_obj.open(port_select)
         if ctrl_comm_obj.isOpen() is True:
             ctrl_comm_obj.write(sig_serial.START_BYTE.value.encode())
-            ctrl_comm_obj.write(struct.pack('!BB', parameter_options_filter.value, filter_select))
-            print("Filter Enum = " + filter_select)
+            ctrl_comm_obj.write(struct.pack('!BB', parameter_options.filter.value, filter_select))
+            print("Filter Enum = " + str(filter_select))
             ctrl_comm_obj.write(sig_serial.END_BYTE.value.encode())
 
         else:
@@ -195,8 +196,8 @@ class cmd:
         ctrl_comm_obj.open(port_select)
         if ctrl_comm_obj.isOpen() is True:
             ctrl_comm_obj.write(sig_serial.START_BYTE.value.encode())
-            ctrl_comm_obj.write(struct.pack('!BHH', parameter_options.corner_freq.value, u_bin, l_bin))
-            print("Corner Frequency = " + u_corner_freq + " / " + l_corner_freq)
+            ctrl_comm_obj.write(struct.pack('!BHH', parameter_options.corner_freq.value, u_corner_freq, l_corner_freq))
+            print("Corner Frequency = " + str(u_corner_freq) + " / " + str(l_corner_freq))
             ctrl_comm_obj.write(sig_serial.END_BYTE.value.encode())
 
         else:
@@ -293,7 +294,7 @@ class cmd:
             return False
 
     def decimal_to_binary(self, number):
-        bin_num = bin(number)
+        bin_num = bin(int(number))
         return bin_num
 
     def binary_to_hex(self, number):

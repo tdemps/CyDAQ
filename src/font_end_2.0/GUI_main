@@ -4,6 +4,7 @@ from tkinter.ttk import Combobox
 from serial_comm import ctrl_comm
 from data_handle import raw_data, open_instruction
 from master_enum import parameter_options_input, parameter_options_filter, parameter_options_output, parameter_options
+from command_comm import cmd
 
 
 ############## Class to Move Between Frames #############
@@ -18,6 +19,7 @@ comm_port = ""
 serial_obj = ctrl_comm()
 raw_adc_data = raw_data()
 pdf = open_instruction()
+cmd_obj = cmd()
 
 
 class CyDAQ_GUI(tk.Tk):
@@ -173,14 +175,16 @@ class CyDAQ_Config(tk.Frame):
         global lowerCornerLabel
         global lowerCornerSelect
         lowerCornerLabel = Label(root, text="Lower Corner", height=1, width=len("Lower Corner"), relief=RAISED)
-        lowerCornerSelect = Scale(root, from_=0, to=255, orient=HORIZONTAL, length=225)
+        lowerCornerSelect = Scale(root, from_=0, to=15000, orient=HORIZONTAL, length=225)
+        lowerCornerSelect.bind("<Leave>", self.changeLowerCorner)
         lowerCornerSelect.place(relx=.25, rely=.55, anchor=CENTER)
         lowerCornerLabel.place(relx=.25, rely=.44, anchor=CENTER)
 
         global upperCornerLabel
         global upperCornerSelect
         upperCornerLabel = Label(root, text="Upper Corner", height=1, width=len("Upper Corner"), relief=RAISED)
-        upperCornerSelect = Scale(root, from_=0, to=255, orient=HORIZONTAL, length=225)
+        upperCornerSelect = Scale(root, from_=15000, to=40000, orient=HORIZONTAL, length=225)
+        lowerCornerSelect.bind("<Leave>", self.changeUpperCorner)
         upperCornerSelect.place(relx=.75, rely=.55, anchor=CENTER)
         upperCornerLabel.place(relx=.75, rely=.44, anchor=CENTER)
 
@@ -265,6 +269,23 @@ class CyDAQ_Config(tk.Frame):
             lowerCornerSelect.place(relx=.25, rely=.55, anchor=CENTER)
             lowerCornerLabel.place(relx=.25, rely=.44, anchor=CENTER)
         self.updateConfig()
+
+    def changeUpperCorner(self, event):
+        check_u_widget = event.widget
+        check_u_int = check_u_widget.get()
+        if upperCorner == check_u_int:
+            pass
+        else:
+            self.updateConfig()
+
+    def changeLowerCorner(self, event):
+        check_l_widget = event.widget
+        check_l_int = check_l_widget.get()
+        if lowerCorner == check_l_int:
+            pass
+        else:
+            self.updateConfig()
+
 
     def outChange(self, event):
         widget = event.widget
@@ -408,14 +429,14 @@ class SamplePage(tk.Frame):
         stopButton.place_forget()
         startButton.place(relx=.5, rely=.5, anchor=CENTER)
         print("Stopping")
-        serial_obj.send_stop_cmd(comm_port)
+        cmd_obj.send_stop_cmd(comm_port)
 
     def createStopButton(self):
         startButton.place_forget()
         stopButton.place(relx=.5, rely=.5, anchor=CENTER)
         print("Starting")
         print("Sampling Rate is: " + self.master.sampleRate)
-        serial_obj.send_parameters(comm_port, self.master.input, self.master.sampleRate, self.master.filter, self.master.upperCorner, self.master.lowerCorner)
+        cmd_obj.send_parameters(comm_port, self.master.input, self.master.sampleRate, self.master.filter, self.master.upperCorner, self.master.lowerCorner)
         # if not raw_adc_data.collect_data(self.master.sampleRate, comm_port):
         #     print("Error occurred getting data")
 
