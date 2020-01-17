@@ -176,6 +176,7 @@ void xadcEnableSampling(u8 streamSetting){
 	u32 numBytes = 0;
 	//holds bytes received over UART
 	u8 buf[50];
+	//time variable used to assign time values to sample
 	//Starts timer to begin sampling
 	XTmrCtr_Start(&TimerCounterInst, TIMER_CNTR_0);
 	//XSysMon_IntrGlobalEnable(SysMonInstPtr);
@@ -191,8 +192,9 @@ void xadcEnableSampling(u8 streamSetting){
 		XTmrCtr_Start(&TimerCounterInst, TIMER_CNTR_0);
 		//stores raw 12bit sample (shifted right 4).
 		xadcBuffer[xadcSampleCount] = (SAMPLE_TYPE) XSysMon_GetAdcData(&SysMonInst, AUX_14_INPUT) >> 4;
-
+		//if streaming is enabled, send the samples back
 		if(streamingEnabled){
+			//commUartSend(&xadcBuffer[i], 2);
 			voltage = RawToExtVoltage(xadcBuffer[xadcSampleCount]);
 			xil_printf("%d.%d, 0x%x\n", (int)voltage, xadcFractionToInt(voltage), xadcBuffer[xadcSampleCount]);
 		}
@@ -319,14 +321,18 @@ void xadcProcessSamples(){
 			xil_printf("No new samples\n");
 		return;
 	}
+	sleep(1);
 	if(DEBUG)
 		xil_printf("Beginning sample playback..\n\n");
-	sleep(1);
+	else
+		xil_printf("%c", COMM_START_CHAR);
 
 	while(i < xadcSampleCount){
 
 		commUartSend(&xadcBuffer[i], 2);
-
+		if (i % 10 == 0){
+			usleep(50);
+		}
 		if(DEBUG){
 			xil_printf(" 0x%x", xadcBuffer[i]);
 			voltage = RawToExtVoltage(xadcBuffer[i]);
@@ -334,7 +340,13 @@ void xadcProcessSamples(){
 		}
 		i++;
 	}
+	//commUartSend(&xadcSampleCount+2, 2);
 	xadcSampleCount = 0;
 	if(DEBUG)
 		xil_printf("Finished processing samples\n\n");
+	else
+		//two stop chars to decrease possibly of data byte being misinterpreted as end char
+		xil_printf("%c%c", COMM_STOP_CHAR, COMM_STOP_CHAR);
+
+	return;
 }

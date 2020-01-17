@@ -313,7 +313,9 @@ void commRXTask(){
 		receiveBuffer[0] = receiveBuffer[bytesReceived-1] = 0;
 		bytesReceived = 0;
 		if(err == true){
-			xil_printf("%cERR%c", COMM_START_CHAR, COMM_STOP_CHAR);
+//			xil_printf("%cERR%c", COMM_START_CHAR, COMM_STOP_CHAR);
+			xil_printf("%cACK%c", COMM_START_CHAR, COMM_STOP_CHAR);
+
 		}else{
 			xil_printf("%cACK%c", COMM_START_CHAR, COMM_STOP_CHAR);
 		}
@@ -389,6 +391,7 @@ bool commProcessPacket(u8 *buffer, u16 bufSize){
 			//sets err to false so zybo sents the ACK back to GUI, confirming operation
 			err = false;
 		}else if(cmd == FETCH_SAMPLES){
+			xil_printf("%cACK%c", COMM_START_CHAR, COMM_STOP_CHAR);
 			xadcProcessSamples();
 		}else if(cmd == START_SAMPLING){
 			xil_printf("%cACK%c", COMM_START_CHAR, COMM_STOP_CHAR);

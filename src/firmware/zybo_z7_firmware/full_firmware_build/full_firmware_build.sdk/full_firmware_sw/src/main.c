@@ -28,6 +28,8 @@ u8 getButtonChangeBlocking();
 
 bool samplingEnabled;
 filters_e activeFilter = FILTER_PASSTHROUGH;
+
+
 int main()
 {
 	//initialization functions for all libraries
@@ -37,23 +39,31 @@ int main()
     xadcInit();
     init_x9258_i2c();
 
+    XUartPs* ptr = commGetUartPtr();
+    u8 numBytes = 0;
+    u8 buf[5];
+
     if(DEBUG){
     	xil_printf("\n**********CyDAQ Test Program***********\n");
-    	u8 btns = 0;
 		while(1){
 			xil_printf("Select Test:\n0. XADC\n1. UART Test\n2. Filter Test\n3. Firmware Start\n");
-			btns = getButtonChangeBlocking();
+			numBytes = 0;
+			while(buf[numBytes-1] != '\r' && buf[numBytes-1] != '\n'){
+				numBytes += XUartPs_Recv(ptr, &buf[numBytes], 1);
+			}
 			usleep(300000);
-			switch(btns){
-				case 1: xadcTest(); break;
-				case 2: commTest(); break;
-				case 4: filterTest(); break;
-				case 8:
+			switch(buf[0] - '0'){
+				case 0: xadcTest(); break;
+				case 1: commTest(); break;
+				case 2: filterTest(); break;
+				case 3:
 						xil_printf("Started main firmware process\n");
 						commRXTask();
 						break;
+				default:
+						xil_printf("Invalid input\n");
 			}
-			sleep(2);
+			sleep(1);
 		}
 
     }
@@ -67,20 +77,24 @@ int main()
  * Test for XADC
  */
 void xadcTest(){
-	xil_printf("*****XADC Test*****\nPress BTN1 for data streaming, BTN0 else\n");
+	xil_printf("*****XADC Test*****\nEnter '1' for data streaming, '0' else\n");
 	xil_printf("Note faster sample rates may be affected by real-time streaming\n");
 	xil_printf("if streaming is enabled, type ! to stop program\n");
-	u8 btns = getButtonChangeBlocking();
-	xil_printf("Enter sample rate in samples/second and hit enter\n");
 	u8 buffer[10];
 	u8 numBytes = 0;
+	while(buffer[numBytes-1] != '\r' && buffer[numBytes-1] != '\n'){
+		numBytes += comUartRecv(&buffer[numBytes], 1);
+	}
+	buffer[numBytes-1] = 0;
+	u8 streaming = (buffer[0] == '1') ? 1 : 0;
+	numBytes = 0;
+	xil_printf("Enter sample rate in samples/second and hit enter\n");
 	while(1){
 		numBytes += comUartRecv(&buffer[numBytes], 2);
 		if(buffer[numBytes-1] == '\r' || buffer[numBytes-1] == '\n'){
 			buffer[numBytes-1] = '\0';
 			u32 rate = atoi(buffer);
-			if(rate > 0 && rate < XADC_MAX_SAMPLE_RATE){
-				xadcSetSampleRate(rate);
+			if(xadcSetSampleRate(rate) == 0){
 				break;
 			}else{
 				xil_printf("Error, invalid input, using default (10,000)\n");
@@ -89,8 +103,8 @@ void xadcTest(){
 			}
 		}
 	}
-    xadcEnableSampling(btns-1);
-    if(btns < 2){
+    xadcEnableSampling(streaming);
+    if(streaming == 0){
     	xadcProcessSamples();
     }
     sleep(1);
@@ -101,17 +115,22 @@ void xadcTest(){
  * Test for receiving/transmitting over UART
  */
 void commTest(){
-	if(DEBUG)
-		xil_printf("Comm Test Ready, Press btn0 for enable echo, btns 1-3 otherwise\n");
-	u8 echo = getButtonChangeBlocking();
-	if(DEBUG)
-		xil_printf("Press btns 2 and 3 simultaneously to exit test\n");
-	usleep(300000);
 	u8 buffer[100];
 	u8 buttons = 0;
 	u32 numBytes = 0, i = 0;
-	while( (buttons = getButtons()) != 12){
-		numBytes += comUartRecv(&buffer[numBytes], 8);
+	if(DEBUG)
+		xil_printf("Comm Test Ready, Enter '1' for enable echo, '0' otherwise\n");
+	while(buffer[numBytes-1] != '\r' && buffer[numBytes-1] != '\n'){
+			numBytes += comUartRecv(&buffer[numBytes], 1);
+		}
+	buffer[numBytes-1] = 0;
+	u8 echo = (buffer[0] == '1') ? 1 : 0;
+	if(DEBUG)
+		xil_printf("Type ~ to exit test\n");
+	usleep(300000);
+
+	while( buffer[numBytes-1] != '~'){
+		numBytes += comUartRecv(&buffer[numBytes], 1);
 		if(numBytes > 0 && echo){
 			for(i = 0; i < numBytes; i++){
 				xil_printf("%c", buffer[i]);
@@ -137,12 +156,10 @@ void commTest(){
 }
 
 void filterTest(){
-	xil_printf("*****Filter Test*****\nDefault filter: 1st Order LP, corner=10k\n");
-	xil_printf("Use btns to select filters (follows enum in shared_defs.h)\nBtn 3 increments corners\n");
-	xil_printf("Input is set to analog\n");
-	xil_printf("Press btns 2 and 3 simultaneously to exit test\n");
+	xil_printf("**********Filter Test**********\nDefaults: Filter=1st Order LP, Corners=10k,20k, Input=Analog\n");
+	xil_printf("Type 'I#' or 'F#' + [Enter]to select input/filter (# should follow enums in shared_definitions.h)\n'U' or 'D' + [Enter] to increase/decrease corners.\n");
+	xil_printf("Put # after D or U to add multipler to freq change (1000*#).\'E[Enter]' to exit test\n\n");
     FILTER_FREQ_TYPE highpass = 10000, lowpass = 20000;	  //1550hz -> 10k ohm, 15000hz -> 1k ohm
-	XUartPs* ptr = commGetUartPtr();
 	u8 selectedFilter = FILTER_1ST_ORDER_LP, buttons = 0, numBytes = 0, status = 0;
 	u8 buf[20];
 	muxSetActiveFilter(selectedFilter);	//enums defined in shared_definitions.h for filters and inputs
@@ -150,29 +167,50 @@ void filterTest(){
 	status = tuneFilter(selectedFilter, highpass, lowpass);
 
 	 while((buttons = getButtons()) != 12){	//hit buttons 3 and 4 together to end test
-			numBytes += XUartPs_Recv(ptr, &buf[numBytes], 1);
-			if(buf[numBytes-1] == '\r'){
+			numBytes += comUartRecv(&buf[numBytes], 4);
+			if(buf[numBytes-1] == '\r' || buf[numBytes-1] == '\n'){
 				buf[numBytes-1] = '\0';
-				printf("%s\n", buf);
-				numBytes = 0;
-			}
-			if(buttons > 0 && buttons < NUM_FILTERS){
-				selectedFilter = buttons-1;
-				xil_printf("Changing filter to %d\n", selectedFilter);
-				muxSetActiveFilter(selectedFilter);
-				highpass = 10000;
-				lowpass = 20000;
-				tuneFilter(selectedFilter, highpass, lowpass);
-			}else if(buttons == 0x8){
-				highpass += 1000;
-				lowpass += 1000;
-				status = tuneFilter(selectedFilter, highpass, lowpass);
-				if(status == 1){
+				xil_printf("Input: %s => ", buf);
+				status = 2;
+				if( (buf[0] == 'I' || buf[0] == 'i' ) && numBytes > 2){
+					status = muxSetInputPins(buf[1] - '0');
+				}else if(buf[0] == 'E' || buf[0] == 'e'){
+					break;
+				}else if(buf[0] == 'U' || buf[0] == 'u'){
+					u8 multiplier = (numBytes > 2) ? buf[1]-'0' : 0;
+					highpass += 1000 * multiplier;
+					lowpass += 1000 * multiplier;
+					status = tuneFilter(selectedFilter, highpass, lowpass);
+					if(status == 0){
+						xil_printf("Increasing corners to: %d, %d\n", highpass, lowpass);
+					}else{
+						xil_printf("Reverting corners to 10k, 20k\n");
+						highpass = 10000;
+						lowpass = 20000;
+					}
+				}else if(buf[0] == 'D' || buf[0] == 'd'){
+					u8 multiplier = (numBytes > 2) ? buf[1]-'0' : 0;
+					highpass -= 1000 * multiplier;
+					lowpass -= 1000 * multiplier;
+					xil_printf("Increasing corners to: %d, %d\n", highpass, lowpass);
+					status = tuneFilter(selectedFilter, highpass, lowpass);
+					if(status != 0){
+						xil_printf("Reverting corners to default\n");
+						highpass = 10000;
+						lowpass = 20000;
+					}
+				}else if(( buf[0] == 'F' || buf[0] == 'f') && numBytes > 2){
+					xil_printf("Changing filter to %d,reverting corners to default\n", selectedFilter);
+					if(muxSetActiveFilter(buf[1]-'0') == 0){
+						selectedFilter = buf[1]-1;
+					}
 					highpass = 10000;
 					lowpass = 20000;
+					status = tuneFilter(selectedFilter, highpass, lowpass);
 				}else{
-					xil_printf("Increasing corners to: %d, %d\n", highpass, lowpass);
+					xil_printf("Invalid Input\n");
 				}
+				numBytes = 0;
 			}
 			usleep(500000);
 	}

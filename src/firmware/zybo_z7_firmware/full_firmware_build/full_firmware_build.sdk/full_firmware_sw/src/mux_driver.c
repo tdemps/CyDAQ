@@ -109,6 +109,8 @@ u8 muxSetInputPins( inputs_e inputSelect){
 		if(DEBUG)
 			xil_printf("input requested %d not in valid range\n", inputSelect);
 		return MUX_SET_FAILED;
+	}else if(DEBUG){
+		xil_printf("Changing input to: %d\n", inputSelect);
 	}
 	//gets mux configuration from input array using input number
 	mux_config_data_t *config = &inputConfigs[inputSelect];

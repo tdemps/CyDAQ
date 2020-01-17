@@ -147,6 +147,8 @@ u8 tuneFilter(filters_e filterSelect, FILTER_FREQ_TYPE freq1, FILTER_FREQ_TYPE f
 	if(err == 0){
 	  currentFilter->currentFreq[0] = freq1;
 	  currentFilter->currentFreq[1] = freq2;
+	}else if(DEBUG){
+		xil_printf("Error tuning filter\n");
 	}
 	return err;
 }
