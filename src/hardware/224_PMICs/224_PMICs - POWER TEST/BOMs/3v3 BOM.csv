@@ -1,0 +1,10 @@
+Part	Manufacturer	Part Number	Vendor P/N	Quantity	 Price (USD) 	Footprint (mm²)	Description
+L1	TDK	LTF5022T-4R7N2R0-LC	445-6196-1-ND	1	 $0.81 	51.12	L: 4.7 µH  DCR: 81 m?  IDC: 2 A  
+U1	Texas Instruments	TPS56339DDCR	296-53568-1-ND	1	 $0.97 	10.47	
+Rfbt	Vishay-Dale	CRCW080530K9FKEA	541-30.9KCCT-ND	1	 $0.07 	6.75	Resistance: 30.9 k?  Tolerance: 1.0%  Power: 125 mW  
+Rfbb	Vishay-Dale	CRCW080510K0FKEA	541-10.0KCCT-ND	1	 $0.03 	6.75	Resistance: 10 k?  Tolerance: 1.0%  Power: 125 mW  
+Cinx	Kemet	C0805C104M5RACTU	399-1169-1-ND	1	 $0.03 	6.75	Cap: 100 nF  Total Derated Cap: 100 nF  VDC: 50 V  ESR: 64 m?  Package: 0805  
+Cout	TDK	C2012X7S1A226M125AC	445-14560-1-ND	2	 $0.62 	6.75	Cap: 22 µF  Total Derated Cap: 27 µF  VDC: 10 V  ESR: 1 m?  Package: 0805  
+Cbst	Kemet	C0805C104M5RACTU	399-1169-1-ND	1	 $0.03 	6.75	Cap: 100 nF  Total Derated Cap: 100 nF  VDC: 50 V  ESR: 64 m?  Package: 0805  
+Rbst	Susumu Co Ltd	RR1220Q-300-D	RR12Q30DCT-ND	1	 $0.04 	6.75	Resistance: 30 ?  Tolerance: 0.5%  Power: 100 mW  
+Cin	TDK	C2012X5R1V106K085AC	445-14417-1-ND	2	 $0.35 	6.75	Cap: 10 µF  Total Derated Cap: 1.4 µF  VDC: 35 V  ESR: 2.82 m?  Package: 0805  
