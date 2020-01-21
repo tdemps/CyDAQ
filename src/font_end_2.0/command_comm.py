@@ -98,14 +98,35 @@ class cmd:
         ctrl_comm_obj.close()
 
     def send_stop_cmd(self, port_select):
-
+        cursor = 0
+        wait = 0
         ctrl_comm_obj.open(port_select)
-        while True:
-            self.send_stop(port_select)
-            if self.recieve_acknowlege_zybo(port_select):
-                break
+        while cursor < 2:
+            if cursor == 0:
+                self.send_stop(port_select)
+                wait = 1
+            elif cursor == 1:
+                self.send_fetch(port_select)
+                wait = 1
+            if wait == 1:
+                if self.recieve_acknowlege_zybo(port_select):
+                    print("Ack received")
+                    cursor += 1
+                    wait = 0
+                else:
+                    pass
         ctrl_comm_obj.close()
 
+    def send_fetch(self, port_select):
+        ctrl_comm_obj.open(port_select)
+        if ctrl_comm_obj.isOpen() is True:
+            ctrl_comm_obj.write(sig_serial.START_BYTE.value.encode())
+            ctrl_comm_obj.write(struct.pack('!B', parameter_options.fetch_samples.value))
+            ctrl_comm_obj.write(sig_serial.END_BYTE.value.encode())
+
+        else:
+            self.__throw_exception('Sending fetch failed')
+            return False
     def send_input(self, port_select, input_set):
         """
                 Sends the Input.
@@ -139,8 +160,6 @@ class cmd:
                 Returns:
                     True
                 """
-        # sample_rate_bin = self.decimal_to_binary(sample_rate)
-        # sample_rate_hex = self.binary_to_hex(sample_rate_bin)
 
         ctrl_comm_obj.open(port_select)
         if ctrl_comm_obj.isOpen() is True:
@@ -188,15 +207,11 @@ class cmd:
                 Returns:
                     True
                 """
-        u_bin = self.decimal_to_binary(u_corner_freq)
-        # u_hex = self.binary_to_hex(u_bin)
-        l_bin = self.decimal_to_binary(l_corner_freq)
-        # l_hex = self.binary_to_hex(l_bin)
 
         ctrl_comm_obj.open(port_select)
         if ctrl_comm_obj.isOpen() is True:
             ctrl_comm_obj.write(sig_serial.START_BYTE.value.encode())
-            ctrl_comm_obj.write(struct.pack('!BHH', parameter_options.corner_freq.value, u_corner_freq, l_corner_freq))
+            ctrl_comm_obj.write(struct.pack('!BHH', parameter_options.corner_freq.value,  l_corner_freq, u_corner_freq))
             print("Corner Frequency = " + str(u_corner_freq) + " / " + str(l_corner_freq))
             ctrl_comm_obj.write(sig_serial.END_BYTE.value.encode())
 
@@ -240,6 +255,7 @@ class cmd:
             ctrl_comm_obj.write(sig_serial.START_BYTE.value.encode())
             ctrl_comm_obj.write(struct.pack('!B', parameter_options.STOP.value))
             ctrl_comm_obj.write(sig_serial.END_BYTE.value.encode())
+
 
         else:
             self.__throw_exception('Sending stop failed')

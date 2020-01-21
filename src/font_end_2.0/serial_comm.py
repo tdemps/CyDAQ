@@ -30,7 +30,7 @@ class ctrl_comm:
         self.__s_comm.rtscts = False
         self.__s_comm.dsrdtr = False
         self.__s_comm.parity = serial.PARITY_NONE
-        self.__s_comm.timeout = 2
+        self.__s_comm.timeout = 1
         self.__order = "little"
 
     def close(self):
@@ -164,7 +164,26 @@ class ctrl_comm:
             return int.from_bytes(buffer, byteorder=self.__order, signed=False)
         else:
             return False
+    def read_uint16(self):
+        """
+        Read a uint16 from the serial device
 
+        Args:
+            None
+
+        Returns:
+            A uint16 from the serial device. False if the device is not open
+        """
+
+        if self.__s_comm.isOpen() is True:
+            buffer = self.__s_comm.read(2)
+
+            if len(buffer) != 2:
+                self.__throw_exception('SerialReadTimeout')
+
+            return int.from_bytes(buffer, byteorder=self.__order, signed=False)
+        else:
+            return False
     def __throw_exception(self, text):
         """
         Throws an exception for a read timeout
@@ -173,6 +192,9 @@ class ctrl_comm:
 
     def isOpen(self):
         return self.__s_comm.is_open
+
+    def getSerialObj(self):
+        return self.__s_comm
 
 
 class not_connected:
