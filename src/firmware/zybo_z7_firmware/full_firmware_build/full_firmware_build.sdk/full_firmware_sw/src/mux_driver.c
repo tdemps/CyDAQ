@@ -86,6 +86,8 @@ u8 muxSetActiveFilter( filters_e filterSelect){
 		if(DEBUG)
 			xil_printf("Error, %d is not a valid filter enum #\n", filterSelect);
 		return MUX_SET_FAILED;
+	}else if(DEBUG){
+		xil_printf("Changing filter to %d\n", filterSelect);
 	}
 	//gets mux configuration from input array using input number
 	mux_config_data_t *config = &outputConfigs[filterSelect];

@@ -90,6 +90,8 @@ int commInit(){
 	/* Set the UART in Normal Mode */
 	XUartPs_SetOperMode(&UART1, XUARTPS_OPER_MODE_NORMAL);
 	XUartPs_SetBaudRate(&UART1, COMM_BAUD_RATE);
+	status = XUartPs_GetOptions(&UART1);
+	XUartPs_SetOptions(&UART1, status | XUARTPS_OPTION_SET_FCM);
 
 	return XST_SUCCESS;
 }

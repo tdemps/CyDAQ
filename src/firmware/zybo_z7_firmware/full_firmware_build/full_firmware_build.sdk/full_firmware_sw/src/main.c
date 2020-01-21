@@ -168,7 +168,7 @@ void filterTest(){
 
 	 while((buttons = getButtons()) != 12){	//hit buttons 3 and 4 together to end test
 			numBytes += comUartRecv(&buf[numBytes], 4);
-			if(buf[numBytes-1] == '\r' || buf[numBytes-1] == '\n'){
+			if(numBytes > 1 && (buf[numBytes-1] == '\r' || buf[numBytes-1] == '\n')){
 				buf[numBytes-1] = '\0';
 				xil_printf("Input: %s => ", buf);
 				status = 2;
@@ -200,10 +200,10 @@ void filterTest(){
 						lowpass = 20000;
 					}
 				}else if(( buf[0] == 'F' || buf[0] == 'f') && numBytes > 2){
-					xil_printf("Changing filter to %d,reverting corners to default\n", selectedFilter);
 					if(muxSetActiveFilter(buf[1]-'0') == 0){
 						selectedFilter = buf[1]-1;
 					}
+					xil_printf("Reverting corners to default\n", buf[1]-'0');
 					highpass = 10000;
 					lowpass = 20000;
 					status = tuneFilter(selectedFilter, highpass, lowpass);

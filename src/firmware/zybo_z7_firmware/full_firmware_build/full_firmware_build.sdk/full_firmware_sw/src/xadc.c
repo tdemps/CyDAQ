@@ -12,11 +12,11 @@ static XTmrCtr TimerCounterInst;
 XSysMon* SysMonInstPtr = &SysMonInst;
 u8 initialized = 0; //whether XADC has been initialized
 static XScuGic InterruptController;
-volatile SAMPLE_TYPE xadcBuffer[RX_BUFFER_SIZE];
+SAMPLE_TYPE xadcBuffer[RX_BUFFER_SIZE];
 volatile u32 xadcSampleCount = 0;
 volatile float voltage;
 
-extern volatile bool samplingEnabled, streamingEnabled = false;
+extern bool samplingEnabled, streamingEnabled = false;
 
 //#define INTC_DEVICE_ID		 	XPAR_INTC_0_DEVICE_ID
 #define INTC_DEVICE_INT_ID	 	XPAR_INTC_0_TMRCTR_0_VEC_ID
@@ -316,6 +316,8 @@ void xadcInterruptHandler(void *CallBackRef){
 }
 void xadcProcessSamples(){
 	u32 i = 0;
+	u8 sent = 0;
+	u8* ptr = (u8*) xadcBuffer;
 	if(xadcSampleCount == 0){
 		if(DEBUG)
 			xil_printf("No new samples\n");
@@ -328,25 +330,25 @@ void xadcProcessSamples(){
 		xil_printf("%c", COMM_START_CHAR);
 
 	while(i < xadcSampleCount){
-
-		commUartSend(&xadcBuffer[i], 2);
-		if (i % 10 == 0){
-			usleep(50);
+		while(sent < 2){
+			sent += commUartSend((ptr+sent), 2-sent);
 		}
+		sent = 0;
 		if(DEBUG){
 			xil_printf(" 0x%x", xadcBuffer[i]);
 			voltage = RawToExtVoltage(xadcBuffer[i]);
 			xil_printf(" => %d.%d V\n", (int)voltage, xadcFractionToInt(voltage));
 		}
 		i++;
+		ptr += 2;
 	}
 	//commUartSend(&xadcSampleCount+2, 2);
-	xadcSampleCount = 0;
 	if(DEBUG)
 		xil_printf("Finished processing samples\n\n");
-	else
-		//two stop chars to decrease possibly of data byte being misinterpreted as end char
-		xil_printf("%c%c", COMM_STOP_CHAR, COMM_STOP_CHAR);
+//	else
+//		//two stop chars to decrease possibly of data byte being misinterpreted as end char
+//		xil_printf("%c%c", COMM_STOP_CHAR, COMM_STOP_CHAR);
+	xadcSampleCount = 0;
 
 	return;
 }

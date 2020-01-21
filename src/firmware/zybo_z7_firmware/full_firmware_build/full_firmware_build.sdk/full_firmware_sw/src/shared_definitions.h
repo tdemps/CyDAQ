@@ -14,7 +14,7 @@
 /**
  * Meant to enable outputting of debug messages over uart (WIP).
  */
-#define DEBUG 0
+#define DEBUG 1
 /**
  * Maps the filters/paths on the board to numbers.
  * Starts at 0 (used to create arrays of presets mapped to this enum.
