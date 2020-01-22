@@ -21,6 +21,7 @@ class parameter_options(IntEnum):
     sample_rate = 1
     filter = 2
     corner_freq = 3
+    fetch_samples = 4
     ping = 7
     START = 8
     STOP = 9

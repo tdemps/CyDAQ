@@ -1,11 +1,11 @@
 from serial_comm import ctrl_comm
 from master_enum import parameter_options_output, parameter_options_filter, parameter_options_input, parameter_options, sig_serial
 import numpy as np
-from tkinter import filedialog
+from tkinter import filedialog, messagebox
 import csv
 import subprocess
 
-
+import time as t
 serial_obj = ctrl_comm()
 port = ""
 
@@ -25,30 +25,44 @@ class raw_data:
             time_array = []
             time = 0
             serial_obj.open(zport)
-            if serial_obj.read_byte() == sig_serial.START_BYTE.value:
-                byte_value = 0
+            last = ""
+            while serial_obj.read_byte() != sig_serial.START_BYTE.value:
+                pass
+
+            if True:    #serial_obj.read_byte() == sig_serial.START_BYTE.value:
                 byte_char = ""
-                while byte_char != sig_serial.END_BYTE.value:
-                    byte_value = serial_obj.read_uint8()
-                    byte_char = chr(byte_value)
-                    if byte_char != sig_serial.END_BYTE.value:
-                        data_array.append(byte_value)
-                for i in range(0, len(data_array) - 1, 2):
-                    sum1 = (256 * data_array[i]) + data_array[i + 1]
-                    new_data_array.append(sum1)
+                test_arr = []
+                try:
+                    while(1):
+                        sample = serial_obj.read_uint16()
+                        data_array.append(sample)
+                except Exception as e:
+                    messagebox.showerror("Communication Message",
+                                         "Sample Transfer Complete")
+                # while byte_char != sig_serial.END_BYTE.value or last != sig_serial.END_BYTE.value:
+                #     byte_value = serial_obj.read_uint8()
+                #     last = byte_char
+                #     byte_char = chr(byte_value)
+                #     if byte_char != sig_serial.END_BYTE.value:
+                #         data_array.append(byte_value)
+                for i in range(0, len(data_array)):
+                    # sum1 = (256 * data_array[i+1]) + data_array[i] #zybo sends MSB first
+                    new_data_array.append(data_array[i] & 4095)
+                    time += 1 / int(sampling_rate)
+                    time_array.append(round(time, 6))
+
                 np_data_array = np.array(new_data_array)
-                for i in range(len(np_data_array)):
-                    time += 1 / sampling_rate
-                    time_array.append(time)
                 np_time_array = np.array(time_array)
                 final_data = np.vstack((np_time_array, np_data_array))
+                serial_obj.close()
                 return final_data
-        except AttributeError:
+        except AttributeError as e:
             print("No data was recorded (timeout error)")
+            serial_obj.close()
 
     def collect_data(self, sampling_rate, zport):
         """
-        collects data that is being sent from the zbyo
+        collects data that is being sent from the zybo
 
         :param sampling_rate: sampling rate, used to determine the time of each sample
         :param zport: zybo port
@@ -63,7 +77,7 @@ class raw_data:
             self.__file_save(data_array_T)
         except AttributeError:
             print("No data was recorded (timeout error)")
-        print(data_array)
+        # print(data_array)
         return True
 
     def __file_save(self, data_array):
@@ -78,11 +92,13 @@ class raw_data:
                                                                                    ("All Files", "*.*")))
         if f is None:  # asksaveasfile return `None` if dialog closed with "cancel".
             return
-        with open(f.name, 'w', newline='') as output:
-            w = csv.writer(output)
-            w.writerow(['Time'] + ['Value'])
-            w.writerows(data_array)
-        f.close
+        try:
+            with open(f.name, 'w', newline='') as output:
+                w = csv.writer(output)
+                w.writerow(['Time'] + ['Value'])
+                w.writerows(data_array)
+        except Exception as e:
+            print("Error saving csv, do you have that file open currently?")
 
 
 class open_instruction:
