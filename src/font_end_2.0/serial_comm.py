@@ -1,11 +1,8 @@
 import time
 import threading
-import master_enum
 import serial
-import struct
 import serial.tools.list_ports
 from tkinter import *
-
 
 class ctrl_comm:
     """
@@ -186,11 +183,6 @@ class not_connected:
         not_connected_label = Label(root, text=not_connected_labelName, height=1, width=len(not_connected_labelName),
                                     relief=RAISED, font=60)
         not_connected_label.place(relx=.5, rely=.5, anchor=CENTER)
-
-        if self.check_connection() is True:
-            self.quit()
-        else:
-            pass
         root.mainloop()
 
     def quit(self):
@@ -208,7 +200,4 @@ class not_connected:
             port = str(zybo_port)
             return port
         except:
-            print("Zybo not connected")
             return False
-
-
