@@ -102,7 +102,6 @@ class CyDAQ_Config(tk.Frame):
         # Initialize the menu
         menu = Menu(self)
         self.master.config(menu=menu)
-        print("Config init")
         # Initialize the file menu
         file = Menu(menu, tearoff=0)
         menu.add_cascade(label="File", menu=file)

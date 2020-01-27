@@ -4,7 +4,8 @@ import numpy as np
 from tkinter import filedialog, messagebox
 import csv
 import subprocess
-
+import struct
+import time as t
 serial_obj = ctrl_comm()
 port = ""
 
@@ -18,40 +19,60 @@ class raw_data:
         :param zport: zybo port
         :return: numpy array containing all the data and time
         """
+
+        data_array = bytearray()
+        time = 0
+        sec_per_sample = 1 / int(sampling_rate)
+        end_seq = '00000000'.encode('ascii')
+        serial_obj.open(zport)
+
+        while serial_obj.read_byte() != sig_serial.START_BYTE.value:
+            pass
+
+        print("Reading Samples...", end='')
         try:
-            data_array = []
-            new_data_array = []
-            time_array = []
-            time = 0
-            serial_obj.open(zport)
-            last = ""
-
-            while serial_obj.read_byte() != sig_serial.START_BYTE.value:
-                pass
-
-            try:
-                while True:
-                    sample = serial_obj.read_uint16()
-                    data_array.append(sample)
-            except Exception as e:
-                messagebox.showerror("Communication Message",
-                                     "Sample Transfer Complete")
-            # while byte_char != sig_serial.END_BYTE.value or last != sig_serial.END_BYTE.value:
-            #     byte_value = serial_obj.read_uint8()
-            #     last = byte_char
-            #     byte_char = chr(byte_value)
-            #     if byte_char != sig_serial.END_BYTE.value:
-            #         data_array.append(byte_value)
-            for i in range(0, len(data_array)):
-                # sum1 = (256 * data_array[i+1]) + data_array[i] #zybo sends MSB first
-                new_data_array.append(data_array[i] & 4095)
-                time += 1 / int(sampling_rate)
-                time_array.append(round(time, 6))
-
-            np_data_array = np.array(new_data_array)
-            np_time_array = np.array(time_array)
-            final_data = np.vstack((np_time_array, np_data_array))
+            # data_array.append(serial_obj.getSerialObj().read_until())
+            while(1):
+                pending = serial_obj.getSerialObj().inWaiting()
+                if pending:
+                    read = serial_obj.getSerialObj().read(pending)
+                    data_array.extend(read)
+                elif( len(data_array) > 8 and data_array[-len("00000000"):] == end_seq):
+                    break
+                    # pending = serial_obj.getSerialObj().inWaiting()
+                    # if pending:
+                    #     data_array.append(serial_obj.getSerialObj().read(pending))
+                    # elif errcnt > 5:
+                    #     break
+                    # else:
+                    #     t.sleep(0.2)
+                    #     errcnt += 1
+                    # while(cnt < sample_burst_size):
+                    #     sample = serial_obj.read_uint16()
+                    #     data_array.append(sample)
+                    #     cnt += 1
+            print('done.')
             serial_obj.close()
+            data_array = data_array.rstrip(end_seq)
+            messagebox.showinfo("Communication Message",
+                                 "Sample transfer complete, " + str(len(data_array)/2) + " samples received.")
+            print('Processing Samples...', end='')
+
+            test = struct.iter_unpack("<H", data_array)
+            np_data_array = np.empty(int(len(data_array) / 2), dtype=np.uint16)
+            np_time_array = np.empty(int(len(data_array) / 2), dtype=np.float64)
+            np_voltage_array = np.empty(int(len(data_array) / 2), dtype=np.float64)
+            i = 0
+            for sample in test:  # in range(0, len(data_array), 2):
+                np_data_array[i] = (sample[0] & 4095)  #((data_array[i+1] << 8) | data_array[i]) & 4095
+                np_voltage_array[i] = (sample[0] / 4096.0)
+                time += sec_per_sample
+                np_time_array[i] = (round(time, 6))
+                i += 1
+
+            #np_voltage_array = np.array(np_voltage_array)
+            final_data = np.vstack((np_time_array, np_data_array, np_voltage_array))
+            print('done')
             return final_data
         except AttributeError as e:
             print("No data was recorded (timeout error)")
@@ -85,15 +106,21 @@ class raw_data:
         :return:
 
         """
-        f = filedialog.asksaveasfile(mode='w', defaultextension=".csv", filetypes=(("CSV file", ".*csv"),
-                                                                                   ("All Files", "*.*")))
-        if f is None:  # asksaveasfile return `None` if dialog closed with "cancel".
-            return
+
+
         try:
+            f = filedialog.asksaveasfile(mode='w', defaultextension=".csv", filetypes=(("CSV file", ".*csv"),
+                                                                                       ("All Files", "*.*")))
+            if f is None:  # asksaveasfile return `None` if dialog closed with "cancel".
+                return
             with open(f.name, 'w', newline='') as output:
+                print("Writing to:",f.name)
                 w = csv.writer(output)
-                w.writerow(['Time'] + ['Value'])
+                w.writerow(['Time (s)','Value (Decimal)', 'Voltage (V)'])
                 w.writerows(data_array)
+
+            f.close()
+            print("File Write Complete.")
         except Exception as e:
             print("Error saving csv, do you have that file open currently?")
 
