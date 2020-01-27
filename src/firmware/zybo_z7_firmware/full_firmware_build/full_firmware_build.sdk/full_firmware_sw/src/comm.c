@@ -89,9 +89,15 @@ int commInit(){
 
 	/* Set the UART in Normal Mode */
 	XUartPs_SetOperMode(&UART1, XUARTPS_OPER_MODE_NORMAL);
-	XUartPs_SetBaudRate(&UART1, COMM_BAUD_RATE);
+	XUartPs_SetBaudRate(&UART1, COMM_BAUD_RATE); //COMM_BAUD_RATE);
 	status = XUartPs_GetOptions(&UART1);
-	XUartPs_SetOptions(&UART1, status | XUARTPS_OPTION_SET_FCM);
+	//XUartPs_SetOptions(&UART1, status | XUARTPS_OPTION_SET_FCM);
+
+	XUartPsFormat formatConfig;
+	XUartPs_GetDataFormat(&UART1, &formatConfig);
+	formatConfig.Parity = XUARTPS_FORMAT_NO_PARITY; //XUARTPS_FORMAT_EVEN_PARITY
+	formatConfig.StopBits = XUARTPS_FORMAT_1_STOP_BIT;
+	XUartPs_SetDataFormat(&UART1, &formatConfig);
 
 	return XST_SUCCESS;
 }
@@ -426,4 +432,14 @@ u32 comUartRecv(u8 *bufferPtr, u32 numBytes)
 u32 commUartSend(u8 *bufferPtr, u32 numBytes)
 {
 	return XUartPs_Send(&UART1, bufferPtr, numBytes);
+}
+
+u32 commUartWaitReceive(u8 *bufferPtr, char endChar1, char endChar2){
+
+	u32 byteCount = 0;
+	while(bufferPtr[byteCount-1] != endChar1 && bufferPtr[byteCount-1] != endChar2){
+		byteCount += comUartRecv(bufferPtr, 1);
+	}
+
+	return byteCount;
 }

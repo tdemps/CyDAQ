@@ -44,6 +44,7 @@
 #define COMM_START_CHAR '@'
 #define COMM_STOP_CHAR '!'
 #define TEST_BUFFER_SIZE	50
+#define DEF_SAMPLE_BURST_SIZE 200 //number of bytes worth of samples to send in single burst (# samples* 2 bytes/sample)
 
 typedef enum cmds
 {
@@ -63,4 +64,6 @@ void commRXTask();
 bool commProcessPacket(u8 *buffer, u16 bufSize);
 u32 comUartRecv(u8 *bufferPtr, u32 numBytes);
 u32 commUartSend(u8 *bufferPtr, u32 numBytes);
+u32 commUartWaitReceive(u8 *bufferPtr, char endChar1, char endChar2);
+
 #endif /* SRC_COMM_H_ */

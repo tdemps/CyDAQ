@@ -26,7 +26,9 @@ void initButtons();
 u8 getButtons();
 u8 getButtonChangeBlocking();
 
+//global variables used in various libraries (DO NOT REMOVE)
 bool samplingEnabled;
+bool streamingEnabled;
 filters_e activeFilter = FILTER_PASSTHROUGH;
 
 
@@ -177,7 +179,7 @@ void filterTest(){
 				}else if(buf[0] == 'E' || buf[0] == 'e'){
 					break;
 				}else if(buf[0] == 'U' || buf[0] == 'u'){
-					u8 multiplier = (numBytes > 2) ? buf[1]-'0' : 0;
+					u8 multiplier = (numBytes > 2) ? buf[1]-'0' : 1;
 					highpass += 1000 * multiplier;
 					lowpass += 1000 * multiplier;
 					status = tuneFilter(selectedFilter, highpass, lowpass);

@@ -30,7 +30,7 @@
 #define CLOCK_FREQ 100000000 //input clock to xadc wiz block (Mhz). Must be set in Vivado
 #define RX_BUFFER_SIZE  3000000
 #define XADC_MAX_SAMPLE_RATE 60000
-#define XADC_DEFAULT_RATE 20000
+#define XADC_DEFAULT_RATE 44100
 #define XADC_INTR_ID				XPS_IRQ_INT_ID
 #define INTC_DEVICE_ID		XPAR_SCUGIC_SINGLE_DEVICE_ID
 #define AUX_14_INPUT (XSM_CH_AUX_MIN + 14)

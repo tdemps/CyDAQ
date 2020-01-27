@@ -136,7 +136,7 @@ u8 tuneFilter(filters_e filterSelect, FILTER_FREQ_TYPE freq1, FILTER_FREQ_TYPE f
 		//number of pots to write cut in half (already wrote to first half)
 		wipersToWrite = currentFilter->filterOrder / 2;
 	}
-	//Write the remaining pots (or all of them if filter is not BP
+	//Write the remaining pots (or all of them if filter is not BP)
 	for(int i = 0; i < wipersToWrite; i++){
 		do{
 			err = x9258_volatile_write(currentFilter->wipers[i], potVal1);

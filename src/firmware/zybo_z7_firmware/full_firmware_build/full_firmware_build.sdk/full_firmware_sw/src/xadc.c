@@ -11,12 +11,13 @@ static u32 xadcSampleRate = 0, resetValue = 0xFD050E58; //current sample rate (s
 static XTmrCtr TimerCounterInst;
 XSysMon* SysMonInstPtr = &SysMonInst;
 u8 initialized = 0; //whether XADC has been initialized
-static XScuGic InterruptController;
+//static XScuGic InterruptController;
 SAMPLE_TYPE xadcBuffer[RX_BUFFER_SIZE];
 volatile u32 xadcSampleCount = 0;
 volatile float voltage;
 
-extern bool samplingEnabled, streamingEnabled = false;
+extern bool samplingEnabled;
+extern bool streamingEnabled;
 
 //#define INTC_DEVICE_ID		 	XPAR_INTC_0_DEVICE_ID
 #define INTC_DEVICE_INT_ID	 	XPAR_INTC_0_TMRCTR_0_VEC_ID
@@ -28,7 +29,7 @@ extern bool samplingEnabled, streamingEnabled = false;
  * Initializes XADC
  */
 u8 xadcInit(){
-	u32 address, status, intrStatusValue;
+	u32 address, status;
 	XSysMon_Config *SYSConfigPtr;
 
 	SYSConfigPtr = XSysMon_LookupConfig(SYSMON_DEVICE_ID);
@@ -73,13 +74,18 @@ u8 xadcInit(){
 //	printf("Global Int Enable %x \n",(unsigned int)intrStatusValue);
 
 
-	//set sequencer to continually sample enabled inputs
-	XSysMon_SetSequencerMode(SysMonInstPtr, XSM_SEQ_MODE_CONTINPASS);
+
 	//status = XSysMon_GetSeqInputMode(SysMonInstPtr);
     //disables calibration
 	XSysMon_SetCalibEnables(SysMonInstPtr, XSM_CFR1_CAL_DISABLE_MASK);
 	//disables averaging
 	XSysMon_SetAvg(SysMonInstPtr, XSM_AVG_0_SAMPLES);
+	//set sequencer to continually sample enabled inputs
+	XSysMon_SetSequencerMode(SysMonInstPtr, XSM_SEQ_MODE_CONTINPASS); //XSM_SEQ_MODE_SINGCHAN XSM_SEQ_MODE_SINGCHAN
+
+//	status = XSysMon_SetSingleChParams(SysMonInstPtr, XSM_SEQ_CH_AUX14, 0, 0, 0);
+
+
 	if(DEBUG)
 		xadcCheckAuxSettings();
 
@@ -151,15 +157,16 @@ SAMPLE_TYPE* xadcGetBuffer(){
 	return xadcBuffer;
 }
 /**
- * Disables sampling.
+ * Disables sampling by stopping timer. Sets sampling status variables to off position.
  */
 void xadcDisableSampling(){
 	//stops timer that drives xadc
 	XTmrCtr_Stop(&TimerCounterInst, TIMER_CNTR_0);
 	//XSysMon_IntrGlobalDisable(&SysMonInst);
-	samplingEnabled = streamingEnabled = false;
-	//xadcProcessSamples();
-	//xadcSampleCount = 0;
+	//resets sampling status variables to 'off'
+	samplingEnabled = false;
+	streamingEnabled = false;
+
 }
 /**
  * Enables storing/printing of samples from XADC
@@ -171,39 +178,45 @@ void xadcEnableSampling(u8 streamSetting){
 	}
 	if(DEBUG)
 		xil_printf("Starting sampling, Streaming: %s\n", (streamSetting) ? "On" : "Off");
+	//changes sampling status var
 	samplingEnabled = true;
-	//number of bytes received over UART
+	//number of bytes received over UART, used to index buffer
 	u32 numBytes = 0;
 	//holds bytes received over UART
 	u8 buf[50];
-	//time variable used to assign time values to sample
 	//Starts timer to begin sampling
 	XTmrCtr_Start(&TimerCounterInst, TIMER_CNTR_0);
 	//XSysMon_IntrGlobalEnable(SysMonInstPtr);
+	//if caller wants streaming, change status var as needed
 	if(streamSetting == 1){
 		streamingEnabled = true;
 	}
 	while(samplingEnabled){
-		//checks for bytes received on uart
+		//checks for bytes received on uart, 1 at a time to minimize cycles used
 		numBytes += comUartRecv(&buf[numBytes], 1);
-		//waits for xadc to finish conversion of sample
+		//waits for xadc to finish conversion of current sample
 		while ((XSysMon_GetStatus(&SysMonInst) & XSM_SR_EOS_MASK) != XSM_SR_EOS_MASK);
 		//restarts timer for next sample.
 		XTmrCtr_Start(&TimerCounterInst, TIMER_CNTR_0);
+		//u32 status = (XSysMon_GetStatus(&SysMonInst));
+
 		//stores raw 12bit sample (shifted right 4).
-		xadcBuffer[xadcSampleCount] = (SAMPLE_TYPE) XSysMon_GetAdcData(&SysMonInst, AUX_14_INPUT) >> 4;
-		//if streaming is enabled, send the samples back
+		xadcBuffer[xadcSampleCount] = (SAMPLE_TYPE) (XSysMon_GetAdcData(&SysMonInst, AUX_14_INPUT) >> 4); // & 4095;
+
+		//if streaming is enabled, send the samples back (MAY AFFECT SAMPLE COLLECTION PERFORMANCE)
 		if(streamingEnabled){
 			//commUartSend(&xadcBuffer[i], 2);
 			voltage = RawToExtVoltage(xadcBuffer[xadcSampleCount]);
 			xil_printf("%d.%d, 0x%x\n", (int)voltage, xadcFractionToInt(voltage), xadcBuffer[xadcSampleCount]);
 		}
+		//checks for stop byte from UART
 		if(buf[numBytes-1] == '!'){
 			xadcDisableSampling();
 			if(DEBUG)
 				xil_printf("Stopping, # Samples: %d\n", xadcSampleCount);
 			//since buffer memory isn't initialized, reset first and last char so they aren't saved
 			buf[0] = buf[numBytes-1] = '\0';
+		//rollover for sample array if sample count gets too big
 		}else if(xadcSampleCount == RX_BUFFER_SIZE-1){
 				xadcSampleCount = 0;
 		}else{
@@ -318,37 +331,44 @@ void xadcProcessSamples(){
 	u32 i = 0;
 	u8 sent = 0;
 	u8* ptr = (u8*) xadcBuffer;
+	u8* lastVal = (u8*) xadcBuffer + (2*xadcSampleCount);
+	u8 burstSize = DEF_SAMPLE_BURST_SIZE;
 	if(xadcSampleCount == 0){
-		if(DEBUG)
+		if(DEBUG){
 			xil_printf("No new samples\n");
+		}
+		else{
+			xil_printf("%c", COMM_START_CHAR);
+			usleep(100);
+			xil_printf("000000000");
+		}
 		return;
 	}
 	sleep(1);
-	if(DEBUG)
+	if(DEBUG){
 		xil_printf("Beginning sample playback..\n\n");
-	else
-		xil_printf("%c", COMM_START_CHAR);
-
-	while(i < xadcSampleCount){
-		while(sent < 2){
-			sent += commUartSend((ptr+sent), 2-sent);
-		}
-		sent = 0;
-		if(DEBUG){
-			xil_printf(" 0x%x", xadcBuffer[i]);
+		while(i < xadcSampleCount){
 			voltage = RawToExtVoltage(xadcBuffer[i]);
 			xil_printf(" => %d.%d V\n", (int)voltage, xadcFractionToInt(voltage));
+			i++;
 		}
-		i++;
-		ptr += 2;
-	}
-	//commUartSend(&xadcSampleCount+2, 2);
-	if(DEBUG)
 		xil_printf("Finished processing samples\n\n");
-//	else
-//		//two stop chars to decrease possibly of data byte being misinterpreted as end char
-//		xil_printf("%c%c", COMM_STOP_CHAR, COMM_STOP_CHAR);
-	xadcSampleCount = 0;
+	}else{
+		xil_printf("%c", COMM_START_CHAR);
+		while(ptr < lastVal){
+			if(ptr+burstSize > lastVal){ burstSize = lastVal-ptr; }
+			while(sent < burstSize){
+				sent += commUartSend((ptr+sent), burstSize-sent);
+			}
+			ptr += burstSize;
+			usleep(1);
+			sent = 0;
+		}
+		usleep(100);
+		xil_printf("00000000"); //COMM_STOP_CHAR, COMM_STOP_CHAR);
+		usleep(50000);
+	}
 
+	xadcSampleCount = 0;
 	return;
 }

@@ -1,8 +1,8 @@
 //Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2019.1 (win64) Build 2552052 Fri May 24 14:49:42 MDT 2019
-//Date        : Tue Dec 10 11:14:37 2019
-//Host        : etgtech-03 running 64-bit major release  (build 9200)
+//Date        : Mon Jan 27 12:34:04 2020
+//Host        : etglabtest-02 running 64-bit major release  (build 9200)
 //Command     : generate_target design_1.bd
 //Design      : design_1
 //Purpose     : IP block netlist
@@ -242,8 +242,7 @@ module design_1
         .s_axi_wstrb(ps7_0_axi_periph_M01_AXI_WSTRB),
         .s_axi_wvalid(ps7_0_axi_periph_M01_AXI_WVALID));
   design_1_processing_system7_0_0 processing_system7_0
-       (.Core0_nFIQ(1'b0),
-        .Core0_nIRQ(xadc_wiz_0_ip2intc_irpt),
+       (.Core0_nIRQ(xadc_wiz_0_ip2intc_irpt),
         .DDR_Addr(DDR_addr[14:0]),
         .DDR_BankAddr(DDR_ba[2:0]),
         .DDR_CAS_n(DDR_cas_n),
@@ -308,6 +307,7 @@ module design_1
         .PS_CLK(FIXED_IO_ps_clk),
         .PS_PORB(FIXED_IO_ps_porb),
         .PS_SRSTB(FIXED_IO_ps_srstb),
+        .UART0_RX(1'b1),
         .USB0_VBUS_PWRFAULT(1'b0));
   design_1_ps7_0_axi_periph_0 ps7_0_axi_periph
        (.ACLK(processing_system7_0_FCLK_CLK0),

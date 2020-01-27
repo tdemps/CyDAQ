@@ -1,4 +1,4 @@
-// (c) Copyright 1995-2019 Xilinx, Inc. All rights reserved.
+// (c) Copyright 1995-2020 Xilinx, Inc. All rights reserved.
 // 
 // This file contains confidential and proprietary information
 // of Xilinx, Inc. and is protected under U.S. and
@@ -61,6 +61,8 @@ module design_1_processing_system7_0_0 (
   GPIO_I,
   GPIO_O,
   GPIO_T,
+  UART0_TX,
+  UART0_RX,
   USB0_PORT_INDCTL,
   USB0_VBUS_PWRSELECT,
   USB0_VBUS_PWRFAULT,
@@ -103,7 +105,6 @@ module design_1_processing_system7_0_0 (
   M_AXI_GP0_BRESP,
   M_AXI_GP0_RRESP,
   M_AXI_GP0_RDATA,
-  Core0_nFIQ,
   Core0_nIRQ,
   FCLK_CLK0,
   FCLK_RESET0_N,
@@ -136,6 +137,10 @@ input wire [0 : 0] GPIO_I;
 output wire [0 : 0] GPIO_O;
 (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 GPIO_0 TRI_T" *)
 output wire [0 : 0] GPIO_T;
+(* X_INTERFACE_INFO = "xilinx.com:interface:uart:1.0 UART_0 TxD" *)
+output wire UART0_TX;
+(* X_INTERFACE_INFO = "xilinx.com:interface:uart:1.0 UART_0 RxD" *)
+input wire UART0_RX;
 (* X_INTERFACE_INFO = "xilinx.com:display_processing_system7:usbctrl:1.0 USBIND_0 PORT_INDCTL" *)
 output wire [1 : 0] USB0_PORT_INDCTL;
 (* X_INTERFACE_INFO = "xilinx.com:display_processing_system7:usbctrl:1.0 USBIND_0 VBUS_PWRSELECT" *)
@@ -223,13 +228,10 @@ input wire [1 : 0] M_AXI_GP0_RRESP;
 ADS 4, NUM_WRITE_THREADS 4, RUSER_BITS_PER_BYTE 0, WUSER_BITS_PER_BYTE 0, INSERT_VIP 0" *)
 (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 M_AXI_GP0 RDATA" *)
 input wire [31 : 0] M_AXI_GP0_RDATA;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME Core0_nFIQ, SENSITIVITY LEVEL_HIGH, PortWidth 1" *)
-(* X_INTERFACE_INFO = "xilinx.com:signal:interrupt:1.0 Core0_nFIQ INTERRUPT" *)
-input wire Core0_nFIQ;
 (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME Core0_nIRQ, SENSITIVITY LEVEL_HIGH, PortWidth 1" *)
 (* X_INTERFACE_INFO = "xilinx.com:signal:interrupt:1.0 Core0_nIRQ INTERRUPT" *)
 input wire Core0_nIRQ;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME FCLK_CLK0, FREQ_HZ 1e+08, PHASE 0.000, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME FCLK_CLK0, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
 (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 FCLK_CLK0 CLK" *)
 output wire FCLK_CLK0;
 (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME FCLK_RESET0_N, POLARITY ACTIVE_LOW, INSERT_VIP 0" *)
@@ -467,12 +469,12 @@ inout wire PS_PORB;
     .SPI1_SS_T(),
     .UART0_DTRN(),
     .UART0_RTSN(),
-    .UART0_TX(),
+    .UART0_TX(UART0_TX),
     .UART0_CTSN(1'B0),
     .UART0_DCDN(1'B0),
     .UART0_DSRN(1'B0),
     .UART0_RIN(1'B0),
-    .UART0_RX(1'B1),
+    .UART0_RX(UART0_RX),
     .UART1_DTRN(),
     .UART1_RTSN(),
     .UART1_TX(),
@@ -913,7 +915,7 @@ inout wire PS_PORB;
     .IRQ_P2F_UART1(),
     .IRQ_P2F_CAN1(),
     .IRQ_F2P(1'B0),
-    .Core0_nFIQ(Core0_nFIQ),
+    .Core0_nFIQ(1'B0),
     .Core0_nIRQ(Core0_nIRQ),
     .Core1_nFIQ(1'B0),
     .Core1_nIRQ(1'B0),
