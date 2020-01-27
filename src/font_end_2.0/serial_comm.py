@@ -26,11 +26,11 @@ class ctrl_comm:
         self.__s_comm.baudrate = 921600
         self.__s_comm.bytesize = serial.EIGHTBITS
         self.__s_comm.stopbits = serial.STOPBITS_ONE
-        self.__s_comm.xonxoff = True
+        self.__s_comm.xonxoff = False
         self.__s_comm.rtscts = False
         self.__s_comm.dsrdtr = False
-        self.__s_comm.parity = serial.PARITY_NONE
-        self.__s_comm.timeout = 1
+        self.__s_comm.parity = serial.PARITY_NONE #PARITY_EVEN
+        self.__s_comm.timeout = 4
         self.__order = "little"
 
     def close(self):
