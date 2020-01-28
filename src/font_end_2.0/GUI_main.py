@@ -8,18 +8,21 @@ from command_comm import cmd
 
 #TODO: Add Check logic for corner frequencies
 
-############## Class to Move Between Frames #############
+# https://www.daniweb.com/programming/software-development/code/484591/a-tooltip-class-for-tkinter
 
-upperCorner = 000
-lowerCorner = 000
+
+
+upperCorner = 20000
+lowerCorner = 10000
 lowerCornerMin = 100
 lowerCornerMax = 20000
 upperCornerMin = 2000
 upperCornerMax = 40000
-corner = 000
-input = ""
-filter = ""
-sampleRate = ""
+corner = 100
+inputSel = ""
+filterSel = "6th Order Band Pass"
+outSel = ""
+sampleRate = "44100"
 comm_port = ""
 serial_obj = ctrl_comm()
 raw_adc_data = raw_data()
@@ -63,32 +66,24 @@ outputNames = [
     "Digital"
 ]
 
+################ Master Class that Controls All Subclasses ########################
 class CyDAQ_GUI(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
         self._frame = None
         self.switch_frame(CyDAQ_Config)
-        global comm_port
-        global upperCorner
-        global lowerCorner
-        global corner
-        global input
-        global filter
-        global sampleRate
-        global output
-
         comm_port = serial_obj.get_port()
-        print("The Zybo is on " + comm_port)
 
+        # For debugging only
+        #global filterSel
+       #print("The Zybo is on " + comm_port)
+       # print("The current filter is " + filterSel)
+
+    ############## Function to Move Between Frames #############
     def switch_frame(self, frame_class):
         new_frame = frame_class(self)
-        try:
-            self._frame.destroy()
-        except:
-            print("didn't work")
-        finally:
-            self._frame = new_frame
-            self._frame.place(rely=0, relx=0)
+        self._frame = new_frame
+        self._frame.place(rely=0, relx=0)
 
 
 ############## The Frame containing CyDAQ Configuration ################
@@ -96,21 +91,33 @@ class CyDAQ_GUI(tk.Tk):
 
 
 class CyDAQ_Config(tk.Frame):
+    ############## Initializing the frame ##################
     def __init__(self, master):
+        # Include the globals
+        global filterSel
+        global inputSel
+        global outSel
+        global corner
+        global upperCorner
+        global lowerCorner
+        global sampleRate
+
         tk.Frame.__init__(self, master)
-        root = self.master
+        root = master
+        #self.master = master
         self.master.title(title)
         # Initialize the menu
         menu = Menu(self)
         self.master.config(menu=menu)
-        print("Config init")
-        # Initialize the file menu
+
+
+        ########################## Initialize the Menu ########################
         file = Menu(menu, tearoff=0)
         menu.add_cascade(label="File", menu=file)
 
         # Add drop down commands to file menu
         # file.add_command(label="Save Settings")
-        file.add_command(label="Save")
+        #file.add_command(label="Save") # no longer needed according to Matt
         # file.add_cascade(label="Save As")
         file.add_command(label="Exit", command=self.client_exit)
 
@@ -133,7 +140,8 @@ class CyDAQ_Config(tk.Frame):
         COMport.add_command(label="Ping", command=PingCyDAQ)
         SampleData.add_command(label="Start Sampling", command=self.killAndSwitchToSample)
 
-        self.inputLabel = Label(root, text=inputLabelName, height=1, width=len(inputLabelName), relief=RAISED)
+        ################################## Initialize System Input Select ####################################
+        self.inputLabel = Label(root, text=inputLabelName, height=1, width=len(inputLabelName))
         self.inputLabel.place(relx=.25, rely=.17, anchor=CENTER)
 
         self.inputSelectComboBox = Combobox(root, values=inputNames)
@@ -141,52 +149,99 @@ class CyDAQ_Config(tk.Frame):
         self.inputSelectComboBox.current(0)
         self.inputSelectComboBox.bind("<<ComboboxSelected>>", self.changeInput)
 
-        self.filterLabel = Label(root, text=filterlabelName, height=1, width=len(filterlabelName), relief=RAISED)
+        ################################ Initialize Filter Select ##########################################
+        self.filterLabel = Label(root, text=filterlabelName, height=1, width=len(filterlabelName))
         self.filterLabel.place(relx=.5, rely=.17, anchor=CENTER)
 
-        self.filterSelectComboBox = Combobox(root, values=filterNames)
+        self.filterSelectComboBox = Combobox(root, values=filterNames, textvariable=filterSel)
         self.filterSelectComboBox.place(relx=0.5, rely=0.25, anchor=CENTER)
         self.filterSelectComboBox.current(5)
         self.filterSelectComboBox.bind("<<ComboboxSelected>>", self.changeFilter)
 
-        # Make the Label for the Combobox
-        self.outSelecLabel = Label(root, text=outLabelName, height=1, width=len(outLabelName), relief=RAISED)
+        ############################# Initialize Output Select ##############################################
+        self.outSelecLabel = Label(root, text=outLabelName, height=1, width=len(outLabelName))
         self.outSelecLabel.place(relx=.75, rely=.17, anchor=CENTER)
 
-        # Make the Combobox
         self.outSelectComboBox = Combobox(root, values=outputNames)
         self.outSelectComboBox.place(relx=.75, rely=.25, anchor=CENTER)
         self.outSelectComboBox.current(0)
         self.outSelectComboBox.bind("<<ComboboxSelected>>", self.outChange)
 
-        self.sampleRateLabel = Label(root, text=sampleRateLabelName, height=1, width=len(sampleRateLabelName), relief=RAISED)
+        ############################## Initialize Sample Rate Select ###################################
+        self.sampleRateLabel = Label(root, text=sampleRateLabelName, height=1, width=len(sampleRateLabelName))
         self.sampleRateLabel.place(relx=.5, rely=.75, anchor=CENTER)
 
-        sampleRate = StringVar()
-        self.sampleRateEntry = Entry(root, textvariable=sampleRate)
+        #sampleRate = StringVar()
+        self.sampleRateEntry = Entry(root, textvariable=sampleRate, justify='center')
         self.sampleRateEntry.place(relx=.5, rely=.85, anchor=CENTER)
-        self.sampleRateEntry.insert(END, "44100")
+        self.sampleRateEntry.delete(END, 0)
+        #self.sampleRateEntry.insert(END, sampleRate)
         self.sampleRateEntry.bind("<Leave>", self.check_sample)
         self.sampleRateEntry.bind("<Return>", self.check_sample)
 
-        # These constantly change depending on the selected filter
-        self.lowerCornerLabel = Label(root, text="Lower Corner", height=1, width=len("Lower Corner"), relief=RAISED)
-        self.lowerCornerSelect = Scale(root, from_=lowerCornerMin, to=lowerCornerMax, orient=HORIZONTAL, length=225)
+        ################################ Initialize Lower Corner Select ################################
+        self.lowerCornerLabel = Label(root, text="Lower Corner", height=1, width=len("Lower Corner"))
+        self.lowerCornerSelect = Entry(root, textvariable=lowerCorner, justify='center')
         self.lowerCornerSelect.bind("<Leave>", self.changeLowerCorner)
-        self.lowerCornerSelect.place(relx=.25, rely=.55, anchor=CENTER)
-        self.lowerCornerLabel.place(relx=.25, rely=.44, anchor=CENTER)
+        self.lowerCornerSelect.bind("<Return>", self.changeLowerCorner)
 
-        self.upperCornerLabel = Label(root, text="Upper Corner", height=1, width=len("Upper Corner"), relief=RAISED)
-        self.upperCornerSelect = Scale(root, from_=upperCornerMin, to=upperCornerMax, orient=HORIZONTAL, length=225)
-        self.lowerCornerSelect.bind("<Leave>", self.changeUpperCorner)
-        self.upperCornerSelect.place(relx=.75, rely=.55, anchor=CENTER)
-        self.upperCornerLabel.place(relx=.75, rely=.44, anchor=CENTER)
+        ############################## Initialize Upper Corner Select ##################################
+        self.upperCornerLabel = Label(root, text="Upper Corner", height=1, width=len("Upper Corner"))
+        self.upperCornerSelect = Entry(root, textvariable=upperCorner, justify='center')
+        self.upperCornerSelect.bind("<Leave>", self.changeUpperCorner)
+        self.upperCornerSelect.bind("<Return>", self.changeUpperCorner)
 
-        self.cornerLabel = Label(root, text="Corner", height=1, width=len("Corner"), relief=RAISED)
-        self.cornerSelect = Scale(root, from_=0, to=255, orient=HORIZONTAL, length=225)
+        ################################# Iniialize Single Corner Select #################################
+        self.cornerLabel = Label(root, text="Corner", height=1, width=len("Corner"))
+        self.cornerSelect = Entry(root, textvariable=corner, justify='center')
+        self.cornerSelect.bind("<Leave>", self.changeCorner)
+        self.cornerSelect.bind("<Return>", self.changeCorner)
 
+        ##################################################################################################
+        ################################ Reload Previous Settings Between Frammes #########################
+        ###################################################################################################
+
+        ############################### Place the correct corner inputs ###################################
+        # Place the corner for HP or LP filters
+        if filterSel == filterNames[2] or filterSel == filterNames[3] or filterSel == filterNames[6] or filterSel == filterNames[7]:
+            self.cornerLabel.place(relx=.5, rely=.44, anchor=CENTER)
+            self.cornerSelect.place(relx=.5, rely=.55, anchor=CENTER)
+        # Place upper and lower corners for bandpass filters
+        if filterSel == filterNames[4] or filterSel == filterNames[5]:
+            self.upperCornerSelect.place(relx=.75, rely=.55, anchor=CENTER)
+            self.upperCornerLabel.place(relx=.75, rely=.44, anchor=CENTER)
+            self.lowerCornerSelect.place(relx=.25, rely=.55, anchor=CENTER)
+            self.lowerCornerLabel.place(relx=.25, rely=.44, anchor=CENTER)
+
+        ############################# Make sure the comboboxes are set correctly ############################
+        for x in range(0, len(filterNames)):
+            if filterSel == filterNames[x]:
+                self.filterSelectComboBox.current(x)
+
+        for x in range(0, len(inputNames)):
+            if inputSel == inputNames[x]:
+                self.inputSelectComboBox.current(x)
+
+        for x in range(0, len(outputNames)):
+            if outSel == outputNames[x]:
+                self.outSelectComboBox.current(x)
+
+        ############################# Make sure corner selects are loaded in #################################
+        self.cornerSelect.delete(0, END)
+        self.cornerSelect.insert(END, corner)
+        self.upperCornerSelect.delete(0, END)
+        self.upperCornerSelect.insert(END, upperCorner)
+        self.lowerCornerSelect.delete(0, END)
+        self.lowerCornerSelect.insert(END, lowerCorner)
+
+        ########################### Load in the sample rate ##########################
+        self.sampleRateEntry.delete(0, END)
+        self.sampleRateEntry.insert(END, sampleRate)
         self.updateConfig()
 
+
+    # On the event that the sample rate is changed
+    # Make sure the sample rate is in bounds
     def check_sample(self, event):
         checkWidget = event.widget
         checkString = checkWidget.get()
@@ -194,11 +249,27 @@ class CyDAQ_Config(tk.Frame):
             if (int(checkString) < 100) or (int(checkString) > 50000):
                 event.widget.delete(0, END)
                 event.widget.insert(END, "44100")
+                root = Tk()
+                root.geometry("500x200")
+                root.title("OUT OF BOUNDS!!!")
+                rootTitle = Label(root, text="Sample rate must be between 100 and 50000 samples/s", height=5,
+                                  width=len("Sample rate must be between 100 and 50000 samples/s"))
+                rootTitle.pack()
+
         else:
             event.widget.delete(0, END)
             event.widget.insert(END, "44100")
+            root = Tk()
+            root.geometry("500x200")
+            root.title("OUT OF BOUNDS!!!")
+            rootTitle = Label(root, text="Sampler rate must be a number", height=5,
+                              width=len("Sampler rate must be a number"))
+            rootTitle.pack()
         self.updateConfig()
 
+    # On the event that the filter is changed
+    # make sure the inputs/outputs and corners
+    # available to configure are correct
     def changeFilter(self, event):
         widget = event.widget
         self.forgetCorners()
@@ -229,7 +300,12 @@ class CyDAQ_Config(tk.Frame):
                     self.inputSelectComboBox.get() == inputNames[5]):
                 self.inputSelectComboBox.current(0)
         self.updateConfig()
+        self.master.filterSel = event.widget.get()
 
+
+    # On the Event that an input is changed
+    # Make sure all other configuration options
+    # are viable
     def changeInput(self, event):
         widget = event.widget
         if (widget.get() == inputNames[6] or
@@ -262,22 +338,133 @@ class CyDAQ_Config(tk.Frame):
             self.lowerCornerLabel.place(relx=.25, rely=.44, anchor=CENTER)
         self.updateConfig()
 
+    # TODO: Make an error function that pops up when things are out of bounds
+    # On the event that a corner is changed,
+    # make sure that the corner is in bounds
     def changeUpperCorner(self, event):
-        check_u_widget = event.widget
-        check_u_int = check_u_widget.get()
-        if upperCorner == check_u_int:
-            pass
+        checkWidget = event.widget
+        checkString = checkWidget.get()
+        # Make sure the upper corner is in range
+        if checkString.isnumeric():
+            if int(checkString) < upperCornerMin:
+                event.widget.delete(0, END)
+                event.widget.insert(END, upperCornerMin)
+                root = Tk()
+                root.geometry("500x200")
+                root.title("OUT OF BOUNDS!!!")
+                rootTitle = Label(root, text="Upper Corner must be greater than " + str(lowerCornerMin), height=5,
+                                  width=len("Upper Corner must be greater than " + str(lowerCornerMin)))
+                rootTitle.pack()
+            if int(checkString) > upperCornerMax:
+                event.widget.delete(0, END)
+                event.widget.insert(END, upperCornerMax)
+                root = Tk()
+                root.geometry("500x200")
+                root.title("OUT OF BOUNDS!!!")
+                rootTitle = Label(root, text="Upper Corner must be less than " + str(upperCornerMax), height=5,
+                                  width=len("Upper Corner must be less than " + str(upperCornerMax)))
+                rootTitle.pack()
+            if (int(checkString) - 100) < int(self.lowerCornerSelect.get()):
+                newCorner = int(self.lowerCornerSelect.get()) + 100
+                event.widget.delete(0, END)
+                event.widget.insert(END, str(newCorner))
+                root = Tk()
+                root.geometry("500x200")
+                root.title("OUT OF BOUNDS!!!")
+                rootTitle = Label(root, text="Upper Corner must be 100hz more than Lower Corner", height=5,
+                                  width=len("Upper Corner must be 100hz more than Lower Corner"))
+                rootTitle.pack()
         else:
-            self.updateConfig()
+            event.widget.delete(0, END)
+            event.widget.insert(END, upperCornerMax)
+            root = Tk()
+            root.geometry("500x200")
+            root.title("OUT OF BOUNDS!!!")
+            rootTitle = Label(root, text="Upper Corner must be a number", height=5,
+                              width=len("UpperCorner must be a number"))
+            rootTitle.pack()
+        self.updateConfig()
 
+    # TODO: Use error function instead
+    # On the event that a corner is changed,
+    # make sure that the corner is in bounds
     def changeLowerCorner(self, event):
-        check_l_widget = event.widget
-        check_l_int = check_l_widget.get()
-        if lowerCorner == check_l_int:
-            pass
+        checkWidget = event.widget
+        checkString = checkWidget.get()
+        if checkString.isnumeric():
+            if int(checkString) < lowerCornerMin:
+                event.widget.delete(0, END)
+                event.widget.insert(END, lowerCornerMin)
+                root = Tk()
+                root.geometry("500x200")
+                root.title("OUT OF BOUNDS!!!")
+                rootTitle = Label(root, text="Lower Corner must be greater than " + str(lowerCornerMin), height=5,
+                                  width=len("Lower Corner must be greater than " + str(lowerCornerMin)))
+                rootTitle.pack()
+            if int(checkString) > lowerCornerMax:
+                event.widget.delete(0, END)
+                event.widget.insert(END, lowerCornerMax)
+                root = Tk()
+                root.geometry("500x200")
+                root.title("OUT OF BOUNDS!!!")
+                rootTitle = Label(root, text="Lower Corner must be less than " + str(lowerCornerMax), height=5,
+                                  width=len("Lower Corner must be less than " + str(lowerCornerMax)))
+                rootTitle.pack()
+            if int(checkString) > (int(self.upperCornerSelect.get()) - 100):
+                newCorner = int(self.upperCornerSelect.get()) - 100
+                event.widget.delete(0, END)
+                event.widget.insert(END, str(newCorner))
+                root = Tk()
+                root.geometry("500x200")
+                root.title("OUT OF BOUNDS!!!")
+                rootTitle = Label(root, text="Lower Corner must be 100hz less than Upper Corner", height=5,
+                                  width=len("Lower Corner must be 100hz less than Upper Corner"))
+                rootTitle.pack()
         else:
-            self.updateConfig()
+            event.widget.delete(0, END)
+            event.widget.insert(END, lowerCornerMin)
+            root = Tk()
+            root.geometry("500x200")
+            root.title("OUT OF BOUNDS!!!")
+            rootTitle = Label(root, text="Lower Corner must be a number", height=5,
+                              width=len("Lower Corner must be a number"))
+            rootTitle.pack()
+        self.updateConfig()
 
+    # TODO: Use error function instead
+    # Make sure the corner is in bounds
+    def changeCorner(self, event):
+        checkWidget = event.widget
+        checkString = checkWidget.get()
+        if checkString.isnumeric():
+            if int(checkString) < lowerCornerMin:
+                event.widget.delete(0, END)
+                event.widget.insert(END, lowerCornerMin)
+                root = Tk()
+                root.geometry("500x200")
+                root.title("OUT OF BOUNDS!!!")
+                rootTitle = Label(root, text="Lower Corner must be greater than " + str(lowerCornerMin), height=5,
+                                  width=len("Lower Corner must be greater than " + str(lowerCornerMin)))
+                rootTitle.pack()
+            if int(checkString) > upperCornerMax:
+                event.widget.delete(0, END)
+                event.widget.insert(END, upperCornerMax)
+                root = Tk()
+                root.geometry("500x200")
+                root.title("OUT OF BOUNDS!!!")
+                rootTitle = Label(root, text="Upper Corner must be less than " + str(upperCornerMax), height=5,
+                                  width=len("Upper Corner must be less than " + str(upperCornerMax)))
+                rootTitle.pack()
+        else:
+            event.widget.delete(0, END)
+            event.widget.insert(END, lowerCornerMin)
+            root = Tk()
+            root.geometry("500x200")
+            root.title("OUT OF BOUNDS!!!")
+            rootTitle = Label(root, text="Lower Corner must be a number", height=5,
+                              width=len("Lower Corner must be a number"))
+            rootTitle.pack()
+        self.updateConfig()
 
     def outChange(self, event):
         widget = event.widget
@@ -325,6 +512,10 @@ class CyDAQ_Config(tk.Frame):
         exit()
 
     def updateConfig(self):
+        ##### Taylor does not know what this block is for, ask Josh ####
+        ##### Taylor thinks it would be better to stick with globals ###
+        ##### because all locals are lost inbetween frames #############
+        # TODO: please fix for Taylor's sanity
         self.master.upperCorner = self.upperCornerSelect.get()
         self.master.lowerCorner = self.lowerCornerSelect.get()
         self.master.corner = self.cornerSelect.get()
@@ -369,12 +560,31 @@ class CyDAQ_Config(tk.Frame):
             self.master.output = parameter_options_output.digital.value
         self.master.sampleRate = self.sampleRateEntry.get()
 
+        ##### This is what is used to update the global variables to save state inbetween frames ########
+        #### This is all the code that should be included in this function ######
+        #### The stuff above should be done elsewhere, talk to Josh ###########
+        global filterSel
+        global outSel
+        global inputSel
+        global corner
+        global upperCorner
+        global lowerCorner
+        global sampleRate
+        filterSel = self.filterSelectComboBox.get()
+        inputSel = self.inputSelectComboBox.get()
+        outSel = self.outSelectComboBox.get()
+        corner = self.cornerSelect.get()
+        upperCorner = self.upperCornerSelect.get()
+        lowerCorner = self.lowerCornerSelect.get()
+        sampleRate = self.sampleRateEntry.get()
 
-############## a page to be created later so ignore for now ####################
+
+####################### The Page to Initialize Sampling on the CyDAQ #######################
 class SamplePage(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
 
+        ######################### Initialize the Start and Stop Buttons #######################
         root = self.master
         global startButton
         global stopButton
@@ -386,6 +596,7 @@ class SamplePage(tk.Frame):
                              command=self.createStopButton)
         startButton.place(relx=.5, rely=.5, anchor=CENTER)
 
+        ######################## Initialize the Menu ########################
         menu = Menu(self)
         self.master.config(menu=menu)
         # Initialize the file menu
@@ -394,7 +605,7 @@ class SamplePage(tk.Frame):
 
         # Add drop down commands to file menu
         # file.add_command(label="Save Settings")
-        file.add_command(label="Save")
+        #file.add_command(label="Save") # Not needed according to Matt
         # file.add_cascade(label="Save As")
         file.add_command(label="Exit", command=self.client_exit)
 
@@ -474,6 +685,7 @@ class PingCyDAQ:
                                        relief=RAISED)
             ping_fail_label.place(relx=.5, rely=.5, anchor=CENTER)
         root.mainloop()
+
 
 
 ################### initialize and run ####################
