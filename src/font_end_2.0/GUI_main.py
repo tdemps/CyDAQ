@@ -1,12 +1,11 @@
 import tkinter as tk
 from tkinter import *
 from tkinter.ttk import Combobox
-from serial_comm import ctrl_comm
 from data_handle import raw_data, open_instruction
 from master_enum import parameter_options_input, parameter_options_filter, parameter_options_output, parameter_options
 from command_comm import cmd
+from serial_comm import ctrl_comm
 
-#TODO: Add Check logic for corner frequencies
 
 # https://www.daniweb.com/programming/software-development/code/484591/a-tooltip-class-for-tkinter
 
@@ -112,6 +111,7 @@ class CyDAQ_Config(tk.Frame):
 
 
         ########################## Initialize the Menu ########################
+
         file = Menu(menu, tearoff=0)
         menu.add_cascade(label="File", menu=file)
 
@@ -637,13 +637,13 @@ class SamplePage(tk.Frame):
             print("Error occurred getting data")
 
     def createStopButton(self):
+        global input, sampleRate, filter, upperCorner, lowerCorner, corner
         startButton.place_forget()
         stopButton.place(relx=.5, rely=.5, anchor=CENTER)
         print("Starting")
         print("Sampling Rate is: " + self.master.sampleRate)
-        cmd_obj.send_parameters(comm_port, self.master.input, self.master.sampleRate, self.master.filter, self.master.upperCorner, self.master.lowerCorner)
-        # if not raw_adc_data.collect_data(self.master.sampleRate, comm_port):
-        #     print("Error occurred getting data")
+        cmd_obj.send_parameters(comm_port, input, sampleRate, filter, upperCorner, lowerCorner, corner)
+
 
     def client_exit(self):
         exit()

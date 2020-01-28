@@ -1,8 +1,11 @@
 import time
 import threading
+import queue
 import serial
 import serial.tools.list_ports
 from tkinter import *
+import GUI_error_handle
+
 
 class ctrl_comm:
     """
@@ -18,16 +21,15 @@ class ctrl_comm:
             try:
                 self.__s_comm.port = self.get_port()
             except:
-                not_connected()
                 pass
         self.__s_comm.baudrate = 921600
         self.__s_comm.bytesize = serial.EIGHTBITS
         self.__s_comm.stopbits = serial.STOPBITS_ONE
-        self.__s_comm.xonxoff = True
+        self.__s_comm.xonxoff = False
         self.__s_comm.rtscts = False
         self.__s_comm.dsrdtr = False
-        self.__s_comm.parity = serial.PARITY_NONE
-        self.__s_comm.timeout = 1
+        self.__s_comm.parity = serial.PARITY_NONE #PARITY_EVEN
+        self.__s_comm.timeout = 4
         self.__order = "little"
 
     def close(self):
@@ -95,7 +97,6 @@ class ctrl_comm:
             self.__s_comm.open()
             self.__s_comm.flushInput()
             self.__s_comm.flushOutput()
-            # print(self.__s_comm.read(self.__s_comm.in_waiting()))
         else:
             self.__s_comm.flushInput()
 
@@ -194,32 +195,6 @@ class ctrl_comm:
         return self.__s_comm
 
 
-class not_connected:
-    def __init__(self):
-        root = Tk()
-        root.geometry("700x300")
-        rootTitle = Label(root, text="Zybo Connection", height=2, width=len("Zybo Connection"), font=44)
-        rootTitle.pack()
-        global not_connected_label
-        not_connected_labelName = "The Zybo is not connected or turned on."
-        not_connected_label = Label(root, text=not_connected_labelName, height=1, width=len(not_connected_labelName),
-                                    relief=RAISED, font=60)
-        not_connected_label.place(relx=.5, rely=.5, anchor=CENTER)
-        root.mainloop()
 
-    def quit(self):
-        exit()
 
-    def check_connection(self):
 
-        all_ports = serial.tools.list_ports.comports()
-        open_ports = []
-        for element in all_ports:
-            if "USB Serial Port" in element.description:
-                open_ports.append(element.device)
-        try:
-            zybo_port = open_ports[0]
-            port = str(zybo_port)
-            return port
-        except:
-            return False

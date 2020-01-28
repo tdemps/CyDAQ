@@ -2,8 +2,6 @@ from serial_comm import ctrl_comm
 from master_enum import parameter_options_filter, parameter_options, parameter_options_input, parameter_options_output,\
     sig_serial
 import struct
-import serial
-import serial.tools.list_ports
 
 ctrl_comm_obj = ctrl_comm()
 
@@ -14,7 +12,7 @@ class cmd:
                receives ACK! from the ZYBO
 
                Args:
-                   port_select = port that is selected i.e. the zybo port
+                   port_select: Zybo comm port
 
                Returns:
                    None
@@ -49,12 +47,17 @@ class cmd:
         else:
             return False
 
-    def send_parameters(self, port_select, input_set, sample_rate, filter_select, corner_freq_upper, corner_freq_lower):
+    def send_parameters(self, port_select, input_set, sample_rate, filter_select, corner_freq_upper, corner_freq_lower, corner_freq):
         """
         sends all parameters to the Zybo
 
         Args:
-        port_select = port that is selected i.e. the zybo port
+            port_select: Zybo comm port
+            input_set: input selection enum value
+            sample_rate: sample rate value
+            filter_select: filter select enum value
+            corner_freq_lower: lower corner frequency value
+            corner_freq_upper: upper corner frequency value
 
 
         Returns: None
@@ -76,7 +79,7 @@ class cmd:
                 self.send_filter(port_select, filter_select)
                 wait = 1
             elif cursor == 3 and wait == 0:
-                self.send_corner_freq(port_select, corner_freq_upper, corner_freq_lower)
+                self.send_corner_freq(port_select, corner_freq_upper, corner_freq_lower, corner_freq, filter_select)
                 wait = 1
             elif cursor == 4 and wait == 0:
                 self.send_start(port_select)
@@ -127,13 +130,14 @@ class cmd:
         else:
             self.__throw_exception('Sending fetch failed')
             return False
+
     def send_input(self, port_select, input_set):
         """
                 Sends the Input.
 
                 Args:
-                    port selection
-                    input selection
+                    port_select: Zybo comm port
+                    input_set: input select enum value
 
                 Returns:
                     True
@@ -155,7 +159,8 @@ class cmd:
                 Sends the Input.
 
                 Args:
-                    None
+                    port_select: Zybo comm port
+                    sample_rate: sample rate enum value
 
                 Returns:
                     True
@@ -177,11 +182,11 @@ class cmd:
                 Sends the Input.
 
                 Args:
-                    port selection
-                    filter selection
+                    port_select: Zybo comm port
+                    filter_select: filter selection enum
 
                 Returns:
-                    True
+                    True or False
                 """
         ctrl_comm_obj.open(port_select)
         if ctrl_comm_obj.isOpen() is True:
@@ -194,26 +199,37 @@ class cmd:
             self.__throw_exception('Sending filter failed')
             return False
 
-    def send_corner_freq(self, port_select, u_corner_freq, l_corner_freq):
+    def send_corner_freq(self, port_select, u_corner_freq, l_corner_freq, corner_freq, filter):
         """
                 Sends the Input.
 
                 Args:
-                    port selection
-                    upper corner freq
-                    lower corner freq
+                    port_select: Zybo comm port
+                    u_corner_freq: upper corner frequency value
+                    l_corner_freq: lower corner frequency value
 
 
                 Returns:
-                    True
+                    True or false
                 """
 
         ctrl_comm_obj.open(port_select)
         if ctrl_comm_obj.isOpen() is True:
-            ctrl_comm_obj.write(sig_serial.START_BYTE.value.encode())
-            ctrl_comm_obj.write(struct.pack('!BHH', parameter_options.corner_freq.value,  l_corner_freq, u_corner_freq))
-            print("Corner Frequency = " + str(u_corner_freq) + " / " + str(l_corner_freq))
-            ctrl_comm_obj.write(sig_serial.END_BYTE.value.encode())
+            if filter == (2 or 3):
+                ctrl_comm_obj.write(sig_serial.START_BYTE.value.encode())
+                ctrl_comm_obj.write(struct.pack('!BHH', parameter_options.corner_freq.value,  int(l_corner_freq), int(u_corner_freq)))
+                print("Corner Frequency = " + l_corner_freq + " / " + u_corner_freq)
+                ctrl_comm_obj.write(sig_serial.END_BYTE.value.encode())
+            elif filter == (0 or 5):
+                ctrl_comm_obj.write(sig_serial.START_BYTE.value.encode())
+                ctrl_comm_obj.write(struct.pack('!BHH', parameter_options.corner_freq.value, int(corner_freq), 0))
+                print("Corner Frequency = " + corner_freq + " / " + str(0))
+                ctrl_comm_obj.write(sig_serial.END_BYTE.value.encode())
+            elif filter == (1 or 4):
+                ctrl_comm_obj.write(sig_serial.START_BYTE.value.encode())
+                ctrl_comm_obj.write(struct.pack('!BHH', parameter_options.corner_freq.value,  int(corner_freq), 0))
+                print("Corner Frequency = " + corner_freq + " / " + str(0))
+                ctrl_comm_obj.write(sig_serial.END_BYTE.value.encode())
 
         else:
             self.__throw_exception('Sending corner freq failed')
@@ -224,10 +240,10 @@ class cmd:
                 Sends the Input.
 
                 Args:
-                    None
+                    port_select: Zybo comm port
 
                 Returns:
-                    True
+                    True or false
                 """
         ctrl_comm_obj.open(port_select)
         if ctrl_comm_obj.isOpen() is True:
@@ -244,11 +260,10 @@ class cmd:
                 Sends the Input.
 
                 Args:
-                    port selection
-
+                    port_select: Zybo comm port
 
                 Returns:
-                    True
+                    True or false
                 """
         ctrl_comm_obj.open(port_select)
         if ctrl_comm_obj.isOpen() is True:
@@ -272,7 +287,7 @@ class cmd:
                 Handshake between zybo and the cydaq
 
                 Args:
-                    port selection
+                    port_select: Zybo comm port
 
 
                 Returns:
