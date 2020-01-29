@@ -109,12 +109,13 @@ u8 xadcInit(){
 
 	XTmrCtr_SetOptions(&TimerCounterInst, TIMER_CNTR_0, XTC_INT_MODE_OPTION);
 	//set to default sample rate
-	xadcSetSampleRate(XADC_DEFAULT_RATE);
 
 	xadcSampleCount = 0;
 	samplingEnabled = false;
 	streamingEnabled = false;
 	xadcInitStatus = 1;
+	xadcSetSampleRate(XADC_DEFAULT_RATE);
+
 	return XST_SUCCESS;
 }
 
