@@ -1,14 +1,19 @@
 from serial_comm import ctrl_comm
-from master_enum import parameter_options_output, parameter_options_filter, parameter_options_input, parameter_options, sig_serial
+from master_enum import enum_output, enum_filter, enum_input, enum_commands, sig_serial
 import numpy as np
 from tkinter import filedialog, messagebox
 import csv
 import subprocess
 import struct
-import time as t
-serial_obj = ctrl_comm()
-port = ""
+from os import path
+import scipy.io as io
 
+serial_obj = ctrl_comm()
+
+def open_instruction():
+    chrome_address = r'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
+    file_path = path.join(path.dirname(path.abspath(__file__)),r'This is a test.pdf')
+    subprocess.Popen([chrome_address, file_path], shell=True)
 
 class raw_data:
     def __adc_data(self, sampling_rate, zport):
@@ -19,19 +24,23 @@ class raw_data:
         :param zport: zybo port
         :return: numpy array containing all the data and time
         """
-
+        #stores incoming bytes from serial
         data_array = bytearray()
+        #used to assign timestamps to each sample
         time = 0
+        #increment added to give samples timestamps. Initialized as variable to save clocks
         sec_per_sample = 1 / int(sampling_rate)
+        #end sequence sent by zybo saying sample transfer is complete
         end_seq = '00000000'.encode('ascii')
+
         serial_obj.open(zport)
 
+        #wait for start character from zybo before reading data
         while serial_obj.read_byte() != sig_serial.START_BYTE.value:
             pass
 
         print("Reading Samples...", end='')
         try:
-            # data_array.append(serial_obj.getSerialObj().read_until())
             while(1):
                 pending = serial_obj.getSerialObj().inWaiting()
                 if pending:
@@ -39,18 +48,7 @@ class raw_data:
                     data_array.extend(read)
                 elif( len(data_array) > 8 and data_array[-len("00000000"):] == end_seq):
                     break
-                    # pending = serial_obj.getSerialObj().inWaiting()
-                    # if pending:
-                    #     data_array.append(serial_obj.getSerialObj().read(pending))
-                    # elif errcnt > 5:
-                    #     break
-                    # else:
-                    #     t.sleep(0.2)
-                    #     errcnt += 1
-                    # while(cnt < sample_burst_size):
-                    #     sample = serial_obj.read_uint16()
-                    #     data_array.append(sample)
-                    #     cnt += 1
+
             print('done.')
             serial_obj.close()
             data_array = data_array.rstrip(end_seq)
@@ -109,24 +107,27 @@ class raw_data:
 
 
         try:
-            f = filedialog.asksaveasfile(mode='w', defaultextension=".csv", filetypes=(("CSV file", ".*csv"),
-                                                                                       ("All Files", "*.*")))
+            f = filedialog.asksaveasfile(mode='w', defaultextension=".csv", filetypes=[("CSV File", ".*csv"),("MAT File", ".mat"),
+                                                                                       ("All Files", "*.*")])
             if f is None:  # asksaveasfile return `None` if dialog closed with "cancel".
                 return
-            with open(f.name, 'w', newline='') as output:
-                print("Writing to:",f.name)
-                w = csv.writer(output)
-                w.writerow(['Time (s)','Value (Decimal)', 'Voltage (V)'])
-                w.writerows(data_array)
+            print("Writing to:", f.name, '...', end='')
+
+            if f.name[-4:] == '.csv':
+                with open(f.name, 'w', newline='') as output:
+                    w = csv.writer(output)
+                    w.writerow(['Time (s)','Value (Decimal)', 'Voltage (V)'])
+                    w.writerows(data_array)
+
+            elif f.name[-4:] == '.mat':
+                tmp = dict(data=data_array[:,1].tolist(), time=data_array[:,0].tolist())
+                io.savemat(file_name=str(f.name),appendmat=False, mdict=tmp)
 
             f.close()
-            print("File Write Complete.")
+            print("Done.")
         except Exception as e:
-            print("Error saving csv, do you have that file open currently?")
+            print("Error saving file, do you have that file open in another program?")
 
 
-class open_instruction:
-    def open_pdf(self):
-        chrome_address = r'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
-        file_path = r'U:\ETG\EE_224\src\font_end_2.0\This is a test.pdf'
-        subprocess.Popen([chrome_address, file_path], shell=True)
+
+

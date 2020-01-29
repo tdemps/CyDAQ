@@ -2,9 +2,9 @@ import tkinter as tk
 from tkinter import *
 from tkinter.ttk import Combobox
 from data_handle import raw_data, open_instruction
-from master_enum import parameter_options_input, parameter_options_filter, parameter_options_output, parameter_options
+from master_enum import enum_input, enum_filter, enum_output
 from command_comm import cmd
-from serial_comm import ctrl_comm
+from serial_comm import get_port
 
 
 # https://www.daniweb.com/programming/software-development/code/484591/a-tooltip-class-for-tkinter
@@ -17,15 +17,16 @@ lowerCornerMin = 100
 lowerCornerMax = 20000
 upperCornerMin = 2000
 upperCornerMax = 40000
+sampleRateMin = 100
+sampleRateMax = 50000
 corner = 100
 inputSel = ""
 filterSel = "6th Order Band Pass"
 outSel = ""
 sampleRate = "44100"
 comm_port = ""
-serial_obj = ctrl_comm()
+#serial_obj = ctrl_comm()
 raw_adc_data = raw_data()
-pdf = open_instruction()
 cmd_obj = cmd()
 
 title = "CyDAQ 2.0 by ETG"
@@ -71,7 +72,8 @@ class CyDAQ_GUI(tk.Tk):
         tk.Tk.__init__(self)
         self._frame = None
         self.switch_frame(CyDAQ_Config)
-        comm_port = serial_obj.get_port()
+        global comm_port
+        comm_port = get_port()
 
         # For debugging only
         #global filterSel
@@ -126,7 +128,7 @@ class CyDAQ_Config(tk.Frame):
         menu.add_cascade(label="Configure CyDAQ", menu=ConfigureCydaq)
 
         # Set up Cascade for CyDAQ Configuration Menu
-        ConfigureCydaq.add_command(label="Setup Instructions")
+        ConfigureCydaq.add_command(label="Setup Instructions", command=open_instruction)
         ConfigureCydaq.add_command(label="CyDAQ Setup")
 
         # Setup Sampling Menu
@@ -246,7 +248,7 @@ class CyDAQ_Config(tk.Frame):
         checkWidget = event.widget
         checkString = checkWidget.get()
         if checkString.isnumeric():
-            if (int(checkString) < 100) or (int(checkString) > 50000):
+            if (int(checkString) < sampleRateMin) or (int(checkString) > sampleRateMax):
                 event.widget.delete(0, END)
                 event.widget.insert(END, "44100")
                 root = Tk()
@@ -516,49 +518,6 @@ class CyDAQ_Config(tk.Frame):
         ##### Taylor thinks it would be better to stick with globals ###
         ##### because all locals are lost inbetween frames #############
         # TODO: please fix for Taylor's sanity
-        self.master.upperCorner = self.upperCornerSelect.get()
-        self.master.lowerCorner = self.lowerCornerSelect.get()
-        self.master.corner = self.cornerSelect.get()
-        self.master.input = self.inputSelectComboBox.get()
-        if self.master.input == "5 volt":
-            self.master.input = parameter_options_input.volt_5.value
-        elif self.master.input == "3.3 volt":
-            self.master.input = parameter_options_input.volt_3.value
-        elif self.master.input == "1.8 volt":
-            self.master.input = parameter_options_input.volt_1.value
-        elif self.master.input == "Analog In":
-            self.master.input = parameter_options_input.analog_in.value
-        elif self.master.input == "Audio In":
-            self.master.input = parameter_options_input.audio_in.value
-        elif self.master.input == "Digital I2C Bus":
-            self.master.input = parameter_options_input.digital_i2c.value
-        elif self.master.input == "Digital SPI Bus":
-            self.master.input = parameter_options_input.digital_spi_bus.value
-        elif self.master.input == "Digital UART":
-            self.master.input = parameter_options_input.digital_uart.value
-        self.master.filter = self.filterSelectComboBox.get()
-        if self.master.filter == "All Pass":
-            self.master.filter = parameter_options_filter.NO_FILTER.value
-        elif self.master.filter == "60 hz Notch":
-            self.master.filter = parameter_options_filter.NOTCH.value
-        elif self.master.filter == "1st Order High Pass":
-            self.master.filter = parameter_options_filter.HP1.value
-        elif self.master.filter == "1st Order Low Pass":
-            self.master.filter = parameter_options_filter.LP1.value
-        elif self.master.filter == "2nd Order Band Pass":
-            self.master.filter = parameter_options_filter.BP2.value
-        elif self.master.filter == "6th Order High Pass":
-            self.master.filter = parameter_options_filter.HP6.value
-        elif self.master.filter == "6th Order Low Pass":
-            self.master.filter = parameter_options_filter.LP6.value
-        elif self.master.filter == "6th Order Band Pass":
-            self.master.filter = parameter_options_filter.BP6.value
-        self.master.output = self.outSelectComboBox.get()
-        if self.master.output == "XADC":
-            self.master.output = parameter_options_output.xadc.value
-        elif self.master.output == "Digital":
-            self.master.output = parameter_options_output.digital.value
-        self.master.sampleRate = self.sampleRateEntry.get()
 
         ##### This is what is used to update the global variables to save state inbetween frames ########
         #### This is all the code that should be included in this function ######
@@ -577,6 +536,8 @@ class CyDAQ_Config(tk.Frame):
         upperCorner = self.upperCornerSelect.get()
         lowerCorner = self.lowerCornerSelect.get()
         sampleRate = self.sampleRateEntry.get()
+
+
 
 
 ####################### The Page to Initialize Sampling on the CyDAQ #######################
@@ -614,7 +575,7 @@ class SamplePage(tk.Frame):
         menu.add_cascade(label="Configure CyDAQ", menu=ConfigureCydaq)
 
         # Set up Cascade for CyDAQ Configuration Menu
-        ConfigureCydaq.add_command(label="Setup Instructions")
+        ConfigureCydaq.add_command(label="Setup Instructions", command=open_instruction)
         ConfigureCydaq.add_command(label="CyDAQ Setup", command=self.killSwitchConfig)
 
         # Setup Sampling Menu
@@ -627,23 +588,72 @@ class SamplePage(tk.Frame):
         SampleData.add_cascade(label="Test Connection", menu=COMport)
         COMport.add_command(label="Ping", command=PingCyDAQ)
         SampleData.add_command(label="Start Sampling")
+        self.inputEnum = None
+        self.outputEnum = None
+        self.sampleRate = sampleRate
+        self.filterEnum = None
+        self.lowerCorner = lowerCorner
+        self.upperCorner = upperCorner
+        self.midCorner = corner
 
     def createStartButton(self):
         stopButton.place_forget()
         startButton.place(relx=.5, rely=.5, anchor=CENTER)
         print("Stopping")
         cmd_obj.send_stop_cmd(comm_port)
-        if not raw_adc_data.collect_data(self.master.sampleRate, comm_port):
+        if not raw_adc_data.collect_data(sampleRate, comm_port):
             print("Error occurred getting data")
 
     def createStopButton(self):
-        global input, sampleRate, filter, upperCorner, lowerCorner, corner
+        self.nameToEnum()
+        result = cmd_obj.send_parameters(comm_port, self.inputEnum, self.sampleRate, self.filterEnum, self.upperCorner, self.lowerCorner, self.midCorner)
+        if result is False:
+            print("Error connecting to cyDaq, try ping test to confirm")
+            return
         startButton.place_forget()
         stopButton.place(relx=.5, rely=.5, anchor=CENTER)
         print("Starting")
-        print("Sampling Rate is: " + self.master.sampleRate)
-        cmd_obj.send_parameters(comm_port, input, sampleRate, filter, upperCorner, lowerCorner, corner)
 
+    def nameToEnum(self):
+        global inputSel, filterSel
+        if inputSel == "5 volt":
+            self.inputEnum = enum_input.volt_5.value
+        elif inputSel == "3.3 volt":
+            self.inputEnum = enum_input.volt_3.value
+        elif inputSel == "1.8 volt":
+            self.inputEnum = enum_input.volt_1.value
+        elif inputSel == "Analog In":
+            self.inputEnum = enum_input.analog_in.value
+        elif inputSel == "Audio In":
+            self.inputEnum = enum_input.audio_in.value
+        elif inputSel == "Digital I2C Bus":
+            self.inputEnum = enum_input.digital_i2c.value
+        elif inputSel == "Digital SPI Bus":
+            self.inputEnum = enum_input.digital_spi_bus.value
+        elif inputSel == "Digital UART":
+            self.inputEnum = enum_input.digital_uart.value
+
+        if filterSel == "All Pass":
+            self.filterEnum = enum_filter.NO_FILTER.value
+        elif filterSel == "60 hz Notch":
+            self.filterEnum = enum_filter.NOTCH.value
+        elif filterSel == "1st Order High Pass":
+            self.filterEnum = enum_filter.HP1.value
+        elif filterSel == "1st Order Low Pass":
+            self.filterEnum = enum_filter.LP1.value
+        elif filterSel == "2nd Order Band Pass":
+            self.filterEnum = enum_filter.BP2.value
+        elif filterSel == "6th Order High Pass":
+            self.filterEnum = enum_filter.HP6.value
+        elif filterSel == "6th Order Low Pass":
+            self.filterEnum = enum_filter.LP6.value
+        elif filterSel == "6th Order Band Pass":
+            self.filterEnum = enum_filter.BP6.value
+
+        if outSel == "XADC":
+            output = enum_output.xadc.value
+        elif outSel == "Digital":
+            output = enum_output.digital.value
 
     def client_exit(self):
         exit()
@@ -671,7 +681,7 @@ class PingCyDAQ:
         root.title("ETG")
         rootTitle = Label(root, text="Connection Test", height=1, width=len("Connection Test"))
         rootTitle.pack()
-        if serial_obj.ping_zybo(comm_port):
+        if cmd_obj.ping_zybo(comm_port):
             print("Test Passed")
             global ping_success_label
             ping_success_labelName = "Ping Successful"

@@ -1,6 +1,5 @@
 from enum import IntEnum, Enum
 
-
 class sig_serial(Enum):
     """
     This class defines a table of commands that are sent between the firmware
@@ -11,7 +10,7 @@ class sig_serial(Enum):
     START_BYTE = "@"    # decimal for '@'
 
 
-class parameter_options(IntEnum):
+class enum_commands(IntEnum):
     """
            This class defines a table of commands that are sent to the ZYBO specifying the settings for
            the Zybo
@@ -27,7 +26,7 @@ class parameter_options(IntEnum):
     STOP = 9
 
 
-class parameter_options_filter(IntEnum):
+class enum_filter(IntEnum):
     """
            This class defines a table of commands that are sent to the ZYBO specifying the settings for
            the Zybo
@@ -43,7 +42,7 @@ class parameter_options_filter(IntEnum):
     NO_FILTER = 7
 
 
-class parameter_options_input(IntEnum):
+class enum_input(IntEnum):
     """
            This class defines a table of commands that are sent to the ZYBO specifying the settings for
            the Zybo
@@ -60,7 +59,7 @@ class parameter_options_input(IntEnum):
     digital_uart = 7
 
 
-class parameter_options_output(IntEnum):
+class enum_output(IntEnum):
     """
            This class defines a table of commands that are sent to the ZYBO specifying the settings for
            the Zybo

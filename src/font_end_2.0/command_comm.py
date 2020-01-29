@@ -1,7 +1,8 @@
 from serial_comm import ctrl_comm
-from master_enum import parameter_options_filter, parameter_options, parameter_options_input, parameter_options_output,\
+from master_enum import enum_filter, enum_commands, enum_input, enum_output,\
     sig_serial
 import struct
+import time as t
 
 ctrl_comm_obj = ctrl_comm()
 
@@ -38,6 +39,9 @@ class cmd:
                     if buffer == "ACK":
                         print("Data Received")
                         return True
+                    elif buffer == 'ERR':
+                        print('CyDAQ encountered error during configuration, contact ETG')
+                        return False
                     else:
                         # self.__throw_exception('ack was not received')
                         print("'ack' was not received")
@@ -60,11 +64,13 @@ class cmd:
             corner_freq_upper: upper corner frequency value
 
 
-        Returns: None
+        Returns: True if cydaq was programmed successfully, false otherwise
 
         """
-
-        ctrl_comm_obj.open(port_select)
+        try:
+            ctrl_comm_obj.open(port_select)
+        except ValueError as e:
+            return False
         cnt = 0
         cursor = 0
         wait = 0
@@ -100,6 +106,8 @@ class cmd:
             print("Commands Not Sent/Received")
         ctrl_comm_obj.close()
 
+        return True
+
     def send_stop_cmd(self, port_select):
         cursor = 0
         wait = 0
@@ -111,24 +119,23 @@ class cmd:
             elif cursor == 1:
                 self.send_fetch(port_select)
                 wait = 1
-            if wait == 1:
-                if self.recieve_acknowlege_zybo(port_select):
-                    print("Ack received")
-                    cursor += 1
-                    wait = 0
-                else:
-                    pass
+            if wait == 1 and self.recieve_acknowlege_zybo(port_select):
+                print("Sampling stop ACK received")
+                cursor += 1
+                wait = 0
+            else:
+                pass
         ctrl_comm_obj.close()
 
     def send_fetch(self, port_select):
         ctrl_comm_obj.open(port_select)
         if ctrl_comm_obj.isOpen() is True:
             ctrl_comm_obj.write(sig_serial.START_BYTE.value.encode())
-            ctrl_comm_obj.write(struct.pack('!B', parameter_options.fetch_samples.value))
+            ctrl_comm_obj.write(struct.pack('!B', enum_commands.fetch_samples.value))
             ctrl_comm_obj.write(sig_serial.END_BYTE.value.encode())
 
         else:
-            self.__throw_exception('Sending fetch failed')
+            self.__throw_exception('Sample transfer init failed')
             return False
 
     def send_input(self, port_select, input_set):
@@ -145,8 +152,8 @@ class cmd:
         ctrl_comm_obj.open(port_select)
         if ctrl_comm_obj.isOpen() is True:
             ctrl_comm_obj.write(sig_serial.START_BYTE.value.encode())
-            ctrl_comm_obj.write(struct.pack('!B', parameter_options.input_select.value))
-            ctrl_comm_obj.write(struct.pack('!B', input_set))
+            ctrl_comm_obj.write(struct.pack('!B', enum_commands.input_select.value))
+            ctrl_comm_obj.write(struct.pack('!B', int(input_set)))
             print("Input set Enum = " + str(input_set))
             ctrl_comm_obj.write(sig_serial.END_BYTE.value.encode())
 
@@ -169,12 +176,12 @@ class cmd:
         ctrl_comm_obj.open(port_select)
         if ctrl_comm_obj.isOpen() is True:
             ctrl_comm_obj.write(sig_serial.START_BYTE.value.encode())
-            ctrl_comm_obj.write(struct.pack('!Bi', parameter_options.sample_rate.value, int(sample_rate)))
+            ctrl_comm_obj.write(struct.pack('!BI', enum_commands.sample_rate.value, int(sample_rate)))
             print("Sample Rate = " + sample_rate)
             ctrl_comm_obj.write(sig_serial.END_BYTE.value.encode())
 
         else:
-            self.__throw_exception('Sending Input Failed')
+            self.__throw_exception('Sending Sample Rate Failed')
             return False
 
     def send_filter(self, port_select, filter_select):
@@ -191,7 +198,7 @@ class cmd:
         ctrl_comm_obj.open(port_select)
         if ctrl_comm_obj.isOpen() is True:
             ctrl_comm_obj.write(sig_serial.START_BYTE.value.encode())
-            ctrl_comm_obj.write(struct.pack('!BB', parameter_options.filter.value, filter_select))
+            ctrl_comm_obj.write(struct.pack('!BB', enum_commands.filter.value, int(filter_select)))
             print("Filter Enum = " + str(filter_select))
             ctrl_comm_obj.write(sig_serial.END_BYTE.value.encode())
 
@@ -212,25 +219,24 @@ class cmd:
                 Returns:
                     True or false
                 """
-
+        val_to_write = None
         ctrl_comm_obj.open(port_select)
-        if ctrl_comm_obj.isOpen() is True:
-            if filter == (2 or 3):
-                ctrl_comm_obj.write(sig_serial.START_BYTE.value.encode())
-                ctrl_comm_obj.write(struct.pack('!BHH', parameter_options.corner_freq.value,  int(l_corner_freq), int(u_corner_freq)))
-                print("Corner Frequency = " + l_corner_freq + " / " + u_corner_freq)
-                ctrl_comm_obj.write(sig_serial.END_BYTE.value.encode())
-            elif filter == (0 or 5):
-                ctrl_comm_obj.write(sig_serial.START_BYTE.value.encode())
-                ctrl_comm_obj.write(struct.pack('!BHH', parameter_options.corner_freq.value, int(corner_freq), 0))
-                print("Corner Frequency = " + corner_freq + " / " + str(0))
-                ctrl_comm_obj.write(sig_serial.END_BYTE.value.encode())
-            elif filter == (1 or 4):
-                ctrl_comm_obj.write(sig_serial.START_BYTE.value.encode())
-                ctrl_comm_obj.write(struct.pack('!BHH', parameter_options.corner_freq.value,  int(corner_freq), 0))
-                print("Corner Frequency = " + corner_freq + " / " + str(0))
-                ctrl_comm_obj.write(sig_serial.END_BYTE.value.encode())
 
+        if ctrl_comm_obj.isOpen() is True:
+            if filter == enum_filter.BP2.value or filter == enum_filter.BP6.value:
+                val_to_write = struct.pack('!BHH', enum_commands.corner_freq.value, int(l_corner_freq), int(u_corner_freq))
+                print("Corner Frequency = " + l_corner_freq + " / " + u_corner_freq)
+            elif filter == enum_filter.LP1.value or filter == enum_filter.LP6.value:
+                val_to_write = struct.pack('!BHH', enum_commands.corner_freq.value, int(corner_freq), 0)
+                print("Corner Frequency = " + corner_freq + " / " + str(0))
+            elif filter == enum_filter.HP1.value or filter == enum_filter.HP6.value:
+                val_to_write = struct.pack('!BHH', enum_commands.corner_freq.value, int(corner_freq), 0)
+                print("Corner Frequency = " + corner_freq + " / " + str(0))
+
+            ctrl_comm_obj.write(sig_serial.START_BYTE.value.encode())
+            ctrl_comm_obj.write(val_to_write)
+            ctrl_comm_obj.write(sig_serial.END_BYTE.value.encode())
+            return True
         else:
             self.__throw_exception('Sending corner freq failed')
             return False
@@ -248,7 +254,7 @@ class cmd:
         ctrl_comm_obj.open(port_select)
         if ctrl_comm_obj.isOpen() is True:
             ctrl_comm_obj.write(sig_serial.START_BYTE.value.encode())
-            ctrl_comm_obj.write(struct.pack('!B', parameter_options.START.value))
+            ctrl_comm_obj.write(struct.pack('!B', enum_commands.START.value))
             ctrl_comm_obj.write(sig_serial.END_BYTE.value.encode())
 
         else:
@@ -268,7 +274,7 @@ class cmd:
         ctrl_comm_obj.open(port_select)
         if ctrl_comm_obj.isOpen() is True:
             ctrl_comm_obj.write(sig_serial.START_BYTE.value.encode())
-            ctrl_comm_obj.write(struct.pack('!B', parameter_options.STOP.value))
+            ctrl_comm_obj.write(struct.pack('!B', enum_commands.STOP.value))
             ctrl_comm_obj.write(sig_serial.END_BYTE.value.encode())
 
 
@@ -293,45 +299,54 @@ class cmd:
                 Returns:
                     None
                 """
-        ctrl_comm_obj.open(port_select)
+        try:
+            ctrl_comm_obj.open(port_select)
+        except ValueError as e:
+            return False
         if ctrl_comm_obj.isOpen() is True:
             ctrl_comm_obj.write(sig_serial.START_BYTE.value.encode('ascii'))
-            ctrl_comm_obj.write(struct.pack('!B', parameter_options.ping.value))
+            ctrl_comm_obj.write(struct.pack('!B', enum_commands.ping.value))
             ctrl_comm_obj.write(sig_serial.END_BYTE.value.encode('ascii'))
+            cnt = 0
             while True:
                 if self.recieve_acknowlege_zybo(port_select):
-                    if ctrl_comm_obj.read_byte() == sig_serial.START_BYTE.value:
-                        buffer = ""
-                        byte_value = ""
-                        if len(buffer) < 20:
-                            while byte_value != sig_serial.END_BYTE.value:
-                                byte_value = ctrl_comm_obj.read_byte()
-                                if byte_value != sig_serial.END_BYTE.value:
-                                    buffer += byte_value
-                        else:
-                            print("Acknowledge was incorrect")
-                            return False
-                        if buffer == 'ACK':
-                            print(buffer)
-                            return True
-                        else:
-                            print("Acknowledge was incorrect")
-                            return False
-                    else:
-                        pass
+                    return True
+                elif cnt > 10:
+                    return False
                 else:
-                    pass
+                    t.sleep(0.1)
+                    cnt += 1
+                    # if ctrl_comm_obj.read_byte() == sig_serial.START_BYTE.value:
+                    #     buffer = ""
+                    #     byte_value = ""
+                    #     if len(buffer) < 20:
+                    #         while byte_value != sig_serial.END_BYTE.value:
+                    #             byte_value = ctrl_comm_obj.read_byte()
+                    #             if byte_value != sig_serial.END_BYTE.value:
+                    #                 buffer += byte_value
+                    #     else:
+                    #         print("Acknowledge was incorrect")
+                    #         return False
+                    #     if buffer == 'ACK':
+                    #         print(buffer)
+                    #         return True
+                    #     else:
+                    #         print("Acknowledge was incorrect")
+                    #         return False
+                    # else:
+                    #     pass
         else:
             return False
 
-    def decimal_to_binary(self, number):
-        bin_num = bin(int(number))
-        return bin_num
-
-    def binary_to_hex(self, number):
-        hex_num = hex(int(number, 2))
-        return hex_num
-
-    def hex_to_dec(self, hex_number):
-        dec_num = str(int(hex_number, 16))
-        return dec_num
+    #not needed since struct library takes care of byte convertions for us
+    # def decimal_to_binary(self, number):
+    #     bin_num = bin(int(number))
+    #     return bin_num
+    #
+    # def binary_to_hex(self, number):
+    #     hex_num = hex(int(number, 2))
+    #     return hex_num
+    #
+    # def hex_to_dec(self, hex_number):
+    #     dec_num = str(int(hex_number, 16))
+    #     return dec_num
