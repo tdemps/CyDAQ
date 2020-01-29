@@ -10,7 +10,7 @@ static XSysMon SysMonInst;
 static u32 xadcSampleRate = 0, resetValue = 0xFD050E58; //current sample rate (samples/s) and reset value for timer
 static XTmrCtr TimerCounterInst;
 XSysMon* SysMonInstPtr = &SysMonInst;
-u8 initialized = 0; //whether XADC has been initialized
+u8 xadcInitStatus = 0; //whether XADC has been initialized
 //static XScuGic InterruptController;
 SAMPLE_TYPE xadcBuffer[RX_BUFFER_SIZE];
 volatile u32 xadcSampleCount = 0;
@@ -39,9 +39,11 @@ u8 xadcInit(){
 
 	XSysMon_CfgInitialize(SysMonInstPtr, SYSConfigPtr, SYSConfigPtr->BaseAddress);
 
-	address = SYSConfigPtr->BaseAddress;
-	if(DEBUG)
+	if(DEBUG){
+		address = SYSConfigPtr->BaseAddress;
 		xil_printf("XADC using Sysmon -> base address %lx \n\r", address);
+	}
+
 
 	//status = xadcSetupInterruptSystem(&InterruptController, &SysMonInst, XADC_INTR_ID);
 //	if (status != XST_SUCCESS) {
@@ -59,7 +61,7 @@ u8 xadcInit(){
     XSysMon_SetSequencerMode(SysMonInstPtr, XSM_SEQ_MODE_SAFE);
     status =  XSysMon_GetSeqInputMode(SysMonInstPtr);
     //disables averaging on all inputs
-    XSysMon_SetSeqAvgEnables(SysMonInstPtr, 0);
+    XSysMon_SetSeqAvgEnables(SysMonInstPtr, XSM_AVG_0_SAMPLES);
     //clear the old status
     XSysMon_GetStatus(SysMonInstPtr);
 //    intrStatusValue = Xil_In16(SYSConfigPtr->BaseAddress+XSM_CFR0_OFFSET);
@@ -81,9 +83,14 @@ u8 xadcInit(){
 	//disables averaging
 	XSysMon_SetAvg(SysMonInstPtr, XSM_AVG_0_SAMPLES);
 	//set sequencer to continually sample enabled inputs
-	XSysMon_SetSequencerMode(SysMonInstPtr, XSM_SEQ_MODE_CONTINPASS); //XSM_SEQ_MODE_SINGCHAN XSM_SEQ_MODE_SINGCHAN
-
-//	status = XSysMon_SetSingleChParams(SysMonInstPtr, XSM_SEQ_CH_AUX14, 0, 0, 0);
+	XSysMon_SetSequencerMode(SysMonInstPtr, XADC_SEQ_SETTING); //XSM_SEQ_MODE_SINGCHAN XSM_SEQ_MODE_CONTINPASS
+	usleep(1000);
+	if(XADC_SEQ_SETTING == XSM_SEQ_MODE_SINGCHAN){
+		status = XSysMon_SetSingleChParams(SysMonInstPtr, AUX_14_INPUT, 0, 1, 0);
+		if (status != XST_SUCCESS) {
+					return XST_FAILURE;
+		}
+	}
 
 
 	if(DEBUG)
@@ -107,8 +114,8 @@ u8 xadcInit(){
 	xadcSampleCount = 0;
 	samplingEnabled = false;
 	streamingEnabled = false;
-	initialized = 1;
-	return 0;
+	xadcInitStatus = 1;
+	return XST_SUCCESS;
 }
 
 XSysMon* xadcGetSysMonPtr(){
@@ -173,7 +180,7 @@ void xadcDisableSampling(){
  */
 void xadcEnableSampling(u8 streamSetting){
 	//checks that XADC has been initialized
-	if(initialized == 0){
+	if(xadcInitStatus == 0){
 		xadcInit();
 	}
 	if(DEBUG)
@@ -195,14 +202,11 @@ void xadcEnableSampling(u8 streamSetting){
 		//checks for bytes received on uart, 1 at a time to minimize cycles used
 		numBytes += comUartRecv(&buf[numBytes], 1);
 		//waits for xadc to finish conversion of current sample
-		while ((XSysMon_GetStatus(&SysMonInst) & XSM_SR_EOS_MASK) != XSM_SR_EOS_MASK);
+		while ((XSysMon_GetStatus(&SysMonInst) & XSM_SR_EOC_MASK) != XSM_SR_EOC_MASK);
 		//restarts timer for next sample.
 		XTmrCtr_Start(&TimerCounterInst, TIMER_CNTR_0);
-		//u32 status = (XSysMon_GetStatus(&SysMonInst));
-
 		//stores raw 12bit sample (shifted right 4).
 		xadcBuffer[xadcSampleCount] = (SAMPLE_TYPE) (XSysMon_GetAdcData(&SysMonInst, AUX_14_INPUT) >> 4); // & 4095;
-
 		//if streaming is enabled, send the samples back (MAY AFFECT SAMPLE COLLECTION PERFORMANCE)
 		if(streamingEnabled){
 			//commUartSend(&xadcBuffer[i], 2);
@@ -252,6 +256,10 @@ int xadcFractionToInt(float FloatNum){
  * Rate should be given in SPS. Configures timer to count at rate that matches sample rate.
  */
 int xadcSetSampleRate(u32 rate){
+
+	if(xadcInitStatus == 0){
+			xadcInit();
+	}
 
 	if(rate > XADC_MAX_SAMPLE_RATE){
 		if(DEBUG)
@@ -356,16 +364,21 @@ void xadcProcessSamples(){
 	}else{
 		xil_printf("%c", COMM_START_CHAR);
 		while(ptr < lastVal){
+			//if we are on the last burst is smaller than the burst limit, resize window so we don't miss end samples
 			if(ptr+burstSize > lastVal){ burstSize = lastVal-ptr; }
 			while(sent < burstSize){
 				sent += commUartSend((ptr+sent), burstSize-sent);
 			}
+			//increment pointer to sample array
 			ptr += burstSize;
 			usleep(1);
+			//reset temp variable
 			sent = 0;
 		}
+		//clear UART out buffer before sending end sequence
 		usleep(100);
 		xil_printf("00000000"); //COMM_STOP_CHAR, COMM_STOP_CHAR);
+		//Needed to give GUI time to reset itself
 		usleep(50000);
 	}
 

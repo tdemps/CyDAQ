@@ -160,7 +160,7 @@ void commTest(){
 void filterTest(){
 	xil_printf("**********Filter Test**********\nDefaults: Filter=1st Order LP, Corners=10k,20k, Input=Analog\n");
 	xil_printf("Type 'I#' or 'F#' + [Enter]to select input/filter (# should follow enums in shared_definitions.h)\n'U' or 'D' + [Enter] to increase/decrease corners.\n");
-	xil_printf("Put # after D or U to add multipler to freq change (1000*#).\'E[Enter]' to exit test\n\n");
+	xil_printf("E[Enter]' to exit test\n\n");
     FILTER_FREQ_TYPE highpass = 10000, lowpass = 20000;	  //1550hz -> 10k ohm, 15000hz -> 1k ohm
 	u8 selectedFilter = FILTER_1ST_ORDER_LP, buttons = 0, numBytes = 0, status = 0;
 	u8 buf[20];
@@ -179,9 +179,8 @@ void filterTest(){
 				}else if(buf[0] == 'E' || buf[0] == 'e'){
 					break;
 				}else if(buf[0] == 'U' || buf[0] == 'u'){
-					u8 multiplier = (numBytes > 2) ? buf[1]-'0' : 1;
-					highpass += 1000 * multiplier;
-					lowpass += 1000 * multiplier;
+					highpass += 1000;
+					lowpass += 1000;
 					status = tuneFilter(selectedFilter, highpass, lowpass);
 					if(status == 0){
 						xil_printf("Increasing corners to: %d, %d\n", highpass, lowpass);
@@ -191,9 +190,8 @@ void filterTest(){
 						lowpass = 20000;
 					}
 				}else if(buf[0] == 'D' || buf[0] == 'd'){
-					u8 multiplier = (numBytes > 2) ? buf[1]-'0' : 0;
-					highpass -= 1000 * multiplier;
-					lowpass -= 1000 * multiplier;
+					highpass -= 1000;
+					lowpass -= 1000;
 					xil_printf("Increasing corners to: %d, %d\n", highpass, lowpass);
 					status = tuneFilter(selectedFilter, highpass, lowpass);
 					if(status != 0){

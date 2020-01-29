@@ -321,6 +321,7 @@ void commRXTask(){
 		receiveBuffer[0] = receiveBuffer[bytesReceived-1] = 0;
 		bytesReceived = 0;
 		if(err == true){
+			//should be ERR instead of ACK, used to test GUI elements
 //			xil_printf("%cERR%c", COMM_START_CHAR, COMM_STOP_CHAR);
 			xil_printf("%cACK%c", COMM_START_CHAR, COMM_STOP_CHAR);
 

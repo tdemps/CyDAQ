@@ -35,6 +35,7 @@
 #define INTC_DEVICE_ID		XPAR_SCUGIC_SINGLE_DEVICE_ID
 #define AUX_14_INPUT (XSM_CH_AUX_MIN + 14)
 #define SAMPLE_TYPE u16
+#define XADC_SEQ_SETTING XSM_SEQ_MODE_SINGCHAN
 
 /**
  * Function that converts raw 12bit sample to voltage (float)

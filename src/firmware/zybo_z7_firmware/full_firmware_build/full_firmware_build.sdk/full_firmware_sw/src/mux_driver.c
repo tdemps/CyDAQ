@@ -3,7 +3,7 @@
 //holds GPIO object used in XGPIO library
 static XGpio GPIO_MUX;
 //saves state of mux class (if init has been called)
-static u8 initialized = 0;
+static u8 muxInitStatus = 0;
 //global that contains currently selected filter
 extern filters_e activeFilter;
 //static const MUX_SELECT_TYPE inputMuxPins[] = {0x8, 0x4, 0x2}; //Input select lines S0-S3 on JE header.
@@ -63,7 +63,7 @@ int muxInit(){
 	//set gpio pins to be all outputs (assuming mux pins are the only ones on this channel)
 	XGpio_SetDataDirection(&GPIO_MUX, MUX_GPIO_CHANNEL, 0x00);
 
-	initialized = 1;
+	muxInitStatus = 1;
 
 	//set pins to default state
 	muxSetActiveFilter(FILTER_PASSTHROUGH);
@@ -78,7 +78,7 @@ int muxInit(){
 u8 muxSetActiveFilter( filters_e filterSelect){
 
 	//checks if gpio module has been initialized
-	if(initialized == 0){
+	if(muxInitStatus == 0){
 		muxInit();
 	}
 	//checks if input is valid
@@ -103,7 +103,7 @@ u8 muxSetActiveFilter( filters_e filterSelect){
 u8 muxSetInputPins( inputs_e inputSelect){
 
 	//checks if gpio module has been initialized
-	if(initialized == 0){
+	if(muxInitStatus == 0){
 		muxInit();
 	}
 	//checks if input is valid

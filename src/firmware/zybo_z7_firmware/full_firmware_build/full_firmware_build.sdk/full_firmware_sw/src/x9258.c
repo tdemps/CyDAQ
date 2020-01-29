@@ -11,6 +11,7 @@
 #include "x9258.h"
 
 static XIicPs I2C0_IIC;
+u8 potInit = 0;
 
 int init_x9258_i2c(){
 	if(DEBUG)
@@ -44,7 +45,7 @@ int init_x9258_i2c(){
 	 * Set the IIC serial clock rate.
 	 */
 	status = XIicPs_SetSClk(&I2C0_IIC, POT_I2C_CLK_RATE);
-
+	potInit = 1;
 	return status;
 }
 
@@ -61,6 +62,9 @@ POT_R_TYPE pot_value_conversion(int ohmValue){
 
 uint8_t x9258_volatile_write(wiper_t wiper_location, POT_R_TYPE r_value){
 
+	if(potInit == 0){
+		init_x9258_i2c();
+	}
   	u8 SendBuffer[POT_I2C_BUFFER_SIZE];
   	SendBuffer[0] = (u8) (0b10100000 | wiper_location.wiper);
   	SendBuffer[1] = r_value;
