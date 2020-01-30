@@ -32,10 +32,11 @@ def get_port():
     try:
         zybo_port = open_ports[0]
         port = str(zybo_port)
+        print("Zybo found on ",str(zybo_port))
         return port
     except:
         print("Zybo not connected")
-        return False
+        return None
 
 
 class ctrl_comm:

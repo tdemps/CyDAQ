@@ -606,6 +606,9 @@ class SamplePage(tk.Frame):
 
     def createStopButton(self):
         self.nameToEnum()
+        global comm_port
+        if(comm_port == "" or comm_port is None):
+            comm_port = get_port()
         result = cmd_obj.send_parameters(comm_port, self.inputEnum, self.sampleRate, self.filterEnum, self.upperCorner, self.lowerCorner, self.midCorner)
         if result is False:
             print("Error connecting to cyDaq, try ping test to confirm")
@@ -632,6 +635,9 @@ class SamplePage(tk.Frame):
             self.inputEnum = enum_input.digital_spi_bus.value
         elif inputSel == "Digital UART":
             self.inputEnum = enum_input.digital_uart.value
+        else:
+            self.inputEnum = enum_input.analog_in.value
+
 
         if filterSel == "All Pass":
             self.filterEnum = enum_filter.NO_FILTER.value
@@ -649,6 +655,8 @@ class SamplePage(tk.Frame):
             self.filterEnum = enum_filter.LP6.value
         elif filterSel == "6th Order Band Pass":
             self.filterEnum = enum_filter.BP6.value
+        else:
+            self.filterEnum = enum_filter.NO_FILTER.value
 
         if outSel == "XADC":
             output = enum_output.xadc.value

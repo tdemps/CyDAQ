@@ -120,7 +120,7 @@ class raw_data:
                     w.writerows(data_array)
 
             elif f.name[-4:] == '.mat':
-                tmp = dict(data=data_array[:,1].tolist(), time=data_array[:,0].tolist())
+                tmp = dict(data=data_array[:,1].tolist(), time=data_array[:,0].tolist(), voltage=data_array[:,2])
                 io.savemat(file_name=str(f.name),appendmat=False, mdict=tmp)
 
             f.close()
