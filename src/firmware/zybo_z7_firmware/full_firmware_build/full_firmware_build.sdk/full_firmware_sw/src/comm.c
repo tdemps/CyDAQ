@@ -367,7 +367,7 @@ bool commProcessPacket(u8 *buffer, u16 bufSize){
 					xil_printf("Error, payload length too small\n");
 				err = true;
 			}else{
-				status = muxSetActiveFilter(buffer[2]);
+				status = muxSetInputPins(buffer[2]);
 				if(status > 0){
 					err = true;
 				}
