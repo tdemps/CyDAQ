@@ -6,7 +6,6 @@ from master_enum import enum_input, enum_filter, enum_output
 from command_comm import cmd
 from serial_comm import get_port
 
-
 # https://www.daniweb.com/programming/software-development/code/484591/a-tooltip-class-for-tkinter
 
 
@@ -618,7 +617,7 @@ class SamplePage(tk.Frame):
         print("Starting")
 
     def nameToEnum(self):
-        global inputSel, filterSel
+        global inputSel, filterSel, outSel
         if inputSel == "5 volt":
             self.inputEnum = enum_input.volt_5.value
         elif inputSel == "3.3 volt":
@@ -703,7 +702,6 @@ class PingCyDAQ:
                                        relief=RAISED)
             ping_fail_label.place(relx=.5, rely=.5, anchor=CENTER)
         root.mainloop()
-
 
 
 ################### initialize and run ####################
