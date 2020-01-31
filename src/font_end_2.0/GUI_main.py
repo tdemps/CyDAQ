@@ -6,7 +6,6 @@ from master_enum import enum_input, enum_filter, enum_output
 from command_comm import cmd
 from serial_comm import get_port
 
-
 # https://www.daniweb.com/programming/software-development/code/484591/a-tooltip-class-for-tkinter
 
 
@@ -565,7 +564,10 @@ class CyDAQ_Config(tk.Frame):
 
     def createStopButton(self):
         self.nameToEnum()
-        result = cmd_obj.send_parameters(comm_port, self.inputEnum, sampleRate, self.filterEnum, upperCorner, lowerCorner, corner)
+        global comm_port
+        if(comm_port == "" or comm_port is None):
+            comm_port = get_port()
+        result = cmd_obj.send_parameters(comm_port, self.inputEnum, self.sampleRate, self.filterEnum, self.upperCorner, self.lowerCorner, self.midCorner)
         if result is False:
             print("Error connecting to cyDaq, try ping test to confirm")
             return
@@ -574,7 +576,7 @@ class CyDAQ_Config(tk.Frame):
         print("Starting")
 
     def nameToEnum(self):
-        global inputSel, filterSel
+        global inputSel, filterSel, outSel
         if inputSel == "5 volt":
             self.inputEnum = enum_input.volt_5.value
         elif inputSel == "3.3 volt":
@@ -591,6 +593,9 @@ class CyDAQ_Config(tk.Frame):
             self.inputEnum = enum_input.digital_spi_bus.value
         elif inputSel == "Digital UART":
             self.inputEnum = enum_input.digital_uart.value
+        else:
+            self.inputEnum = enum_input.analog_in.value
+
 
         if filterSel == "All Pass":
             self.filterEnum = enum_filter.NO_FILTER.value
@@ -608,6 +613,8 @@ class CyDAQ_Config(tk.Frame):
             self.filterEnum = enum_filter.LP6.value
         elif filterSel == "6th Order Band Pass":
             self.filterEnum = enum_filter.BP6.value
+        else:
+            self.filterEnum = enum_filter.NO_FILTER.value
 
         if outSel == "XADC":
             output = enum_output.xadc.value
@@ -770,7 +777,6 @@ class PingCyDAQ:
                                        relief=RAISED)
             ping_fail_label.place(relx=.5, rely=.5, anchor=CENTER)
         root.mainloop()
-
 
 
 ################### initialize and run ####################

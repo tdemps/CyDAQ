@@ -232,6 +232,9 @@ class cmd:
             elif filter == enum_filter.HP1.value or filter == enum_filter.HP6.value:
                 val_to_write = struct.pack('!BHH', enum_commands.corner_freq.value, int(corner_freq), 0)
                 print("Corner Frequency = " + corner_freq + " / " + str(0))
+            else:
+                val_to_write = struct.pack('!BHH', enum_commands.corner_freq.value, int(l_corner_freq), int(u_corner_freq))
+                print("Corner Frequency = " + l_corner_freq + " / " + u_corner_freq)
 
             ctrl_comm_obj.write(sig_serial.START_BYTE.value.encode())
             ctrl_comm_obj.write(val_to_write)
