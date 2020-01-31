@@ -10,10 +10,12 @@ import scipy.io as io
 
 serial_obj = ctrl_comm()
 
+
 def open_instruction():
     chrome_address = r'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
-    file_path = path.join(path.dirname(path.abspath(__file__)),r'This is a test.pdf')
+    file_path = path.join(path.dirname(path.abspath(__file__)), r'This is a test.pdf')
     subprocess.Popen([chrome_address, file_path], shell=True)
+
 
 class raw_data:
     def __adc_data(self, sampling_rate, zport):

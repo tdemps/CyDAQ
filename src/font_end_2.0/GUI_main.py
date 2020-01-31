@@ -102,9 +102,23 @@ class CyDAQ_Config(tk.Frame):
         global upperCorner
         global lowerCorner
         global sampleRate
+        global startButton
+        global stopButton
+
+        # Configure Sampling Menu
+        # Might have to reinitialize this every time COM port is plugged in
+
+        self.inputEnum = None
+        self.outputEnum = None
+        self.sampleRate = sampleRate
+        self.filterEnum = None
+        self.lowerCorner = lowerCorner
+        self.upperCorner = upperCorner
+        self.midCorner = corner
 
         tk.Frame.__init__(self, master)
         root = master
+
         #self.master = master
         self.master.title(title)
         # Initialize the menu
@@ -133,14 +147,22 @@ class CyDAQ_Config(tk.Frame):
 
         # Setup Sampling Menu
         SampleData = Menu(menu, tearoff=0)
-        menu.add_cascade(label="Sample Data", menu=SampleData)
+        menu.add_cascade(label="Test Connection", menu=SampleData)
 
         # Configure Sampling Menu
         # Might have to reinitialize this everytime COM port is plugged in
         COMport = Menu(SampleData, tearoff=0)
-        SampleData.add_cascade(label="Test Connection", menu=COMport)
+        SampleData.add_cascade(label="Ping Zybo", menu=COMport)
         COMport.add_command(label="Ping", command=PingCyDAQ)
-        SampleData.add_command(label="Start Sampling", command=self.killAndSwitchToSample)
+        # SampleData.add_command(label="Start Sampling", command=self.killAndSwitchToSample)
+
+        ################################# Initialize Sampling button ##########################################
+        stopButton = Button(root, text="Stop Sampling", font=('Helvetica', 24, "bold"), bg="red",
+                            command=self.createStartButton)
+
+        startButton = Button(root, text="Start Sampling", font=('Helvetica', 24, "bold"), bg="green",
+                             command=self.createStopButton)
+        startButton.place(relx=.5, rely=.8, anchor=CENTER)
 
         ################################## Initialize System Input Select ####################################
         self.inputLabel = Label(root, text=inputLabelName, height=1, width=len(inputLabelName))
@@ -171,11 +193,11 @@ class CyDAQ_Config(tk.Frame):
 
         ############################## Initialize Sample Rate Select ###################################
         self.sampleRateLabel = Label(root, text=sampleRateLabelName, height=1, width=len(sampleRateLabelName))
-        self.sampleRateLabel.place(relx=.5, rely=.75, anchor=CENTER)
+        self.sampleRateLabel.place(relx=.75, rely=.45, anchor=CENTER)
 
         #sampleRate = StringVar()
         self.sampleRateEntry = Entry(root, textvariable=sampleRate, justify='center')
-        self.sampleRateEntry.place(relx=.5, rely=.85, anchor=CENTER)
+        self.sampleRateEntry.place(relx=.75, rely=.55, anchor=CENTER)
         self.sampleRateEntry.delete(END, 0)
         #self.sampleRateEntry.insert(END, sampleRate)
         self.sampleRateEntry.bind("<Leave>", self.check_sample)
@@ -206,12 +228,12 @@ class CyDAQ_Config(tk.Frame):
         ############################### Place the correct corner inputs ###################################
         # Place the corner for HP or LP filters
         if filterSel == filterNames[2] or filterSel == filterNames[3] or filterSel == filterNames[6] or filterSel == filterNames[7]:
-            self.cornerLabel.place(relx=.5, rely=.44, anchor=CENTER)
-            self.cornerSelect.place(relx=.5, rely=.55, anchor=CENTER)
+            self.cornerLabel.place(relx=.25, rely=.44, anchor=CENTER)
+            self.cornerSelect.place(relx=.25, rely=.55, anchor=CENTER)
         # Place upper and lower corners for bandpass filters
         if filterSel == filterNames[4] or filterSel == filterNames[5]:
-            self.upperCornerSelect.place(relx=.75, rely=.55, anchor=CENTER)
-            self.upperCornerLabel.place(relx=.75, rely=.44, anchor=CENTER)
+            self.upperCornerSelect.place(relx=.5, rely=.55, anchor=CENTER)
+            self.upperCornerLabel.place(relx=.5, rely=.44, anchor=CENTER)
             self.lowerCornerSelect.place(relx=.25, rely=.55, anchor=CENTER)
             self.lowerCornerLabel.place(relx=.25, rely=.44, anchor=CENTER)
 
@@ -280,12 +302,12 @@ class CyDAQ_Config(tk.Frame):
                 or widget.get() == filterNames[3]
                 or widget.get() == filterNames[6]
                 or widget.get() == filterNames[7]):
-            self.cornerLabel.place(relx=.5, rely=.44, anchor=CENTER)
-            self.cornerSelect.place(relx=.5, rely=.55, anchor=CENTER)
+            self.cornerLabel.place(relx=.25, rely=.44, anchor=CENTER)
+            self.cornerSelect.place(relx=.25, rely=.55, anchor=CENTER)
         elif (widget.get() == filterNames[4]
               or widget.get() == filterNames[5]):
-            self.upperCornerSelect.place(relx=.75, rely=.55, anchor=CENTER)
-            self.upperCornerLabel.place(relx=.75, rely=.44, anchor=CENTER)
+            self.upperCornerSelect.place(relx=.5, rely=.55, anchor=CENTER)
+            self.upperCornerLabel.place(relx=.5, rely=.44, anchor=CENTER)
             self.lowerCornerSelect.place(relx=.25, rely=.55, anchor=CENTER)
             self.lowerCornerLabel.place(relx=.25, rely=.44, anchor=CENTER)
         elif widget.get() == filterNames[8]:
@@ -330,17 +352,16 @@ class CyDAQ_Config(tk.Frame):
                 or self.filterSelectComboBox.get() == filterNames[3]
                 or self.filterSelectComboBox.get() == filterNames[6]
                 or self.filterSelectComboBox.get() == filterNames[7]):
-            self.cornerLabel.place(relx=.5, rely=.44, anchor=CENTER)
-            self.cornerSelect.place(relx=.5, rely=.55, anchor=CENTER)
+            self.cornerLabel.place(relx=.25, rely=.44, anchor=CENTER)
+            self.cornerSelect.place(relx=.25, rely=.55, anchor=CENTER)
         elif (self.filterSelectComboBox.get() == filterNames[4]
               or self.filterSelectComboBox.get() == filterNames[5]):
-            self.upperCornerSelect.place(relx=.75, rely=.55, anchor=CENTER)
-            self.upperCornerLabel.place(relx=.75, rely=.44, anchor=CENTER)
+            self.upperCornerSelect.place(relx=.5, rely=.55, anchor=CENTER)
+            self.upperCornerLabel.place(relx=.5, rely=.44, anchor=CENTER)
             self.lowerCornerSelect.place(relx=.25, rely=.55, anchor=CENTER)
             self.lowerCornerLabel.place(relx=.25, rely=.44, anchor=CENTER)
         self.updateConfig()
 
-    # TODO: Make an error function that pops up when things are out of bounds
     # On the event that a corner is changed,
     # make sure that the corner is in bounds
     def changeUpperCorner(self, event):
@@ -519,9 +540,6 @@ class CyDAQ_Config(tk.Frame):
         ##### because all locals are lost inbetween frames #############
         # TODO: please fix for Taylor's sanity
 
-        ##### This is what is used to update the global variables to save state inbetween frames ########
-        #### This is all the code that should be included in this function ######
-        #### The stuff above should be done elsewhere, talk to Josh ###########
         global filterSel
         global outSel
         global inputSel
@@ -537,65 +555,6 @@ class CyDAQ_Config(tk.Frame):
         lowerCorner = self.lowerCornerSelect.get()
         sampleRate = self.sampleRateEntry.get()
 
-
-
-
-####################### The Page to Initialize Sampling on the CyDAQ #######################
-class SamplePage(tk.Frame):
-    def __init__(self, master):
-        tk.Frame.__init__(self, master)
-
-        ######################### Initialize the Start and Stop Buttons #######################
-        root = self.master
-        global startButton
-        global stopButton
-
-        stopButton = Button(root, text="Stop Sampling", font=('Helvetica', 24, "bold"), bg="red",
-                            command=self.createStartButton)
-
-        startButton = Button(root, text="Start Sampling", font=('Helvetica', 24, "bold"), bg="green",
-                             command=self.createStopButton)
-        startButton.place(relx=.5, rely=.5, anchor=CENTER)
-
-        ######################## Initialize the Menu ########################
-        menu = Menu(self)
-        self.master.config(menu=menu)
-        # Initialize the file menu
-        file = Menu(menu, tearoff=0)
-        menu.add_cascade(label="File", menu=file)
-
-        # Add drop down commands to file menu
-        # file.add_command(label="Save Settings")
-        #file.add_command(label="Save") # Not needed according to Matt
-        # file.add_cascade(label="Save As")
-        file.add_command(label="Exit", command=self.client_exit)
-
-        # Initialize CyDAQ Configurtion Menu
-        ConfigureCydaq = Menu(menu, tearoff=0)
-        menu.add_cascade(label="Configure CyDAQ", menu=ConfigureCydaq)
-
-        # Set up Cascade for CyDAQ Configuration Menu
-        ConfigureCydaq.add_command(label="Setup Instructions", command=open_instruction)
-        ConfigureCydaq.add_command(label="CyDAQ Setup", command=self.killSwitchConfig)
-
-        # Setup Sampling Menu
-        SampleData = Menu(menu, tearoff=0)
-        menu.add_cascade(label="Sample Data", menu=SampleData)
-
-        # Configure Sampling Menu
-        # Might have to reinitialize this every time COM port is plugged in
-        COMport = Menu(SampleData, tearoff=0)
-        SampleData.add_cascade(label="Test Connection", menu=COMport)
-        COMport.add_command(label="Ping", command=PingCyDAQ)
-        SampleData.add_command(label="Start Sampling")
-        self.inputEnum = None
-        self.outputEnum = None
-        self.sampleRate = sampleRate
-        self.filterEnum = None
-        self.lowerCorner = lowerCorner
-        self.upperCorner = upperCorner
-        self.midCorner = corner
-
     def createStartButton(self):
         stopButton.place_forget()
         startButton.place(relx=.5, rely=.5, anchor=CENTER)
@@ -606,7 +565,7 @@ class SamplePage(tk.Frame):
 
     def createStopButton(self):
         self.nameToEnum()
-        result = cmd_obj.send_parameters(comm_port, self.inputEnum, self.sampleRate, self.filterEnum, self.upperCorner, self.lowerCorner, self.midCorner)
+        result = cmd_obj.send_parameters(comm_port, self.inputEnum, sampleRate, self.filterEnum, upperCorner, lowerCorner, corner)
         if result is False:
             print("Error connecting to cyDaq, try ping test to confirm")
             return
@@ -655,13 +614,129 @@ class SamplePage(tk.Frame):
         elif outSel == "Digital":
             output = enum_output.digital.value
 
-    def client_exit(self):
-        exit()
 
-    def killSwitchConfig(self):
-        stopButton.destroy()
-        startButton.destroy()
-        self.master.switch_frame(CyDAQ_Config)
+####################### The Page to Initialize Sampling on the CyDAQ #######################
+# class SamplePage(tk.Frame):
+#     def __init__(self, master):
+#         tk.Frame.__init__(self, master)
+#
+#         ######################### Initialize the Start and Stop Buttons #######################
+#         root = self.master
+#         global startButton
+#         global stopButton
+#
+#         stopButton = Button(root, text="Stop Sampling", font=('Helvetica', 24, "bold"), bg="red",
+#                             command=self.createStartButton)
+#
+#         startButton = Button(root, text="Start Sampling", font=('Helvetica', 24, "bold"), bg="green",
+#                              command=self.createStopButton)
+#         startButton.place(relx=.5, rely=.5, anchor=CENTER)
+#
+#         ######################## Initialize the Menu ########################
+#         menu = Menu(self)
+#         self.master.config(menu=menu)
+#         # Initialize the file menu
+#         file = Menu(menu, tearoff=0)
+#         menu.add_cascade(label="File", menu=file)
+#
+#         # Add drop down commands to file menu
+#         # file.add_command(label="Save Settings")
+#         #file.add_command(label="Save") # Not needed according to Matt
+#         # file.add_cascade(label="Save As")
+#         file.add_command(label="Exit", command=self.client_exit)
+#
+#         # Initialize CyDAQ Configurtion Menu
+#         ConfigureCydaq = Menu(menu, tearoff=0)
+#         menu.add_cascade(label="Configure CyDAQ", menu=ConfigureCydaq)
+#
+#         # Set up Cascade for CyDAQ Configuration Menu
+#         ConfigureCydaq.add_command(label="Setup Instructions", command=open_instruction)
+#         ConfigureCydaq.add_command(label="CyDAQ Setup", command=self.killSwitchConfig)
+#
+#         # Setup Sampling Menu
+#         SampleData = Menu(menu, tearoff=0)
+#         menu.add_cascade(label="Test Connection", menu=SampleData)
+#
+#         # Configure Sampling Menu
+#         # Might have to reinitialize this every time COM port is plugged in
+#         COMport = Menu(SampleData, tearoff=0)
+#         SampleData.add_cascade(label="Test Connection", menu=COMport)
+#         COMport.add_command(label="Ping", command=PingCyDAQ)
+#         # SampleData.add_command(label="Start Sampling")
+#         self.inputEnum = None
+#         self.outputEnum = None
+#         self.sampleRate = sampleRate
+#         self.filterEnum = None
+#         self.lowerCorner = lowerCorner
+#         self.upperCorner = upperCorner
+#         self.midCorner = corner
+#
+#     def createStartButton(self):
+#         stopButton.place_forget()
+#         startButton.place(relx=.5, rely=.5, anchor=CENTER)
+#         print("Stopping")
+#         cmd_obj.send_stop_cmd(comm_port)
+#         if not raw_adc_data.collect_data(sampleRate, comm_port):
+#             print("Error occurred getting data")
+#
+#     def createStopButton(self):
+#         self.nameToEnum()
+#         result = cmd_obj.send_parameters(comm_port, self.inputEnum, self.sampleRate, self.filterEnum, self.upperCorner, self.lowerCorner, self.midCorner)
+#         if result is False:
+#             print("Error connecting to cyDaq, try ping test to confirm")
+#             return
+#         startButton.place_forget()
+#         stopButton.place(relx=.5, rely=.5, anchor=CENTER)
+#         print("Starting")
+#
+#     def nameToEnum(self):
+#         global inputSel, filterSel
+#         if inputSel == "5 volt":
+#             self.inputEnum = enum_input.volt_5.value
+#         elif inputSel == "3.3 volt":
+#             self.inputEnum = enum_input.volt_3.value
+#         elif inputSel == "1.8 volt":
+#             self.inputEnum = enum_input.volt_1.value
+#         elif inputSel == "Analog In":
+#             self.inputEnum = enum_input.analog_in.value
+#         elif inputSel == "Audio In":
+#             self.inputEnum = enum_input.audio_in.value
+#         elif inputSel == "Digital I2C Bus":
+#             self.inputEnum = enum_input.digital_i2c.value
+#         elif inputSel == "Digital SPI Bus":
+#             self.inputEnum = enum_input.digital_spi_bus.value
+#         elif inputSel == "Digital UART":
+#             self.inputEnum = enum_input.digital_uart.value
+#
+#         if filterSel == "All Pass":
+#             self.filterEnum = enum_filter.NO_FILTER.value
+#         elif filterSel == "60 hz Notch":
+#             self.filterEnum = enum_filter.NOTCH.value
+#         elif filterSel == "1st Order High Pass":
+#             self.filterEnum = enum_filter.HP1.value
+#         elif filterSel == "1st Order Low Pass":
+#             self.filterEnum = enum_filter.LP1.value
+#         elif filterSel == "2nd Order Band Pass":
+#             self.filterEnum = enum_filter.BP2.value
+#         elif filterSel == "6th Order High Pass":
+#             self.filterEnum = enum_filter.HP6.value
+#         elif filterSel == "6th Order Low Pass":
+#             self.filterEnum = enum_filter.LP6.value
+#         elif filterSel == "6th Order Band Pass":
+#             self.filterEnum = enum_filter.BP6.value
+#
+#         if outSel == "XADC":
+#             output = enum_output.xadc.value
+#         elif outSel == "Digital":
+#             output = enum_output.digital.value
+#
+#     def client_exit(self):
+#         exit()
+#
+#     def killSwitchConfig(self):
+#         stopButton.destroy()
+#         startButton.destroy()
+#         self.master.switch_frame(CyDAQ_Config)
 
 
 ################# a page to be created later so ignore for now #######################
