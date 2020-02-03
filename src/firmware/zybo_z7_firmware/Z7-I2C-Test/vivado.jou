@@ -2,14 +2,13 @@
 # Vivado v2019.1 (64-bit)
 # SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
 # IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
-# Start of session at: Fri Oct  4 11:23:42 2019
-# Process ID: 1204
-# Current directory: C:/Zybo-Projects/Z7-I2C-Test
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent9540 C:\Zybo-Projects\Z7-I2C-Test\Z7-I2C-Test.xpr
-# Log file: C:/Zybo-Projects/Z7-I2C-Test/vivado.log
-# Journal file: C:/Zybo-Projects/Z7-I2C-Test\vivado.jou
+# Start of session at: Mon Dec  9 08:15:48 2019
+# Process ID: 12664
+# Current directory: C:/ETG-Git-Repos/ee224_software/master_ee_224/src/firmware/zybo_z7_firmware/Z7-I2C-Test
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent9692 C:\ETG-Git-Repos\ee224_software\master_ee_224\src\firmware\zybo_z7_firmware\Z7-I2C-Test\Z7-I2C-Test.xpr
+# Log file: C:/ETG-Git-Repos/ee224_software/master_ee_224/src/firmware/zybo_z7_firmware/Z7-I2C-Test/vivado.log
+# Journal file: C:/ETG-Git-Repos/ee224_software/master_ee_224/src/firmware/zybo_z7_firmware/Z7-I2C-Test\vivado.jou
 #-----------------------------------------------------------
 start_gui
-open_project C:/Zybo-Projects/Z7-I2C-Test/Z7-I2C-Test.xpr
+open_project C:/ETG-Git-Repos/ee224_software/master_ee_224/src/firmware/zybo_z7_firmware/Z7-I2C-Test/Z7-I2C-Test.xpr
 update_compile_order -fileset sources_1
-open_bd_design {C:/Zybo-Projects/Z7-I2C-Test/Z7-I2C-Test.srcs/sources_1/bd/design_1/design_1.bd}

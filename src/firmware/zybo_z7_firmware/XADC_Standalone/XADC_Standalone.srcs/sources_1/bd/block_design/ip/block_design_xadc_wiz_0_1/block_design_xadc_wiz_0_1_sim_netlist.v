@@ -1,10 +1,10 @@
 // Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2019.1 (win64) Build 2552052 Fri May 24 14:49:42 MDT 2019
-// Date        : Tue Oct 29 13:51:38 2019
-// Host        : etglabtest-02 running 64-bit major release  (build 9200)
+// Date        : Mon Nov  4 16:46:50 2019
+// Host        : etgtech-03 running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode funcsim
-//               C:/ETG-Git-Repos/x9258-potentiometer/src/zybo_z7_firmware/XADC_Standalone/XADC_Standalone.srcs/sources_1/bd/block_design/ip/block_design_xadc_wiz_0_1/block_design_xadc_wiz_0_1_sim_netlist.v
+//               U:/master_ee_224/src/firmware/zybo_z7_firmware/XADC_Standalone/XADC_Standalone.srcs/sources_1/bd/block_design/ip/block_design_xadc_wiz_0_1/block_design_xadc_wiz_0_1_sim_netlist.v
 // Design      : block_design_xadc_wiz_0_1
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -5181,7 +5181,7 @@ module block_design_xadc_wiz_0_1_block_design_xadc_wiz_0_1_xadc_core_drp
         .O(local_reg_wrack_reg_0));
   (* box_type = "PRIMITIVE" *) 
   XADC #(
-    .INIT_40(16'h1000),
+    .INIT_40(16'h0000),
     .INIT_41(16'h21A0),
     .INIT_42(16'h0400),
     .INIT_43(16'h0000),
@@ -5192,7 +5192,7 @@ module block_design_xadc_wiz_0_1_block_design_xadc_wiz_0_1_xadc_core_drp
     .INIT_48(16'h0F01),
     .INIT_49(16'h4000),
     .INIT_4A(16'h0000),
-    .INIT_4B(16'h4000),
+    .INIT_4B(16'h0000),
     .INIT_4C(16'h0800),
     .INIT_4D(16'h4000),
     .INIT_4E(16'h0000),

@@ -1,7 +1,7 @@
 //Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2019.1 (win64) Build 2552052 Fri May 24 14:49:42 MDT 2019
-//Date        : Mon Oct 14 18:40:29 2019
+//Date        : Mon Nov 11 19:06:41 2019
 //Host        : etgtech-03 running 64-bit major release  (build 9200)
 //Command     : generate_target design_1_wrapper.bd
 //Design      : design_1_wrapper
@@ -30,7 +30,11 @@ module design_1_wrapper
     FIXED_IO_mio,
     FIXED_IO_ps_clk,
     FIXED_IO_ps_porb,
-    FIXED_IO_ps_srstb);
+    FIXED_IO_ps_srstb,
+    Vaux14_0_v_n,
+    Vaux14_0_v_p,
+    Vp_Vn_0_v_n,
+    Vp_Vn_0_v_p);
   inout [14:0]DDR_addr;
   inout [2:0]DDR_ba;
   inout DDR_cas_n;
@@ -52,6 +56,10 @@ module design_1_wrapper
   inout FIXED_IO_ps_clk;
   inout FIXED_IO_ps_porb;
   inout FIXED_IO_ps_srstb;
+  input Vaux14_0_v_n;
+  input Vaux14_0_v_p;
+  input Vp_Vn_0_v_n;
+  input Vp_Vn_0_v_p;
 
   wire [14:0]DDR_addr;
   wire [2:0]DDR_ba;
@@ -74,6 +82,10 @@ module design_1_wrapper
   wire FIXED_IO_ps_clk;
   wire FIXED_IO_ps_porb;
   wire FIXED_IO_ps_srstb;
+  wire Vaux14_0_v_n;
+  wire Vaux14_0_v_p;
+  wire Vp_Vn_0_v_n;
+  wire Vp_Vn_0_v_p;
 
   design_1 design_1_i
        (.DDR_addr(DDR_addr),
@@ -96,5 +108,9 @@ module design_1_wrapper
         .FIXED_IO_mio(FIXED_IO_mio),
         .FIXED_IO_ps_clk(FIXED_IO_ps_clk),
         .FIXED_IO_ps_porb(FIXED_IO_ps_porb),
-        .FIXED_IO_ps_srstb(FIXED_IO_ps_srstb));
+        .FIXED_IO_ps_srstb(FIXED_IO_ps_srstb),
+        .Vaux14_0_v_n(Vaux14_0_v_n),
+        .Vaux14_0_v_p(Vaux14_0_v_p),
+        .Vp_Vn_0_v_n(Vp_Vn_0_v_n),
+        .Vp_Vn_0_v_p(Vp_Vn_0_v_p));
 endmodule

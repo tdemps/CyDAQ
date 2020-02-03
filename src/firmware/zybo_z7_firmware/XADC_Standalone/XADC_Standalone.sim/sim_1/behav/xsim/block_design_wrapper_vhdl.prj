@@ -14,6 +14,7 @@ vhdl xil_defaultlib  \
 "../../../../XADC_Standalone.ip_user_files/bd/block_design/ip/block_design_xadc_wiz_0_1/block_design_xadc_wiz_0_1_xadc_core_drp.vhd" \
 "../../../../XADC_Standalone.ip_user_files/bd/block_design/ip/block_design_xadc_wiz_0_1/block_design_xadc_wiz_0_1_axi_xadc.vhd" \
 "../../../../XADC_Standalone.ip_user_files/bd/block_design/ip/block_design_rst_ps7_0_50M_0/sim/block_design_rst_ps7_0_50M_0.vhd" \
+"../../../../XADC_Standalone.ip_user_files/bd/block_design/ip/block_design_axi_timer_0_0/sim/block_design_axi_timer_0_0.vhd" \
 
 # Do not sort compile order
 nosort

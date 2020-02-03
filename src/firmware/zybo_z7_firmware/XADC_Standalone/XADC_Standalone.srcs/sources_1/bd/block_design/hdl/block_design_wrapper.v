@@ -1,8 +1,8 @@
 //Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2019.1 (win64) Build 2552052 Fri May 24 14:49:42 MDT 2019
-//Date        : Tue Oct 29 13:50:22 2019
-//Host        : etglabtest-02 running 64-bit major release  (build 9200)
+//Date        : Mon Nov  4 16:44:36 2019
+//Host        : etgtech-03 running 64-bit major release  (build 9200)
 //Command     : generate_target block_design_wrapper.bd
 //Design      : block_design_wrapper
 //Purpose     : IP block netlist

@@ -20,23 +20,23 @@
 #include "xil_printf.h"
 #include <xparameters.h>
 #include "x9258.h"
-#include "xscugic.h"
-#include "xil_exception.h"
 #include <sleep.h>
 #include "filter.h"
 #include "mux_driver.h"
 #include "comm.h"
 #include "stdlib.h"
-
+#include "xadc.h"
 #define IIC_DEVICE_ID		XPAR_XIICPS_0_DEVICE_ID
 #define INTC_DEVICE_ID		XPAR_SCUGIC_SINGLE_DEVICE_ID
 #define IIC_INT_VEC_ID		XPAR_XIICPS_0_INTR
+void xadcTest();
 
 int main()
 {
     xil_printf("\n\n\n");
 	xil_printf("Beginning CyDAQ Test Program\n");
     init_platform();
+    xadcTest();
     //initUartComm();
     muxInit();
     int status = init_x9258_i2c(IIC_DEVICE_ID);
@@ -51,7 +51,6 @@ int main()
     };
 
     POT_R_TYPE i = 0;
-    //wiper_t wiper = {0b00000110, 0b1}, wiper2 = {0b00000110, 0b10};
 
     //CHANGE CORNERS FOR FILTER HERE//////////////////////////////////////////////////////////
     FREQ_TYPE lower = 1550;	  //1550hz -> 10k
@@ -73,5 +72,19 @@ int main()
 	//}
 
     cleanup_platform();
+    return 0;
+}
+void xadcTest(){
+
+    u32 status = 0;
+    float voltage = 0.0;
+    xadcInit();
+   // xil_printf("Hello World\n\r");
+    u16 i = 0, reading = 0;
+    xadcEnableSampling();
+	sleep(5);
+
+	xadcProcessSamples();
+
     return 0;
 }
