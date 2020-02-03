@@ -142,7 +142,7 @@ class CyDAQ_Config(tk.Frame):
 
         # Set up Cascade for CyDAQ Configuration Menu
         ConfigureCydaq.add_command(label="Setup Instructions", command=open_instruction)
-        ConfigureCydaq.add_command(label="CyDAQ Setup")
+        #ConfigureCydaq.add_command(label="CyDAQ Setup")
 
         # Setup Sampling Menu
         SampleData = Menu(menu, tearoff=0)
@@ -512,23 +512,23 @@ class CyDAQ_Config(tk.Frame):
         self.cornerLabel.place_forget()
         self.cornerSelect.place_forget()
 
-    def killAndSwitchToSample(self):
-        self.upperCornerLabel.destroy()
-        self.upperCornerSelect.destroy()
-        self.lowerCornerSelect.destroy()
-        self.lowerCornerLabel.destroy()
-        self.cornerLabel.destroy()
-        self.cornerSelect.destroy()
-        self.inputLabel.destroy()
-        self.inputSelectComboBox.destroy()
-        self.filterLabel.destroy()
-        self.filterSelectComboBox.destroy()
-        self.filterLabel.destroy()
-        self.outSelecLabel.destroy()
-        self.outSelectComboBox.destroy()
-        self.sampleRateLabel.destroy()
-        self.sampleRateEntry.destroy()
-        self.master.switch_frame(SamplePage)
+    # def killAndSwitchToSample(self):
+    #     self.upperCornerLabel.destroy()
+    #     self.upperCornerSelect.destroy()
+    #     self.lowerCornerSelect.destroy()
+    #     self.lowerCornerLabel.destroy()
+    #     self.cornerLabel.destroy()
+    #     self.cornerSelect.destroy()
+    #     self.inputLabel.destroy()
+    #     self.inputSelectComboBox.destroy()
+    #     self.filterLabel.destroy()
+    #     self.filterSelectComboBox.destroy()
+    #     self.filterLabel.destroy()
+    #     self.outSelecLabel.destroy()
+    #     self.outSelectComboBox.destroy()
+    #     self.sampleRateLabel.destroy()
+    #     self.sampleRateEntry.destroy()
+    #     self.master.switch_frame(SamplePage)
 
     def client_exit(self):
         exit()
@@ -556,7 +556,7 @@ class CyDAQ_Config(tk.Frame):
 
     def createStartButton(self):
         stopButton.place_forget()
-        startButton.place(relx=.5, rely=.5, anchor=CENTER)
+        startButton.place(relx=.5, rely=.8, anchor=CENTER)
         print("Stopping")
         cmd_obj.send_stop_cmd(comm_port)
         if not raw_adc_data.collect_data(sampleRate, comm_port):
@@ -567,12 +567,12 @@ class CyDAQ_Config(tk.Frame):
         global comm_port
         if(comm_port == "" or comm_port is None):
             comm_port = get_port()
-        result = cmd_obj.send_parameters(comm_port, self.inputEnum, self.sampleRate, self.filterEnum, self.upperCorner, self.lowerCorner, self.midCorner)
+        result = cmd_obj.send_parameters(comm_port, self.inputEnum, sampleRate, self.filterEnum, upperCorner, lowerCorner, corner)
         if result is False:
             print("Error connecting to cyDaq, try ping test to confirm")
             return
         startButton.place_forget()
-        stopButton.place(relx=.5, rely=.5, anchor=CENTER)
+        stopButton.place(relx=.5, rely=.8, anchor=CENTER)
         print("Starting")
 
     def nameToEnum(self):
