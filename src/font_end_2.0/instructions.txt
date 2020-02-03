@@ -1,0 +1,24 @@
+to run this project with python installed on machine:
+1. Open terminal in directory with .py files (font_end_2.0). All commands below must be run from this terminal
+2. run "python -m venv venv". A folder called venv will be made in the project directory.
+3. run ".\venv\Scripts\activate.bat"
+follow instructions below to install needed packages
+
+to install all needed packages:
+"pip install -r requirements.txt"
+
+main file: GUI_main.py
+
+NOTE: If a new package is used in source code, the requirements.txt must be updated.
+This is done by running "pip freeze > requirements.txt"
+
+To compile into exe:
+1. Install pyinstaller to venv or system
+2. run "pyinstaller GUI_main.spec"
+ORRRRRRRRRRRRRRRRRRRRRRRRRR if you want everything in a single exe file:
+"pyinstaller --onefile --add-data="This is a test.pdf;." ./GUI_main.py"
+
+
+BUILD NOTES: the exe is built using the builders python version, OS, including 32/64
+Any differences between this setup and the user's can result in errors.
+Replace "this is a test.pdf" in spec file or above command with name of instructions pdf
