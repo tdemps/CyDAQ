@@ -13,10 +13,10 @@
 static XIicPs I2C0_IIC;
 u8 potInit = 0;
 
-int init_x9258_i2c(){
+XStatus init_x9258_i2c(){
 	if(DEBUG)
 		xil_printf("Initializing I2C for X9258\n");
-	int status;
+	XStatus status;
 	XIicPs_Config *Config;
 
 /*
@@ -48,7 +48,10 @@ int init_x9258_i2c(){
 	potInit = 1;
 	return status;
 }
-
+/**
+ * Function used to convert resistance into the appropriate byte value
+ * send to the X9258 IC's.
+ */
 POT_R_TYPE pot_value_conversion(int ohmValue){
   static const POT_R_TYPE calFactor = 0;
 
@@ -60,7 +63,7 @@ POT_R_TYPE pot_value_conversion(int ohmValue){
   return map(ohmValue,0,100000,0,255) + calFactor;
 }
 
-uint8_t x9258_volatile_write(wiper_t wiper_location, POT_R_TYPE r_value){
+XStatus x9258_volatile_write(wiper_t wiper_location, POT_R_TYPE r_value){
 
 	if(potInit == 0){
 		init_x9258_i2c();
@@ -74,7 +77,7 @@ uint8_t x9258_volatile_write(wiper_t wiper_location, POT_R_TYPE r_value){
 	 * Send the buffer using the IIC and ignore the number of bytes sent
 	 * as the return value since we are using it in interrupt mode.
 	 */
-  	int status = XIicPs_MasterSendPolled(&I2C0_IIC, SendBuffer, POT_I2C_BUFFER_SIZE,  address);
+  	XStatus status = XIicPs_MasterSendPolled(&I2C0_IIC, SendBuffer, POT_I2C_BUFFER_SIZE,  address);
 	if (status != XST_SUCCESS) {
 		return XST_FAILURE;
 	}
@@ -90,15 +93,22 @@ uint8_t x9258_volatile_write(wiper_t wiper_location, POT_R_TYPE r_value){
 
 	return XST_SUCCESS;
 }
-
+/**
+ * Generic mapping function stolen from Arduino. Used to map value x from in_range
+ * to out_range.
+ */
 long map(long x, long in_min, long in_max, long out_min, long out_max) {
   return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
-
+/**
+ * Returns IICPS instance used for I2C comms with pots.
+ */
 XIicPs* getIicInstance(){
 	return &I2C0_IIC;
 }
-
+/**
+ * Old, left for archival purposes.
+ */
 void setIicInstance(XIicPs *InstancePtr){
 	I2C0_IIC = *InstancePtr;
 }

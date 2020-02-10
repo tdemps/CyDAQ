@@ -34,11 +34,12 @@ filters_e activeFilter = FILTER_PASSTHROUGH;
 
 int main()
 {
+	XStatus initCheck = XST_SUCCESS;
 	//initialization functions for all libraries
 	init_platform();
-    commInit();
+    initCheck = commInit();
     muxInit();
-    xadcInit();
+    initCheck = xadcInit();
     init_x9258_i2c();
 
     XUartPs* ptr = commGetUartPtr();

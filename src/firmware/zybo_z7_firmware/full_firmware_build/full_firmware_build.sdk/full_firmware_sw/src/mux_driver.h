@@ -31,8 +31,8 @@ typedef struct{
 	MUX_SELECT_TYPE enablePin;
 } mux_config_data_t;
 
-int muxInit();
-u8 muxSetActiveFilter( filters_e filterSelect);
-u8 muxSetInputPins( inputs_e inputSelect);
+XStatus muxInit();
+XStatus muxSetActiveFilter( filters_e filterSelect);
+XStatus muxSetInputPins( inputs_e inputSelect);
 
 #endif /* SRC_MUX_DRIVER_H_ */

@@ -44,8 +44,8 @@ static mux_config_data_t inputConfigs[NUM_INPUTS] = {
 /**
  * Initializes GPIO module for controlling the input and output muxes/demuxes.
  */
-int muxInit(){
-	int status = 0;
+XStatus muxInit(){
+	XStatus status = XST_SUCCESS;
 	XGpio_Config *Config;
 	//initializes XGPIO pointer
 	Config = XGpio_LookupConfig(GPIO_DEV_ID);
@@ -75,7 +75,7 @@ int muxInit(){
 /**
  * Sets active filter to connect to output.
  */
-u8 muxSetActiveFilter( filters_e filterSelect){
+XStatus muxSetActiveFilter( filters_e filterSelect){
 
 	//checks if gpio module has been initialized
 	if(muxInitStatus == 0){
@@ -85,7 +85,7 @@ u8 muxSetActiveFilter( filters_e filterSelect){
 	if(filterSelect >= NUM_FILTERS){
 		if(DEBUG)
 			xil_printf("Error, %d is not a valid filter enum #\n", filterSelect);
-		return MUX_SET_FAILED;
+		return XST_FAILURE;
 	}else if(DEBUG){
 		xil_printf("Changing filter to %d\n", filterSelect);
 	}
@@ -97,10 +97,13 @@ u8 muxSetActiveFilter( filters_e filterSelect){
 	//writes mask to GPIO channel
 	XGpio_DiscreteWrite(&GPIO_MUX, MUX_GPIO_CHANNEL, mask);
 	activeFilter = filterSelect;
-	return 0;
+	return XST_SUCCESS;
 }
-
-u8 muxSetInputPins( inputs_e inputSelect){
+/**
+ * Configures the input mux based on the enum parameter.
+ * Returns XST_SUCCESS on successful gpio change, XST_FAILURE if input is invalid.
+ */
+XStatus muxSetInputPins( inputs_e inputSelect){
 
 	//checks if gpio module has been initialized
 	if(muxInitStatus == 0){
@@ -110,7 +113,7 @@ u8 muxSetInputPins( inputs_e inputSelect){
 	if(inputSelect >= NUM_INPUTS){
 		if(DEBUG)
 			xil_printf("input requested %d not in valid range\n", inputSelect);
-		return MUX_SET_FAILED;
+		return XST_FAILURE;
 	}else if(DEBUG){
 		xil_printf("Changing input to: %d\n", inputSelect);
 	}
@@ -122,5 +125,5 @@ u8 muxSetInputPins( inputs_e inputSelect){
 	//writes mask to GPIO channel
 	XGpio_DiscreteWrite(&GPIO_MUX, MUX_GPIO_CHANNEL, mask);
 
-	return 0;
+	return XST_SUCCESS;
 }

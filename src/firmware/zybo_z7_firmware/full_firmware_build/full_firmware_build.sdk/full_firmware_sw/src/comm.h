@@ -56,7 +56,7 @@ typedef enum cmds
     NUMCOMMANDS
 } commands;
 
-int commInit();
+XStatus commInit();
 static int commSetupInterruptSystem(INTC *IntcInstancePtr, XUartPs *UartInstancePtr, u16 UartIntrId);
 void Handler(void *CallBackRef, u32 Event, unsigned int EventData);
 XUartPs* commGetUartPtr();

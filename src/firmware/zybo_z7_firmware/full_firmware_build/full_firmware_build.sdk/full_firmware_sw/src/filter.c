@@ -41,7 +41,8 @@ static wiper_t firstOrderHP[1] = {
 /*
  * Array of pointers to wiper_t arrays for each filter (defined above).
  * Order matches that of filter enum in shared_definitions.h.
- * sixthOrderLP and HP share the same configurations
+ * sixthOrderLP and HP share the same configurations.
+ * Not used currently, since pot config pointers are in filter structs now
  */
 static wiper_t *filterPotConfigs[6] = {firstOrderLP, firstOrderHP, secondOrderBP, sixthOrderBP, sixthOrderLP, sixthOrderLP};
 //objects holding config info of different filters.
@@ -86,14 +87,14 @@ static filter_t secondBP = {
 	.filterOrder = 2,
 	.wipers = secondOrderBP
 };
-//array with pointers to each filter configuration object
+//array with pointers to each filter configuration object. ORDER MATCHES FILTER ENUM
 static filter_t *filterConfigs[NUM_FILTERS-1] = {&firstLP, &firstHP, &secondBP, &sixthBP, &sixthHP, &sixthLP};
 extern filters_e activeFilter;
 /*
  * Writes pots to get the desired frequency(ies).
  * For BP, freq1 is lower corner(HP) and freq2 is upper corner(LP).
  * If the filter only has one corner, freq1 is used as the corner to set.
- * pass in NULL or 0 as freq2
+ * pass in 0 as freq2 in this case.
  */
 u8 tuneFilter(filters_e filterSelect, FILTER_FREQ_TYPE freq1, FILTER_FREQ_TYPE freq2){
 

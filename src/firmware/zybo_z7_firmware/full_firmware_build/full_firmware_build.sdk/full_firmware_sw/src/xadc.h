@@ -44,11 +44,11 @@
 	(((float)(AdcData))/4096.0f)
 
 
-u8 xadcInit();
+XStatus xadcInit();
 int xadcFractionToInt(float FloatNum);
 XSysMon* xadcGetSysMonPtr();
 u8 xadcCheckAuxSettings();
-int xadcSetSampleRate(u32 rate);
+XStatus xadcSetSampleRate(u32 rate);
 u32 xadcGetSampleRate();
 static int xadcSetupInterruptSystem(XScuGic *IntcInstancePtr,XSysMon *XAdcPtr,u16 IntrId );
 void xadcInterruptHandler(void *CallBackRef);

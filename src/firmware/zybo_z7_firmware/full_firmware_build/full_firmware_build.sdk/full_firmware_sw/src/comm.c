@@ -26,9 +26,9 @@ extern bool samplingEnabled;
 extern filters_e activeFilter;
 int TotalErrorCount;
 
-int commInit(){
+XStatus commInit(){
 
-	int status = 0;
+	XStatus status = XST_SUCCESS;
 	XUartPs_Config *Config;
 	u32 IntrMask;
 	fifoFlag = false;
@@ -89,17 +89,24 @@ int commInit(){
 
 	/* Set the UART in Normal Mode */
 	XUartPs_SetOperMode(&UART1, XUARTPS_OPER_MODE_NORMAL);
-	XUartPs_SetBaudRate(&UART1, COMM_BAUD_RATE); //COMM_BAUD_RATE);
-	status = XUartPs_GetOptions(&UART1);
+	status = XUartPs_SetBaudRate(&UART1, COMM_BAUD_RATE); //COMM_BAUD_RATE);
+	if (status != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
+	XUartPs_GetOptions(&UART1);
+
+
 	//XUartPs_SetOptions(&UART1, status | XUARTPS_OPTION_SET_FCM);
 
 	XUartPsFormat formatConfig;
 	XUartPs_GetDataFormat(&UART1, &formatConfig);
 	formatConfig.Parity = XUARTPS_FORMAT_NO_PARITY; //XUARTPS_FORMAT_EVEN_PARITY
 	formatConfig.StopBits = XUARTPS_FORMAT_1_STOP_BIT;
-	XUartPs_SetDataFormat(&UART1, &formatConfig);
-
-	return XST_SUCCESS;
+	status = XUartPs_SetDataFormat(&UART1, &formatConfig);
+	if (status != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
+	return status;
 }
 
 
@@ -179,6 +186,9 @@ void Handler(void *CallBackRef, u32 Event, unsigned int EventData)
 
 /*****************************************************************************/
 /**
+* NOTE: This function was from a Xilinx UART example. The current fw uses polled functions instead.
+* This is here purely for archival purposes.
+*
 *
 * This function sets up the interrupt system so interrupts can occur for the
 * Uart. This function is application-specific. The user should modify this
@@ -429,12 +439,23 @@ u32 comUartRecv(u8 *bufferPtr, u32 numBytes)
 {
 	return XUartPs_Recv(&UART1, bufferPtr, numBytes);
 }
-
+/**
+ * Passthrough for libraries to call internal UART lib send function.
+ * See XUartPs_Send documentation for functionality.
+ */
 u32 commUartSend(u8 *bufferPtr, u32 numBytes)
 {
 	return XUartPs_Send(&UART1, bufferPtr, numBytes);
 }
-
+/**
+ * Function to wait until certain char or chars have been received on Uart.
+ * WIP, is not used and has never been tested. Thought it would be useful someday.
+ *
+ *@param bufferPtr buffer to store received char sequence
+ *@param endChar1 character to stop receiving loop
+ *@param endchar2 character to stop receiving loop
+ *@return byteCount Number of bytes received before one of the endChars was received (includes that character)
+ */
 u32 commUartWaitReceive(u8 *bufferPtr, char endChar1, char endChar2){
 
 	u32 byteCount = 0;

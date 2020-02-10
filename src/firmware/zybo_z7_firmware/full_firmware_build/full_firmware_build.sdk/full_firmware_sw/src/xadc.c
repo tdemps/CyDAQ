@@ -26,10 +26,11 @@ extern bool streamingEnabled;
 
 
 /**
- * Initializes XADC
+ * Initializes XADC and AXI Timer modules.
  */
-u8 xadcInit(){
-	u32 address, status;
+XStatus xadcInit(){
+	u32 address;
+	XStatus status;
 	XSysMon_Config *SYSConfigPtr;
 
 	SYSConfigPtr = XSysMon_LookupConfig(SYSMON_DEVICE_ID);
@@ -37,8 +38,10 @@ u8 xadcInit(){
 		return XST_FAILURE;
 	}
 
-	XSysMon_CfgInitialize(SysMonInstPtr, SYSConfigPtr, SYSConfigPtr->BaseAddress);
-
+	status = XSysMon_CfgInitialize(SysMonInstPtr, SYSConfigPtr, SYSConfigPtr->BaseAddress);
+	if (status != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
 	if(DEBUG){
 		address = SYSConfigPtr->BaseAddress;
 		xil_printf("XADC using Sysmon -> base address %lx \n\r", address);
@@ -61,7 +64,10 @@ u8 xadcInit(){
     XSysMon_SetSequencerMode(SysMonInstPtr, XSM_SEQ_MODE_SAFE);
     status =  XSysMon_GetSeqInputMode(SysMonInstPtr);
     //disables averaging on all inputs
-    XSysMon_SetSeqAvgEnables(SysMonInstPtr, XSM_AVG_0_SAMPLES);
+    status = XSysMon_SetSeqAvgEnables(SysMonInstPtr, XSM_AVG_0_SAMPLES);
+    if (status != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
     //clear the old status
     XSysMon_GetStatus(SysMonInstPtr);
 //    intrStatusValue = Xil_In16(SYSConfigPtr->BaseAddress+XSM_CFR0_OFFSET);
@@ -122,7 +128,9 @@ u8 xadcInit(){
 XSysMon* xadcGetSysMonPtr(){
 	return SysMonInstPtr;
 }
-
+/**
+ * In debug mode, can be used to print inputs that will be sampled on XADC header.
+ */
 u8 xadcCheckAuxSettings(){
 	u64 channelConfig = XSysMon_GetSeqChEnables(SysMonInstPtr);
 	//0x040000900 AUX14 VPVN and Temp sensors
@@ -254,9 +262,14 @@ int xadcFractionToInt(float FloatNum){
 	return( ((int)((Temp -(float)((int)Temp)) * (1000.0f))));
 }
 /**
- * Rate should be given in SPS. Configures timer to count at rate that matches sample rate.
+ *
+ * TODO: Check validity of equation implementation and find timer limits in terms of sample rate.
+ *
+ * Rate should be given in samples per second. Configures timer to count at rate that matches sample rate.
+ * The equation is defined in the AXI Timer datasheet. Returns XST_FAILURE if rate given is invalid, XST_SUCCESS
+ * otherwise.
  */
-int xadcSetSampleRate(u32 rate){
+XStatus xadcSetSampleRate(u32 rate){
 
 	if(xadcInitStatus == 0){
 			xadcInit();
@@ -265,7 +278,7 @@ int xadcSetSampleRate(u32 rate){
 	if(rate > XADC_MAX_SAMPLE_RATE){
 		if(DEBUG)
 			xil_printf("Invalid sample rate given");
-		return 1;
+		return XST_FAILURE;
 	}
 	xadcSampleRate = rate;
 	double period = (double) 1 / rate;
@@ -276,7 +289,7 @@ int xadcSetSampleRate(u32 rate){
 
 	if(DEBUG)
 		xil_printf("New Sample Rate: %d SPS\n", rate);
-	return 0;
+	return XST_SUCCESS;
 }
 /**
  * Returns current sample rate
@@ -285,7 +298,7 @@ u32 xadcGetSampleRate(){
 	return xadcSampleRate;
 }
 /**
- * Sets up interrupt for XADC to handler function. (NOT USED CURRENTLY, POLLED INSTEAD)
+ * Sets up interrupt for XADC to handler function. (NOT USED CURRENTLY, POLLING INSTEAD)
  */
 static int xadcSetupInterruptSystem(XScuGic *IntcInstancePtr,XSysMon *XAdcPtr, u16 IntrId ){
 
@@ -321,6 +334,10 @@ static int xadcSetupInterruptSystem(XScuGic *IntcInstancePtr,XSysMon *XAdcPtr, u
 
 	return XST_SUCCESS;
 }
+/**
+ * This function is not used in the release build of the fw.
+ * It is kept for archival purposes only. Please do not use interrupts to fetch sample data.
+ */
 void xadcInterruptHandler(void *CallBackRef){
 
 	if (xadcSampleCount < RX_BUFFER_SIZE ){
@@ -336,12 +353,16 @@ void xadcInterruptHandler(void *CallBackRef){
 
 	XSysMon_IntrClear(&SysMonInst, XSM_IPIXR_EOS_MASK);
 }
+/**
+ * This function sends the samples collected during the last sampling period over uart.
+ */
 void xadcProcessSamples(){
 	u32 i = 0;
 	u8 sent = 0;
 	u8* ptr = (u8*) xadcBuffer;
 	u8* lastVal = (u8*) xadcBuffer + (2*xadcSampleCount);
 	u8 burstSize = DEF_SAMPLE_BURST_SIZE;
+	//if there are no samples waiting to be processed, return
 	if(xadcSampleCount == 0){
 		if(DEBUG){
 			xil_printf("No new samples\n");
@@ -354,6 +375,7 @@ void xadcProcessSamples(){
 		return;
 	}
 	sleep(1);
+	//if in debug/test mode, format samples to be human readable
 	if(DEBUG){
 		xil_printf("Beginning sample playback..\n\n");
 		while(i < xadcSampleCount){
@@ -363,10 +385,12 @@ void xadcProcessSamples(){
 		}
 		xil_printf("Finished processing samples\n\n");
 	}else{
+		//start char for GUI
 		xil_printf("%c", COMM_START_CHAR);
 		while(ptr < lastVal){
 			//if we are on the last burst is smaller than the burst limit, resize window so we don't miss end samples
 			if(ptr+burstSize > lastVal){ burstSize = lastVal-ptr; }
+			//sends burst of samples
 			while(sent < burstSize){
 				sent += commUartSend((ptr+sent), burstSize-sent);
 			}
@@ -378,11 +402,12 @@ void xadcProcessSamples(){
 		}
 		//clear UART out buffer before sending end sequence
 		usleep(100);
+		//end sequence for GUI to stop looking for samples
 		xil_printf("00000000"); //COMM_STOP_CHAR, COMM_STOP_CHAR);
 		//Needed to give GUI time to reset itself
 		usleep(50000);
 	}
-
+	//clear sample counter
 	xadcSampleCount = 0;
 	return;
 }

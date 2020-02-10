@@ -36,11 +36,10 @@ typedef struct _wiper_t{
 } wiper_t;
 
 
-int init_x9258_i2c();
+XStatus init_x9258_i2c();
 POT_R_TYPE pot_value_conversion( int ohmValue);
-u8 x9258_volatile_write(wiper_t wiper_location, POT_R_TYPE r_value);
+XStatus x9258_volatile_write(wiper_t wiper_location, POT_R_TYPE r_value);
 long map(long x, long in_min, long in_max, long out_min, long out_max);
-// This goes into the header
 XIicPs* getIicInstance();
 void setIicInstance(XIicPs *InstancePtr);
 #endif /* X9258_H_ */
