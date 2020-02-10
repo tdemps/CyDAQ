@@ -1,0 +1,4 @@
+TODO:
+
+Choose connectors for analog inputs
+Clean up power supply schematic

@@ -1,0 +1,13 @@
+Part	Manufacturer	Part Number	Vendor P/N	Quantity	 Price (USD) 	Footprint (mm²)	Description
+L1	Vishay-Dale	IFSC1515AHER150M01	541-4328-1-ND	1	 $0.47 	67.2	L: 15 µH  DCR: 222 m?  IDC: 1 A  
+Cboot	Taiyo Yuden	TMK212BJ474KD-T	587-1290-1-ND	1	 $0.03 	6.75	Cap: 470 nF  Total Derated Cap: 470 nF  VDC: 20 V  ESR: 1 m?  Package: 0805  
+Rfbb	Panasonic	ERJ-6ENF2553V	P255KCCT-ND	1	 $0.28 	6.75	Resistance: 255 k?  Tolerance: 1.0%  Power: 125 mW  
+U1	Texas Instruments	LM43601PWPR	296-40221-1-ND	1	 $2.94 	58.8	Buck Switching Regulator IC Positive Adjustable 1V 1 Output 1A 16-PowerTSSOP 
+Cin	MuRata	GRM32ER61C226ME20L	490-1881-1-ND	2	 $1.08 	14.7	Cap: 22 µF  Total Derated Cap: 29 µF  VDC: 16 V  ESR: 2 m?  Package: 1210  
+Cout	TDK	CGA9N3X7R1C476M230KB	445-7935-1-ND	1	 $1.49 	53.9	Cap: 47 µF  Total Derated Cap: 43 µF  VDC: 16 V  ESR: 3.16 m?  Package: 2220_250  
+Rfbt	Vishay-Dale	CRCW08051M00FKEA	541-4135-1-ND	1	 $0.02 	6.75	Resistance: 1 M?  Tolerance: 1.0%  Power: 125 mW  
+Cio	Taiyo Yuden	TMK212BJ475KG-T	587-1782-1-ND	1	 $0.09 	6.75	Cap: 4.7 µF  Total Derated Cap: 4.7 µF  VDC: 25 V  ESR: 1 m?  Package: 0805  
+Cvcc	Taiyo Yuden	EMK212BJ225KG-T	587-1293-1-ND	1	 $0.05 	6.75	Cap: 2.2 µF  Total Derated Cap: 2.2 µF  VDC: 16 V  ESR: 1 m?  Package: 0805  
+Cff	Kemet	C0805C330J5GACTU	399-1115-1-ND	1	 $0.03 	6.75	Cap: 33 pF  Total Derated Cap: 33 pF  VDC: 50 V  ESR: 14.3 m?  Package: 0805  
+Rpgt	Vishay-Dale	CRCW0805100KFKEA	541-3978-1-ND	1	 $0.02 	6.75	Resistance: 100 k?  Tolerance: 1.0%  Power: 125 mW  
+Cbias	Taiyo Yuden	LMK212BJ475KD-T	587-1297-1-ND	1	 $0.06 	6.75	Cap: 4.7 µF  Total Derated Cap: 4.7 µF  VDC: 10 V  ESR: 1 m?  Package: 0805  
