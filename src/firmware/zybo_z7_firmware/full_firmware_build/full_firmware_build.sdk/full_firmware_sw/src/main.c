@@ -17,6 +17,7 @@
 #include "stdlib.h"
 #include "xadc.h"
 #include "shared_definitions.h"
+#include "sd_config.h"
 
 #define BUTTON_BASE_ADDR	XPAR_GPIO_0_BASEADDR
 void xadcTest();
@@ -35,13 +36,19 @@ filters_e activeFilter = FILTER_PASSTHROUGH;
 int main()
 {
 	XStatus initCheck = XST_SUCCESS;
+	initCheck = commInit();
 	//initialization functions for all libraries
 	init_platform();
-    initCheck = commInit();
     muxInit();
     initCheck = xadcInit();
     init_x9258_i2c();
+	initCheck = sdConfigInit();
+	if(initCheck == XST_SUCCESS){
+		xil_printf("Using preloaded config.json file found on SD card\n");
+		for(;;){
 
+		}
+	}
     XUartPs* ptr = commGetUartPtr();
     u8 numBytes = 0;
     u8 buf[5];
