@@ -18,3 +18,6 @@ The board has three user accessible power rails: 1.8V, 3.3V, and 5.0V. Each rail
 
 ## Digital Communication Protocols
 The board breaks out I2C and UART busses accessible through the Zybo.
+
+## Firmware
+See README in /src/firmware details
