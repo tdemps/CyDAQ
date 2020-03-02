@@ -49,17 +49,16 @@ int main()
 
 		}
 	}
-    XUartPs* ptr = commGetUartPtr();
     u8 numBytes = 0;
     u8 buf[5];
 
     if(DEBUG){
-    	xil_printf("\n**********CyDAQ Test Program***********\n");
+    	xil_printf("\n\n**********CyDAQ Test Program***********\n");
 		while(1){
 			xil_printf("Select Test:\n0. XADC\n1. UART Test\n2. Filter Test\n3. Firmware Start\n");
 			numBytes = 0;
 			while(buf[numBytes-1] != '\r' && buf[numBytes-1] != '\n'){
-				numBytes += XUartPs_Recv(ptr, &buf[numBytes], 1);
+				numBytes += comUartRecv(&buf[numBytes], 1);
 			}
 			usleep(300000);
 			switch(buf[0] - '0'){
@@ -166,23 +165,23 @@ void commTest(){
 }
 
 void filterTest(){
-	xil_printf("**********Filter Test**********\nDefaults: Filter=1st Order LP, Corners=10k,20k, Input=Analog\n");
-	xil_printf("Type 'I#' or 'F#' + [Enter]to select input/filter (# should follow enums in shared_definitions.h)\n'U' or 'D' + [Enter] to increase/decrease corners.\n");
-	xil_printf("E[Enter]' to exit test\n\n");
+	print("\n**********Filter Test**********\nDefaults: Filter=1st Order LP, Corners=10k,20k, Input=Analog\n");
+	print("Type 'I#' or 'F#' + [Enter]to select input/filter (# should follow enums in shared_definitions.h)\n'U' or 'D' + [Enter] to increase/decrease corners.\n");
+	print("E+[Enter]' to exit test\n\n");
     FILTER_FREQ_TYPE highpass = 10000, lowpass = 20000;	  //1550hz -> 10k ohm, 15000hz -> 1k ohm
-	u8 selectedFilter = FILTER_1ST_ORDER_LP, buttons = 0, numBytes = 0, status = 0;
+	u8 selectedFilter = FILTER_1ST_ORDER_LP, buttons = 0, nBytes = 0, status = 0;
 	u8 buf[20];
 	muxSetActiveFilter(selectedFilter);	//enums defined in shared_definitions.h for filters and inputs
 	muxSetInputPins(ANALOG);
 	status = tuneFilter(selectedFilter, highpass, lowpass);
-
-	 while((buttons = getButtons()) != 12){	//hit buttons 3 and 4 together to end test
-			numBytes += comUartRecv(&buf[numBytes], 4);
-			if(numBytes > 1 && (buf[numBytes-1] == '\r' || buf[numBytes-1] == '\n')){
-				buf[numBytes-1] = '\0';
+	buf[0] = 0;
+	 while(1){	//hit buttons 3 and 4 together to end test
+			nBytes += comUartRecv(&buf[nBytes], 2);
+			if(nBytes > 1 && (buf[nBytes-1] == '\r' || buf[nBytes-1] == '\n')){
+				buf[nBytes-1] = '\0';
 				xil_printf("Input: %s => ", buf);
 				status = 2;
-				if( (buf[0] == 'I' || buf[0] == 'i' ) && numBytes > 2){
+				if( (buf[0] == 'I' || buf[0] == 'i' ) && nBytes > 2){
 					status = muxSetInputPins(buf[1] - '0');
 				}else if(buf[0] == 'E' || buf[0] == 'e'){
 					break;
@@ -191,38 +190,38 @@ void filterTest(){
 					lowpass += 1000;
 					status = tuneFilter(selectedFilter, highpass, lowpass);
 					if(status == 0){
-						xil_printf("Increasing corners to: %d, %d\n", highpass, lowpass);
+						xil_printf("Incr corners to: %d, %d\n", highpass, lowpass);
 					}else{
-						xil_printf("Reverting corners to 10k, 20k\n");
+						print("Reverting corners to 10k, 20k\n");
 						highpass = 10000;
 						lowpass = 20000;
 					}
 				}else if(buf[0] == 'D' || buf[0] == 'd'){
 					highpass -= 1000;
 					lowpass -= 1000;
-					xil_printf("Increasing corners to: %d, %d\n", highpass, lowpass);
+					xil_printf("Decr corners to: %d, %d\n", highpass, lowpass);
 					status = tuneFilter(selectedFilter, highpass, lowpass);
 					if(status != 0){
-						xil_printf("Reverting corners to default\n");
+						print("Reverting corners to default\n");
 						highpass = 10000;
 						lowpass = 20000;
 					}
-				}else if(( buf[0] == 'F' || buf[0] == 'f') && numBytes > 2){
+				}else if(( buf[0] == 'F' || buf[0] == 'f') && nBytes > 2){
 					if(muxSetActiveFilter(buf[1]-'0') == 0){
-						selectedFilter = buf[1]-1;
+						selectedFilter = buf[1]-'0';
 					}
-					xil_printf("Reverting corners to default\n", buf[1]-'0');
+					print("Reverting corners to default\n");
 					highpass = 10000;
 					lowpass = 20000;
 					status = tuneFilter(selectedFilter, highpass, lowpass);
 				}else{
-					xil_printf("Invalid Input\n");
+					print("Invalid Input\n");
 				}
-				numBytes = 0;
+				nBytes = 0;
 			}
 			usleep(500000);
 	}
-	xil_printf("Exiting Filter Test\n");
+	print("Exiting Filter Test\n\n");
 }
 
 u8 getButtons(){
