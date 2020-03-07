@@ -54,7 +54,7 @@ XStatus sdConfigInit(){
 	 */
 	SD_File = (char *)FileName;
 
-	Res = f_open(&fil, SD_File, FA_OPEN_ALWAYS | FA_READ);
+	Res = f_open(&fil, SD_File, FA_READ);
 	if (Res) {
 		if(DEBUG){
 			xil_printf("Error: can't find config.json\n");

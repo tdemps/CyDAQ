@@ -45,9 +45,9 @@ int main()
 	initCheck = sdConfigInit();
 	if(initCheck == XST_SUCCESS){
 		xil_printf("Using preloaded config.json file found on SD card\n");
-		for(;;){
-
-		}
+//		for(;;){
+//
+//		}
 	}
     u8 numBytes = 0;
     u8 buf[5];
